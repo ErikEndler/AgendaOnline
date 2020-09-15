@@ -21,8 +21,10 @@
             "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "src/assets/scss/black-dashboard.scss",
+              "src/assets/css/nucleo-icons.css"
             ],
             "scripts": []
           },
