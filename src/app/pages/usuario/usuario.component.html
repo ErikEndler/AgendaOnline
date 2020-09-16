@@ -38,6 +38,7 @@
                     class="form-control"
                     placeholder="000.000.000-00"
                     type="text"
+                    [mask]="maskCpf"
                   />
                 </div>
               </div>
@@ -48,7 +49,7 @@
                     class="form-control"
                     placeholder="(00) 00000-0000"
                     type="text"
-                    mask="(00) 0 0000-0000"
+                    [mask]="maskFone"
                   />
                 </div>
               </div>
@@ -59,7 +60,7 @@
                     class="form-control"
                     placeholder="(00) 00000-0000"
                     type="text"
-                    mask="(00) 0 0000-0000"
+                    [mask]="maskFone"
                   />
                 </div>
               </div>
