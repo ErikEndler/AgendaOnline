@@ -28,6 +28,7 @@ export class UsuarioComponent implements OnInit {
       id: [usuario.id],
       nome: [usuario.nome, Validators.required],
       cpf: [usuario.cpf, Validators.required],
+      email: [usuario.cpf, Validators.required],
       role: [usuario.role, Validators.required],
       sexo: [usuario.sexo, Validators.required],
       telefone: [usuario.telefone, Validators.required],

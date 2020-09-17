@@ -9,12 +9,17 @@
       <div class="card">
         <div class="card-header"><h5 class="title">Perfil</h5></div>
         <div class="card-body">
-          <form>
+          <form [formGroup]="formulario">
             <div class="row">
               <div class="col-md-8">
                 <div class="form-group">
                   <label> Nome </label>
-                  <input class="form-control" placeholder="Nome" type="text" />
+                  <input
+                    class="form-control"
+                    placeholder="Nome"
+                    type="text"
+                    formControlName="nome"
+                  />
                 </div>
               </div>
               <div class="col-md-4">
@@ -23,8 +28,10 @@
                   <input
                     type="radio"
                     id="customRadio1"
-                    name="customRadio"
+                    name="sexo"
                     class="custom-control-input"
+                    formControlName="sexo"
+                    value="masculino"
                   />
                   <label class="custom-control-label" for="customRadio1"
                     >Masculino</label
@@ -34,8 +41,10 @@
                   <input
                     type="radio"
                     id="customRadio2"
-                    name="customRadio"
+                    name="sexo"
                     class="custom-control-input"
+                    value="feminino"
+                    formControlName="sexo"
                   />
                   <label class="custom-control-label" for="customRadio2"
                     >Feminino</label
@@ -51,6 +60,7 @@
                     class="form-control"
                     placeholder="Home Address"
                     type="Email"
+                    formControlName="email"
                   />
                 </div>
               </div>
@@ -64,6 +74,7 @@
                     placeholder="000.000.000-00"
                     type="text"
                     [mask]="maskCpf"
+                    formControlName="cpf"
                   />
                 </div>
               </div>
@@ -75,6 +86,7 @@
                     placeholder="(00) 00000-0000"
                     type="text"
                     [mask]="maskFone"
+                    formControlName="telefone"
                   />
                 </div>
               </div>
@@ -86,6 +98,7 @@
                     placeholder="(00) 00000-0000"
                     type="text"
                     [mask]="maskFone"
+                    formControlName="whatsapp"
                   />
                 </div>
               </div>
@@ -98,6 +111,7 @@
                     class="form-control"
                     placeholder="******"
                     type="password"
+                    [type]="hide ? 'password' : 'text'"
                   />
                 </div>
               </div>
@@ -113,15 +127,15 @@
               </div>
               <div class="col-md-4">
                 <label> </label>
-                <div class="custom-control custom-checkbox">
-                  <input
-                    type="checkbox"
-                    class="custom-control-input"
-                    id="customCheck1"
-                  />
-                  <label class="custom-control-label" for="customCheck1"
-                    >Mostrar Senha</label
+                <div>
+                  <button
+                    class="btn btn-fill"
+                    (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide"
                   >
+                    <i class="{{ hide ? 'fas fa-coffee' : 'fas fa-car' }}"></i>
+                  </button>
                 </div>
               </div>
             </div>
@@ -129,6 +143,18 @@
         </div>
         <div class="card-footer">
           <button class="btn btn-fill btn-danger" type="submit">Save</button>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customSwitch1"
+            (change)="debug()"
+          />
+          <label class="custom-control-label" for="customSwitch1">Debug</label>
+        </div>
+        <div class="card-body" *ngIf="debugEnable">
+          <app-form-debug [form]="formulario"></app-form-debug>
         </div>
       </div>
     </div>
