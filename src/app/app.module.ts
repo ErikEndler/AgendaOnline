@@ -6,13 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UsuarioComponent } from './pages/usuario/usuario.component';
+import { UsuarioComponent } from './pages/usuario/form/usuario.component';
 import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, UsuarioComponent],
@@ -28,6 +29,7 @@ import { NgxMaskModule, IConfig } from 'ngx-mask';
     ComponentsModule,
     CommonModule,
     NgxMaskModule.forRoot(),
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

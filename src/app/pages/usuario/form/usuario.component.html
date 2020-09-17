@@ -11,10 +11,35 @@
         <div class="card-body">
           <form>
             <div class="row">
-              <div class="col-md-12">
+              <div class="col-md-8">
                 <div class="form-group">
                   <label> Nome </label>
                   <input class="form-control" placeholder="Nome" type="text" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label> Sexo </label>
+                <div class="custom-control custom-radio">
+                  <input
+                    type="radio"
+                    id="customRadio1"
+                    name="customRadio"
+                    class="custom-control-input"
+                  />
+                  <label class="custom-control-label" for="customRadio1"
+                    >Masculino</label
+                  >
+                </div>
+                <div class="custom-control custom-radio">
+                  <input
+                    type="radio"
+                    id="customRadio2"
+                    name="customRadio"
+                    class="custom-control-input"
+                  />
+                  <label class="custom-control-label" for="customRadio2"
+                    >Feminino</label
+                  >
                 </div>
               </div>
             </div>
@@ -66,18 +91,36 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-8">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <label> About Me </label>
-                  <textarea
+                  <label> Senha </label>
+                  <input
                     class="form-control"
-                    cols="80"
-                    placeholder="Here can be your description"
-                    rows="4"
-                    value="Mike"
-                  >
-Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.
-</textarea
+                    placeholder="******"
+                    type="password"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label> Senha </label>
+                  <input
+                    class="form-control"
+                    placeholder="******"
+                    [type]="hide ? 'password' : 'text'"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label> </label>
+                <div class="custom-control custom-checkbox">
+                  <input
+                    type="checkbox"
+                    class="custom-control-input"
+                    id="customCheck1"
+                  />
+                  <label class="custom-control-label" for="customCheck1"
+                    >Mostrar Senha</label
                   >
                 </div>
               </div>

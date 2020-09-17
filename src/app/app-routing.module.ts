@@ -1,4 +1,4 @@
-import { UsuarioComponent } from './pages/usuario/usuario.component';
+import { UsuarioComponent } from './pages/usuario/form/usuario.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
