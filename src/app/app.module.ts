@@ -14,9 +14,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
+import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-list.component';
 
 @NgModule({
-  declarations: [AppComponent, UsuarioComponent],
+  declarations: [AppComponent, UsuarioComponent, UsuarioListComponent],
   imports: [
     FormsModule,
     HttpClientModule,

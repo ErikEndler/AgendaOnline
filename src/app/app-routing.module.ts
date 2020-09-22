@@ -1,3 +1,4 @@
+import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-list.component';
 import { UsuarioResolverGuard } from './guards/usuario-resolver.guard';
 import { UsuarioComponent } from './pages/usuario/form/usuario.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = [
     path: 'usuario',
     component: UsuarioComponent,
     resolve: { usuario: UsuarioResolverGuard },
+  },
+  {
+    path: 'list-usuario',
+    component: UsuarioListComponent,
   },
 ];
 

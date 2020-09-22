@@ -129,12 +129,14 @@
                 <label> </label>
                 <div>
                   <button
-                    class="btn btn-fill"
+                    class="btn btn-warning btn-icon"
                     (click)="hide = !hide"
                     [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide"
                   >
-                    <i class="{{ hide ? 'fas fa-coffee' : 'fas fa-car' }}"></i>
+                    <i
+                      class="{{ hide ? 'far fa-eye-slash' : 'fas fa-eye' }}"
+                    ></i>
                   </button>
                 </div>
               </div>
@@ -142,7 +144,7 @@
           </form>
         </div>
         <div class="card-footer">
-          <button class="btn btn-fill btn-danger" type="submit">Save</button>
+          <button class="btn btn-fill btn-success" type="submit">Save</button>
         </div>
         <div class="custom-control custom-checkbox">
           <input
