@@ -29,6 +29,7 @@
     "jquery-mask-plugin": "^1.14.16",
     "ng-sidebar": "^9.4.2",
     "ngx-bootstrap": "^6.1.0",
+    "ngx-bootstrap-modal": "^2.0.1",
     "ngx-mask": "^10.0.1",
     "ngx-pagination": "^5.0.0",
     "ngx-toastr": "^13.0.0",

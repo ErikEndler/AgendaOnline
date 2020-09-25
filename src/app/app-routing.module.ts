@@ -14,6 +14,11 @@ const routes: Routes = [
     resolve: { usuario: UsuarioResolverGuard },
   },
   {
+    path: 'usuarioEditar/:id',
+    component: UsuarioComponent,
+    resolve: { usuario: UsuarioResolverGuard },
+  },
+  {
     path: 'list-usuario',
     component: UsuarioListComponent,
   },

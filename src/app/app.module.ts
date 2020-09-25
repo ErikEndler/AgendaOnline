@@ -15,9 +15,16 @@ import { CommonModule } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-list.component';
+import { ModalConfirmacaoComponent } from './shared/modal-confirmacao/modal-confirmacao.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
-  declarations: [AppComponent, UsuarioComponent, UsuarioListComponent],
+  declarations: [
+    AppComponent,
+    UsuarioComponent,
+    UsuarioListComponent,
+    ModalConfirmacaoComponent,
+  ],
   imports: [
     FormsModule,
     HttpClientModule,
@@ -31,6 +38,7 @@ import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-
     CommonModule,
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
+    ModalModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

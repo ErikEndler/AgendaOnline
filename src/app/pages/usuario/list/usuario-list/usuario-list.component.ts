@@ -1,6 +1,7 @@
 import { UsuarioService } from './../../usuario.service';
 import { Usuario } from './../../../../models/usuario';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario-list',
@@ -24,11 +25,14 @@ export class UsuarioListComponent implements OnInit {
   ];
   loading = false;
 
-  constructor(private usuarioService: UsuarioService) {}
+  constructor(private usuarioService: UsuarioService, private router: Router) {}
 
   lista: Usuario[];
   ngOnInit(): void {
     this.list();
+  }
+  onEdit(id): void {
+    this.router.navigate(['usuarioEditar', id]);
   }
   list(): void {
     this.loading = true;

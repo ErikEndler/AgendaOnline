@@ -9,7 +9,7 @@
       <div class="card">
         <div class="card-header"><h5 class="title">Perfil</h5></div>
         <div class="card-body">
-          <form [formGroup]="formulario">
+          <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-md-8">
                 <div class="form-group">
@@ -95,7 +95,7 @@
                   <label> WhatsApp </label>
                   <input
                     class="form-control"
-                    placeholder="(00) 00000-0000"
+                    placeholder="(00) 0 0000 - 0000"
                     type="text"
                     [mask]="maskFone"
                     formControlName="whatsapp"
@@ -144,7 +144,14 @@
           </form>
         </div>
         <div class="card-footer">
-          <button class="btn btn-fill btn-success" type="submit">Save</button>
+          <button
+            class="btn btn-fill btn-success"
+            [disabled]="!formulario.valid"
+            (click)="onSubmit()"
+            type="submit"
+          >
+            Salvar
+          </button>
         </div>
         <div class="custom-control custom-checkbox">
           <input

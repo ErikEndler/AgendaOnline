@@ -22,6 +22,17 @@
               <td>{{ usuario.email }}</td>
               <td>{{ usuario.telefone }}</td>
               <td>{{ usuario.whatsapp }}</td>
+              <td>
+                <button
+                  class="btn btn-info btn-icon"
+                  (click)="onEdit(usuario.id)"
+                >
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-warning btn-icon">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
