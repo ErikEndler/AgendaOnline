@@ -10,8 +10,8 @@ import { Subject } from 'rxjs';
 export class ModalConfirmacaoComponent implements OnInit {
   @Input() title: string;
   @Input() msg: string;
-  @Input() cancelTxt: 'Cancelar';
-  @Input() okTxt: 'Confirmar';
+  @Input() cancelTxt = 'Cancelar';
+  @Input() okTxt = 'Confirmar';
 
   confirmResult: Subject<boolean>;
 

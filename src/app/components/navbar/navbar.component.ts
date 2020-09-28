@@ -10,6 +10,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  hide = true;
   private listTitles: any[];
   location: Location;
   mobileMenuVisible: any = 0;
@@ -174,6 +175,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return 'Dashboard';
   }
 
+  newopen() {}
   open(content) {
     this.modalService
       .open(content, { windowClass: 'modal-search' })

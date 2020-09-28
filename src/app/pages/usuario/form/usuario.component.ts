@@ -47,7 +47,8 @@ export class UsuarioComponent implements OnInit {
     if (this.formulario.valid) {
       const result$ = this.modalCOnfirm.showConfirm(
         'Confirmação',
-        'Deseja Salvar??'
+        'Deseja Salvar??',
+        'Confirmaaarrr'
       );
       result$
         .asObservable()
@@ -59,8 +60,7 @@ export class UsuarioComponent implements OnInit {
         )
         .subscribe(
           (success) => console.log('salvo com sucesso!'),
-          (error) => console.error(error),
-          () => console.log('request completo')
+          (error) => console.error(error)
         );
       console.log(this.formulario.value);
     }
