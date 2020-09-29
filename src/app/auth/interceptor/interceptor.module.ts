@@ -11,16 +11,23 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 export class HttpsRequestInterceptor implements HttpInterceptor {
   intercept(
-    req: HttpRequest<any>,
+    request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const dupReq = req.clone({
-      headers: req.headers.set(
-        'Authorization',
-        sessionStorage.getItem('Authorization')
-      ),
-    });
-    return next.handle(dupReq);
+    const requestUrl: Array<any> = request.url.split('/');
+    const apiUrl = 'localhost:8080';
+    const token = sessionStorage.getItem('Authorization');
+    if (token && (requestUrl[2] = apiUrl)) {
+      const dupReq = request.clone({
+        headers: request.headers.set(
+          'Authorization',
+          sessionStorage.getItem('Authorization')
+        ),
+      });
+      return next.handle(dupReq);
+    } else {
+      return next.handle(request);
+    }
   }
 }
 

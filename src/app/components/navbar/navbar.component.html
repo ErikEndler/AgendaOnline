@@ -39,6 +39,7 @@
             <span class="d-lg-none d-md-block"> Search </span>
           </button>
         </li>
+
         <li class="nav-item" ngbDropdown>
           <a
             class="nav-link"
@@ -89,13 +90,15 @@
               <img alt="Profile Photo" src="assets/img/anime3.png" />
             </div>
             <b class="caret d-none d-lg-block d-xl-block"> </b>
-            <p class="d-lg-none">Log out</p>
           </a>
+
           <ul class="dropdown-navbar" ngbDropdownMenu>
+            <li class="nav-item">
+              <p ngbDropdownItem>USER</p>
+            </li>
+            <li class="dropdown-divider"></li>
             <li class="nav-link">
-              <a class="nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Profile
-              </a>
+              <a href="javascript:void(0)" ngbDropdownItem> Profile </a>
             </li>
             <li class="nav-link">
               <a class="nav-item" href="javascript:void(0)" ngbDropdownItem>

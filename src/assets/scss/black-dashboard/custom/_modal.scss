@@ -1,8 +1,18 @@
 // Modals
 // Design element Dialogs
 // --------------------------------------------------
+@keyframes fade {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .modal-content {
   border: 1px solid black;
+  animation: fade 1s;
 
   // Modal header
   // Top section of the modal w/ title and dismiss

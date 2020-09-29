@@ -28,13 +28,22 @@ export class ModalLoginComponent implements OnInit {
   ngOnInit(): void {}
   login() {
     this.loading = true;
-    return this.http.post(this.url, this.form).subscribe((data) => {
+    return this.http.post(this.url, this.form.value).subscribe((data) => {
       this.loginReturn = data as LoginReturn;
       sessionStorage.setItem('logado', 'true');
+      console.log('sessionStorage logado :' + sessionStorage.getItem('logado'));
       sessionStorage.setItem('userID', this.loginReturn.id.toString());
+      console.log('sessionStorage userID :' + sessionStorage.getItem('userID'));
       sessionStorage.setItem('userName', this.loginReturn.nome);
       sessionStorage.setItem('Authorization', this.loginReturn.authorization);
+      console.log(
+        'sessionStorage Authorization :' +
+          sessionStorage.getItem('Authorization')
+      );
+      this.bsModalRef.hide();
     });
   }
-  onClose() {}
+  onClose(): void {
+    this.bsModalRef.hide();
+  }
 }
