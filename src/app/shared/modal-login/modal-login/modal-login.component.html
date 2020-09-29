@@ -1,0 +1,50 @@
+<div class="modal-header">
+  <h5 class="modal-title" id="exampleModalLongTitle">{{ titulo }}</h5>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="row">
+      <div class="col-md-10">
+        <label> CPF </label>
+        <input
+          class="form-control"
+          placeholder="000.000.000-00"
+          type="text"
+          [mask]="maskCpf"
+          formControlName="cpf"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10">
+        <div class="form-group">
+          <label> Senha </label>
+          <input
+            class="form-control"
+            placeholder="******"
+            [type]="hide ? 'password' : 'text'"
+          />
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label> </label>
+        <div>
+          <button
+            class="btn btn-warning btn-icon"
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <i class="{{ hide ? 'far fa-eye-slash' : 'fas fa-eye' }}"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-fill btn-success" (click)="login()">Login</button>
+  <button type="button" class="btn btn-secondary" (click)="onClose()">
+    Cancelar
+  </button>
+</div>

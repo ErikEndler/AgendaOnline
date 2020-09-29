@@ -1,3 +1,4 @@
+import { ModalLoginService } from './../../shared/modal-login/modal-login.service';
 import { Component, OnDestroy, ElementRef, OnInit } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import { Location } from '@angular/common';
@@ -11,6 +12,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   hide = true;
+  logStatus = false;
   private listTitles: any[];
   location: Location;
   mobileMenuVisible: any = 0;
@@ -22,6 +24,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   closeResult: string;
 
   constructor(
+    private modalLoginService: ModalLoginService,
     location: Location,
     private element: ElementRef,
     private router: Router,
@@ -41,6 +44,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
       navbar.classList.add('navbar-transparent');
     }
   };
+  //chama login
+  login() {
+    this.modalLoginService.open();
+  }
+
   ngOnInit(): void {
     window.addEventListener('resize', this.updateColor);
     this.listTitles = ROUTES.filter((listTitle) => listTitle);

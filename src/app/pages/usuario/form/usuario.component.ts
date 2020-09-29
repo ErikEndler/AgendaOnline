@@ -15,6 +15,7 @@ import { EMPTY } from 'rxjs';
 export class UsuarioComponent implements OnInit {
   formulario: FormGroup;
   hide = true;
+  loading = false;
   maskFone = '(00) 0 0000 - 0000';
   maskCpf = '000.000.000-00';
   debugEnable = false;

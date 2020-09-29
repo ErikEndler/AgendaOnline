@@ -1,3 +1,4 @@
+import { InterceptorModule } from './auth/interceptor/interceptor.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,6 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-list.component';
 import { ModalConfirmacaoComponent } from './shared/modal-confirmacao/modal-confirmacao.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModalLoginComponent } from './shared/modal-login/modal-login/modal-login.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     UsuarioComponent,
     UsuarioListComponent,
     ModalConfirmacaoComponent,
+    ModalLoginComponent,
   ],
   imports: [
     FormsModule,
@@ -39,6 +42,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     ModalModule.forRoot(),
+    InterceptorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
