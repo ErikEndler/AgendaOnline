@@ -1,5 +1,4 @@
-import { LoginReturn } from './../../../models/loginReturn';
-import { HttpClient } from '@angular/common/http';
+import { AuthService } from './../../../auth/auth.service';
 import { ModalLoginService } from './../modal-login.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -14,11 +13,12 @@ export class ModalLoginComponent implements OnInit {
   hide = true;
   loading = false;
   titulo = 'Login';
-  url = 'http://localhost:8080/login';
-  loginReturn: LoginReturn;
   maskCpf = '000.000.000-00';
 
-  constructor(public bsModalRef: BsModalRef, private http: HttpClient) {}
+  constructor(
+    public bsModalRef: BsModalRef,
+    private authService: AuthService
+  ) {}
 
   form: FormGroup = new FormGroup({
     cpf: new FormControl(''),
@@ -27,21 +27,10 @@ export class ModalLoginComponent implements OnInit {
 
   ngOnInit(): void {}
   login() {
+    // chama metodo do serviço para logar
+    this.authService.logar(this.form.value);
     this.loading = true;
-    return this.http.post(this.url, this.form.value).subscribe((data) => {
-      this.loginReturn = data as LoginReturn;
-      sessionStorage.setItem('logado', 'true');
-      console.log('sessionStorage logado :' + sessionStorage.getItem('logado'));
-      sessionStorage.setItem('userID', this.loginReturn.id.toString());
-      console.log('sessionStorage userID :' + sessionStorage.getItem('userID'));
-      sessionStorage.setItem('userName', this.loginReturn.nome);
-      sessionStorage.setItem('Authorization', this.loginReturn.authorization);
-      console.log(
-        'sessionStorage Authorization :' +
-          sessionStorage.getItem('Authorization')
-      );
-      this.bsModalRef.hide();
-    });
+    this.bsModalRef.hide();
   }
   onClose(): void {
     this.bsModalRef.hide();
