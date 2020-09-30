@@ -19,6 +19,7 @@ import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-
 import { ModalConfirmacaoComponent } from './shared/modal-confirmacao/modal-confirmacao.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalLoginComponent } from './shared/modal-login/modal-login/modal-login.component';
+import { HomeComponent } from './pages/home/home/home.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ModalLoginComponent } from './shared/modal-login/modal-login/modal-logi
     UsuarioListComponent,
     ModalConfirmacaoComponent,
     ModalLoginComponent,
+    HomeComponent,
   ],
   imports: [
     FormsModule,

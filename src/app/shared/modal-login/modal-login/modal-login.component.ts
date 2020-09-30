@@ -1,3 +1,5 @@
+import { take, switchMap } from 'rxjs/operators';
+import { Observable, EMPTY } from 'rxjs';
 import { AuthService } from './../../../auth/auth.service';
 import { ModalLoginService } from './../modal-login.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -26,11 +28,30 @@ export class ModalLoginComponent implements OnInit {
   });
 
   ngOnInit(): void {}
-  login() {
+  login(): void {
     // chama metodo do serviço para logar
-    this.authService.logar(this.form.value);
     this.loading = true;
-    this.bsModalRef.hide();
+
+    const result$ = this.authService.logar(this.form.value);
+    result$
+      .asObservable()
+      .pipe(take(1))
+      .subscribe(
+        (success) => {
+          if (success === true) {
+            console.log(success + ' Logado com sucesso! 2');
+            this.loading = false;
+            this.bsModalRef.hide();
+          } else {
+            this.loading = false;
+            console.log(success + ' Erro ao logar! 2');
+          }
+        },
+        (error) => {
+          this.loading = false;
+          console.error(error), console.log('Erro ao logar 2');
+        }
+      );
   }
   onClose(): void {
     this.bsModalRef.hide();

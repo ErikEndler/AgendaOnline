@@ -25,7 +25,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
       this.token = this.loginReturn.authorization;
     }
 
-    if (this.token && (requestUrl[2] = apiUrl)) {
+    if (this.token && requestUrl[2] === apiUrl) {
       const dupReq = request.clone({
         headers: request.headers.set('Authorization', this.token),
       });

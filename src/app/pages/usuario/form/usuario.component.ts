@@ -41,6 +41,7 @@ export class UsuarioComponent implements OnInit {
       sexo: [usuario.sexo, Validators.required],
       telefone: [usuario.telefone, Validators.required],
       whatsapp: [usuario.whatsapp],
+      senha: [usuario.senha],
     });
   }
 
@@ -61,7 +62,9 @@ export class UsuarioComponent implements OnInit {
         )
         .subscribe(
           (success) => console.log('salvo com sucesso!'),
-          (error) => console.error(error)
+          (error) => {
+            console.error(error), console.log('ERRO AO SALVAR');
+          }
         );
       console.log(this.formulario.value);
     }

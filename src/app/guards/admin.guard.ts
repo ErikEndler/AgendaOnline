@@ -8,13 +8,17 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { ModalLoginService } from '../shared/modal-login/modal-login.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AdminGuard implements CanActivate {
   user: LoginReturn;
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private modalLoginService: ModalLoginService
+  ) {
     this.user = JSON.parse(sessionStorage.getItem('Authorization'));
   }
 
@@ -32,7 +36,9 @@ export class AdminGuard implements CanActivate {
     ) {
       return true;
     } else {
-      return this.router.navigate(['']);
+      this.modalLoginService.open();
+
+      return this.router.navigate(['home']);
     }
   }
 }

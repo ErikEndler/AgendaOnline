@@ -1,3 +1,5 @@
+import { ModalLoginComponent } from './shared/modal-login/modal-login/modal-login.component';
+import { HomeComponent } from './pages/home/home/home.component';
 import { UserGuard } from './guards/user.guard';
 import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-list.component';
 import { AdminGuard } from './guards/admin.guard';
@@ -9,13 +11,24 @@ import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'usuariolist', pathMatch: 'full' },
-  { path: 'usuariolist', component: UsuarioListComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'usuariolist',
+    component: UsuarioListComponent,
+    canActivate: [AdminGuard],
+  },
+
   {
     path: 'usuario',
     component: UsuarioComponent,
     resolve: { usuario: UsuarioResolverGuard },
     canActivate: [AdminGuard],
+  },
+  {
+    path: 'usuarioEditar/:id',
+    component: UsuarioComponent,
+    resolve: { usuario: UsuarioResolverGuard },
   },
 ];
 

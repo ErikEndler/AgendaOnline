@@ -20,7 +20,7 @@ export const ROUTES: RouteInfo[] = [
     class: '',
   },
   {
-    path: '/list-usuario',
+    path: '/usuariolist',
     title: 'Listar Usuarios',
     icon: 'icon-align-center',
     class: '',
