@@ -2,7 +2,7 @@
   <h5 class="modal-title" id="exampleModalLongTitle">{{ titulo }}</h5>
 </div>
 <div class="modal-body">
-  <form [formGroup]="form">
+  <form [formGroup]="form" (ngSubmit)="login()">
     <div class="row">
       <div class="col-md-10">
         <label> CPF </label>
@@ -44,7 +44,9 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-fill btn-success" (click)="login()">Login</button>
+  <button type="submit" class="btn btn-fill btn-success" (click)="login()">
+    Login
+  </button>
   <button type="button" class="btn btn-secondary" (click)="onClose()">
     Cancelar
   </button>

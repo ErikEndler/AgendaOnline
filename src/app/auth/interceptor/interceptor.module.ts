@@ -20,7 +20,7 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const requestUrl: Array<any> = request.url.split('/');
     const apiUrl = 'localhost:8080';
-    this.loginReturn = JSON.parse(sessionStorage.getItem('Authorization'));
+    this.loginReturn = JSON.parse(sessionStorage.getItem('auth'));
     if (this.loginReturn != null) {
       this.token = this.loginReturn.authorization;
     }

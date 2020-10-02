@@ -19,7 +19,7 @@ export class AdminGuard implements CanActivate {
     private router: Router,
     private modalLoginService: ModalLoginService
   ) {
-    this.user = JSON.parse(sessionStorage.getItem('Authorization'));
+    this.user = JSON.parse(sessionStorage.getItem('auth'));
   }
 
   canActivate(

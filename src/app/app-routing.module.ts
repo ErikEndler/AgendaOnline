@@ -29,6 +29,7 @@ const routes: Routes = [
     path: 'usuarioEditar/:id',
     component: UsuarioComponent,
     resolve: { usuario: UsuarioResolverGuard },
+    canActivate: [AdminGuard],
   },
 ];
 

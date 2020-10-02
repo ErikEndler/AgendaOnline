@@ -92,13 +92,19 @@
             <b class="caret d-none d-lg-block d-xl-block"> </b>
           </a>
 
-          <ul class="dropdown-navbar" ngbDropdownMenu>
+          <ul *ngIf="verificaLogin()" class="dropdown-navbar" ngbDropdownMenu>
             <li class="nav-item">
-              <p ngbDropdownItem>USER</p>
+              <p ngbDropdownItem>USUARIO</p>
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-link">
-              <a href="javascript:void(0)" ngbDropdownItem> Profile </a>
+              <a
+                href="javascript:void(0)"
+                (click)="chamarperfil()"
+                ngbDropdownItem
+              >
+                Profile
+              </a>
             </li>
             <li class="nav-link">
               <a class="nav-item" href="javascript:void(0)" ngbDropdownItem>
@@ -114,6 +120,18 @@
                 ngbDropdownItem
               >
                 Log out
+              </a>
+            </li>
+          </ul>
+          <ul *ngIf="!verificaLogin()" class="dropdown-navbar" ngbDropdownMenu>
+            <li class="nav-link">
+              <a
+                class="nav-item"
+                (click)="login()"
+                href="javascript:void(0)"
+                ngbDropdownItem
+              >
+                LogIn
               </a>
             </li>
           </ul>

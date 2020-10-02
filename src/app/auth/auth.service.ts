@@ -18,18 +18,19 @@ export class AuthService {
 
     this.http.post(this.url, form).subscribe(
       (success) => {
-        sessionStorage.setItem('Authorization', JSON.stringify(success));
+        this.loginReturn = success as LoginReturn;
+        sessionStorage.setItem('auth', JSON.stringify(success));
+        sessionStorage.setItem('id', this.loginReturn.id.toString());
+        console.log(sessionStorage.getItem('auth'));
 
         sessionStorage.setItem('logado', 'true');
-        console.log(
-          'sessionStorage Authorization :' +
-            sessionStorage.getItem('Authorization')
-        );
+        console.log('sessionStorage auth :' + sessionStorage.getItem('auth'));
         console.log('Logado com sucesso! 1');
         this.confirmResult.next(true);
       },
       (error) => {
         console.log('Erro ao logar ! 1');
+        console.log(error);
 
         this.confirmResult.next(false);
       }

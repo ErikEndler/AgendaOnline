@@ -28,6 +28,7 @@ export class ModalLoginComponent implements OnInit {
   });
 
   ngOnInit(): void {}
+
   login(): void {
     // chama metodo do serviço para logar
     this.loading = true;
@@ -49,7 +50,8 @@ export class ModalLoginComponent implements OnInit {
         },
         (error) => {
           this.loading = false;
-          console.error(error), console.log('Erro ao logar 2');
+          console.log('Erro ao logar 2');
+          console.error(error);
         }
       );
   }

@@ -12,7 +12,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   hide = true;
-  logStatus = false;
+  loginStatus = false;
   private listTitles: any[];
   location: Location;
   mobileMenuVisible: any = 0;
@@ -44,9 +44,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
       navbar.classList.add('navbar-transparent');
     }
   };
-  //chama login
-  login() {
+  chamarperfil(): void {
+    const id = sessionStorage.getItem('id');
+    this.router.navigate(['usuarioEditar', id]);
+  }
+  // chama login
+  login(): void {
     this.modalLoginService.open();
+  }
+  verificaLogin(): boolean {
+    if (sessionStorage.getItem('logado')) {
+      return (this.loginStatus = true);
+    } else {
+      return (this.loginStatus = false);
+    }
   }
 
   ngOnInit(): void {
