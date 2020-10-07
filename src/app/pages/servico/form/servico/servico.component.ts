@@ -1,49 +1,37 @@
-import { ActivatedRoute } from '@angular/router';
+import { ServicoService } from './../../servico.service';
 import { Component, OnInit } from '@angular/core';
-import { EMPTY } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalConfirmacaoService } from './../../../shared/modal-confirmacao.service';
+import { ActivatedRoute } from '@angular/router';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
-import { UsuarioService } from './../usuario.service';
+import { EMPTY } from 'rxjs';
 
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css'],
+  selector: 'app-servico',
+  templateUrl: './servico.component.html',
+  styleUrls: ['./servico.component.css'],
 })
-export class UsuarioComponent implements OnInit {
+export class ServicoComponent implements OnInit {
   formulario: FormGroup;
   hide = true;
   loading = false;
-  maskFone = '(00) 0 0000 - 0000';
-  maskCpf = '000.000.000-00';
   debugEnable = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private serviceUsuario: UsuarioService,
+    private servicoService: ServicoService,
     private modalCOnfirm: ModalConfirmacaoService
   ) {}
 
   ngOnInit(): void {
-    const usuario = this.route.snapshot.data['usuario'];
-    if (usuario.role == null) {
-      usuario.role = 'ROLE_USER';
-    }
+    const servico = this.route.snapshot.data['servico'];
     this.formulario = this.formBuilder.group({
-      id: [usuario.id],
-      nome: [usuario.nome, Validators.required],
-      cpf: [usuario.cpf, Validators.required],
-      email: [usuario.cpf, Validators.required],
-      role: [usuario.role, Validators.required],
-      sexo: [usuario.sexo, Validators.required],
-      telefone: [usuario.telefone, Validators.required],
-      whatsapp: [usuario.whatsapp],
-      senha: [usuario.senha],
+      id: [servico.id],
+      nome: [servico.nome, Validators.required],
+      descricao: [servico.descricao],
     });
   }
-
   onSubmit(): void {
     if (this.formulario.valid) {
       const result$ = this.modalCOnfirm.showConfirm(
@@ -56,7 +44,7 @@ export class UsuarioComponent implements OnInit {
         .pipe(
           take(1),
           switchMap((result) =>
-            result ? this.serviceUsuario.save(this.formulario.value) : EMPTY
+            result ? this.servicoService.save(this.formulario.value) : EMPTY
           )
         )
         .subscribe(

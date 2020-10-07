@@ -20,6 +20,7 @@ export class AdminGuard implements CanActivate {
     private modalLoginService: ModalLoginService
   ) {
     this.user = JSON.parse(sessionStorage.getItem('auth'));
+    console.log(' constructor Role =' + this.user.role);
   }
 
   canActivate(

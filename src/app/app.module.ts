@@ -20,6 +20,10 @@ import { ModalConfirmacaoComponent } from './shared/modal-confirmacao/modal-conf
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalLoginComponent } from './shared/modal-login/modal-login/modal-login.component';
 import { HomeComponent } from './pages/home/home/home.component';
+import { CategoriaComponent } from './pages/categoria/form/categoria/categoria.component';
+import { CategoriaListComponent } from './pages/categoria/list/categoria-list/categoria-list.component';
+import { ServicoListComponent } from './pages/servico/list/servico-list/servico-list.component';
+import { ServicoComponent } from './pages/servico/form/servico/servico.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +33,10 @@ import { HomeComponent } from './pages/home/home/home.component';
     ModalConfirmacaoComponent,
     ModalLoginComponent,
     HomeComponent,
+    CategoriaComponent,
+    CategoriaListComponent,
+    ServicoListComponent,
+    ServicoComponent,
   ],
   imports: [
     FormsModule,

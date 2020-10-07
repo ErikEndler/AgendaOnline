@@ -1,0 +1,7 @@
+.custom-control-input + label:before {
+  background: gray;
+  border: 1px solid white;
+}
+.custom-control-input:checked + label:before {
+  background: blue;
+}

@@ -1,5 +1,5 @@
-import { UsuarioService } from './../pages/usuario/usuario.service';
-import { Usuario } from './../models/usuario';
+import { ServicoService } from './../pages/servico/servico.service';
+import { Servico } from './../models/servico';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -11,26 +11,21 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class UsuarioResolverGuard implements Resolve<Usuario> {
-  constructor(private service: UsuarioService) {}
+export class ServicoResolveGuard implements Resolve<Servico> {
+  constructor(private service: ServicoService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Usuario> {
+  ): Observable<Servico> {
     if (route.params && route.params.id) {
       return this.service.loadByID(route.params.id);
     }
     return of({
       id: null,
+      categoriaId: null,
       nome: null,
-      sexo: null,
-      senha: null,
-      cpf: null,
-      email: null,
-      telefone: null,
-      role: null,
-      whatsapp: null,
+      descricao: null,
     });
   }
 }

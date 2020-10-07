@@ -21,7 +21,7 @@ export class UsuarioListComponent implements OnInit {
     'email',
     'telefone',
     'whatsapp',
-    'Opçóes',
+    'opções',
   ];
   loading = false;
 

@@ -25,6 +25,30 @@ export const ROUTES: RouteInfo[] = [
     icon: 'tim-icons icon-align-center',
     class: '',
   },
+  {
+    path: '/categoria',
+    title: 'Categoria Form',
+    icon: 'tim-icons icon-single-02',
+    class: '',
+  },
+  {
+    path: '/categorialist',
+    title: 'Listar Categorias',
+    icon: 'tim-icons icon-align-center',
+    class: '',
+  },
+  {
+    path: '/servico',
+    title: 'Servico Form',
+    icon: 'tim-icons icon-single-02',
+    class: '',
+  },
+  {
+    path: '/servicolist',
+    title: 'Listar Serviços',
+    icon: 'tim-icons icon-align-center',
+    class: '',
+  },
 ];
 
 @Component({
