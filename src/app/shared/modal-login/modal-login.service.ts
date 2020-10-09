@@ -8,7 +8,9 @@ import { ModalLoginComponent } from './modal-login/modal-login.component';
 export class ModalLoginService {
   constructor(private modalservice: BsModalService) {}
 
-  open(): void {
+  open(url?: string): void {
+    const urlDestibo = url;
     const bsModalRef: BsModalRef = this.modalservice.show(ModalLoginComponent);
+    const result = (bsModalRef.content as ModalLoginComponent).confirmResult;
   }
 }

@@ -19,8 +19,10 @@ export class AdminGuard implements CanActivate {
     private router: Router,
     private modalLoginService: ModalLoginService
   ) {
-    this.user = JSON.parse(sessionStorage.getItem('auth'));
-    console.log(' constructor Role =' + this.user.role);
+    if (sessionStorage.getItem('auth')) {
+      this.user = JSON.parse(sessionStorage.getItem('auth'));
+      console.log(' constructor Role =' + this.user.role);
+    }
   }
 
   canActivate(
@@ -31,13 +33,15 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (
-      sessionStorage.getItem('logado') === 'true' &&
-      this.user.role === 'ROLE_ADMIN'
-    ) {
-      return true;
+    if (sessionStorage.getItem('logado') === 'true') {
+      if (this.user.role === 'ROLE_ADMIN') {
+        return true;
+      } else {
+        return false;
+      }
     } else {
-      this.modalLoginService.open();
+      console.log('DESTINO : ' + next.url.toString());
+      this.modalLoginService.open(next.url.toString());
 
       return this.router.navigate(['home']);
     }

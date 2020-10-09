@@ -1,5 +1,5 @@
 import { take, switchMap } from 'rxjs/operators';
-import { Observable, EMPTY } from 'rxjs';
+import { Observable, EMPTY, Subject } from 'rxjs';
 import { AuthService } from './../../../auth/auth.service';
 import { ModalLoginService } from './../modal-login.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
@@ -27,7 +27,11 @@ export class ModalLoginComponent implements OnInit {
     senha: new FormControl(''),
   });
 
-  ngOnInit(): void {}
+  confirmResult: Subject<boolean>;
+
+  ngOnInit(): void {
+    this.confirmResult = new Subject();
+  }
 
   login(): void {
     // chama metodo do serviço para logar
@@ -42,6 +46,7 @@ export class ModalLoginComponent implements OnInit {
           if (success === true) {
             console.log(success + ' Logado com sucesso! 2');
             this.loading = false;
+            this.confirmResult.next(true);
             this.bsModalRef.hide();
           } else {
             this.loading = false;
@@ -56,6 +61,7 @@ export class ModalLoginComponent implements OnInit {
       );
   }
   onClose(): void {
+    this.confirmResult.next(false);
     this.bsModalRef.hide();
   }
 }
