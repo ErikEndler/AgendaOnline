@@ -8,5 +8,9 @@ export class Usuario {
   sexo: string;
   senha: string;
   role: string;
+  notificacao: boolean;
+  notificacaoSms: boolean;
+  notificacaoEmail: boolean;
+  notificacaoWhatsapp: boolean;
   token?: string;
 }
