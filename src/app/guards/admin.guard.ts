@@ -7,8 +7,9 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { ModalLoginService } from '../shared/modal-login/modal-login.service';
+import { switchMap, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +19,7 @@ export class AdminGuard implements CanActivate {
   constructor(
     private router: Router,
     private modalLoginService: ModalLoginService
-  ) {
-    if (sessionStorage.getItem('auth')) {
-      this.user = JSON.parse(sessionStorage.getItem('auth'));
-      console.log(' constructor Role =' + this.user.role);
-    }
-  }
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -33,6 +29,9 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    if (sessionStorage.getItem('auth')) {
+      this.user = JSON.parse(sessionStorage.getItem('auth'));
+    }
     if (sessionStorage.getItem('logado') === 'true') {
       if (this.user.role === 'ROLE_ADMIN') {
         return true;
@@ -41,7 +40,23 @@ export class AdminGuard implements CanActivate {
       }
     } else {
       console.log('DESTINO : ' + next.url.toString());
-      this.modalLoginService.open(next.url.toString());
+      const result$ = this.modalLoginService.open(next.url.toString());
+      result$
+        .asObservable()
+        .pipe(
+          take(1),
+          switchMap((result) =>
+            result ? this.router.navigate([next.url.toString()]) : EMPTY
+          )
+        )
+        .subscribe(
+          (success) => console.log('logou e redirecionou'),
+          (error) => {
+            console.error(error),
+              console.log(error),
+              console.log('ERRO AO redirecionar');
+          }
+        );
 
       return this.router.navigate(['home']);
     }

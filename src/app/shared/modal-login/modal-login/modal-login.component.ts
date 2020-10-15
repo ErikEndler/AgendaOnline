@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { take, switchMap } from 'rxjs/operators';
 import { Observable, EMPTY, Subject } from 'rxjs';
 import { AuthService } from './../../../auth/auth.service';
@@ -19,7 +20,8 @@ export class ModalLoginComponent implements OnInit {
 
   constructor(
     public bsModalRef: BsModalRef,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   form: FormGroup = new FormGroup({
@@ -62,6 +64,10 @@ export class ModalLoginComponent implements OnInit {
   }
   onClose(): void {
     this.confirmResult.next(false);
+    this.bsModalRef.hide();
+  }
+  cadastrar(): void {
+    this.router.navigate(['cadastro']);
     this.bsModalRef.hide();
   }
 }

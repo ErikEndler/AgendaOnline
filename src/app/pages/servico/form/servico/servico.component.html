@@ -22,6 +22,12 @@
                   />
                 </div>
               </div>
+              <div class="col-md-4">
+                <label> Categoria </label>
+                <select class="form-control" formControlName="categoriaId">
+                  <option *ngFor="let categoria of categorias" [value]="categoria.id" >{{categoria.nome}}</option>
+                </select>
+              </div>
             </div>
             <div class="row">
               <div class="col-md-12">

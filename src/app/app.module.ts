@@ -24,6 +24,7 @@ import { CategoriaComponent } from './pages/categoria/form/categoria/categoria.c
 import { CategoriaListComponent } from './pages/categoria/list/categoria-list/categoria-list.component';
 import { ServicoListComponent } from './pages/servico/list/servico-list/servico-list.component';
 import { ServicoComponent } from './pages/servico/form/servico/servico.component';
+import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ServicoComponent } from './pages/servico/form/servico/servico.component
     CategoriaListComponent,
     ServicoListComponent,
     ServicoComponent,
+    CadastroComponent,
   ],
   imports: [
     FormsModule,

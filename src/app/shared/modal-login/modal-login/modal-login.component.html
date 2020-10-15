@@ -44,11 +44,21 @@
   </form>
 </div>
 <div class="modal-footer">
-  <button type="submit" class="btn btn-fill btn-success" (click)="login()">
-    Login
-  </button>
-  <button type="button" class="btn btn-secondary" (click)="onClose()">
-    Cancelar
-  </button>
+  <div class="row">
+    <div class="col-md-6">
+      <button type="submit" class="btn btn-fill btn-success" (click)="login()">
+        Login
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn btn-warning" (click)="onClose()">
+        Cancelar
+      </button>
+    </div>
+  </div>
+  <div class="row"><div class="col-md-6">
+    <button type="button" class="btn btn-secondary" (click)="cadastrar()">
+      Cadastrar
+    </button>
+  </div></div>
 </div>
-<div class="testeBlur"></div>

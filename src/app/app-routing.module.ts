@@ -1,3 +1,4 @@
+import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
 import { ServicoResolveGuard } from './guards/servico-resolve.guard';
 import { ServicoComponent } from './pages/servico/form/servico/servico.component';
 import { ServicoListComponent } from './pages/servico/list/servico-list/servico-list.component';
@@ -18,6 +19,7 @@ import { CategoriaListComponent } from './pages/categoria/list/categoria-list/ca
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'cadastro', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
   {
     path: 'usuariolist',

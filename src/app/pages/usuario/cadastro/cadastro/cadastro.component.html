@@ -1,0 +1,167 @@
+<div class="content">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header"><h5 class="title">Cadastro</h5></div>
+        <div class="card-body">
+          <form [formGroup]="formulario">
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label> Nome (Obrigatório) </label>
+                  <input
+                    class="form-control"
+                    placeholder="Nome"
+                    type="text"
+                    formControlName="nome"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label> Sexo(Opcional) </label>
+                <div class="custom-control custom-radio">
+                  <input
+                    type="radio"
+                    id="customRadio1"
+                    name="sexo"
+                    class="custom-control-input"
+                    formControlName="sexo"
+                    value="masculino"
+                  />
+                  <label class="custom-control-label" for="customRadio1"
+                    >Masculino</label
+                  >
+                </div>
+                <div class="custom-control custom-radio">
+                  <input
+                    type="radio"
+                    id="customRadio2"
+                    name="sexo"
+                    class="custom-control-input"
+                    value="feminino"
+                    formControlName="sexo"
+                  />
+                  <label class="custom-control-label" for="customRadio2"
+                    >Feminino</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-md-1">
+                <div class="form-group">
+                  <label> CPF (Obrigatorio)</label>
+                  <input
+                    class="form-control"
+                    placeholder="000.000.000-00"
+                    type="text"
+                    [mask]="maskCpf"
+                    formControlName="cpf"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 px-md-1">
+                <div class="form-group">
+                  <label> Telefone (Obrigatório) </label>
+                  <input
+                    class="form-control"
+                    placeholder="(00) 00000-0000"
+                    type="text"
+                    [mask]="maskFone"
+                    formControlName="telefone"
+                  />
+                </div>
+              </div>
+
+            </div>
+
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label> Email (Opcional)</label>
+                  <input
+                    class="form-control"
+                    placeholder="Home Address"
+                    type="Email"
+                    formControlName="email"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-4 pl-md-1">
+                <div class="form-group">
+                  <label> WhatsApp (Opcional) </label>
+                  <input
+                    class="form-control"
+                    placeholder="(00) 0 0000 - 0000"
+                    type="text"
+                    [mask]="maskFone"
+                    formControlName="whatsapp"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label> Senha </label>
+                  <input
+                    class="form-control"
+                    placeholder="******"
+                    type="password"
+                    [type]="hide ? 'password' : 'text'"
+                    formControlName="senha"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label> Senha </label>
+                  <input
+                    class="form-control"
+                    placeholder="******"
+                    [type]="hide ? 'password' : 'text'"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label> </label>
+                <div>
+                  <button
+                    class="btn btn-warning btn-icon"
+                    (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide"
+                  >
+                    <i
+                      class="{{ hide ? 'far fa-eye-slash' : 'fas fa-eye' }}"
+                    ></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <button
+            class="btn btn-fill btn-success"
+            [disabled]="!formulario.valid"
+            (click)="onSubmit()"
+          >
+            Cadastrar
+          </button>
+        </div>
+        <div class="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customSwitch1"
+            (change)="debug()"
+          />
+          <label class="custom-control-label" for="customSwitch1">Debug</label>
+        </div>
+        <div class="card-body" *ngIf="debugEnable">
+          <app-form-debug [form]="formulario"></app-form-debug>
+        </div>
+      </div>
+    </div>

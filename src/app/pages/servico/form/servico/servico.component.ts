@@ -1,3 +1,5 @@
+import { Categoria } from './../../../../models/categoria';
+import { CategoriaService } from './../../../categoria/categoria.service';
 import { ServicoService } from './../../servico.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -16,21 +18,34 @@ export class ServicoComponent implements OnInit {
   hide = true;
   loading = false;
   debugEnable = false;
+  categorias: Categoria[];
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private servicoService: ServicoService,
-    private modalCOnfirm: ModalConfirmacaoService
+    private modalCOnfirm: ModalConfirmacaoService,
+    private categoriaService: CategoriaService
   ) {}
 
   ngOnInit(): void {
+    this.combobox();
     const servico = this.route.snapshot.data['servico'];
     this.formulario = this.formBuilder.group({
       id: [servico.id],
+      categoriaId: [servico.categoriaId],
       nome: [servico.nome, Validators.required],
       descricao: [servico.descricao],
     });
+  }
+  combobox() {
+    this.categoriaService
+      .list()
+      .subscribe(
+        (result) => (
+          (this.categorias = result), console.log('result : ' + result)
+        )
+      );
   }
   onSubmit(): void {
     if (this.formulario.valid) {

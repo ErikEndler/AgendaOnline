@@ -34,7 +34,9 @@ export class ServicoListComponent implements OnInit {
       this.refresh();
       // this.lista = this.usuarios;
     }),
-      (error) => {};
+      (error) => {
+        console.log(error);
+      };
   }
   refresh(): void {
     this.servicos = this.lista
