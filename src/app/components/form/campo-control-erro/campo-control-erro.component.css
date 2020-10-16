@@ -1,0 +1,7 @@
+.alert {
+  position: relative;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 0.0825rem solid transparent;
+  border-radius: 0.2857rem;
+}

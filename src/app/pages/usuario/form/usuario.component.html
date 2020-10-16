@@ -12,14 +12,18 @@
           <form [formGroup]="formulario">
             <div class="row">
               <div class="col-md-8">
-                <div class="form-group">
+                <div class="form-group" [ngClass]="aplicaCssErro('nome')">
                   <label> Nome </label>
                   <input
                     class="form-control"
                     placeholder="Nome"
                     type="text"
                     formControlName="nome"
+                    id='nome'
                   />
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')"
+                  msgErro="Nome é obrigatório.">
+                  </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4">

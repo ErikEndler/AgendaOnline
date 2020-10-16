@@ -81,4 +81,13 @@ export class UsuarioComponent implements OnInit {
   debug(): void {
     this.debugEnable = !this.debugEnable;
   }
+  verificaValidTouched(campo){
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+  }
+  aplicaCssErro(campo){
+    return{
+      'has-error': this.verificaValidTouched(campo),
+      'has-feedback': this.verificaValidTouched(campo)
+    };
+  }
 }
