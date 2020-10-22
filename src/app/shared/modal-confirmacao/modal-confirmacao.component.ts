@@ -15,7 +15,7 @@ export class ModalConfirmacaoComponent implements OnInit {
 
   confirmResult: Subject<boolean>;
 
-  constructor(public bsModalRef: BsModalRef) {}
+  constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
     this.confirmResult = new Subject();
@@ -23,10 +23,10 @@ export class ModalConfirmacaoComponent implements OnInit {
   onClose(): void {
     this.confirmAndCLose(false);
   }
-  onConfirme() {
+  onConfirme(): void {
     this.confirmAndCLose(true);
   }
-  private confirmAndCLose(value: boolean) {
+  private confirmAndCLose(value: boolean): void {
     this.confirmResult.next(value);
     this.bsModalRef.hide();
   }

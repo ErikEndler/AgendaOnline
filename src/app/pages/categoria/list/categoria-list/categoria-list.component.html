@@ -20,13 +20,10 @@
               <td>{{ categoria.descricao }}</td>
 
               <td>
-                <button
-                  class="btn btn-info btn-icon"
-                  (click)="onEdit(categoria.id)"
-                >
+                <button class="btn btn-info btn-icon" (click)="onEdit(categoria.id)">
                   <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-warning btn-icon">
+                <button class="btn btn-warning btn-icon" (click)="onDelete(categoria.id)">
                   <i class="far fa-trash-alt"></i>
                 </button>
               </td>
@@ -34,20 +31,11 @@
           </tbody>
         </table>
         <div class="d-flex justify-content-between p-2">
-          <ngb-pagination
-            [collectionSize]="collectionSize"
-            [(page)]="page"
-            [pageSize]="pageSize"
-            (pageChange)="refresh()"
-          >
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refresh()">
           </ngb-pagination>
 
-          <select
-            class="custom-select"
-            style="width: auto"
-            [(ngModel)]="pageSize"
-            (ngModelChange)="refresh()"
-          >
+          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
             <option [ngValue]="2">2 items per page</option>
             <option [ngValue]="4">4 items per page</option>
             <option [ngValue]="6">6 items per page</option>

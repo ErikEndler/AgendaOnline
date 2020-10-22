@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EMPTY } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -23,8 +23,10 @@ export class UsuarioComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private serviceUsuario: UsuarioService,
-    private modalCOnfirm: ModalConfirmacaoService
-  ) {}
+    private modalCOnfirm: ModalConfirmacaoService,
+    private router: Router
+
+  ) { }
 
   ngOnInit(): void {
     const usuario = this.route.snapshot.data['usuario'];
@@ -53,7 +55,7 @@ export class UsuarioComponent implements OnInit {
       const result$ = this.modalCOnfirm.showConfirm(
         'Confirmação',
         'Deseja Salvar??',
-        'Confirmaaarrr'
+        'Confirmar'
       );
       result$
         .asObservable()
@@ -64,7 +66,11 @@ export class UsuarioComponent implements OnInit {
           )
         )
         .subscribe(
-          (success) => console.log('salvo com sucesso!'),
+
+          (success) => {
+            console.log('salvo com sucesso!');
+            console.log('salvo com sucesso!'), this.router.navigate(['']);
+          },
           (error) => {
             console.error(error),
               console.log(error),
@@ -81,11 +87,11 @@ export class UsuarioComponent implements OnInit {
   debug(): void {
     this.debugEnable = !this.debugEnable;
   }
-  verificaValidTouched(campo){
+  verificaValidTouched(campo) {
     return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
-  aplicaCssErro(campo){
-    return{
+  aplicaCssErro(campo) {
+    return {
       'has-error': this.verificaValidTouched(campo),
       'has-feedback': this.verificaValidTouched(campo)
     };

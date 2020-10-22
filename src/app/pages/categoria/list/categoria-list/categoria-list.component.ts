@@ -2,6 +2,9 @@ import { CategoriaService } from './../../categoria.service';
 import { Categoria } from './../../../../models/categoria';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { switchMap, take } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
 
 @Component({
   selector: 'app-categoria-list',
@@ -19,14 +22,42 @@ export class CategoriaListComponent implements OnInit {
 
   constructor(
     private categoriaService: CategoriaService,
+    private modalCOnfirm: ModalConfirmacaoService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.list();
   }
   onEdit(id): void {
     this.router.navigate(['categoriaEditar', id]);
+  }
+  onDelete(id): void {
+    const result$ = this.modalCOnfirm.showConfirm(
+      'Confirmação',
+      'Deseja Excluir??',
+      'Confirmar'
+    );
+    result$
+      .asObservable()
+      .pipe(
+        take(1),
+        switchMap((result) =>
+          result ? this.categoriaService.remove(id) : EMPTY
+        )
+      )
+      .subscribe(
+
+        (success) => {
+          console.log('Excluido com sucesso!');
+          console.log('Excluido com sucesso!'), this.ngOnInit();
+        },
+        (error) => {
+          console.error(error),
+            console.log(error),
+            console.log('ERRO AO EXCLUI');
+        }
+      );
   }
   list(): void {
     this.loading = true;
@@ -37,7 +68,7 @@ export class CategoriaListComponent implements OnInit {
       this.refresh();
       // this.lista = this.usuarios;
     }),
-      (error) => {};
+      (error) => { };
   }
   refresh(): void {
     this.categorias = this.lista

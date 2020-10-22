@@ -2,6 +2,9 @@ import { UsuarioService } from './../../usuario.service';
 import { Usuario } from './../../../../models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { switchMap, take } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-usuario-list',
@@ -25,7 +28,12 @@ export class UsuarioListComponent implements OnInit {
   ];
   loading = false;
 
-  constructor(private usuarioService: UsuarioService, private router: Router) {}
+  constructor(
+    private usuarioService: UsuarioService,
+    private router: Router,
+    private modalCOnfirm: ModalConfirmacaoService,
+    private serviceUsuario: UsuarioService
+  ) { }
 
   lista: Usuario[];
   ngOnInit(): void {
@@ -33,6 +41,33 @@ export class UsuarioListComponent implements OnInit {
   }
   onEdit(id): void {
     this.router.navigate(['usuarioEditar', id]);
+  }
+  onDelete(id): void {
+    const result$ = this.modalCOnfirm.showConfirm(
+      'Confirmação',
+      'Deseja Excluir??',
+      'Confirmar'
+    );
+    result$
+      .asObservable()
+      .pipe(
+        take(1),
+        switchMap((result) =>
+          result ? this.serviceUsuario.remove(id) : EMPTY
+        )
+      )
+      .subscribe(
+
+        (success) => {
+          console.log('Excluido com sucesso!');
+          console.log('Excluido com sucesso!'), this.ngOnInit();
+        },
+        (error) => {
+          console.error(error),
+            console.log(error),
+            console.log('ERRO AO EXCLUI');
+        }
+      );
   }
   list(): void {
     this.loading = true;
@@ -43,7 +78,7 @@ export class UsuarioListComponent implements OnInit {
       this.refreshUsuarios();
       // this.lista = this.usuarios;
     }),
-      (error) => {};
+      (error) => { };
   }
   refreshUsuarios(): void {
     this.usuarios = this.lista

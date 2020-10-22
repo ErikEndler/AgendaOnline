@@ -26,14 +26,14 @@ export class ServicoComponent implements OnInit {
     private servicoService: ServicoService,
     private modalCOnfirm: ModalConfirmacaoService,
     private categoriaService: CategoriaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.combobox();
     const servico = this.route.snapshot.data['servico'];
     this.formulario = this.formBuilder.group({
       id: [servico.id],
-      categoriaId: [servico.categoriaId],
+      categoria: [servico.categoria],
       nome: [servico.nome, Validators.required],
       descricao: [servico.descricao],
     });
@@ -52,7 +52,7 @@ export class ServicoComponent implements OnInit {
       const result$ = this.modalCOnfirm.showConfirm(
         'Confirmação',
         'Deseja Salvar??',
-        'Confirmaaarrr'
+        'Confirmar'
       );
       result$
         .asObservable()

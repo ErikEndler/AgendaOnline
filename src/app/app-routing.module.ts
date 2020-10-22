@@ -1,3 +1,4 @@
+import { EscalaComponent } from './pages/escala/escala-form/escala/escala.component';
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
 import { ServicoResolveGuard } from './guards/servico-resolve.guard';
 import { ServicoComponent } from './pages/servico/form/servico/servico.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'escala', component: EscalaComponent },
   {
     path: 'usuariolist',
     component: UsuarioListComponent,
@@ -78,4 +80,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

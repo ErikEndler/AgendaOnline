@@ -22,7 +22,7 @@ export class CategoriaComponent implements OnInit {
     private route: ActivatedRoute,
     private categoriaService: CategoriaService,
     private modalCOnfirm: ModalConfirmacaoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const categoria = this.route.snapshot.data['categoria'];
@@ -38,7 +38,7 @@ export class CategoriaComponent implements OnInit {
       const result$ = this.modalCOnfirm.showConfirm(
         'Confirmação',
         'Deseja Salvar??',
-        'Confirmaaarrr'
+        'Confirmar'
       );
       result$
         .asObservable()

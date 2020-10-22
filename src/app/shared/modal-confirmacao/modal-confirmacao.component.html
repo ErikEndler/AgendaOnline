@@ -1,20 +1,14 @@
 <!-- Modal -->
-
 <div class="modal-content">
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLongTitle">{{ title }}</h5>
   </div>
   <div class="modal-body">{{ msg }}</div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-secondary"
-      data-dismiss="modal"
-      (click)="onClose()"
-    >
+    <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="onClose()">
       {{ cancelTxt }}
     </button>
-    <button class="btn btn-fill btn-primary" (click)="onConfirme()">
+    <button class="btn btn-fill btn-success" (click)="onConfirme()">
       {{ okTxt }}
     </button>
   </div>

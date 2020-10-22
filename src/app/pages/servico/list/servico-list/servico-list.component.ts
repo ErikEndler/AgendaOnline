@@ -2,6 +2,9 @@ import { ServicoService } from './../../servico.service';
 import { Servico } from './../../../../models/servico';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { switchMap, take } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-servico-list',
@@ -17,13 +20,41 @@ export class ServicoListComponent implements OnInit {
   colunas: string[] = ['id', 'categoria id', 'nome', 'descricao', 'opções'];
   lista: Servico[];
 
-  constructor(private servicoService: ServicoService, private router: Router) {}
+  constructor(private servicoService: ServicoService, private router: Router, private modalCOnfirm: ModalConfirmacaoService
+  ) { }
 
   ngOnInit(): void {
     this.list();
   }
   onEdit(id): void {
     this.router.navigate(['servicoEditar', id]);
+  }
+  onDelete(id): void {
+    const result$ = this.modalCOnfirm.showConfirm(
+      'Confirmação',
+      'Deseja Excluir??',
+      'Confirmar'
+    );
+    result$
+      .asObservable()
+      .pipe(
+        take(1),
+        switchMap((result) =>
+          result ? this.servicoService.remove(id) : EMPTY
+        )
+      )
+      .subscribe(
+
+        (success) => {
+          console.log('Excluido com sucesso!');
+          console.log('Excluido com sucesso!'), this.ngOnInit();
+        },
+        (error) => {
+          console.error(error),
+            console.log(error),
+            console.log('ERRO AO EXCLUI');
+        }
+      );
   }
   list(): void {
     this.loading = true;
