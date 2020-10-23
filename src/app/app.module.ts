@@ -26,6 +26,7 @@ import { ServicoListComponent } from './pages/servico/list/servico-list/servico-
 import { ServicoComponent } from './pages/servico/form/servico/servico.component';
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
 import { EscalaComponent } from './pages/escala/escala-form/escala/escala.component';
+import { ArchwizardModule } from 'angular-archwizard';
 
 @NgModule({
   declarations: [
@@ -57,8 +58,9 @@ import { EscalaComponent } from './pages/escala/escala-form/escala/escala.compon
     ReactiveFormsModule,
     ModalModule.forRoot(),
     InterceptorModule,
+    ArchwizardModule
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
