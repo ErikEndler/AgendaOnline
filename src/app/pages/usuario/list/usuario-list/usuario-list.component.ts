@@ -33,7 +33,7 @@ export class UsuarioListComponent implements OnInit {
     private router: Router,
     private modalCOnfirm: ModalConfirmacaoService,
     private serviceUsuario: UsuarioService
-  ) { }
+  ) {}
 
   lista: Usuario[];
   ngOnInit(): void {
@@ -52,12 +52,9 @@ export class UsuarioListComponent implements OnInit {
       .asObservable()
       .pipe(
         take(1),
-        switchMap((result) =>
-          result ? this.serviceUsuario.remove(id) : EMPTY
-        )
+        switchMap((result) => (result ? this.serviceUsuario.remove(id) : EMPTY))
       )
       .subscribe(
-
         (success) => {
           console.log('Excluido com sucesso!');
           console.log('Excluido com sucesso!'), this.ngOnInit();
@@ -78,7 +75,7 @@ export class UsuarioListComponent implements OnInit {
       this.refreshUsuarios();
       // this.lista = this.usuarios;
     }),
-      (error) => { };
+      (error) => {};
   }
   refreshUsuarios(): void {
     this.usuarios = this.lista

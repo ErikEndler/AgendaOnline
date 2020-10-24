@@ -1,5 +1,5 @@
 export class Escala {
   id: number;
-  nome: string;
-  descricao: string;
+  servico: number;
+  diaSemana: string;
 }
