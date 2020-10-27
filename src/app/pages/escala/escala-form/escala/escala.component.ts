@@ -30,9 +30,9 @@ export class EscalaComponent implements OnInit {
     this.list();
     const escala = this.route.snapshot.data['escala'];
     this.formulario = this.formBuilder.group({
-      id: [''],
-      servico: [''],
-      diaSemana: [''],
+      id: [escala.id],
+      servico: [escala.servico],
+      diaSemana: [escala.diaSemana],
     });
   }
   list(): void {

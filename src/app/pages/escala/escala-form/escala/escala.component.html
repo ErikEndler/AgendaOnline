@@ -1,6 +1,6 @@
 <div class="content">
-  <aw-wizard  #wizard [navBarLayout]="'large-empty-symbols'">
-    <form [formGroup]="formulario">
+  <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
+
     <aw-wizard-step [stepTitle]="'SERVIÇO'">
       <div class="centered-content">
         <div class="card">
@@ -8,6 +8,7 @@
             <h5 class="title">SELCIONE SERVIÇO</h5>
           </div>
           <div class="card-body">
+            <form  [formGroup]="formulario">
             <div class="table-responsive">
               <table class="table tablesorter" id="">
                 <thead class="text-primary">
@@ -20,7 +21,7 @@
                 <tbody>
                   <tr *ngFor="let servico of servicos">
                     <td>
-                      <input type="radio" id=servico.id name="servico" formControlName="servico" value=servico.id>
+                      <input type="radio" id={{servico.id}} name="servico" formControlName="servico" value={{servico.id}}>
                     </td>
                     <td>{{ servico.nome }}</td>
                     <td>{{ servico.descricao }}</td>
@@ -38,7 +39,7 @@
                 <select
                   class="custom-select"
                   style="width: auto"
-                  [(ngModel)]="pageSize"
+                  [(ngModel)]="pageSize" [ngModelOptions]="{standalone: true}"
                   (ngModelChange)="refreshListServico()"
                 >
                   <option [ngValue]="2">2 items per page</option>
@@ -47,6 +48,7 @@
                 </select>
               </div>
             </div>
+          </form>
           </div>
           <div class="card-footer">
             <div class="btn-group">
@@ -98,6 +100,5 @@
         </div>
       </div>
     </aw-wizard-step>
-  </form>
   </aw-wizard>
 </div>
