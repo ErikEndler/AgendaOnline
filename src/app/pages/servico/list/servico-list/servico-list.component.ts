@@ -12,7 +12,7 @@ import { EMPTY } from 'rxjs';
   styleUrls: ['./servico-list.component.css'],
 })
 export class ServicoListComponent implements OnInit {
-  loading = false;
+  loading = true;
   page = 1;
   pageSize = 4;
   collectionSize: any;

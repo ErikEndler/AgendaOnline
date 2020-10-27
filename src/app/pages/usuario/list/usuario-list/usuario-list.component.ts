@@ -26,14 +26,14 @@ export class UsuarioListComponent implements OnInit {
     'whatsapp',
     'opções',
   ];
-  loading = false;
+  loading = true;
 
   constructor(
     private usuarioService: UsuarioService,
     private router: Router,
     private modalCOnfirm: ModalConfirmacaoService,
     private serviceUsuario: UsuarioService
-  ) {}
+  ) { }
 
   lista: Usuario[];
   ngOnInit(): void {
@@ -75,7 +75,7 @@ export class UsuarioListComponent implements OnInit {
       this.refreshUsuarios();
       // this.lista = this.usuarios;
     }),
-      (error) => {};
+      (error) => { };
   }
   refreshUsuarios(): void {
     this.usuarios = this.lista

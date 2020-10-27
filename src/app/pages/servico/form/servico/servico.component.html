@@ -1,31 +1,26 @@
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"
-></script>
+<script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
 
 <div class="content">
   <div class="row">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header"><h5 class="title">Serviço Form</h5></div>
+        <div class="card-header">
+          <h5 class="title">Serviço Form</h5>
+        </div>
         <div class="card-body">
-          <form [formGroup]="formulario">
+          <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
             <div class="row">
               <div class="col-md-8">
                 <div class="form-group">
                   <label> Nome </label>
-                  <input
-                    class="form-control"
-                    placeholder="Nome"
-                    type="text"
-                    formControlName="nome"
-                  />
+                  <input class="form-control" placeholder="Nome" type="text" formControlName="nome" />
                 </div>
               </div>
               <div class="col-md-4">
                 <label> Categoria </label>
                 <select class="form-control" formControlName="categoria">
-                  <option *ngFor="let categoria of categorias" [value]="categoria.id" >{{categoria.nome}}</option>
+                  <option *ngFor="let categoria of categorias" [value]="categoria.id">{{categoria.nome}}</option>
                 </select>
               </div>
             </div>
@@ -33,33 +28,19 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label> Descrição </label>
-                  <input
-                    class="form-control"
-                    placeholder="Home Address"
-                    type="text"
-                    formControlName="descricao"
-                  />
+                  <input class="form-control" placeholder="Home Address" type="text" formControlName="descricao" />
                 </div>
               </div>
             </div>
           </form>
         </div>
         <div class="card-footer">
-          <button
-            class="btn btn-fill btn-success"
-            [disabled]="!formulario.valid"
-            (click)="onSubmit()"
-          >
+          <button type="submit" class="btn btn-fill btn-success" [disabled]="!formulario.valid" (click)="onSubmit()">
             Salvar
           </button>
         </div>
         <div class="custom-control custom-checkbox">
-          <input
-            type="checkbox"
-            class="custom-control-input"
-            id="customSwitch1"
-            (change)="debug()"
-          />
+          <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="debug()" />
           <label class="custom-control-label" for="customSwitch1">Debug</label>
         </div>
         <div class="card-body" *ngIf="debugEnable">
