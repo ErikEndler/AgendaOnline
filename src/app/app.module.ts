@@ -27,6 +27,9 @@ import { ServicoComponent } from './pages/servico/form/servico/servico.component
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
 import { EscalaComponent } from './pages/escala/escala-form/escala/escala.component';
 import { ArchwizardModule } from 'angular-archwizard';
+import { SimpleNotificationsModule } from 'angular2-notifications';
+import { NotificacaoComponent } from './shared/notificacao/notificacao/notificacao.component';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +45,8 @@ import { ArchwizardModule } from 'angular-archwizard';
     ServicoComponent,
     CadastroComponent,
     EscalaComponent,
+    NotificacaoComponent,
+
   ],
   imports: [
     FormsModule,
@@ -58,7 +63,9 @@ import { ArchwizardModule } from 'angular-archwizard';
     ReactiveFormsModule,
     ModalModule.forRoot(),
     InterceptorModule,
-    ArchwizardModule
+    ArchwizardModule,
+    SimpleNotificationsModule.forRoot()
+
   ],
   providers: [],
   bootstrap: [AppComponent],

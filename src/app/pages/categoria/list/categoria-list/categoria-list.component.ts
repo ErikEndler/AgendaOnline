@@ -12,7 +12,7 @@ import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.servic
   styleUrls: ['./categoria-list.component.css'],
 })
 export class CategoriaListComponent implements OnInit {
-  loading = false;
+  loading = true;
   page = 1;
   pageSize = 4;
   collectionSize: any;
