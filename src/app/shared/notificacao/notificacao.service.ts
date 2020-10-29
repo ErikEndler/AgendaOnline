@@ -1,28 +1,39 @@
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotificacaoComponent } from './notificacao/notificacao.component';
 import { Injectable } from '@angular/core';
 import { NotificationsService } from 'angular2-notifications';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificacaoService {
-
-  timeOut: 5000;
-  showProgressBar: true;
-  pauseOnHover: true;
-  clickToClose: true;
-  animate: 'fromRight';
-
-  constructor(private notificacao: NotificationsService) { }
+  constructor(
+    private notification: NotificationsService,
+    private formBuilder: FormBuilder
+  ) {}
+  form: FormGroup;
 
   public criar(tipo: any, titulo: string, msg: string) {
+    this.form = this.formBuilder.group({
+      type: tipo,
+      title: titulo,
+      content: msg,
+      timeOut: 5000,
+      showProgressBar: true,
+      pauseOnHover: true,
+      clickToClose: true,
+      animate: 'fromRight',
+    });
+    const temp = this.form.getRawValue();
+    console.log(temp);
+    const title = temp.title;
+    const content = temp.content;
+    const type = temp.type;
 
-    // const temp = this.form.getRawValue();
-    const title = titulo;
-    const content = msg;
-    const type = tipo;
+    delete temp.title;
+    delete temp.content;
+    delete temp.type;
 
-    // tslint:disable-next-line: max-line-length
-    this.notificacao.create(title, content, type, { timeOut: this.timeOut, showProgressBar: this.showProgressBar, pauseOnHover: this.pauseOnHover, animate: this.animate });
+    this.notification.create(title, content, type, temp);
   }
 }
