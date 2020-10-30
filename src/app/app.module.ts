@@ -1,9 +1,10 @@
+import { ServicoEscalaFormComponent } from './pages/escala/servico-escala-form/servico-escala-form.component';
+import { EscalageralComponent } from './pages/escala/escala-geral-form/escala-geral.component';
 import { InterceptorModule } from './auth/interceptor/interceptor.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -25,10 +26,10 @@ import { CategoriaListComponent } from './pages/categoria/list/categoria-list/ca
 import { ServicoListComponent } from './pages/servico/list/servico-list/servico-list.component';
 import { ServicoComponent } from './pages/servico/form/servico/servico.component';
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
-import { EscalaComponent } from './pages/escala/escala-form/escala/escala.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NotificacaoComponent } from './shared/notificacao/notificacao/notificacao.component';
+import { HomeEscalaComponent } from './pages/escala/home-escala/home-escala.component';
 
 
 @NgModule({
@@ -44,9 +45,10 @@ import { NotificacaoComponent } from './shared/notificacao/notificacao/notificac
     ServicoListComponent,
     ServicoComponent,
     CadastroComponent,
-    EscalaComponent,
+    EscalageralComponent,
     NotificacaoComponent,
-
+    HomeEscalaComponent,
+    ServicoEscalaFormComponent
   ],
   imports: [
     FormsModule,

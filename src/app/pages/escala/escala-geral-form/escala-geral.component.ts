@@ -1,16 +1,17 @@
-import { ServicoService } from './../../../servico/servico.service';
 import { Servico } from 'src/app/models/servico';
-import { Escala } from './../../../../models/escala';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ServicoService } from '../../servico/servico.service';
 
 @Component({
-  selector: 'app-escala',
-  templateUrl: './escala.component.html',
-  styleUrls: ['./escala.component.css'],
+  selector: 'app-escala-geral',
+  templateUrl: './escala-geral.component.html',
+  styleUrls: ['./escala-geral.component.css'],
 })
-export class EscalaComponent implements OnInit {
+export class EscalageralComponent implements OnInit {
+  iniciar = true;
+  visible = false;
   loading = false;
   page = 1;
   pageSize = 4;
@@ -23,8 +24,8 @@ export class EscalaComponent implements OnInit {
   constructor(
     private serviceServico: ServicoService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
-  ) {}
+    private route: ActivatedRoute,
+  ) { }
 
   ngOnInit(): void {
     this.list();
@@ -44,7 +45,7 @@ export class EscalaComponent implements OnInit {
       this.refreshListServico();
       // this.lista = this.usuarios;
     }),
-      (error) => {};
+      (error) => { };
   }
   refreshListServico(): void {
     this.servicos = this.listaServico
@@ -54,7 +55,12 @@ export class EscalaComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
-  onSelect() {}
+  onSelect() { }
 
-  finishFunction() {}
+  changeVisible(evento) {
+    console.log("consolelog do evento : " + evento);
+    this.visible = evento;
+  }
+
+  finishFunction() { }
 }
