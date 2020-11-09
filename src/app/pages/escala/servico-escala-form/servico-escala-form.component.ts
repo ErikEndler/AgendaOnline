@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Servico } from 'src/app/models/servico';
 import { ServicoService } from '../../servico/servico.service';
@@ -13,12 +13,15 @@ export class ServicoEscalaFormComponent implements OnInit {
   constructor(private serviceServico: ServicoService, private formBuilder: FormBuilder,
 
   ) { }
+
+  @Output() eventoServico = new EventEmitter<string>();
+
   servicos: Servico[];
   listaServico: Servico[];
   page = 1;
   pageSize = 4;
   collectionSize: any;
-  loading = false;
+  loading = true;
   colunas: string[] = ['select', 'nome', 'descrição'];
   formulario: FormGroup;
 
@@ -45,6 +48,13 @@ export class ServicoEscalaFormComponent implements OnInit {
         (this.page - 1) * this.pageSize,
         (this.page - 1) * this.pageSize + this.pageSize
       );
+  }
+
+
+  funcao() {
+    this.eventoServico.emit(this.formulario.get('idServico').value);
+    // this.eventoServico.emit('servicooooo');
+
   }
 
 }

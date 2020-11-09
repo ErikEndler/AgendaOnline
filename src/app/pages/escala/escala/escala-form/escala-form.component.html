@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card-header">
+    <h4 class="card-title">Formulário Escala</h4>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label> Serviço </label>
+            <input class="form-control" placeholder=" " type="text" formControlName="servico" />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label> Dia Semana </label>
+            <input class="form-control" placeholder=" " type="text" formControlName="diaSemana" />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer">
+    <button type="submit" class="btn btn-fill btn-success" [disabled]="!formulario.valid" (click)="onSubmit()">
+      Salvar
+    </button>
+  </div>
+</div>

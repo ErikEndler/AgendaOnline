@@ -30,6 +30,8 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NotificacaoComponent } from './shared/notificacao/notificacao/notificacao.component';
 import { HomeEscalaComponent } from './pages/escala/home-escala/home-escala.component';
+import { EscalaFormComponent } from './pages/escala/escala/escala-form/escala-form.component';
+import { EscalaListComponent } from './pages/escala/escala/escala-list/escala-list.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { HomeEscalaComponent } from './pages/escala/home-escala/home-escala.comp
     EscalageralComponent,
     NotificacaoComponent,
     HomeEscalaComponent,
-    ServicoEscalaFormComponent
+    ServicoEscalaFormComponent,
+    EscalaFormComponent,
+    EscalaListComponent
   ],
   imports: [
     FormsModule,

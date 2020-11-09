@@ -1,7 +1,6 @@
 import { ItemEscala } from './../models/itemEscala';
 import { Escala } from './../models/escala';
-import { ItemEscalaService } from './../pages/escala/item-escala.service';
-import { EscalaService } from './../pages/escala/escala.service';
+import { EscalaService } from '../pages/escala/escala/escala.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -16,8 +15,7 @@ import { Observable, of } from 'rxjs';
 export class EscalaResolveGuard implements Resolve<Escala> {
   constructor(
     private serviceEscala: EscalaService,
-    private serviceItemEscala: ItemEscalaService
-  ) {}
+  ) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
