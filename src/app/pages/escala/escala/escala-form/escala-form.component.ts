@@ -1,7 +1,9 @@
+import { ServicoEscalaFormService } from './../../servico-escala-form.service';
 import { ServicoEscalaFormComponent } from './../../servico-escala-form/servico-escala-form.component';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { Servico } from 'src/app/models/servico';
 
 @Component({
   selector: 'app-escala-form',
@@ -15,11 +17,13 @@ export class EscalaFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private modalCOnfirm: ModalConfirmacaoService
-  ) {}
+    private modalCOnfirm: ModalConfirmacaoService,
+    private servicoEscalaFormService: ServicoEscalaFormService
+  ) { }
 
   ngOnInit(): void {
-    console.log('comsole log aki' + this.servicoIn);
+    this.servicoEscalaFormService.emitirServico.subscribe(result => console.log("result do subscribe no evento : ", result));
+    console.log('comsole log aki init :' + this.servicoIn);
 
     this.formulario = this.formBuilder.group({
       id: [],
@@ -28,7 +32,11 @@ export class EscalaFormComponent implements OnInit {
     });
   }
   onSubmit() {
-    console.log('comsole log aki' + this.servicoIn);
+    this.funcao();
+    console.log('comsole log aki : ' + this.servicoIn);
     console.log(this.formulario.value);
+  }
+  funcao() {
+    this.formulario.controls['servico'].setValue(this.servicoIn.nome);
   }
 }

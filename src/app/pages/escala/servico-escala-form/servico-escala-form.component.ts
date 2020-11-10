@@ -12,11 +12,11 @@ export class ServicoEscalaFormComponent implements OnInit {
   constructor(
     private serviceServico: ServicoService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
 
   @Output() eventoServico = new EventEmitter();
 
-  servicoID;
+  servico: Servico;
   servicos: Servico[];
   listaServico: Servico[];
   page = 1;
@@ -37,7 +37,7 @@ export class ServicoEscalaFormComponent implements OnInit {
       this.loading = false;
       this.refreshListServico();
     }),
-      (error) => {};
+      (error) => { };
   }
   refreshListServico(): void {
     this.servicos = this.listaServico
@@ -49,8 +49,11 @@ export class ServicoEscalaFormComponent implements OnInit {
   }
 
   funcao() {
-    console.log('evento servico id : ', this.servicoID);
-    this.eventoServico.emit(this.servicoID);
-    // this.eventoServico.emit('servicooooo');
+    console.log('evento servico id : ', this.servico);
+    this.eventoServico.emit(this.servico);
+  }
+  onselect(variavel: Servico) {
+    console.log("imprimindo o click : ", variavel);
+    this.servico = variavel;
   }
 }

@@ -4,43 +4,42 @@
       <h5 class="title">SELCIONE SERVIÇO</h5>
     </div>
     <div class="card-body">
-        <div *ngIf=loading class="d-flex justify-content-center">
-          <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-            <span class="sr-only">Loading...</span>
-          </div>
+      <div *ngIf=loading class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
         </div>
-        <div *ngIf=!loading class="table-responsive">
-          <table class="table tablesorter" id="">
-            <thead class="text-primary">
-              <tr>
-                <th *ngFor="let coluna of colunas" scope="col">
-                  {{ coluna }}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let servico of servicos" >
-                <td>
-                  <input type="radio" id={{servico.id}} name="idServico" [(ngModel)]="servicoID"
-                    value={{servico.id}}>
-                </td>
-                <td >{{ servico.nome }} </td>
-                <td>{{ servico.descricao }}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-              (pageChange)="refreshListServico()">
-            </ngb-pagination>
-            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
-              [ngModelOptions]="{standalone: true}" (ngModelChange)="refreshListServico()">
-              <option [ngValue]="2">2 items per page</option>
-              <option [ngValue]="4">4 items per page</option>
-              <option [ngValue]="6">6 items per page</option>
-            </select>
-          </div>
+      </div>
+      <div *ngIf=!loading class="table-responsive">
+        <table class="table tablesorter" id="">
+          <thead class="text-primary">
+            <tr>
+              <th *ngFor="let coluna of colunas" scope="col">
+                {{ coluna }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let servico of servicos">
+              <td>
+                <input type="radio" id={{servico.id}} name="idServico" (click)="onselect(servico)">
+              </td>
+              <td>{{ servico.nome }} </td>
+              <td>{{ servico.descricao }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refreshListServico()">
+          </ngb-pagination>
+          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" [ngModelOptions]="{standalone: true}"
+            (ngModelChange)="refreshListServico()">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="4">4 items per page</option>
+            <option [ngValue]="6">6 items per page</option>
+          </select>
         </div>
+      </div>
     </div>
     <div class="card-footer">
       <div class="btn-group">

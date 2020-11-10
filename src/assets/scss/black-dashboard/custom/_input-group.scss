@@ -165,8 +165,12 @@
 .input-group-btn:first-child > .btn:not(:first-child) {
   border-left: 0 none;
 }
+.form-control[readonly] {
+  background-color: darken($input-bg, 13%);
+  color: $input-color;
+  cursor: not-allowed;
+}
 .form-control[disabled],
-.form-control[readonly],
 fieldset[disabled] .form-control {
   background-color: $black-states;
   color: $default;

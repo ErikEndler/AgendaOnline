@@ -63,10 +63,8 @@ export class EscalageralComponent implements OnInit {
     this.visible = evento;
   }
   setServico(evento) {
-    console.log("consolelog do evento 'servico' : " + evento);
-
+    console.log("consolelog do evento 'servico' : " + evento.nome);
     this.servico = evento;
-
   }
 
   finishFunction() { }
