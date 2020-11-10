@@ -4,7 +4,6 @@
       <h5 class="title">SELCIONE SERVIÇO</h5>
     </div>
     <div class="card-body">
-      <form [formGroup]="formulario">
         <div *ngIf=loading class="d-flex justify-content-center">
           <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
@@ -20,12 +19,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let servico of servicos">
+              <tr *ngFor="let servico of servicos" >
                 <td>
-                  <input type="radio" id={{servico.id}} name="idServico" formControlName="idServico"
+                  <input type="radio" id={{servico.id}} name="idServico" [(ngModel)]="servicoID"
                     value={{servico.id}}>
                 </td>
-                <td>{{ servico.nome }}</td>
+                <td >{{ servico.nome }} </td>
                 <td>{{ servico.descricao }}</td>
               </tr>
             </tbody>
@@ -42,7 +41,6 @@
             </select>
           </div>
         </div>
-      </form>
     </div>
     <div class="card-footer">
       <div class="btn-group">

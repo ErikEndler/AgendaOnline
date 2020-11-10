@@ -6,16 +6,17 @@ import { ServicoService } from '../../servico/servico.service';
 @Component({
   selector: 'app-servico-escala-form',
   templateUrl: './servico-escala-form.component.html',
-  styleUrls: ['./servico-escala-form.component.css']
+  styleUrls: ['./servico-escala-form.component.css'],
 })
 export class ServicoEscalaFormComponent implements OnInit {
+  constructor(
+    private serviceServico: ServicoService,
+    private formBuilder: FormBuilder
+  ) {}
 
-  constructor(private serviceServico: ServicoService, private formBuilder: FormBuilder,
+  @Output() eventoServico = new EventEmitter();
 
-  ) { }
-
-  @Output() eventoServico = new EventEmitter<string>();
-
+  servicoID;
   servicos: Servico[];
   listaServico: Servico[];
   page = 1;
@@ -27,9 +28,6 @@ export class ServicoEscalaFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.list();
-    this.formulario = this.formBuilder.group({
-      idServico: []
-    });
   }
   list(): void {
     this.loading = true;
@@ -39,7 +37,7 @@ export class ServicoEscalaFormComponent implements OnInit {
       this.loading = false;
       this.refreshListServico();
     }),
-      (error) => { };
+      (error) => {};
   }
   refreshListServico(): void {
     this.servicos = this.listaServico
@@ -50,11 +48,9 @@ export class ServicoEscalaFormComponent implements OnInit {
       );
   }
 
-
   funcao() {
-    this.eventoServico.emit(this.formulario.get('idServico').value);
+    console.log('evento servico id : ', this.servicoID);
+    this.eventoServico.emit(this.servicoID);
     // this.eventoServico.emit('servicooooo');
-
   }
-
 }

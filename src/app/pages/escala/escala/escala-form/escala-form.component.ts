@@ -6,30 +6,29 @@ import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.servic
 @Component({
   selector: 'app-escala-form',
   templateUrl: './escala-form.component.html',
-  styleUrls: ['./escala-form.component.css']
+  styleUrls: ['./escala-form.component.css'],
 })
 export class EscalaFormComponent implements OnInit {
   formulario: FormGroup;
 
   @Input() servicoIn;
 
-  constructor(private formBuilder: FormBuilder, private modalCOnfirm: ModalConfirmacaoService,
-
-  ) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private modalCOnfirm: ModalConfirmacaoService
+  ) {}
 
   ngOnInit(): void {
-
-    console.log("comsole log aki" + this.servicoIn);
+    console.log('comsole log aki' + this.servicoIn);
 
     this.formulario = this.formBuilder.group({
       id: [],
       diaSemana: [],
-      servico: [],
+      servico: [this.servicoIn],
     });
   }
   onSubmit() {
-    console.log("comsole log aki" + this.servicoIn);
+    console.log('comsole log aki' + this.servicoIn);
     console.log(this.formulario.value);
   }
-
 }
