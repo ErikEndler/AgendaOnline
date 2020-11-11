@@ -10,4 +10,5 @@ export class UsuarioService extends CrudService<Usuario> {
   constructor(protected http: HttpClient) {
     super(http, 'http://localhost:8080/api/usuario');
   }
+
 }
