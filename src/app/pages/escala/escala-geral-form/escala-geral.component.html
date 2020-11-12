@@ -4,7 +4,7 @@
   </div>
   <aw-wizard *ngIf="visible" #wizard [navBarLayout]="'large-empty-symbols'">
     <aw-wizard-step [stepTitle]="'SERVIÇO'">
-      <app-servico-escala-form (eventoServico)="setServico($event)"></app-servico-escala-form>
+      <app-servico-escala-form></app-servico-escala-form>
     </aw-wizard-step>
     <aw-wizard-step [stepTitle]="'Escala'">
       <div class="centered-content">
@@ -13,7 +13,7 @@
             <h5 class="title">ESTAPA 02</h5>
           </div>
           <div class="card-body">
-            <app-escala-form [servicoIn]="servico"></app-escala-form>
+            <app-escala-form></app-escala-form>
             <app-escala-list></app-escala-list>
           </div>
           <div class="card-footer">

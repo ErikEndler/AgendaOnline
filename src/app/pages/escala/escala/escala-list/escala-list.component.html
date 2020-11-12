@@ -21,8 +21,8 @@
           <tr *ngIf="listempy">
             <td id="tdvazio" colspan="4">VAZIO</td>
           </tr>
-          <tr *ngFor="let escala of escalas">
-            <td scope="row">{{ escala.id }}</td>
+          <tr *ngFor="let escala of escalas; let i = index">
+            <td scope="row">{{ i+1 }}</td>
             <td>{{ escala.servico }}</td>
             <td>{{ escala.diaSemana }}</td>
 

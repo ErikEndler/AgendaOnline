@@ -1,3 +1,4 @@
+import { ServicoEscalaFormService } from './../servico-escala-form.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Servico } from 'src/app/models/servico';
@@ -11,7 +12,8 @@ import { ServicoService } from '../../servico/servico.service';
 export class ServicoEscalaFormComponent implements OnInit {
   constructor(
     private serviceServico: ServicoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private servicoEscalaFormService: ServicoEscalaFormService
   ) { }
 
   @Output() eventoServico = new EventEmitter();
@@ -48,12 +50,13 @@ export class ServicoEscalaFormComponent implements OnInit {
       );
   }
 
-  funcao() {
+  funcao(): void {
     console.log('evento servico id : ', this.servico);
     this.eventoServico.emit(this.servico);
+    this.servicoEscalaFormService.funcao(this.servico);
   }
-  onselect(variavel: Servico) {
-    console.log("imprimindo o click : ", variavel);
+  onselect(variavel: Servico): void {
+    console.log('imprimindo o click : ', variavel);
     this.servico = variavel;
   }
 }

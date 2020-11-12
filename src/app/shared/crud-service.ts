@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { delay, tap, take } from 'rxjs/operators';
 
 export class CrudService<T extends generico> {
-  constructor(protected http: HttpClient, private API_URL) {}
+  constructor(protected http: HttpClient, private API_URL) { }
 
   headers = new HttpHeaders();
 
   list() {
-    return this.http.get<T[]>(this.API_URL).pipe(delay(2000), tap(console.log));
+    return this.http.get<T[]>(this.API_URL).pipe(delay(200), tap(console.log));
   }
   loadByID(id) {
     return this.http.get<T>(`${this.API_URL}/${id}`).pipe(take(1));

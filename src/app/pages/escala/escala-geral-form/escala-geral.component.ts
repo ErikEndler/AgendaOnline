@@ -16,7 +16,6 @@ export class EscalageralComponent implements OnInit {
   page = 1;
   pageSize = 4;
   collectionSize: any;
-  servico;
   servicos: Servico[];
   colunas: string[] = ['select', 'nome', 'descrição'];
   formulario: FormGroup;
@@ -56,16 +55,12 @@ export class EscalageralComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
-  onSelect() { }
+  onSelect(): void { }
 
-  changeVisible(evento) {
-    console.log("consolelog do evento : " + evento);
+  changeVisible(evento): void {
+    console.log('consolelog do evento : ' + evento);
     this.visible = evento;
   }
-  setServico(evento) {
-    console.log("consolelog do evento 'servico' : " + evento.nome);
-    this.servico = evento;
-  }
 
-  finishFunction() { }
+  finishFunction(): void { }
 }

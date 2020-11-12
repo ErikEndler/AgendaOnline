@@ -1,3 +1,4 @@
+import { ServicoEscalaFormService } from './../../servico-escala-form.service';
 import { EscalaService } from './../escala.service';
 import { Escala } from './../../../../models/escala';
 import { Component, OnInit } from '@angular/core';
@@ -18,13 +19,19 @@ export class EscalaListComponent implements OnInit {
   pageSize = 4;
   collectionSize: any;
   escalas: Escala[];
-  colunas: string[] = ['id', 'serviço', 'dia semana', 'opções'];
+  colunas: string[] = ['#', 'serviço', 'dia semana', 'opções'];
   lista: Escala[];
 
-  constructor(private escalaService: EscalaService, private router: Router, private modalCOnfirm: ModalConfirmacaoService) { }
+  constructor(
+    private escalaService: EscalaService,
+    private servicoEscalaFormService: ServicoEscalaFormService,
+    private router: Router,
+    private modalCOnfirm: ModalConfirmacaoService) { }
 
   ngOnInit(): void {
-    this.list();
+
+    this.servicoEscalaFormService.emitirServico.subscribe(result => this.list(result.id));
+    this.escalaService.eventoSalvarEscala.subscribe(this.refresh);
   }
   onEdit(id): void {
     this.router.navigate(['servicoEditar', id]);
@@ -56,9 +63,9 @@ export class EscalaListComponent implements OnInit {
         }
       );
   }
-  list(): void {
+  list(id: number): void {
     this.loading = true;
-    this.escalaService.list().subscribe((dados) => {
+    this.escalaService.listarPorServico(id).subscribe((dados) => {
       this.lista = dados;
       this.collectionSize = this.lista.length;
       this.loading = false;

@@ -17,7 +17,7 @@ export class EscalaFormComponent implements OnInit {
   formulario: FormGroup;
   daysWeek: Array<string>;
 
-  @Input() servicoIn;
+  servicoIn: Servico;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,17 +27,23 @@ export class EscalaFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.comboboxDays();
-    this.servicoEscalaFormService.emitirServico.subscribe(result => console.log("result do subscribe no evento : ", result));
-    console.log('comsole log aki init :' + this.servicoIn);
     this.formulario = this.formBuilder.group({
       id: [],
       diaSemana: [],
-      servico: [this.servicoIn],
+      servico: [],
     });
+    this.comboboxDays();
+    this.servicoEscalaFormService.emitirServico.subscribe(result => {
+      console.log('result do subscribe no evento : ', result);
+      this.servicoIn = result;
+      this.formulario.controls['servico'].setValue(this.servicoIn.id);
+    });
+    console.log('comsole log aki init :' + this.servicoIn);
+
   }
-  onSubmit() {
-    this.funcao();
+
+  onSubmit(): void {
+    // this.funcao();
     console.log('comsole log aki : ' + this.servicoIn);
     if (this.formulario.valid) {
       const result$ = this.modalCOnfirm.showConfirm(
@@ -55,6 +61,7 @@ export class EscalaFormComponent implements OnInit {
 
           (success) => {
             console.log('salvo com sucesso!');
+            this.escalaService.salvarEscala();
           },
           (error) => {
             console.error(error),
@@ -66,12 +73,10 @@ export class EscalaFormComponent implements OnInit {
 
     }
   }
-  funcao() {
-    this.formulario.controls['servico'].setValue(this.servicoIn.id);
-  }
-  comboboxDays() {
+
+  comboboxDays(): void {
     this.escalaService.listaDayWeek().subscribe(
-      (result) => { this.daysWeek = result; console.log('dias semana listados: ', result) },
+      (result) => { this.daysWeek = result; console.log('dias semana listados: ', result); },
       (error) => {
         console.error(error), console.log('ERRO AO LISTAR');
       });
