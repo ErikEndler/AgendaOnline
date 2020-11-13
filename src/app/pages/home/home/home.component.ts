@@ -1,6 +1,6 @@
 import { NotificacaoService } from './../../../shared/notificacao/notificacao.service';
 import { Component, OnInit } from '@angular/core';
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService, NotificationType } from 'angular2-notifications';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +11,11 @@ export class HomeComponent implements OnInit {
   constructor(
     private notificacao: NotificacaoService,
     private notification: NotificationsService
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
   testando(): void {
     //this.notification.create('titulo12', 'contente12');
-    this.notificacao.criar('error', 'tituloOO', 'menssagemGEM');
+    this.notificacao.criar(NotificationType.Warn, 'tituloOO', 'menssagemGEM');
   }
 }

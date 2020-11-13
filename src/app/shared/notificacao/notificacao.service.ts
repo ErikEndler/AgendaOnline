@@ -1,7 +1,7 @@
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotificacaoComponent } from './notificacao/notificacao.component';
 import { Injectable } from '@angular/core';
-import { NotificationsService } from 'angular2-notifications';
+import { NotificationsService, NotificationType } from 'angular2-notifications';
 
 @Injectable({
   providedIn: 'root',
@@ -10,15 +10,15 @@ export class NotificacaoService {
   constructor(
     private notification: NotificationsService,
     private formBuilder: FormBuilder
-  ) {}
+  ) { }
   form: FormGroup;
 
-  public criar(tipo: any, titulo: string, msg: string) {
+  public criar(tipo: NotificationType, titulo: string, msg: string, tempo: number = 5000): void {
     this.form = this.formBuilder.group({
       type: tipo,
       title: titulo,
       content: msg,
-      timeOut: 5000,
+      timeOut: tempo,
       showProgressBar: true,
       pauseOnHover: true,
       clickToClose: true,

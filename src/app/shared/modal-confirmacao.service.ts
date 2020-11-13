@@ -11,7 +11,6 @@ export class ModalConfirmacaoService {
   showConfirm(title: string, msg: string, okTxt?: string, cancelText?: string) {
     const config: ModalOptions = {
       class: 'modal-dialog'
-
     };
     const bsModalRef: BsModalRef = this.modalservice.show(
       ModalConfirmacaoComponent, config

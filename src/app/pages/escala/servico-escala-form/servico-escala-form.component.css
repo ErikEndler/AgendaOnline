@@ -1,0 +1,14 @@
+.custom-control-input + label:before {
+  background: gray;
+  border: 1px solid white;
+}
+.custom-control-input:checked + label:before {
+  background: blue;
+}
+input[type="radio"]:checked + label::before {
+  color: #8e44ad;
+  content: "✓";
+  font-size: 30px;
+  font-weight: bold;
+  line-height: 10px;
+}

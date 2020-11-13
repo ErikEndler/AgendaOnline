@@ -1,7 +1,6 @@
 import { EscalaService } from './../escala.service';
 import { ServicoEscalaFormService } from './../../servico-escala-form.service';
-import { ServicoEscalaFormComponent } from './../../servico-escala-form/servico-escala-form.component';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
 import { Servico } from 'src/app/models/servico';
@@ -16,7 +15,6 @@ import { switchMap, take } from 'rxjs/operators';
 export class EscalaFormComponent implements OnInit {
   formulario: FormGroup;
   daysWeek: Array<string>;
-
   servicoIn: Servico;
 
   constructor(
@@ -36,7 +34,7 @@ export class EscalaFormComponent implements OnInit {
     this.servicoEscalaFormService.emitirServico.subscribe(result => {
       console.log('result do subscribe no evento : ', result);
       this.servicoIn = result;
-      this.formulario.controls['servico'].setValue(this.servicoIn.id);
+      this.formulario.controls['servico'].setValue(this.servicoIn?.id);
     });
     console.log('comsole log aki init :' + this.servicoIn);
 

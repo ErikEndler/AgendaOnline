@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { NotificationsService } from 'angular2-notifications';
 
@@ -21,15 +21,13 @@ export class NotificacaoComponent implements OnInit {
   pauseOnHover: true;
   clickToClose: true;
   animate: 'fromRight';
-
   form: FormGroup;
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
 
   public criar() {
-
     const temp = this.form.getRawValue();
     const title = temp.title;
     const content = temp.content;

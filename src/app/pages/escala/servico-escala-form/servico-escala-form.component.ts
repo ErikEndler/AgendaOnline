@@ -1,8 +1,10 @@
 import { ServicoEscalaFormService } from './../servico-escala-form.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { Servico } from 'src/app/models/servico';
 import { ServicoService } from '../../servico/servico.service';
+import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
+import { NotificationType } from 'angular2-notifications';
 
 @Component({
   selector: 'app-servico-escala-form',
@@ -12,12 +14,10 @@ import { ServicoService } from '../../servico/servico.service';
 export class ServicoEscalaFormComponent implements OnInit {
   constructor(
     private serviceServico: ServicoService,
-    private formBuilder: FormBuilder,
-    private servicoEscalaFormService: ServicoEscalaFormService
+    private servicoEscalaFormService: ServicoEscalaFormService,
+    private notificacaoService: NotificacaoService
   ) { }
-
-  @Output() eventoServico = new EventEmitter();
-
+  selecionado = false;
   servico: Servico;
   servicos: Servico[];
   listaServico: Servico[];
@@ -26,7 +26,6 @@ export class ServicoEscalaFormComponent implements OnInit {
   collectionSize: any;
   loading = true;
   colunas: string[] = ['select', 'nome', 'descrição'];
-  formulario: FormGroup;
 
   ngOnInit(): void {
     this.list();
@@ -41,6 +40,7 @@ export class ServicoEscalaFormComponent implements OnInit {
     }),
       (error) => { };
   }
+
   refreshListServico(): void {
     this.servicos = this.listaServico
       .map((servico, i) => ({ ...servico }))
@@ -49,14 +49,19 @@ export class ServicoEscalaFormComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
-
-  funcao(): void {
-    console.log('evento servico id : ', this.servico);
-    this.eventoServico.emit(this.servico);
-    this.servicoEscalaFormService.funcao(this.servico);
+  // avança para proxima estapa do wizard
+  next(): void {
+    this.verificaSelecao();
+    this.servicoEscalaFormService.emiteEventoServico(this.servico);
   }
+  verificaSelecao() {
+    if (this.servico === undefined) {
+      this.notificacaoService.criar(NotificationType.Error, 'Erro', 'Selecione uma opção');
+    }
+  }
+  // ao selecionar um item tabela atribui valor da linha a variavel servicos
   onselect(variavel: Servico): void {
-    console.log('imprimindo o click : ', variavel);
     this.servico = variavel;
+    this.selecionado = true;
   }
 }

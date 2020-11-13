@@ -43,7 +43,8 @@
     </div>
     <div class="card-footer">
       <div class="btn-group">
-        <button type="button" class="btn btn-secondary" (click)="funcao()" awNextStep>Continue</button>
+        <button [disabled]="!selecionado" type="button" class="btn btn-secondary" (click)="next()"
+          awNextStep>Continue</button>
       </div>
     </div>
   </div>

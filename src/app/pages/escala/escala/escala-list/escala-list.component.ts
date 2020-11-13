@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-escala-list',
@@ -21,6 +21,7 @@ export class EscalaListComponent implements OnInit {
   escalas: Escala[];
   colunas: string[] = ['#', 'serviço', 'dia semana', 'opções'];
   lista: Escala[];
+  servicoID: number;
 
   constructor(
     private escalaService: EscalaService,
@@ -30,8 +31,8 @@ export class EscalaListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.servicoEscalaFormService.emitirServico.subscribe(result => this.list(result.id));
-    this.escalaService.eventoSalvarEscala.subscribe(this.refresh);
+    this.servicoEscalaFormService.emitirServico.subscribe(result => { this.list(result?.id), this.servicoID = result?.id; });
+    this.escalaService.eventoSalvarEscala.subscribe(result => (result === true) && this.list(this.servicoID));
   }
   onEdit(id): void {
     this.router.navigate(['servicoEditar', id]);

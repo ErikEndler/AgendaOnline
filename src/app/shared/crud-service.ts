@@ -1,6 +1,7 @@
 import { generico } from './../models/generico';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { delay, tap, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 export class CrudService<T extends generico> {
   constructor(protected http: HttpClient, private API_URL) { }
