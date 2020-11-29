@@ -9,8 +9,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EscalaService extends CrudService<Escala> {
-
   eventoSalvarEscala = new EventEmitter();
+  eventoEscalaSelecionada = new EventEmitter();
+  eventoEscalaAvancar = new EventEmitter();
 
   constructor(protected http: HttpClient) {
     super(http, 'http://localhost:8080/api/escala');
@@ -18,11 +19,20 @@ export class EscalaService extends CrudService<Escala> {
   salvarEscala(): void {
     this.eventoSalvarEscala.emit(true);
   }
+  selecionarEscala(): void {
+    this.eventoEscalaSelecionada.emit(true);
+  }
+  avancarEtapa(escala: Escala): void {
+    this.eventoEscalaAvancar.emit(escala);
+  }
   listaDayWeek(): Observable<Array<string>> {
-    return this.http.get<Array<string>>('http://localhost:8080/api/escala/dayweek').pipe(delay(200));
+    return this.http
+      .get<Array<string>>('http://localhost:8080/api/escala/dayweek')
+      .pipe(delay(200));
   }
   listarPorServico(id): Observable<Array<Escala>> {
-    return this.http.get<Array<Escala>>('http://localhost:8080/api/escala/servico/' + id
-    ).pipe(delay(2000));
+    return this.http
+      .get<Array<Escala>>('http://localhost:8080/api/escala/servico/' + id)
+      .pipe(delay(200));
   }
 }

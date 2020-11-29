@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LoginReturn } from '../models/loginReturn';
 
@@ -11,7 +12,7 @@ export class AuthService {
   loginReturn: LoginReturn;
   confirmResult: Subject<boolean>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   logar(form) {
     this.confirmResult = new Subject();
@@ -36,5 +37,9 @@ export class AuthService {
       }
     );
     return this.confirmResult;
+  }
+  deslogar() {
+    sessionStorage.clear();
+    this.router.navigate(['home']);
   }
 }

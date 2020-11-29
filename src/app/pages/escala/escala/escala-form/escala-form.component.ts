@@ -1,11 +1,12 @@
+import { ErroService } from './../../../../shared/erro/erro.service';
 import { EscalaService } from './../escala.service';
 import { ServicoEscalaFormService } from './../../servico-escala-form.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
 import { Servico } from 'src/app/models/servico';
 import { EMPTY } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 
 @Component({
   selector: 'app-escala-form',
@@ -16,13 +17,15 @@ export class EscalaFormComponent implements OnInit {
   formulario: FormGroup;
   daysWeek: Array<string>;
   servicoIn: Servico;
+  botaoAdicionar = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private modalCOnfirm: ModalConfirmacaoService,
     private servicoEscalaFormService: ServicoEscalaFormService,
-    private escalaService: EscalaService
-  ) { }
+    private escalaService: EscalaService,
+    private erroService: ErroService
+  ) {}
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -31,18 +34,16 @@ export class EscalaFormComponent implements OnInit {
       servico: [],
     });
     this.comboboxDays();
-    this.servicoEscalaFormService.emitirServico.subscribe(result => {
-      console.log('result do subscribe no evento : ', result);
+    this.servicoEscalaFormService.emitirServico.subscribe((result) => {
       this.servicoIn = result;
       this.formulario.controls['servico'].setValue(this.servicoIn?.id);
     });
-    console.log('comsole log aki init :' + this.servicoIn);
-
+  }
+  adicionar() {
+    this.botaoAdicionar = !this.botaoAdicionar;
   }
 
   onSubmit(): void {
-    // this.funcao();
-    console.log('comsole log aki : ' + this.servicoIn);
     if (this.formulario.valid) {
       const result$ = this.modalCOnfirm.showConfirm(
         'Confirmação',
@@ -51,33 +52,35 @@ export class EscalaFormComponent implements OnInit {
       );
       result$
         .asObservable()
-        .pipe(take(1),
+        .pipe(
+          take(1),
           switchMap((result) =>
             result ? this.escalaService.save(this.formulario.value) : EMPTY
           )
-        ).subscribe(
-
+        )
+        .subscribe(
           (success) => {
             console.log('salvo com sucesso!');
             this.escalaService.salvarEscala();
           },
           (error) => {
-            console.error(error),
-              console.log(error),
-              console.log('ERRO AO SALVAR');
+            console.error(error);
+            this.erroService.tratarErro(error);
           }
         );
       console.log(this.formulario.value);
-
     }
   }
 
   comboboxDays(): void {
     this.escalaService.listaDayWeek().subscribe(
-      (result) => { this.daysWeek = result; console.log('dias semana listados: ', result); },
+      (result) => {
+        this.daysWeek = result;
+        console.log('dias semana listados: ', result);
+      },
       (error) => {
         console.error(error), console.log('ERRO AO LISTAR');
-      });
-
+      }
+    );
   }
 }

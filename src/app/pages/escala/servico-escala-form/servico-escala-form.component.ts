@@ -1,6 +1,6 @@
+import { ErroService } from './../../../shared/erro/erro.service';
 import { ServicoEscalaFormService } from './../servico-escala-form.service';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { Servico } from 'src/app/models/servico';
 import { ServicoService } from '../../servico/servico.service';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
@@ -15,8 +15,9 @@ export class ServicoEscalaFormComponent implements OnInit {
   constructor(
     private serviceServico: ServicoService,
     private servicoEscalaFormService: ServicoEscalaFormService,
-    private notificacaoService: NotificacaoService
-  ) { }
+    private notificacaoService: NotificacaoService,
+    private erroService: ErroService
+  ) {}
   selecionado = false;
   servico: Servico;
   servicos: Servico[];
@@ -32,13 +33,18 @@ export class ServicoEscalaFormComponent implements OnInit {
   }
   list(): void {
     this.loading = true;
-    this.serviceServico.list().subscribe((dados) => {
-      this.listaServico = dados;
-      this.collectionSize = this.listaServico.length;
-      this.loading = false;
-      this.refreshListServico();
-    }),
-      (error) => { };
+    this.serviceServico.list().subscribe(
+      (dados) => {
+        this.listaServico = dados;
+        this.collectionSize = this.listaServico.length;
+        this.loading = false;
+        this.refreshListServico();
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
   }
 
   refreshListServico(): void {
@@ -54,9 +60,13 @@ export class ServicoEscalaFormComponent implements OnInit {
     this.verificaSelecao();
     this.servicoEscalaFormService.emiteEventoServico(this.servico);
   }
-  verificaSelecao() {
+  verificaSelecao(): void {
     if (this.servico === undefined) {
-      this.notificacaoService.criar(NotificationType.Error, 'Erro', 'Selecione uma opção');
+      this.notificacaoService.criar(
+        NotificationType.Error,
+        'Erro',
+        'Selecione uma opção'
+      );
     }
   }
   // ao selecionar um item tabela atribui valor da linha a variavel servicos

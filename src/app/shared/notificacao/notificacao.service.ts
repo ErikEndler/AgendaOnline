@@ -10,10 +10,15 @@ export class NotificacaoService {
   constructor(
     private notification: NotificationsService,
     private formBuilder: FormBuilder
-  ) { }
+  ) {}
   form: FormGroup;
 
-  public criar(tipo: NotificationType, titulo: string, msg: string, tempo: number = 5000): void {
+  public criar(
+    tipo: NotificationType,
+    titulo: string,
+    msg?: string,
+    tempo: number = 20000
+  ): void {
     this.form = this.formBuilder.group({
       type: tipo,
       title: titulo,

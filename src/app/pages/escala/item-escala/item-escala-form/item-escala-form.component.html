@@ -1,1 +1,45 @@
-<p>item-escala-form works!</p>
+<div class="centered-content">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="title">Horario Escala  {{escalaIn?.diaSemana}}</h5>
+    </div>
+    <div class="card-body">
+      <button type="submit" class="btn btn-fill btn-success" *ngIf="botaoAdicionar" (click)="adicionar()">Adicionar</button>
+        <div *ngIf="!botaoAdicionar" class="card">
+          <div class="card-header">
+            <h4 class="card-title">Escala de Horários de : {{escalaIn?.diaSemana}}</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label> Quantidade </label>
+                    <input class="form-control" placeholder=" " type="number" min="0" formControlName="qtd" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <label> Hora Inicio </label>
+                  <input class="form-control" placeholder=" " type="time" formControlName="hrInicial" />
+                </div>
+                <div class="col-md-3">
+                  <label> Hora Fim </label>
+                  <input class="form-control" placeholder=" " type="time" formControlName="hrFinal" />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-footer">
+            <button type="submit" class="btn btn-fill btn-danger"  (click)="adicionar()">
+              Ocultar
+            </button>
+            <button type="submit" class="btn btn-fill btn-success" [disabled]="!formulario.valid" (click)="onSubmit()">
+              Adicionar
+            </button>
+          </div>
+        </div>
+        <app-item-escala-list></app-item-escala-list>
+    </div>
+  </div>
+</div>
+

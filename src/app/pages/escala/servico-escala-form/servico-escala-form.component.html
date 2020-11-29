@@ -1,7 +1,7 @@
 <div class="centered-content">
   <div class="card">
     <div class="card-header">
-      <h5 class="title">SELCIONE SERVIÇO</h5>
+      <h5 class="title">SELCIONE SERVIÇO PARA MONTAR ESCALA</h5>
     </div>
     <div class="card-body">
       <div *ngIf=loading class="d-flex justify-content-center">
@@ -43,7 +43,7 @@
     </div>
     <div class="card-footer">
       <div class="btn-group">
-        <button [disabled]="!selecionado" type="button" class="btn btn-secondary" (click)="next()"
+        <button [disabled]="!selecionado" type="button" class="btn btn-success" (click)="next()"
           awNextStep>Continue</button>
       </div>
     </div>

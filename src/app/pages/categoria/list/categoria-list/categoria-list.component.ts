@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 
 @Component({
   selector: 'app-categoria-list',
@@ -24,7 +24,7 @@ export class CategoriaListComponent implements OnInit {
     private categoriaService: CategoriaService,
     private modalCOnfirm: ModalConfirmacaoService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.list();
@@ -47,7 +47,6 @@ export class CategoriaListComponent implements OnInit {
         )
       )
       .subscribe(
-
         (success) => {
           console.log('Excluido com sucesso!');
           console.log('Excluido com sucesso!'), this.ngOnInit();
@@ -68,7 +67,7 @@ export class CategoriaListComponent implements OnInit {
       this.refresh();
       // this.lista = this.usuarios;
     }),
-      (error) => { };
+      (error) => {};
   }
   refresh(): void {
     this.categorias = this.lista

@@ -1,12 +1,16 @@
+import { error } from 'protractor';
+import { NotificacaoService } from './../../../../shared/notificacao/notificacao.service';
+import { ErroService } from './../../../../shared/erro/erro.service';
 import { Categoria } from './../../../../models/categoria';
 import { CategoriaService } from './../../../categoria/categoria.service';
 import { ServicoService } from './../../servico.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { NotificationType } from 'angular2-notifications';
 
 @Component({
   selector: 'app-servico',
@@ -25,8 +29,10 @@ export class ServicoComponent implements OnInit {
     private route: ActivatedRoute,
     private servicoService: ServicoService,
     private modalCOnfirm: ModalConfirmacaoService,
-    private categoriaService: CategoriaService
-  ) { }
+    private categoriaService: CategoriaService,
+    private notificacaoService: NotificacaoService,
+    private erroService: ErroService
+  ) {}
 
   ngOnInit(): void {
     this.combobox();
@@ -34,11 +40,11 @@ export class ServicoComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       id: [servico.id],
       categoria: [servico.categoria],
-      nome: [servico.nome, Validators.required],
+      nome: [servico.nome],
       descricao: [servico.descricao],
     });
   }
-  combobox() {
+  combobox(): void {
     this.categoriaService
       .list()
       .subscribe(
@@ -63,9 +69,16 @@ export class ServicoComponent implements OnInit {
           )
         )
         .subscribe(
-          (success) => console.log('salvo com sucesso!'),
+          (success) => {
+            this.notificacaoService.criar(
+              NotificationType.Success,
+              'Salvo com Sucesso'
+            );
+            console.log('Serviço salvo com sucesso!');
+          },
           (error) => {
-            console.error(error), console.log('ERRO AO SALVAR');
+            console.error(error);
+            this.erroService.tratarErro(error);
           }
         );
       console.log(this.formulario.value);

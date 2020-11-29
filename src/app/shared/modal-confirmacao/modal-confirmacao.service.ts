@@ -1,19 +1,20 @@
-import { ModalConfirmacaoComponent } from './modal-confirmacao/modal-confirmacao.component';
 import { Injectable } from '@angular/core';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
+import { ModalConfirmacaoComponent } from './modal-confirmacao.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalConfirmacaoService {
-  constructor(private modalservice: BsModalService) { }
+  constructor(private modalservice: BsModalService) {}
 
   showConfirm(title: string, msg: string, okTxt?: string, cancelText?: string) {
     const config: ModalOptions = {
-      class: 'modal-dialog'
+      class: 'modal-dialog',
     };
     const bsModalRef: BsModalRef = this.modalservice.show(
-      ModalConfirmacaoComponent, config
+      ModalConfirmacaoComponent,
+      config
     );
     bsModalRef.content.title = title;
     bsModalRef.content.msg = msg;

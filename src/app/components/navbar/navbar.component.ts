@@ -1,3 +1,4 @@
+import { AuthService } from './../../auth/auth.service';
 import { ModalLoginService } from './../../shared/modal-login/modal-login.service';
 import { Component, OnDestroy, ElementRef, OnInit } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
@@ -28,7 +29,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     location: Location,
     private element: ElementRef,
     private router: Router,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private authService: AuthService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -51,6 +53,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // chama login
   login(): void {
     this.modalLoginService.open();
+  }
+  logout(): void {
+    this.authService.deslogar();
   }
   verificaLogin(): boolean {
     if (sessionStorage.getItem('logado')) {

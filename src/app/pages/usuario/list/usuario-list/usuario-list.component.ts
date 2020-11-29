@@ -1,8 +1,9 @@
+import { ErroService } from './../../../../shared/erro/erro.service';
 import { UsuarioService } from './../../usuario.service';
 import { Usuario } from './../../../../models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 
@@ -27,15 +28,15 @@ export class UsuarioListComponent implements OnInit {
     'opções',
   ];
   loading = true;
+  lista: Usuario[];
 
   constructor(
-    private usuarioService: UsuarioService,
     private router: Router,
     private modalCOnfirm: ModalConfirmacaoService,
-    private serviceUsuario: UsuarioService
-  ) { }
+    private serviceUsuario: UsuarioService,
+    private erroService: ErroService
+  ) {}
 
-  lista: Usuario[];
   ngOnInit(): void {
     this.list();
   }
@@ -60,22 +61,26 @@ export class UsuarioListComponent implements OnInit {
           console.log('Excluido com sucesso!'), this.ngOnInit();
         },
         (error) => {
-          console.error(error),
-            console.log(error),
-            console.log('ERRO AO EXCLUI');
+          console.error(error);
+          this.erroService.tratarErro(error);
         }
       );
   }
   list(): void {
     this.loading = true;
-    this.usuarioService.list().subscribe((dados) => {
-      this.lista = dados;
-      this.collectionSize = this.lista.length;
-      this.loading = false;
-      this.refreshUsuarios();
-      // this.lista = this.usuarios;
-    }),
-      (error) => { };
+    this.serviceUsuario.list().subscribe(
+      (dados) => {
+        this.lista = dados;
+        this.collectionSize = this.lista.length;
+        this.loading = false;
+        this.refreshUsuarios();
+        // this.lista = this.usuarios;
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
   }
   refreshUsuarios(): void {
     this.usuarios = this.lista

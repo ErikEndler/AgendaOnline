@@ -1,3 +1,4 @@
+import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 import { EscalaResolveGuard } from './guards/escala-resolve.guard';
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
 import { ServicoResolveGuard } from './guards/servico-resolve.guard';
@@ -16,11 +17,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CategoriaComponent } from './pages/categoria/form/categoria/categoria.component';
 import { CategoriaListComponent } from './pages/categoria/list/categoria-list/categoria-list.component';
 import { EscalageralComponent } from './pages/escala/escala-geral-form/escala-geral.component';
+import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'cadastro', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'sf', component: ServicoFuncionarioComponent },
+  { path: 'sf2', component: FuncionarioviewComponent },
   {
     path: 'escala',
     component: EscalageralComponent,
@@ -83,4 +87,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

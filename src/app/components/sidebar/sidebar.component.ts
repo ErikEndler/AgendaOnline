@@ -49,6 +49,12 @@ export const ROUTES: RouteInfo[] = [
     icon: 'tim-icons icon-align-center',
     class: '',
   },
+  {
+    path: '/escala',
+    title: 'Escala',
+    icon: 'far fa-calendar-alt',
+    class: '',
+  },
 ];
 
 @Component({

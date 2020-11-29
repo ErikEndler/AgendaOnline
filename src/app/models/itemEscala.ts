@@ -1,7 +1,7 @@
 export class ItemEscala {
   id: number;
   escala: number;
-  horarioInicio: string;
-  HorarioFim: string;
+  hrInicial: string;
+  hrFinal: string;
   qtd: number;
 }

@@ -1,10 +1,15 @@
+import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
+import { Usuario } from 'src/app/models/usuario';
+import { ErroService } from './../../../shared/erro/erro.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EMPTY } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalConfirmacaoService } from './../../../shared/modal-confirmacao.service';
+import { ModalConfirmacaoService } from '../../../shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { UsuarioService } from './../usuario.service';
+import { LoginReturn } from 'src/app/models/loginReturn';
+import { NotificationType } from 'angular2-notifications';
 
 @Component({
   selector: 'app-usuario',
@@ -12,41 +17,49 @@ import { UsuarioService } from './../usuario.service';
   styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioComponent implements OnInit {
+  user: LoginReturn;
   formulario: FormGroup;
   hide = true;
   loading = false;
   maskFone = '(00) 0 0000 - 0000';
   maskCpf = '000.000.000-00';
   debugEnable = false;
+  usuario: Usuario;
+  disableAtribuicao = true;
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private serviceUsuario: UsuarioService,
     private modalCOnfirm: ModalConfirmacaoService,
-    private router: Router
-
-  ) { }
+    private router: Router,
+    private erroService: ErroService,
+    private notificacaoService: NotificacaoService
+  ) {}
 
   ngOnInit(): void {
-    const usuario = this.route.snapshot.data['usuario'];
-    if (usuario.role == null) {
-      usuario.role = 'ROLE_USER';
+    this.verificaCredencial();
+    this.usuario = this.route.snapshot.data['usuario'];
+    if (this.usuario.role !== 'ROLE_USER' && this.usuario.role !== null) {
+      this.disableAtribuicao = false;
+    }
+    if (this.usuario.role == null) {
+      this.usuario.role = 'ROLE_USER';
     }
     this.formulario = this.formBuilder.group({
-      id: [usuario.id],
-      nome: [usuario.nome, Validators.required],
-      cpf: [usuario.cpf, Validators.required],
-      email: [usuario.cpf, Validators.required],
-      role: [usuario.role, Validators.required],
-      sexo: [usuario.sexo, Validators.required],
-      telefone: [usuario.telefone, Validators.required],
-      whatsapp: [usuario.whatsapp],
-      senha: [usuario.senha],
-      notificacao: [usuario.notificacao],
-      notificacaoSms: [usuario.notificacaoSms],
-      notificacaoEmail: [usuario.notificacaoEmail],
-      notificacaoWhatsapp: [usuario.notificacaoWhatsapp],
+      id: [this.usuario.id],
+      nome: [this.usuario.nome, Validators.required],
+      cpf: [this.usuario.cpf, Validators.required],
+      email: [this.usuario.cpf, Validators.required],
+      role: [this.usuario.role, Validators.required],
+      sexo: [this.usuario.sexo, Validators.required],
+      telefone: [this.usuario.telefone, Validators.required],
+      whatsapp: [this.usuario.whatsapp],
+      senha: [this.usuario.senha],
+      notificacao: [this.usuario.notificacao],
+      notificacaoSms: [this.usuario.notificacaoSms],
+      notificacaoEmail: [this.usuario.notificacaoEmail],
+      notificacaoWhatsapp: [this.usuario.notificacaoWhatsapp],
     });
   }
 
@@ -66,15 +79,12 @@ export class UsuarioComponent implements OnInit {
           )
         )
         .subscribe(
-
           (success) => {
-            console.log('salvo com sucesso!');
             console.log('salvo com sucesso!'), this.router.navigate(['']);
           },
           (error) => {
-            console.error(error),
-              console.log(error),
-              console.log('ERRO AO SALVAR');
+            console.error(error);
+            this.erroService.tratarErro(error);
           }
         );
       console.log(this.formulario.value);
@@ -88,12 +98,30 @@ export class UsuarioComponent implements OnInit {
     this.debugEnable = !this.debugEnable;
   }
   verificaValidTouched(campo) {
-    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+    return (
+      !this.formulario.get(campo).valid && this.formulario.get(campo).touched
+    );
   }
   aplicaCssErro(campo) {
     return {
       'has-error': this.verificaValidTouched(campo),
-      'has-feedback': this.verificaValidTouched(campo)
+      'has-feedback': this.verificaValidTouched(campo),
     };
+  }
+  verificaCredencial(): void {
+    this.user = this.serviceUsuario.getCredencial();
+    if (this.user.role !== 'ROLE_USER') {
+      const habilitaBotao = true;
+    }
+  }
+  atribuirFuncao() {
+    if (this.usuario.id === null || this.usuario.role === 'ROLE_USER') {
+      this.notificacaoService.criar(
+        NotificationType.Error,
+        'ERROR',
+        'não ha funcionario atribuido'
+      );
+    }
+    this.router.navigate(['sf2'], { state: { usuario: this.usuario } });
   }
 }

@@ -1,8 +1,9 @@
+import { ErroService } from './../../../../shared/erro/erro.service';
 import { ServicoService } from './../../servico.service';
 import { Servico } from './../../../../models/servico';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 
@@ -20,8 +21,12 @@ export class ServicoListComponent implements OnInit {
   colunas: string[] = ['id', 'categoria id', 'nome', 'descricao', 'opções'];
   lista: Servico[];
 
-  constructor(private servicoService: ServicoService, private router: Router, private modalCOnfirm: ModalConfirmacaoService
-  ) { }
+  constructor(
+    private servicoService: ServicoService,
+    private router: Router,
+    private modalCOnfirm: ModalConfirmacaoService,
+    private erroService: ErroService
+  ) {}
 
   ngOnInit(): void {
     this.list();
@@ -39,35 +44,34 @@ export class ServicoListComponent implements OnInit {
       .asObservable()
       .pipe(
         take(1),
-        switchMap((result) =>
-          result ? this.servicoService.remove(id) : EMPTY
-        )
+        switchMap((result) => (result ? this.servicoService.remove(id) : EMPTY))
       )
       .subscribe(
-
         (success) => {
           console.log('Excluido com sucesso!');
           console.log('Excluido com sucesso!'), this.ngOnInit();
         },
         (error) => {
-          console.error(error),
-            console.log(error),
-            console.log('ERRO AO EXCLUI');
+          console.error(error);
+          this.erroService.tratarErro(error);
         }
       );
   }
   list(): void {
     this.loading = true;
-    this.servicoService.list().subscribe((dados) => {
-      this.lista = dados;
-      this.collectionSize = this.lista.length;
-      this.loading = false;
-      this.refresh();
-      // this.lista = this.usuarios;
-    }),
+    this.servicoService.list().subscribe(
+      (dados) => {
+        this.lista = dados;
+        this.collectionSize = this.lista.length;
+        this.loading = false;
+        this.refresh();
+        // this.lista = this.usuarios;
+      },
       (error) => {
-        console.log(error);
-      };
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
   }
   refresh(): void {
     this.servicos = this.lista

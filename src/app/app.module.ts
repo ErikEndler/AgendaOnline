@@ -1,3 +1,4 @@
+import { ItemEscalaFormComponent } from './pages/escala/item-escala/item-escala-form/item-escala-form.component';
 import { ServicoEscalaFormComponent } from './pages/escala/servico-escala-form/servico-escala-form.component';
 import { EscalageralComponent } from './pages/escala/escala-geral-form/escala-geral.component';
 import { InterceptorModule } from './auth/interceptor/interceptor.module';
@@ -32,7 +33,9 @@ import { NotificacaoComponent } from './shared/notificacao/notificacao/notificac
 import { HomeEscalaComponent } from './pages/escala/home-escala/home-escala.component';
 import { EscalaFormComponent } from './pages/escala/escala/escala-form/escala-form.component';
 import { EscalaListComponent } from './pages/escala/escala/escala-list/escala-list.component';
-
+import { ItemEscalaListComponent } from './pages/escala/item-escala/item-escala-list/item-escala-list.component';
+import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
+import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,11 @@ import { EscalaListComponent } from './pages/escala/escala/escala-list/escala-li
     HomeEscalaComponent,
     ServicoEscalaFormComponent,
     EscalaFormComponent,
-    EscalaListComponent
+    EscalaListComponent,
+    ItemEscalaListComponent,
+    ItemEscalaFormComponent,
+    ServicoFuncionarioComponent,
+    FuncionarioviewComponent,
   ],
   imports: [
     FormsModule,
@@ -70,10 +77,9 @@ import { EscalaListComponent } from './pages/escala/escala/escala-list/escala-li
     ModalModule.forRoot(),
     InterceptorModule,
     ArchwizardModule,
-    SimpleNotificationsModule.forRoot()
-
+    SimpleNotificationsModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

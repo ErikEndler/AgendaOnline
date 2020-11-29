@@ -1,8 +1,9 @@
+import { ErroService } from './../../../../shared/erro/erro.service';
 import { Usuario } from 'src/app/models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao.service';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { UsuarioService } from '../../usuario.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
@@ -25,7 +26,8 @@ export class CadastroComponent implements OnInit {
     private route: ActivatedRoute,
     private serviceUsuario: UsuarioService,
     private modalCOnfirm: ModalConfirmacaoService,
-    private router: Router
+    private router: Router,
+    private erroService: ErroService
   ) {}
 
   ngOnInit(): void {
@@ -67,9 +69,8 @@ export class CadastroComponent implements OnInit {
             console.log('salvo com sucesso!'), this.router.navigate(['']);
           },
           (error) => {
-            console.error(error),
-              console.log(error),
-              console.log('ERRO AO SALVAR');
+            console.error(error);
+            this.erroService.tratarErro(error);
           }
         );
       console.log(this.formulario.value);

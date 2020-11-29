@@ -3,7 +3,7 @@ import { CategoriaService } from './../../categoria.service';
 import { Component, OnInit } from '@angular/core';
 import { EMPTY } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalConfirmacaoService } from './../../../../shared/modal-confirmacao.service';
+import { ModalConfirmacaoService } from '../../../../shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 
 @Component({
@@ -22,7 +22,7 @@ export class CategoriaComponent implements OnInit {
     private route: ActivatedRoute,
     private categoriaService: CategoriaService,
     private modalCOnfirm: ModalConfirmacaoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const categoria = this.route.snapshot.data['categoria'];
