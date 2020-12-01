@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
 import { ItemEscala } from 'src/app/models/itemEscala';
+import { AppSettings } from 'src/app/shared/appSettings';
 import { CrudService } from 'src/app/shared/crud-service';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ItemEscalaService extends CrudService<ItemEscala> {
   eventoSalvarItemEscala = new EventEmitter();
 
   constructor(protected http: HttpClient) {
-    super(http, 'http://localhost:8080/api/itemescala');
+    super(http, AppSettings.url + '/api/itemescala');
   }
   salvarItemEscala(): void {
     this.eventoSalvarItemEscala.emit(true);
@@ -20,8 +21,8 @@ export class ItemEscalaService extends CrudService<ItemEscala> {
 
   listarPorEscala(id): Observable<Array<ItemEscala>> {
     return this.http
-      .get<Array<ItemEscala>>(
-        'http://localhost:8080/api/itemescala/escala/' + id
+      .get<Array<ItemEscala>>(AppSettings.url +
+        '/api/itemescala/escala/' + id
       )
       .pipe(delay(200));
   }

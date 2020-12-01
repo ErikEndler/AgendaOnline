@@ -3,17 +3,18 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LoginReturn } from '../models/loginReturn';
+import { AppSettings } from '../shared/appSettings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  url = 'http://localhost:8080/login';
+  url = AppSettings.url + '/login';
   loginReturn: LoginReturn;
   confirmResult: Subject<boolean>;
   eventoLogar = new EventEmitter();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   logar(form) {
     this.confirmResult = new Subject();

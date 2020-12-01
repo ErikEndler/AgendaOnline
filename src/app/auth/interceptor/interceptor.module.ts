@@ -9,6 +9,7 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AppSettings } from 'src/app/shared/appSettings';
 
 export class HttpsRequestInterceptor implements HttpInterceptor {
   loginReturn: LoginReturn;
@@ -19,7 +20,8 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const requestUrl: Array<any> = request.url.split('/');
-    const apiUrl = 'localhost:8080';
+    //const apiUrl = 'localhost:8080';
+    const apiUrl = AppSettings.urlReduzida;
     this.loginReturn = JSON.parse(sessionStorage.getItem('auth'));
     if (this.loginReturn != null) {
       this.token = this.loginReturn.authorization;
@@ -45,4 +47,4 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     },
   ],
 })
-export class InterceptorModule {}
+export class InterceptorModule { }

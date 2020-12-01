@@ -4,6 +4,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { delay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { AppSettings } from 'src/app/shared/appSettings';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class EscalaService extends CrudService<Escala> {
   eventoEscalaAvancar = new EventEmitter();
 
   constructor(protected http: HttpClient) {
-    super(http, 'http://localhost:8080/api/escala');
+    super(http, AppSettings.url + '/api/escala');
   }
   salvarEscala(): void {
     this.eventoSalvarEscala.emit(true);
@@ -27,12 +28,12 @@ export class EscalaService extends CrudService<Escala> {
   }
   listaDayWeek(): Observable<Array<string>> {
     return this.http
-      .get<Array<string>>('http://localhost:8080/api/escala/dayweek')
+      .get<Array<string>>(AppSettings.url + '/api/escala/dayweek')
       .pipe(delay(200));
   }
   listarPorServico(id): Observable<Array<Escala>> {
     return this.http
-      .get<Array<Escala>>('http://localhost:8080/api/escala/servico/' + id)
+      .get<Array<Escala>>(AppSettings.url + '/api/escala/servico/' + id)
       .pipe(delay(200));
   }
 }
