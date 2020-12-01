@@ -18,7 +18,7 @@ export class ServicoListComponent implements OnInit {
   pageSize = 4;
   collectionSize: any;
   servicos: Servico[];
-  colunas: string[] = ['id', 'categoria id', 'nome', 'descricao', 'opções'];
+  colunas: string[] = ['id', 'nome', 'descricao', 'categoria', 'opções'];
   lista: Servico[];
 
   constructor(

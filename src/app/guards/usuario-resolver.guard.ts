@@ -31,10 +31,10 @@ export class UsuarioResolverGuard implements Resolve<Usuario> {
       telefone: null,
       role: null,
       whatsapp: null,
-      notificacao: true,
-      notificacaoEmail: false,
-      notificacaoSms: false,
-      notificacaoWhatsapp: false,
+      notificacao: null,
+      notificacaoEmail: null,
+      notificacaoSms: null,
+      notificacaoWhatsapp: null,
     });
   }
 }

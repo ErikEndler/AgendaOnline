@@ -28,7 +28,9 @@ export class FuncionarioviewComponent implements OnInit {
   funcionario: Usuario;
   servico: Servico;
   servicos: Servico[];
+  listaServicos: Servico[];
   servicosFuncionario: Servico[];
+  listaServicosFuncionario: Servico[];
   listempy = true;
   listempy2 = true;
 
@@ -40,7 +42,7 @@ export class FuncionarioviewComponent implements OnInit {
     private router: Router
   ) {
     const nav = this.router.getCurrentNavigation();
-    this.funcionario = nav.extras.state.usuario;
+    this.funcionario = nav.extras?.state?.usuario;
     console.log('funcionario -- ', this.funcionario);
   }
 
@@ -53,11 +55,11 @@ export class FuncionarioviewComponent implements OnInit {
     this.loading = true;
     this.servicoService.list().subscribe(
       (dados) => {
-        this.servicos = dados;
-        this.collectionSize = this.servicos.length;
+        this.listaServicos = dados;
+        this.collectionSize = this.listaServicos.length;
         this.loading = false;
         this.refreshServico();
-        if (this.servicos.length > 0) {
+        if (this.listaServicos.length > 0) {
           this.listempy = false;
         }
         // this.lista = this.usuarios;
@@ -69,7 +71,7 @@ export class FuncionarioviewComponent implements OnInit {
     );
   }
   refreshServico(): void {
-    this.servicos = this.servicos
+    this.servicos = this.listaServicos
       .map((usuario, i) => ({ ...usuario }))
       .slice(
         (this.page - 1) * this.pageSize,
@@ -85,11 +87,11 @@ export class FuncionarioviewComponent implements OnInit {
         .listarServicosFuncionario(this.funcionario?.id)
         .subscribe(
           (dados) => {
-            this.servicosFuncionario = dados;
-            this.collectionSize2 = this.servicosFuncionario.length;
+            this.listaServicosFuncionario = dados;
+            this.collectionSize2 = this.listaServicosFuncionario.length;
             this.loading2 = false;
             this.refreshServicoFuncionario();
-            if (this.servicosFuncionario.length > 0) {
+            if (this.listaServicosFuncionario.length > 0) {
               this.listempy2 = false;
             }
             // this.lista = this.usuarios;
@@ -102,7 +104,7 @@ export class FuncionarioviewComponent implements OnInit {
     }
   }
   refreshServicoFuncionario(): void {
-    this.servicosFuncionario = this.servicosFuncionario
+    this.servicosFuncionario = this.listaServicosFuncionario
       .map((servicosFuncionario, i) => ({ ...servicosFuncionario }))
       .slice(
         (this.page2 - 1) * this.pageSize2,

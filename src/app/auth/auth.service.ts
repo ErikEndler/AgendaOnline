@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { LoginReturn } from '../models/loginReturn';
@@ -11,6 +11,7 @@ export class AuthService {
   url = 'http://localhost:8080/login';
   loginReturn: LoginReturn;
   confirmResult: Subject<boolean>;
+  eventoLogar = new EventEmitter();
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -28,6 +29,7 @@ export class AuthService {
         console.log('sessionStorage auth :' + sessionStorage.getItem('auth'));
         console.log('Logado com sucesso! 1');
         this.confirmResult.next(true);
+        this.eventoLogar.emit();
       },
       (error) => {
         console.log('Erro ao logar ! 1');

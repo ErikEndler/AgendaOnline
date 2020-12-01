@@ -40,6 +40,7 @@ export class ServicoComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       id: [servico.id],
       categoria: [servico.categoria],
+      //categoria: this.formBuilder.group({id: [],nome: [],descricao: [],}),
       nome: [servico.nome],
       descricao: [servico.descricao],
     });
@@ -90,5 +91,8 @@ export class ServicoComponent implements OnInit {
 
   debug(): void {
     this.debugEnable = !this.debugEnable;
+  }
+  comparaCategoria(obj1, obj2) {
+    return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2;
   }
 }

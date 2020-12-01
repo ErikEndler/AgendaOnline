@@ -26,6 +26,7 @@ export class UsuarioComponent implements OnInit {
   debugEnable = false;
   usuario: Usuario;
   disableAtribuicao = true;
+  switchs = true;
 
   constructor(
     private formBuilder: FormBuilder,

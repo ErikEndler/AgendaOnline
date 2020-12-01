@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class ServicoResolveGuard implements Resolve<Servico> {
-  constructor(private service: ServicoService) { }
+  constructor(private service: ServicoService) {}
 
   resolve(
     route: ActivatedRouteSnapshot,

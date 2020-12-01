@@ -1,7 +1,7 @@
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title">Tabela Categorias</h4>
+      <h4 class="card-title">Serviços</h4>
     </div>
     <div class="card-body">
       <div *ngIf=loading class="d-flex justify-content-center">
@@ -21,9 +21,9 @@
           <tbody>
             <tr *ngFor="let servico of servicos">
               <td scope="row">{{ servico.id }}</td>
-              <td scope="row">{{ servico.categoria }}</td>
               <td>{{ servico.nome }}</td>
               <td>{{ servico.descricao }}</td>
+              <td scope="row">{{ servico.categoria.nome }}</td>
 
               <td>
                 <button class="btn btn-info btn-icon" (click)="onEdit(servico.id)">
