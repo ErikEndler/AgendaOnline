@@ -28,6 +28,7 @@
     "bootstrap4-toggle": "^3.6.1",
     "chart.js": "^2.9.3",
     "core-js": "^3.6.5",
+    "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
     "jquery-mask-plugin": "^1.14.16",
