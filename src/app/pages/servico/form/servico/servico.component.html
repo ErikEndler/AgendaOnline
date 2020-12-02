@@ -17,7 +17,7 @@
                   <input class="form-control" placeholder="Nome" type="text" formControlName="nome" />
                 </div>
               </div>
-              <div  class="col-md-4">
+              <div class="col-md-4">
                 <label> Categoria </label>
                 <select class="form-control" formControlName="categoria" [compareWith]="comparaCategoria">
                   <option *ngFor="let categoria of categorias" [ngValue]="categoria">{{categoria.nome}}</option>

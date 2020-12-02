@@ -26,7 +26,6 @@ export class UsuarioComponent implements OnInit {
   debugEnable = false;
   usuario: Usuario;
   disableAtribuicao = true;
-  switchs = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,9 +35,10 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+
     this.verificaCredencial();
     this.usuario = this.route.snapshot.data['usuario'];
     if (this.usuario.role !== 'ROLE_USER' && this.usuario.role !== null) {
@@ -58,7 +58,6 @@ export class UsuarioComponent implements OnInit {
       whatsapp: [this.usuario.whatsapp],
       senha: [this.usuario.senha],
       notificacao: [this.usuario.notificacao],
-      notificacaoSms: [this.usuario.notificacaoSms],
       notificacaoEmail: [this.usuario.notificacaoEmail],
       notificacaoWhatsapp: [this.usuario.notificacaoWhatsapp],
     });
@@ -125,4 +124,5 @@ export class UsuarioComponent implements OnInit {
     }
     this.router.navigate(['sf2'], { state: { usuario: this.usuario } });
   }
+
 }
