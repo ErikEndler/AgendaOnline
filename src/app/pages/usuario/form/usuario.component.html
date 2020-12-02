@@ -22,14 +22,12 @@
               <div class="col-md-4">
                 <label> Sexo </label>
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadio1" name="sexo" class="custom-control-input" formControlName="sexo"
-                    value="masculino" />
-                  <label class="custom-control-label" for="customRadio1">Masculino</label>
+                  <input type="radio" id="masculino" class="custom-control-input" formControlName="sexo" value="masculino" />
+                  <label class="custom-control-label" for="masculino">Masculino</label>
                 </div>
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="customRadio2" name="sexo" class="custom-control-input" value="feminino"
-                    formControlName="sexo" />
-                  <label class="custom-control-label" for="customRadio2">Feminino</label>
+                  <input type="radio" id="feminino" class="custom-control-input" value="feminino" formControlName="sexo" />
+                  <label class="custom-control-label" for="feminino" >Feminino</label>
                 </div>
               </div>
             </div>
@@ -109,6 +107,8 @@
           <div class="card-footer">
             <button class="btn btn-fill btn-secondary" [disabled]="disableAtribuicao"
               (click)="atribuirFuncao()">Atribuir Serviço</button>
+              <button class="btn btn-fill btn-secondary" [disabled]="disableAtribuicao"
+              (click)="atribuirEscala()">Atribuir Escala</button>
           </div>
         </div>
         <!-- NOTIFICAÇOES -->

@@ -24,16 +24,15 @@ export class UsuarioResolverGuard implements Resolve<Usuario> {
     return of({
       id: null,
       nome: null,
-      sexo: null,
-      senha: null,
       cpf: null,
       email: null,
       telefone: null,
-      role: null,
       whatsapp: null,
+      sexo: null,
+      senha: null,
+      role: null,
       notificacao: null,
       notificacaoEmail: null,
-      notificacaoSms: null,
       notificacaoWhatsapp: null,
     });
   }

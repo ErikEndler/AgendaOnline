@@ -153,4 +153,5 @@ export class FuncionarioviewComponent implements OnInit {
         }
       );
   }
+  escala() {}
 }

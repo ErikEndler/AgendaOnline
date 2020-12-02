@@ -35,10 +35,9 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-
     this.verificaCredencial();
     this.usuario = this.route.snapshot.data['usuario'];
     if (this.usuario.role !== 'ROLE_USER' && this.usuario.role !== null) {
@@ -51,7 +50,7 @@ export class UsuarioComponent implements OnInit {
       id: [this.usuario.id],
       nome: [this.usuario.nome, Validators.required],
       cpf: [this.usuario.cpf, Validators.required],
-      email: [this.usuario.cpf, Validators.required],
+      email: [this.usuario.email, Validators.required],
       role: [this.usuario.role, Validators.required],
       sexo: [this.usuario.sexo, Validators.required],
       telefone: [this.usuario.telefone, Validators.required],
@@ -81,6 +80,7 @@ export class UsuarioComponent implements OnInit {
         .subscribe(
           (success) => {
             console.log('salvo com sucesso!'), this.router.navigate(['']);
+            console.log(this.usuario);
           },
           (error) => {
             console.error(error);
@@ -124,5 +124,5 @@ export class UsuarioComponent implements OnInit {
     }
     this.router.navigate(['sf2'], { state: { usuario: this.usuario } });
   }
-
+  atribuirEscala() {}
 }

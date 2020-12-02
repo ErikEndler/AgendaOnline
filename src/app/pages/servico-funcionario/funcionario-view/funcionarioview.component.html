@@ -26,7 +26,7 @@
                     </tr>
                     <tr *ngFor="let servico of servicos">
                       <td><button type="button" class="btn-sm btn-success"
-                          (click)="adicionarServico(servico)">Adicionar</button></td>
+                          (click)="adicionarServico(servico)">Add</button></td>
                       <td>{{ servico.nome }}</td>
                       <td>{{ servico.categoria.nome }}</td>
                     </tr>
@@ -66,9 +66,11 @@
                     </tr>
                     <tr *ngFor="let servico of servicosFuncionario">
                       <td><button type="button" class="btn-sm btn-danger"
-                          (click)="removerServico(servico)">Remover</button></td>
+                          (click)="removerServico(servico)"><i class="far fa-trash-alt"></i></button></td>
                       <td>{{ servico.nome }}</td>
                       <td>{{ servico.categoria.nome }}</td>
+                      <td><button type="button" class="btn-sm btn-success"
+                        (click)="escala(servico)">Escala</button></td>
                     </tr>
                   </tbody>
                 </table>
