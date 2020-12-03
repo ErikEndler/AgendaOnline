@@ -24,22 +24,26 @@ export class EscalageralComponent implements OnInit {
   formulario: FormGroup;
   listaServico: Servico[];
   selecionadoRtapa2 = false;
-  funcionario: Usuario;
+  funcionarioId: number;
+  funcionarioNome: string;
 
   constructor(
     private serviceServico: ServicoService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private escalaService: EscalaService,
-    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private servicoFuncionarioService: ServicoFuncionarioService
-  ) {
-    const nav = this.router.getCurrentNavigation();
-    this.funcionario = nav.extras?.state?.funcionario;
-    console.log('funcionario -- ', this.funcionario);
-  }
+  ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        console.log(params); // { order: "popular" }
+        this.funcionarioId = params.id as number;
+        this.funcionarioNome = params.nome;
+      });
+
     this.escalaService.eventoEscalaSelecionada.subscribe(
       (result) => (this.selecionadoRtapa2 = result)
     );
@@ -60,7 +64,7 @@ export class EscalageralComponent implements OnInit {
         this.loading = false;
         this.refreshListServico();
       },
-      (error) => {}
+      (error) => { }
     );
   }
   refreshListServico(): void {
@@ -71,13 +75,13 @@ export class EscalageralComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
-  onSelect(): void {}
+  onSelect(): void { }
 
   changeVisible(evento): void {
     console.log('consolelog do evento : ' + evento);
     this.visible = evento;
   }
-  nextEtapa2() {}
+  nextEtapa2() { }
 
-  finishFunction(): void {}
+  finishFunction(): void { }
 }

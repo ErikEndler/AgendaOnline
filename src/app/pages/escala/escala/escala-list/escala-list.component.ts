@@ -23,6 +23,7 @@ export class EscalaListComponent implements OnInit {
   escalas: Escala[];
   colunas: string[] = ['select', 'dia semana'];
   lista: Escala[];
+  listaServico: Servico[];
   servicoID: Servico;
   escala: Escala;
   selecionadoEtapa2 = false;
@@ -35,15 +36,16 @@ export class EscalaListComponent implements OnInit {
     private router: Router,
     private modalCOnfirm: ModalConfirmacaoService,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.servicoEscalaFormService.emitirServico.subscribe((result) => {
-      this.list(result?.id), (this.servicoID = result);
+      this.listaServico = result;
     });
-    this.escalaService.eventoSalvarEscala.subscribe(
-      (result) => result === true && this.list(this.servicoID.id)
-    );
+    if (this.listaServico.length > 0) {
+      // fazer logica de listar
+    }
+
   }
   onEdit(id): void {
     // this.router.navigate(['servicoEditar', id]);

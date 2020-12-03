@@ -10,7 +10,7 @@ export class ServicoEscalaFormService {
 
   constructor() { }
 
-  emiteEventoServico(servico: Servico): void {
+  emiteEventoServico(servico: Servico[]): void {
     this.emitirServico.emit(servico);
   }
 }

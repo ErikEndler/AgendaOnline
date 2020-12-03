@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ServicoFuncionario } from './../../../models/servico-funcionario';
 import { ServicoFuncionarioService } from './../servico-funcionario.service';
 import { UsuarioService } from './../../usuario/usuario.service';
@@ -9,6 +9,7 @@ import { Usuario } from 'src/app/models/usuario';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
+
 
 @Component({
   selector: 'app-funcionarioview',
@@ -25,7 +26,6 @@ export class FuncionarioviewComponent implements OnInit {
   colunasServico: string[] = ['selecione', 'nome', 'categoria'];
   loading = true;
   loading2 = true;
-  funcionario: Usuario;
   servico: Servico;
   servicos: Servico[];
   listaServicos: Servico[];
@@ -33,20 +33,28 @@ export class FuncionarioviewComponent implements OnInit {
   listaServicosFuncionario: Servico[];
   listempy = true;
   listempy2 = true;
+  funcionarioid: number;
+  funcionarioNome: string;
 
   constructor(
     private servicoService: ServicoService,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService,
     private servicoFuncionarioService: ServicoFuncionarioService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
-    const nav = this.router.getCurrentNavigation();
-    this.funcionario = nav.extras?.state?.usuario;
-    console.log('funcionario -- ', this.funcionario);
+
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams
+      .subscribe(params => {
+        console.log(params); // { order: "popular" }
+        this.funcionarioid = params.id as number;
+        this.funcionarioNome = params.nome;
+      });
+
     this.list();
     this.listServicoFuncionario();
   }
@@ -78,12 +86,12 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   listServicoFuncionario(): void {
-    if (this.funcionario === undefined) {
+    if (this.funcionarioid === undefined) {
       this.servicosFuncionario = null;
     } else {
       this.loading2 = true;
       this.servicoFuncionarioService
-        .listarServicosFuncionario(this.funcionario?.id)
+        .listarServicosFuncionario(this.funcionarioid)
         .subscribe(
           (dados) => {
             this.listaServicosFuncionario = dados;
@@ -111,11 +119,10 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   adicionarServico(servico: Servico): void {
-    console.log(servico);
-    console.log(this.funcionario);
+
     let servicoFuncionario: ServicoFuncionario = new ServicoFuncionario();
     servicoFuncionario.servicoId = servico.id;
-    servicoFuncionario.funcionarioId = this.funcionario.id;
+    servicoFuncionario.funcionarioId = this.funcionarioid;
     this.servicoFuncionarioService.save(servicoFuncionario).subscribe(
       (success) => {
         this.notificacaoService.criar(
@@ -133,7 +140,7 @@ export class FuncionarioviewComponent implements OnInit {
   }
   removerServico(servico: Servico): void {
     const servicoFuncionario: ServicoFuncionario = new ServicoFuncionario();
-    servicoFuncionario.funcionarioId = this.funcionario.id;
+    servicoFuncionario.funcionarioId = this.funcionarioid;
     servicoFuncionario.servicoId = servico.id;
     this.servicoFuncionarioService
       .deletarServicoFUncionario(servicoFuncionario)
@@ -153,8 +160,6 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   escala() {
-    this.router.navigate(['escala'], {
-      state: { funcionario: this.funcionario },
-    });
+    this.router.navigate(['escala'], { queryParams: { id: this.funcionarioid, nome: this.funcionarioNome } });
   }
 }

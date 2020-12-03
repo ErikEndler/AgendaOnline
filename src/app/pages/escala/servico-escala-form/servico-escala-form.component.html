@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header">
       <h5 class="title">SELCIONE SERVIÇOS PARA MONTAR ESCALA</h5>
-      <h4>Funcionário : <span class="badge badge-info">{{funcionario.nome}}</span></h4>
+      <h4>Funcionário : <span class="badge badge-info">{{funcionarioNome}}</span></h4>
 
     </div>
     <div class="card-body">
@@ -23,7 +23,8 @@
           <tbody>
             <tr *ngFor="let servico of servicos">
               <td>
-                <input type="radio" id={{servico.id}} name="idServico" (click)="onselect(servico)">
+                <input type="checkbox" id={{servico.id}} name="idServico"
+                  (change)="onChange(servico, $event.target.checked)">
               </td>
               <td>{{ servico.nome }} </td>
               <td>{{ servico.descricao }}</td>

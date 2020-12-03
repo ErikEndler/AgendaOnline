@@ -1,10 +1,8 @@
-import { Usuario } from 'src/app/models/usuario';
 import { ServicoFuncionarioService } from './../../servico-funcionario/servico-funcionario.service';
 import { ErroService } from './../../../shared/erro/erro.service';
 import { ServicoEscalaFormService } from './../servico-escala-form.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Servico } from 'src/app/models/servico';
-import { ServicoService } from '../../servico/servico.service';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
 
@@ -15,14 +13,13 @@ import { NotificationType } from 'angular2-notifications';
 })
 export class ServicoEscalaFormComponent implements OnInit {
   constructor(
-    private serviceServico: ServicoService,
     private servicoEscalaFormService: ServicoEscalaFormService,
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private servicoFuncionarioService: ServicoFuncionarioService
-  ) {}
+  ) { }
   selecionado = false;
-  servico: Servico;
+  servicoOut: Servico[] = [];
   servicos: Servico[];
   listaServico: Servico[];
   page = 1;
@@ -30,16 +27,16 @@ export class ServicoEscalaFormComponent implements OnInit {
   collectionSize: any;
   loading = true;
   colunas: string[] = ['select', 'nome', 'descrição'];
-  @Input() funcionario: Usuario;
+  @Input() funcionarioId: number;
+  @Input() funcionarioNome: string;
 
   ngOnInit(): void {
-    console.log('---this.funcionario --- ', this.funcionario);
     this.list();
   }
   list(): void {
     this.loading = true;
     this.servicoFuncionarioService
-      .listarServicosFuncionario(this.funcionario.id)
+      .listarServicosFuncionario(this.funcionarioId)
       .subscribe(
         (dados) => {
           this.listaServico = dados;
@@ -65,10 +62,10 @@ export class ServicoEscalaFormComponent implements OnInit {
   // avança para proxima estapa do wizard
   next(): void {
     this.verificaSelecao();
-    this.servicoEscalaFormService.emiteEventoServico(this.servico);
+    this.servicoEscalaFormService.emiteEventoServico(this.servicoOut);
   }
   verificaSelecao(): void {
-    if (this.servico === undefined) {
+    if (this.servicoOut === undefined) {
       this.notificacaoService.criar(
         NotificationType.Error,
         'Erro',
@@ -77,8 +74,13 @@ export class ServicoEscalaFormComponent implements OnInit {
     }
   }
   // ao selecionar um item tabela atribui valor da linha a variavel servicos
-  onselect(variavel: Servico): void {
-    this.servico = variavel;
+  onChange(servico: Servico, isChecked: boolean): void {
+    if (isChecked) {
+      this.servicoOut.push(servico);
+    } else {
+      const index = this.servicoOut.indexOf(servico);
+      this.servicoOut.splice(index, 1);
+    }
     this.selecionado = true;
   }
 }
