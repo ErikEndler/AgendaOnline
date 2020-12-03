@@ -80,7 +80,6 @@ export class UsuarioComponent implements OnInit {
         .subscribe(
           (success) => {
             console.log('salvo com sucesso!'), this.router.navigate(['']);
-            console.log(this.usuario);
           },
           (error) => {
             console.error(error);

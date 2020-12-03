@@ -49,7 +49,6 @@ export class FuncionarioviewComponent implements OnInit {
   ngOnInit(): void {
     this.list();
     this.listServicoFuncionario();
-    console.log('funcionario ', this.funcionario);
   }
   list(): void {
     this.loading = true;
@@ -153,5 +152,9 @@ export class FuncionarioviewComponent implements OnInit {
         }
       );
   }
-  escala() {}
+  escala() {
+    this.router.navigate(['escala'], {
+      state: { funcionario: this.funcionario },
+    });
+  }
 }

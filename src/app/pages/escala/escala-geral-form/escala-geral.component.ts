@@ -1,8 +1,10 @@
+import { Usuario } from 'src/app/models/usuario';
+import { ServicoFuncionarioService } from './../../servico-funcionario/servico-funcionario.service';
 import { EscalaService } from './../escala/escala.service';
 import { Servico } from 'src/app/models/servico';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServicoService } from '../../servico/servico.service';
 
 @Component({
@@ -22,13 +24,20 @@ export class EscalageralComponent implements OnInit {
   formulario: FormGroup;
   listaServico: Servico[];
   selecionadoRtapa2 = false;
+  funcionario: Usuario;
 
   constructor(
     private serviceServico: ServicoService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
-    private escalaService: EscalaService
-  ) {}
+    private escalaService: EscalaService,
+    private router: Router,
+    private servicoFuncionarioService: ServicoFuncionarioService
+  ) {
+    const nav = this.router.getCurrentNavigation();
+    this.funcionario = nav.extras?.state?.funcionario;
+    console.log('funcionario -- ', this.funcionario);
+  }
 
   ngOnInit(): void {
     this.escalaService.eventoEscalaSelecionada.subscribe(

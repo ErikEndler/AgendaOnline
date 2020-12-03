@@ -1,6 +1,8 @@
+import { Usuario } from 'src/app/models/usuario';
+import { ServicoFuncionarioService } from './../../servico-funcionario/servico-funcionario.service';
 import { ErroService } from './../../../shared/erro/erro.service';
 import { ServicoEscalaFormService } from './../servico-escala-form.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Servico } from 'src/app/models/servico';
 import { ServicoService } from '../../servico/servico.service';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
@@ -16,7 +18,8 @@ export class ServicoEscalaFormComponent implements OnInit {
     private serviceServico: ServicoService,
     private servicoEscalaFormService: ServicoEscalaFormService,
     private notificacaoService: NotificacaoService,
-    private erroService: ErroService
+    private erroService: ErroService,
+    private servicoFuncionarioService: ServicoFuncionarioService
   ) {}
   selecionado = false;
   servico: Servico;
@@ -27,24 +30,28 @@ export class ServicoEscalaFormComponent implements OnInit {
   collectionSize: any;
   loading = true;
   colunas: string[] = ['select', 'nome', 'descrição'];
+  @Input() funcionario: Usuario;
 
   ngOnInit(): void {
+    console.log('---this.funcionario --- ', this.funcionario);
     this.list();
   }
   list(): void {
     this.loading = true;
-    this.serviceServico.list().subscribe(
-      (dados) => {
-        this.listaServico = dados;
-        this.collectionSize = this.listaServico.length;
-        this.loading = false;
-        this.refreshListServico();
-      },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
-      }
-    );
+    this.servicoFuncionarioService
+      .listarServicosFuncionario(this.funcionario.id)
+      .subscribe(
+        (dados) => {
+          this.listaServico = dados;
+          this.collectionSize = this.listaServico.length;
+          this.loading = false;
+          this.refreshListServico();
+        },
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+        }
+      );
   }
 
   refreshListServico(): void {

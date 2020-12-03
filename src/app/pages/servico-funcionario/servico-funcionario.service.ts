@@ -1,6 +1,7 @@
+import { Usuario } from 'src/app/models/usuario';
 import { Servico } from 'src/app/models/servico';
 import { ServicoFuncionario } from '../../models/servico-funcionario';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CrudService } from 'src/app/shared/crud-service';
 import { Observable } from 'rxjs';
@@ -23,7 +24,10 @@ export class ServicoFuncionarioService extends CrudService<ServicoFuncionario> {
   }
   deletarServicoFUncionario(servicoFuncionario: ServicoFuncionario) {
     return this.http
-      .post(AppSettings.url + '/api/servico/funcionario/delete', servicoFuncionario)
+      .post(
+        AppSettings.url + '/api/servico/funcionario/delete',
+        servicoFuncionario
+      )
       .pipe(take(1));
   }
 }
