@@ -1,3 +1,4 @@
+import { Servico } from './../../../../models/servico';
 import { Escala } from './../../../../models/escala';
 import { EscalaService } from './../../escala/escala.service';
 import { ErroService } from './../../../../shared/erro/erro.service';
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
+import { ServicoEscalaFormService } from '../../servico-escala-form.service';
 
 @Component({
   selector: 'app-item-escala-list',
@@ -14,7 +16,7 @@ import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-
   styleUrls: ['./item-escala-list.component.css'],
 })
 export class ItemEscalaListComponent implements OnInit {
-  loading = true;
+  loading = false;
   listempy = true;
   page = 1;
   pageSize = 4;
@@ -25,18 +27,24 @@ export class ItemEscalaListComponent implements OnInit {
   escala: Escala;
   itenEscala: ItemEscala;
   selecionadoEtapa2 = false;
+  diasSemana: string[] = [];
+  listaServico: Servico[]
+  teste: string = '8:00 - 12:00';
 
   constructor(
     private itemEscalaService: ItemEscalaService,
     private modalCOnfirm: ModalConfirmacaoService,
     private erroService: ErroService,
-    private escalaService: EscalaService
-  ) {}
+    private escalaService: EscalaService,
+    private servicoEscalaFormService: ServicoEscalaFormService
+  ) { }
 
   ngOnInit(): void {
+    this.servicoEscalaFormService.emitirServico.subscribe((result) => {
+      this.listaServico = result;
+    });
     this.escalaService.eventoEscalaAvancar.subscribe((result) => {
-      this.list(result?.id), (this.escala = result);
-      console.log('result.id', result?.id);
+      (this.diasSemana = result);
     });
     this.itemEscalaService.eventoSalvarItemEscala.subscribe(
       (result) => result === true && this.list(this.escala.id)
@@ -67,8 +75,8 @@ export class ItemEscalaListComponent implements OnInit {
         }
       );
   }
-  onEdit(id: number): void {}
-  list(id: number): void {
+  onEdit(id: number): void { }
+  list(id?: number): void {
     this.loading = true;
     this.itemEscalaService.listarPorEscala(id).subscribe(
       (dados) => {

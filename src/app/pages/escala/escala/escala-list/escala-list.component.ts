@@ -22,18 +22,16 @@ export class EscalaListComponent implements OnInit {
   collectionSize: any;
   escalas: Escala[];
   colunas: string[] = ['select', 'dia semana'];
-  lista: Escala[];
   listaServico: Servico[];
   servicoID: Servico;
-  escala: Escala;
   selecionadoEtapa2 = false;
   diasSemana: string[];
   novalista: Escala[];
+  diasSelecionados: string[] = [];
 
   constructor(
     private escalaService: EscalaService,
     private servicoEscalaFormService: ServicoEscalaFormService,
-    private router: Router,
     private modalCOnfirm: ModalConfirmacaoService,
     private erroService: ErroService
   ) { }
@@ -41,8 +39,17 @@ export class EscalaListComponent implements OnInit {
   ngOnInit(): void {
     this.servicoEscalaFormService.emitirServico.subscribe((result) => {
       this.listaServico = result;
+      console.log('lista servico', this.listaServico);
+      if (this.listaServico.length > 0) {
+        this.list();
+        console.log('chamou  o list');
+      }
     });
-    if (this.listaServico.length > 0) {
+    if (this.listaServico !== undefined) {
+      if (this.listaServico.length > 0) {
+        this.list();
+        console.log('chamou  o list');
+      }
       // fazer logica de listar
     }
 
@@ -73,47 +80,35 @@ export class EscalaListComponent implements OnInit {
         }
       );
   }
-  list(id: number): void {
+  list(id?: number): void {
     this.loading = true;
     this.escalaService.listaDayWeek().subscribe((result) => {
       this.diasSemana = result;
-    });
-    this.escalaService.listarPorServico(id).subscribe(
-      (dados) => {
-        this.lista = dados;
-        this.collectionSize = this.lista.length;
-        this.loading = false;
-
-        if (this.lista.length > 0) {
-          this.listempy = false;
-        } else {
-          this.listempy = true;
-        }
-
-        this.refresh();
-      },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
+      this.collectionSize = this.diasSemana.length;
+      this.loading = false;
+      if (this.diasSemana.length > 0) {
+        this.listempy = false;
+      } else {
+        this.listempy = true;
       }
-    );
-  }
+    }, (error) => {
+      console.error(error);
+      this.erroService.tratarErro(error);
+    });
 
-  refresh(): void {
-    this.escalas = this.lista
-      .map((usuario, i) => ({ ...usuario }))
-      .slice(
-        (this.page - 1) * this.pageSize,
-        (this.page - 1) * this.pageSize + this.pageSize
-      );
   }
-  onselect(variavel: Escala): void {
-    this.escala = variavel;
+  onChange(variavel: string, isChecked: boolean): void {
+    if (isChecked) {
+      this.diasSelecionados.push(variavel);
+    } else {
+      const index = this.diasSelecionados.indexOf(variavel);
+      this.diasSelecionados.splice(index, 1);
+    }
     this.escalaService.selecionarEscala();
     this.selecionadoEtapa2 = true;
   }
   nextEtapa2(): void {
-    this.escalaService.avancarEtapa(this.escala);
+    this.escalaService.avancarEtapa(this.diasSelecionados);
   }
   voltar(): void {
     this.selecionadoEtapa2 = false;

@@ -3,8 +3,8 @@
   <div class="card">
     <div class="card-header">
       <h4 class="card-title">Escalas serviço </h4>
-      <span class="badge badge-pill badge-info">{{servicoID?.nome}}</span>
-      <span class="badge badge-pill badge-secondary">Secondary</span>
+      <span *ngFor="let servico of listaServico" class="badge badge-pill badge-info">{{servico.nome}}</span>
+      <!--<span class="badge badge-pill badge-secondary">Secondary</span>-->
 
 
     </div>
@@ -27,24 +27,15 @@
             <tr *ngIf="listempy">
               <td id="tdvazio" colspan="4">VAZIO</td>
             </tr>
-            <tr *ngFor="let escala of lista; let i = index">
+            <tr *ngFor="let diaSemana of diasSemana; let i = index">
 
-              <td><input type="checkbox" id={{escala.id}} name="idEscala" (click)="onselect(escala)"></td>
-              <td>{{ escala.diaSemana }}</td>
+              <td><input type="checkbox" id={{diaSemana}} name="idEscala"
+                  (change)="onChange(diaSemana, $event.target.checked)"></td>
+              <td>{{ diaSemana }}</td>
             </tr>
           </tbody>
         </table>
-        <div class="d-flex justify-content-between p-2">
-          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-            (pageChange)="refresh()">
-          </ngb-pagination>
 
-          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
-            <option [ngValue]="2">2 items per page</option>
-            <option [ngValue]="4">4 items per page</option>
-            <option [ngValue]="6">6 items per page</option>
-          </select>
-        </div>
       </div>
     </div>
     <div class="card-footer">

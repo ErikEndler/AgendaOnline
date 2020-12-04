@@ -12,7 +12,7 @@
       <table class="table tablesorter" id="">
         <thead class="text-primary">
           <tr>
-            <th *ngFor="let coluna of colunas" scope="col">
+            <th *ngFor="let coluna of diasSemana; let j= index" scope="col">
               {{ coluna }}
             </th>
           </tr>
@@ -21,19 +21,9 @@
           <tr *ngIf="listempy">
             <td id="tdvazio" colspan="4">VAZIO</td>
           </tr>
-          <tr *ngFor="let itenEscala of itensEscala; let i = index">
-            <td scope="row">{{ i+1 }}</td>
-            <td>{{ itenEscala.qtd }}</td>
-            <td>{{ itenEscala.hrInicial }}</td>
-            <td>{{ itenEscala.hrFinal }}</td>
-            <td>
-              <button class="btn btn-info btn-icon" (click)="onEdit(itenEscala.id)">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button class="btn btn-warning btn-icon" (click)="onDelete(itenEscala.id)">
-                <i class="far fa-trash-alt"></i>
-              </button>
-            </td>
+          <tr *ngFor="let servico of listaServico; let i = index">
+            <td *ngFor="let coluna of diasSemana">
+              {{ servico.nome }}<br><span class="badge-larg badge-pill badge-info">{{teste}}</span></td>
           </tr>
         </tbody>
       </table>
@@ -53,7 +43,7 @@
 </div>
 <div class="card-footer">
   <div class="btn-group">
-    <button type="button"class="btn btn-fill btn-danger" awPreviousStep>Back</button>
+    <button type="button" class="btn btn-fill btn-danger" awPreviousStep>Back</button>
     <button [disabled]="!selecionadoEtapa2" type="button" class="btn btn-fill btn-success" awNextStep>Continue</button>
   </div>
 </div>

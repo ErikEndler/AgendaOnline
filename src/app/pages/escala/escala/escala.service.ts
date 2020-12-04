@@ -23,8 +23,8 @@ export class EscalaService extends CrudService<Escala> {
   selecionarEscala(): void {
     this.eventoEscalaSelecionada.emit(true);
   }
-  avancarEtapa(escala: Escala): void {
-    this.eventoEscalaAvancar.emit(escala);
+  avancarEtapa(diasSemana: string[]): void {
+    this.eventoEscalaAvancar.emit(diasSemana);
   }
   listaDayWeek(): Observable<Array<string>> {
     return this.http
