@@ -37,6 +37,7 @@ import { ItemEscalaListComponent } from './pages/escala/item-escala/item-escala-
 import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 import { ServicoViewComponent } from './pages/servico-funcionario/servico-view/servico-view.component';
+import { NovoComponent } from './pages/escala/novo/novo.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ServicoViewComponent } from './pages/servico-funcionario/servico-view/s
     ServicoFuncionarioComponent,
     FuncionarioviewComponent,
     ServicoViewComponent,
+    NovoComponent,
   ],
   imports: [
     FormsModule,

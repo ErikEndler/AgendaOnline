@@ -28,7 +28,7 @@ export class ItemEscalaListComponent implements OnInit {
   itenEscala: ItemEscala;
   selecionadoEtapa2 = false;
   diasSemana: string[] = [];
-  listaServico: Servico[]
+  listaServico: Servico[];
   teste: string = '8:00 - 12:00';
 
   constructor(
@@ -37,14 +37,15 @@ export class ItemEscalaListComponent implements OnInit {
     private erroService: ErroService,
     private escalaService: EscalaService,
     private servicoEscalaFormService: ServicoEscalaFormService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.servicoEscalaFormService.emitirServico.subscribe((result) => {
-      this.listaServico = result;
-    });
+    // this.servicoEscalaFormService.emitirServico.subscribe((result) => {
+    //   this.listaServico = result;
+    //   console.log('this.listaServico', this.listaServico);
+    // });
     this.escalaService.eventoEscalaAvancar.subscribe((result) => {
-      (this.diasSemana = result);
+      this.diasSemana = result;
     });
     this.itemEscalaService.eventoSalvarItemEscala.subscribe(
       (result) => result === true && this.list(this.escala.id)
@@ -75,7 +76,7 @@ export class ItemEscalaListComponent implements OnInit {
         }
       );
   }
-  onEdit(id: number): void { }
+  onEdit(id: number): void {}
   list(id?: number): void {
     this.loading = true;
     this.itemEscalaService.listarPorEscala(id).subscribe(

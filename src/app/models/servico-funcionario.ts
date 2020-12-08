@@ -1,5 +1,7 @@
+import { Servico } from './servico';
+import { Usuario } from './usuario';
 export class ServicoFuncionario {
   id: number;
-  funcionarioId: number;
-  servicoId: number;
+  funcionario: Usuario;
+  servico: Servico;
 }

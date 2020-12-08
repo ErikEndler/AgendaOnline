@@ -1,3 +1,4 @@
+import { ServicoFuncionario } from './../../../models/servico-funcionario';
 import { ServicoFuncionarioService } from './../../servico-funcionario/servico-funcionario.service';
 import { ErroService } from './../../../shared/erro/erro.service';
 import { ServicoEscalaFormService } from './../servico-escala-form.service';
@@ -17,8 +18,9 @@ export class ServicoEscalaFormComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private servicoFuncionarioService: ServicoFuncionarioService
-  ) { }
+  ) {}
   selecionado = false;
+  servicoFuncionario: ServicoFuncionario[] = [];
   servicoOut: Servico[] = [];
   servicos: Servico[];
   listaServico: Servico[];
@@ -62,7 +64,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   // avança para proxima estapa do wizard
   next(): void {
     this.verificaSelecao();
-    this.servicoEscalaFormService.emiteEventoServico(this.servicoOut);
+    this.servicoEscalaFormService.emiteEventoServico(this.servicoFuncionario);
   }
   verificaSelecao(): void {
     if (this.servicoOut === undefined) {
@@ -76,10 +78,14 @@ export class ServicoEscalaFormComponent implements OnInit {
   // ao selecionar um item tabela atribui valor da linha a variavel servicos
   onChange(servico: Servico, isChecked: boolean): void {
     if (isChecked) {
+      this.servicoEscalaFormService
+        .getServicoFuncionario(servico.id)
+        .subscribe((dados) => this.servicoFuncionario.push(dados));
       this.servicoOut.push(servico);
     } else {
       const index = this.servicoOut.indexOf(servico);
       this.servicoOut.splice(index, 1);
+      this.servicoFuncionario.splice(index, 1);
     }
     this.selecionado = true;
   }
