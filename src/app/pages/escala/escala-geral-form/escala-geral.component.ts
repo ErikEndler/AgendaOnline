@@ -1,3 +1,4 @@
+import { UsuarioService } from './../../usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 import { ServicoFuncionarioService } from './../../servico-funcionario/servico-funcionario.service';
 import { EscalaService } from './../escala/escala.service';
@@ -24,36 +25,30 @@ export class EscalageralComponent implements OnInit {
   formulario: FormGroup;
   listaServico: Servico[];
   selecionadoRtapa2 = false;
-  funcionarioId: number;
-  funcionarioNome: string;
+  funcionario: Usuario;
 
   constructor(
     private serviceServico: ServicoService,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute,
     private escalaService: EscalaService,
     private activatedRoute: ActivatedRoute,
-    private servicoFuncionarioService: ServicoFuncionarioService
+    private usuarioService: UsuarioService
   ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams
       .subscribe(params => {
         console.log(params); // { order: "popular" }
-        this.funcionarioId = params.id as number;
-        this.funcionarioNome = params.nome;
+        this.usuarioService.loadByID(params.id).subscribe((result) => this.funcionario = result);
+        // this.funcionarioId = params.id as number;
+        // this.funcionarioNome = params.nome;
       });
 
     this.escalaService.eventoEscalaSelecionada.subscribe(
       (result) => (this.selecionadoRtapa2 = result)
     );
     this.list();
-    const escala = this.route.snapshot.data['escala'];
-    this.formulario = this.formBuilder.group({
-      id: [escala.id],
-      servico: [escala.servico],
-      diaSemana: [escala.diaSemana],
-    });
+    // const escala = this.route.snapshot.data['escala'];
+    // this.formulario = this.formBuilder.group({id: [escala.id],servico: [escala.servico],diaSemana: [escala.diaSemana],});
   }
   list(): void {
     this.loading = true;

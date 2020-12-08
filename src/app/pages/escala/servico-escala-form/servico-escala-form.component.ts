@@ -6,6 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Servico } from 'src/app/models/servico';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
+import { Usuario } from 'src/app/models/usuario';
 
 @Component({
   selector: 'app-servico-escala-form',
@@ -18,7 +19,7 @@ export class ServicoEscalaFormComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private servicoFuncionarioService: ServicoFuncionarioService
-  ) {}
+  ) { }
   selecionado = false;
   servicoFuncionario: ServicoFuncionario[] = [];
   servicoOut: Servico[] = [];
@@ -31,6 +32,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   colunas: string[] = ['select', 'nome', 'descrição'];
   @Input() funcionarioId: number;
   @Input() funcionarioNome: string;
+  @Input() funcionario: Usuario;
 
   ngOnInit(): void {
     this.list();
@@ -38,7 +40,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   list(): void {
     this.loading = true;
     this.servicoFuncionarioService
-      .listarServicosFuncionario(this.funcionarioId)
+      .listarServicosFuncionario(this.funcionario.id)
       .subscribe(
         (dados) => {
           this.listaServico = dados;
@@ -77,6 +79,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   }
   // ao selecionar um item tabela atribui valor da linha a variavel servicos
   onChange(servico: Servico, isChecked: boolean): void {
+    // implementar pegar id servico e id funcionario
     if (isChecked) {
       this.servicoEscalaFormService
         .getServicoFuncionario(servico.id)

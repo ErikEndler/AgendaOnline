@@ -34,7 +34,7 @@ export class FuncionarioviewComponent implements OnInit {
   listempy = true;
   listempy2 = true;
   funcionarioid: number;
-  funcionarioNome: string;
+  funcionario: Usuario;
 
   constructor(
     private servicoService: ServicoService,
@@ -42,7 +42,8 @@ export class FuncionarioviewComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private servicoFuncionarioService: ServicoFuncionarioService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private usuarioService: UsuarioService
   ) {
 
   }
@@ -52,11 +53,14 @@ export class FuncionarioviewComponent implements OnInit {
       .subscribe(params => {
         console.log(params); // { order: "popular" }
         this.funcionarioid = params.id as number;
-        this.funcionarioNome = params.nome;
+        this.getFuncionario(this.funcionarioid);
       });
 
     this.list();
     this.listServicoFuncionario();
+  }
+  getFuncionario(id: number) {
+    this.usuarioService.loadByID(id).subscribe((result) => this.funcionario = result);
   }
   list(): void {
     this.loading = true;
@@ -121,8 +125,8 @@ export class FuncionarioviewComponent implements OnInit {
   adicionarServico(servico: Servico): void {
 
     let servicoFuncionario: ServicoFuncionario = new ServicoFuncionario();
-    servicoFuncionario.servicoId = servico.id;
-    servicoFuncionario.funcionarioId = this.funcionarioid;
+    servicoFuncionario.servico = servico;
+    servicoFuncionario.funcionario.id = this.funcionarioid;
     this.servicoFuncionarioService.save(servicoFuncionario).subscribe(
       (success) => {
         this.notificacaoService.criar(
@@ -140,8 +144,8 @@ export class FuncionarioviewComponent implements OnInit {
   }
   removerServico(servico: Servico): void {
     const servicoFuncionario: ServicoFuncionario = new ServicoFuncionario();
-    servicoFuncionario.funcionarioId = this.funcionarioid;
-    servicoFuncionario.servicoId = servico.id;
+    servicoFuncionario.funcionario = this.funcionario;
+    servicoFuncionario.servico = servico;
     this.servicoFuncionarioService
       .deletarServicoFUncionario(servicoFuncionario)
       .subscribe(
@@ -159,7 +163,7 @@ export class FuncionarioviewComponent implements OnInit {
         }
       );
   }
-  escala() {
-    this.router.navigate(['escala'], { queryParams: { id: this.funcionarioid, nome: this.funcionarioNome } });
+  redirecionaEscala() {
+    this.router.navigate(['escala'], { queryParams: { id: this.funcionario.id, nome: this.funcionario.nome } });
   }
 }
