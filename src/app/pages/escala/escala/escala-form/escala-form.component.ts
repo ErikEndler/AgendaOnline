@@ -25,7 +25,7 @@ export class EscalaFormComponent implements OnInit {
     private servicoEscalaFormService: ServicoEscalaFormService,
     private escalaService: EscalaService,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -34,7 +34,7 @@ export class EscalaFormComponent implements OnInit {
       servico: [],
     });
     this.comboboxDays();
-    this.servicoEscalaFormService.emitirServico.subscribe((result) => {
+    this.servicoEscalaFormService.emitirServicos.subscribe((result) => {
       this.servicoIn = result;
       this.formulario.controls['servico'].setValue(this.servicoIn?.id);
     });

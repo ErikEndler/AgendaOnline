@@ -33,8 +33,8 @@ export class ServicoFuncionarioService extends CrudService<ServicoFuncionario> {
   teste() {
     console.log('entrou teste');
     return this.http
-      .get(
-        'localhost:8080/api/itemescala/servicofuncionario?funcionario=1&servico=1&servico=2'
+      .get(AppSettings.url +
+        '/api/escala/servicofuncionario?funcionario=1&servico=1&servico=2'
       )
       .pipe(delay(200));
   }

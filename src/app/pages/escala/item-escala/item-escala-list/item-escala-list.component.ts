@@ -37,7 +37,7 @@ export class ItemEscalaListComponent implements OnInit {
     private erroService: ErroService,
     private escalaService: EscalaService,
     private servicoEscalaFormService: ServicoEscalaFormService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // this.servicoEscalaFormService.emitirServico.subscribe((result) => {
@@ -76,7 +76,7 @@ export class ItemEscalaListComponent implements OnInit {
         }
       );
   }
-  onEdit(id: number): void {}
+  onEdit(id: number): void { }
   list(id?: number): void {
     this.loading = true;
     this.itemEscalaService.listarPorEscala(id).subscribe(

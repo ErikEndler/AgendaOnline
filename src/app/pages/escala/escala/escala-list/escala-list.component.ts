@@ -37,7 +37,7 @@ export class EscalaListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.servicoEscalaFormService.emitirServico.subscribe((result) => {
+    this.servicoEscalaFormService.emitirServicos.subscribe((result) => {
       this.listaServico = result;
       console.log('lista servico', this.listaServico);
       if (this.listaServico.length > 0) {

@@ -1,31 +1,32 @@
 <div class="content">
 
-<div class="card">
-  <div class="card-header">
-    <h4 class="card-title">Horários : </h4>
-  </div>
-  <div class="card-body">
-    <div >
-      <table class="table tablesorter" id="">
-        <thead class="text-primary">
-          <tr>
-            <th *ngFor="let coluna of diasSemana; let j= index" scope="col">
-              {{ coluna }}
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr >
-            <td id="tdvazio" colspan="4">VAZIO</td>
-          </tr>
-          <tr *ngFor="let escala of escalas; let i = index">
-            <td >
-              {{ escala.servico }}<br><span class="badge-larg badge-pill badge-info">teste</span></td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Horários : </h4>
+    </div>
+    <div class="card-body">
+      <div>
+        <table class="table tablesorter" id="">
+          <thead class="text-primary">
+            <tr>
+              <th *ngFor="let coluna of diasSemana; let j= index" scope="col">
+                {{ coluna }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="tdvazio" colspan="4">VAZIO</td>
+            </tr>
+            <tr *ngFor="let escala of escalas">
+              <td>
+                {{ escala.servicoFuncionario.servico.nome }} {{escala.diaSemana}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
 
+      </div>
     </div>
   </div>
-</div>
 </div>

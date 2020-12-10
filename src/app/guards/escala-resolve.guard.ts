@@ -25,8 +25,9 @@ export class EscalaResolveGuard implements Resolve<Escala> {
     }
     return of({
       id: null,
-      servico: null,
       diaSemana: null,
+      servicoFuncionario: null,
+      itensEscala: null,
     });
   }
 }

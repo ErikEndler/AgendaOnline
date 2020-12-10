@@ -167,6 +167,6 @@ export class FuncionarioviewComponent implements OnInit {
     this.router.navigate(['escala'], { queryParams: { id: this.funcionario.id, nome: this.funcionario.nome } });
   }
   teste() {
-    this.servicoFuncionarioService.teste();
+    this.servicoFuncionarioService.teste().subscribe(result => console.log(result));
   }
 }

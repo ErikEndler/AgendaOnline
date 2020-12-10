@@ -21,7 +21,7 @@ export class ServicoEscalaFormComponent implements OnInit {
     private servicoFuncionarioService: ServicoFuncionarioService
   ) { }
   selecionado = false;
-  servicoFuncionario: ServicoFuncionario[] = [];
+  //servicoFuncionario: ServicoFuncionario[] = [];
   servicoOut: Servico[] = [];
   servicos: Servico[];
   listaServico: Servico[];
@@ -30,8 +30,6 @@ export class ServicoEscalaFormComponent implements OnInit {
   collectionSize: any;
   loading = true;
   colunas: string[] = ['select', 'nome', 'descrição'];
-  @Input() funcionarioId: number;
-  @Input() funcionarioNome: string;
   @Input() funcionario: Usuario;
 
   ngOnInit(): void {
@@ -66,7 +64,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   // avança para proxima estapa do wizard
   next(): void {
     this.verificaSelecao();
-    this.servicoEscalaFormService.emiteEventoServico(this.servicoFuncionario);
+    this.servicoEscalaFormService.emiteServicoEatapa2(this.servicoOut);
   }
   verificaSelecao(): void {
     if (this.servicoOut === undefined) {
@@ -81,15 +79,15 @@ export class ServicoEscalaFormComponent implements OnInit {
   onChange(servico: Servico, isChecked: boolean): void {
     // implementar pegar id servico e id funcionario
     if (isChecked) {
-      this.servicoEscalaFormService
-        .getServicoFuncionario(servico.id)
-        .subscribe((dados) => this.servicoFuncionario.push(dados));
+
       this.servicoOut.push(servico);
     } else {
       const index = this.servicoOut.indexOf(servico);
       this.servicoOut.splice(index, 1);
-      this.servicoFuncionario.splice(index, 1);
     }
     this.selecionado = true;
+  }
+  teste() {
+    this.servicoEscalaFormService.teste(1, [1, 2]).subscribe(result => console.log(result));
   }
 }
