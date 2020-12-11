@@ -1,31 +1,51 @@
-<div class="content">
-
+<div class="centered-content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title">Horários : </h4>
+      <h4 class="card-title">Horários :</h4>
     </div>
     <div class="card-body">
-      <div>
+      <div *ngIf="loading" class="d-flex justify-content-center">
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div *ngIf="!loading" class="table-responsive">
         <table class="table tablesorter" id="">
           <thead class="text-primary">
             <tr>
-              <th *ngFor="let coluna of diasSemana; let j= index" scope="col">
+              <th *ngFor="let coluna of diasSemana" scope="col">
                 {{ coluna }}
               </th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td id="tdvazio" colspan="4">VAZIO</td>
+            <tr *ngIf="empy">
+              <td id="tdvazio" colspan="7">VAZIO</td>
             </tr>
             <tr *ngFor="let escala of escalas">
-              <td>
-                {{ escala.servicoFuncionario.servico.nome }} {{escala.diaSemana}}
+              <td *ngFor="let abc of escala">
+                {{ abc.servicoFuncionario.servico.nome
+                }}<app-item-escala-list
+                  [itensEscala]="abc.itensEscala"
+                ></app-item-escala-list>
               </td>
             </tr>
           </tbody>
         </table>
-
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning" awPreviousStep>
+          Voltar
+        </button>
+        <button type="button" class="btn btn-success" awNextStep>
+          Continue
+        </button>
       </div>
     </div>
   </div>

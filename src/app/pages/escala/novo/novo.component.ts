@@ -19,12 +19,14 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class NovoComponent implements OnInit {
   diasSemana: string[] = [];
-  loading = false;
+  loading = true;
+  empy = true;
   servicoFuncionarioId: number;
-  escalas: Escala[];
+  escalas: Escala[][];
+  escala: Escala;
+  lista: any[];
   servicos: Servico[];
   funcionarioId: number;
-  //funcionario: Usuario;
   servicosIds: number[];
   @Input() funcionario: Usuario;
 
@@ -34,27 +36,42 @@ export class NovoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private escalaService: EscalaService,
     private usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     //this.activatedRoute.queryParams.subscribe((params) => {
     //  console.log(params); this.funcionarioId = params.id as number; this.getFuncionario(this.funcionarioId);
     //  this.servicosIds = params.servicos;});
-    this.servicoEscalaFormService.emitirServicos.subscribe((result: Servico[]) => { this.servicos = result; this.listEscalas() });
+    this.servicoEscalaFormService.emitirServicos.subscribe(
+      (result: Servico[]) => {
+        this.servicos = result;
+        this.listEscalas();
+      }
+    );
     this.escalaService
       .listaDayWeek()
       .subscribe((result) => (this.diasSemana = result));
   }
   getFuncionario(id: number): void {
-    this.usuarioService.loadByID(id).subscribe((result) => this.funcionario = result);
+    this.usuarioService
+      .loadByID(id)
+      .subscribe((result) => (this.funcionario = result));
   }
   listEscalas(dados?: Servico[]): void {
+    this.loading = true;
     this.servicosIds = this.servicos.map((item) => item.id);
     this.servicoEscalaFormService
       .teste(this.funcionario.id, this.servicosIds)
       .subscribe(
         (result) => {
+          console.log('result ===', result);
           this.escalas = result;
+
+          if (this.escalas.length > 0) {
+            this.empy = false;
+          }
+          this.loading = false;
+          console.log('this.escalas ---- ', this.escalas);
         },
         (error) => {
           console.error(error);
@@ -65,7 +82,7 @@ export class NovoComponent implements OnInit {
   retornaServico(idServico: number): string {
     console.log('idServico - ', idServico);
     let serv: Servico;
-    serv = this.servicos.find((e) => e.id = idServico);
+    serv = this.servicos.find((e) => (e.id = idServico));
     return serv.nome;
   }
 }

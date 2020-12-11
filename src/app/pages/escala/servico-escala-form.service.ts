@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 export class ServicoEscalaFormService {
   emitirServicos = new EventEmitter<Servico[]>();
 
-  constructor(protected http: HttpClient) { }
+  constructor(protected http: HttpClient) {}
 
   emiteServicoEatapa2(servicoFuncionario: Servico[]): void {
     this.emitirServicos.emit(servicoFuncionario);
@@ -31,13 +31,16 @@ export class ServicoEscalaFormService {
       AppSettings.url + '/api/escala/servicofuncionario/' + idServicoFuncionario
     );
   }
-  teste(idFuncionario: number, idsServicos: number[]): Observable<Escala[]> {
+  teste(idFuncionario: number, idsServicos: number[]) {
     let str = '';
-    idsServicos.forEach(e => str = str + '&servico=' + e);
+    idsServicos.forEach((e) => (str = str + '&servico=' + e));
     console.log('entrou teste');
     return this.http
-      .get<Array<Escala>>(AppSettings.url +
-        '/api/escala/servicofuncionario?funcionario=' + idFuncionario + str
+      .get<Array<Escala[]>>(
+        AppSettings.url +
+          '/api/escala/servicofuncionario?funcionario=' +
+          idFuncionario +
+          str
       )
       .pipe(delay(200));
   }

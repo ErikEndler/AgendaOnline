@@ -2,16 +2,24 @@
   <div class="card">
     <div class="card-header">
       <h5 class="title">SELCIONE SERVIÇOS PARA MONTAR ESCALA</h5>
-      <h4>Funcionário : <span class="badge badge-info">{{funcionario?.nome}}</span></h4>
-
+      <h4>
+        Funcionário :
+        <span class="badge-larg badge-pill badge-info">{{
+          funcionario?.nome
+        }}</span>
+      </h4>
     </div>
     <div class="card-body">
-      <div *ngIf=loading class="d-flex justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <div *ngIf="loading" class="d-flex justify-content-center">
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <div *ngIf=!loading class="table-responsive">
+      <div *ngIf="!loading" class="table-responsive">
         <table class="table tablesorter" id="">
           <thead class="text-primary">
             <tr>
@@ -23,20 +31,33 @@
           <tbody>
             <tr *ngFor="let servico of servicos">
               <td>
-                <input type="checkbox" id={{servico.id}} name="idServico"
-                  (change)="onChange(servico, $event.target.checked)">
+                <input
+                  type="checkbox"
+                  id="{{ servico.id }}"
+                  name="idServico"
+                  (change)="onChange(servico, $event.target.checked)"
+                />
               </td>
-              <td>{{ servico.nome }} </td>
+              <td>{{ servico.nome }}</td>
               <td>{{ servico.descricao }}</td>
             </tr>
           </tbody>
         </table>
         <div class="d-flex justify-content-between p-2">
-          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-            (pageChange)="refreshListServico()">
+          <ngb-pagination
+            [collectionSize]="collectionSize"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            (pageChange)="refreshListServico()"
+          >
           </ngb-pagination>
-          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" [ngModelOptions]="{standalone: true}"
-            (ngModelChange)="refreshListServico()">
+          <select
+            class="custom-select"
+            style="width: auto"
+            [(ngModel)]="pageSize"
+            [ngModelOptions]="{ standalone: true }"
+            (ngModelChange)="refreshListServico()"
+          >
             <option [ngValue]="2">2 items per page</option>
             <option [ngValue]="4">4 items per page</option>
             <option [ngValue]="6">6 items per page</option>
@@ -46,8 +67,15 @@
     </div>
     <div class="card-footer">
       <div class="btn-group">
-        <button [disabled]="!selecionado" type="button" class="btn btn-success" (click)="next()"
-          awNextStep>Continue</button>
+        <button
+          [disabled]="!selecionado"
+          type="button"
+          class="btn btn-success"
+          (click)="next()"
+          awNextStep
+        >
+          Continue
+        </button>
       </div>
     </div>
   </div>

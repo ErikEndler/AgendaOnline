@@ -3,5 +3,4 @@ export class ItemEscala {
   escala: number;
   hrInicial: string;
   hrFinal: string;
-  qtd: number;
 }

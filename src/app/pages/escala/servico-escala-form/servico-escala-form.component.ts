@@ -19,9 +19,9 @@ export class ServicoEscalaFormComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private servicoFuncionarioService: ServicoFuncionarioService
-  ) { }
+  ) {}
   selecionado = false;
-  //servicoFuncionario: ServicoFuncionario[] = [];
+  // servicoFuncionario: ServicoFuncionario[] = [];
   servicoOut: Servico[] = [];
   servicos: Servico[];
   listaServico: Servico[];
@@ -79,7 +79,6 @@ export class ServicoEscalaFormComponent implements OnInit {
   onChange(servico: Servico, isChecked: boolean): void {
     // implementar pegar id servico e id funcionario
     if (isChecked) {
-
       this.servicoOut.push(servico);
     } else {
       const index = this.servicoOut.indexOf(servico);
@@ -88,6 +87,8 @@ export class ServicoEscalaFormComponent implements OnInit {
     this.selecionado = true;
   }
   teste() {
-    this.servicoEscalaFormService.teste(1, [1, 2]).subscribe(result => console.log(result));
+    this.servicoEscalaFormService
+      .teste(1, [1, 2])
+      .subscribe((result) => console.log(result));
   }
 }
