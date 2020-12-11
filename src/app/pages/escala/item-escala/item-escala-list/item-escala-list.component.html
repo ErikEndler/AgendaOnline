@@ -1,10 +1,10 @@
 <div *ngIf="itensEscala?.length <= 0">
-  <span class="badge-larg badge-pill badge-info">VAZIO</span>
+  <span class="badge-larg badge-pill badge-info">--:--</span>
+  <span class="badge-larg badge-pill badge-info">--:--</span>
 </div>
 <div *ngIf="itensEscala?.length > 0">
   <div *ngFor="let item of itensEscala">
-    <span class="badge-larg badge-info"
-      >{{ item.hrInicial }} : {{ item.hrFinal }}</span
-    >
+    <span class="badge-larg badge-pill badge-info">{{item.hrInicial}} : {{item.hrFinal}}</span>
+    <span class="badge-larg badge-pill badge-info">{{item.hrInicial}} : {{item.hrFinal}}</span>
   </div>
 </div>

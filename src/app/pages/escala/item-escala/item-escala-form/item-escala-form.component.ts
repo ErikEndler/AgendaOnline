@@ -1,7 +1,7 @@
+import { ItemEscala } from 'src/app/models/itemEscala';
 import { ItemEscalaService } from '../item-escala.service';
 import { Escala } from './../../../../models/escala';
-import { EscalaService } from './../../escala/escala.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
@@ -17,14 +17,15 @@ export class ItemEscalaFormComponent implements OnInit {
   formulario: FormGroup;
   escalaIn: Escala;
   botaoAdicionar = true;
+  @Input() itemEscala: ItemEscala;
+
 
   constructor(
     private formBuilder: FormBuilder,
     private modalCOnfirm: ModalConfirmacaoService,
-    private escalaService: EscalaService,
     private erroService: ErroService,
     private itemEscalaService: ItemEscalaService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
@@ -32,11 +33,6 @@ export class ItemEscalaFormComponent implements OnInit {
       escala: [],
       hrInicial: [],
       hrFinal: [],
-      qtd: [],
-    });
-    this.escalaService.eventoEscalaAvancar.subscribe((result) => {
-      this.escalaIn = result;
-      this.formulario.controls['escala'].setValue(this.escalaIn?.id);
     });
   }
   onSubmit(): void {
@@ -63,6 +59,9 @@ export class ItemEscalaFormComponent implements OnInit {
           }
         );
     }
+  }
+  onClose() {
+
   }
   salvar(): Observable<object> {
     const horaInicio = this.formulario.controls['hrInicial'].value + ':00';
