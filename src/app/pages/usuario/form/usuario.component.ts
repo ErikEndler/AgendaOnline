@@ -35,7 +35,7 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.verificaCredencial();
@@ -121,7 +121,9 @@ export class UsuarioComponent implements OnInit {
         'não ha funcionario atribuido'
       );
     }
-    this.router.navigate(['sf2'], { queryParams: { id: this.usuario.id, nome: this.usuario.nome } });
+    this.router.navigate(['sf2'], {
+      queryParams: { id: this.usuario.id, nome: this.usuario.nome },
+    });
   }
-  atribuirEscala() { }
+  atribuirEscala() {}
 }

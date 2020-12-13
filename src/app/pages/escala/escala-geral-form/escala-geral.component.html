@@ -3,15 +3,12 @@
     <app-home-escala (eventoHide)="changeVisible($event)"></app-home-escala>
   </div>
   <aw-wizard *ngIf="visible" #wizard [navBarLayout]="'large-empty-symbols'">
-    <aw-wizard-step [stepTitle]="'SERVIÇO'">
+    <aw-wizard-step [stepTitle]="'SERVIÇOS'">
       <app-servico-escala-form [funcionario]="funcionario">
       </app-servico-escala-form>
     </aw-wizard-step>
-    <aw-wizard-step [stepTitle]="'Dia Escala'">
+    <aw-wizard-step [stepTitle]="'Escalas'">
       <app-novo [funcionario]="funcionario"></app-novo>
-    </aw-wizard-step>
-    <aw-wizard-step [stepTitle]="'Horario Escala'">
-      <app-item-escala-form></app-item-escala-form>
     </aw-wizard-step>
   </aw-wizard>
 </div>

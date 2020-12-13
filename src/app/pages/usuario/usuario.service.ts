@@ -1,9 +1,9 @@
-import { CrudService } from './../../shared/crud-service';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { HttpClient } from '@angular/common/http';
 import { LoginReturn } from 'src/app/models/loginReturn';
 import { AppSettings } from 'src/app/shared/appSettings';
+import { CrudService } from 'src/app/shared/crud-service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,9 +1,3 @@
-import { error } from 'protractor';
-import { NotificacaoService } from './../../../../shared/notificacao/notificacao.service';
-import { ErroService } from './../../../../shared/erro/erro.service';
-import { Categoria } from './../../../../models/categoria';
-import { CategoriaService } from './../../../categoria/categoria.service';
-import { ServicoService } from './../../servico.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -11,6 +5,11 @@ import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { NotificationType } from 'angular2-notifications';
+import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
+import { ErroService } from 'src/app/shared/erro/erro.service';
+import { Categoria } from 'src/app/models/categoria';
+import { CategoriaService } from 'src/app/pages/categoria/categoria.service';
+import { ServicoService } from '../../servico.service';
 
 @Component({
   selector: 'app-servico',

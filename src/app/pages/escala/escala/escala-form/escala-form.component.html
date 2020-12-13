@@ -1,10 +1,17 @@
 <div class="centered-content">
   <div class="card">
     <div class="card-header">
-      <h5 class="title">{{servicoIn?.nome}}</h5>
+      <h5 class="title">{{ servicoIn?.nome }}</h5>
     </div>
     <div class="card-body">
-      <button type="submit" class="btn btn-fill btn-success" *ngIf="botaoAdicionar" (click)="adicionar()">Adicionar</button>
+      <button
+        type="submit"
+        class="btn btn-fill btn-success"
+        *ngIf="botaoAdicionar"
+        (click)="adicionar()"
+      >
+        Adicionar
+      </button>
       <div *ngIf="!botaoAdicionar" class="card">
         <div class="card-header">
           <h4 class="card-title">Formulário Escala</h4>
@@ -12,12 +19,13 @@
         <div class="card-body">
           <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
             <div class="row">
-
               <div class="col-md-5">
                 <div class="form-group">
                   <label> Dia Semana </label>
                   <select class="form-control" formControlName="diaSemana">
-                    <option *ngFor="let day of daysWeek" [value]="day">{{day}}</option>
+                    <option *ngFor="let day of daysWeek" [value]="day">
+                      {{ day }}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -25,25 +33,32 @@
           </form>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-fill btn-success" [disabled]="!formulario.valid" (click)="onSubmit()">
+          <button
+            type="submit"
+            class="btn btn-fill btn-success"
+            [disabled]="!formulario.valid"
+            (click)="onSubmit()"
+          >
             Salvar
           </button>
-          <button type="submit" class="btn btn-fill btn-danger"  (click)="adicionar()">
+          <button
+            type="submit"
+            class="btn btn-fill btn-danger"
+            (click)="adicionar()"
+          >
             Cancelar
           </button>
         </div>
       </div>
       <app-escala-list></app-escala-list>
       <span class="badge badge-pill badge-primary">Primary</span>
-<span class="badge badge-pill badge-secondary">Secondary</span>
-<span class="badge badge-pill badge-success">Success</span>
-<span class="badge badge-pill badge-danger">Danger</span>
-<span class="badge badge-pill badge-warning">Warning</span>
-<span class="badge badge-pill badge-info">Info</span>
-<span class="badge badge-pill badge-light">Light</span>
-<span class="badge badge-pill badge-dark">Dark</span>
+      <span class="badge badge-pill badge-secondary">Secondary</span>
+      <span class="badge badge-pill badge-success">Success</span>
+      <span class="badge badge-pill badge-danger">Danger</span>
+      <span class="badge badge-pill badge-warning">Warning</span>
+      <span class="badge badge-pill badge-info">Info</span>
+      <span class="badge badge-pill badge-light">Light</span>
+      <span class="badge badge-pill badge-dark">Dark</span>
     </div>
-
   </div>
 </div>
-

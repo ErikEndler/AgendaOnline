@@ -1,11 +1,11 @@
-import { ErroService } from './../../../../shared/erro/erro.service';
-import { ServicoService } from './../../servico.service';
-import { Servico } from './../../../../models/servico';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { ServicoService } from '../../servico.service';
+import { ErroService } from 'src/app/shared/erro/erro.service';
+import { Servico } from 'src/app/models/servico';
 
 @Component({
   selector: 'app-servico-list',

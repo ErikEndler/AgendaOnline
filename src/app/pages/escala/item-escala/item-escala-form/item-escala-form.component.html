@@ -1,25 +1,50 @@
 <div class="modal-header">
-  <h5 class="modal-title" id="exampleModalLongTitle">Horario Escala {{escalaIn?.diaSemana}}</h5>
+  <h5 class="modal-title" id="exampleModalLongTitle">Horario Escala</h5>
 </div>
 <div class="modal-body">
-  <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <form>
     <div class="row">
       <div class="col-md-3">
         <label> Hora Inicio </label>
-        <input class="form-control" placeholder=" " type="time" formControlName="hrInicial" />
+        <input
+          class="form-control"
+          placeholder="0"
+          type="time"
+          name="hrInicial"
+          [(ngModel)]="itemEscala.hrInicial"
+        />
       </div>
       <div class="col-md-3">
         <label> Hora Fim </label>
-        <input class="form-control" placeholder=" " type="time" formControlName="hrFinal" />
+        <input
+          class="form-control"
+          placeholder="00:00"
+          type="time"
+          [(ngModel)]="itemEscala.hrFinal"
+          name="hrFinal"
+        />
       </div>
+      <!--<div class="col-md-3">
+        {{ itemEscala?.id }} - {{ itemEscala?.escala }} -
+        {{ itemEscala?.hrFinal }}
+      </div>-->
     </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button id='login' type="submit" class="btn btn-success" (click)="onSubmit()">
-    Login
+  <button id="login" type="submit" class="btn btn-info" (click)="onSubmit()">
+    Salvar
   </button>
   <button type="button" class="btn btn-warning" (click)="onClose()">
     Cancelar
+  </button>
+  <button
+    (click)="onDelete()"
+    type="button"
+    class="btn btn-warning btn-icon"
+    data-toggle="tooltip"
+    title="Excluir"
+  >
+    <i class="far fa-trash-alt"></i>
   </button>
 </div>

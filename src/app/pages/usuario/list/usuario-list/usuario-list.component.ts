@@ -1,11 +1,11 @@
-import { ErroService } from './../../../../shared/erro/erro.service';
-import { UsuarioService } from './../../usuario.service';
-import { Usuario } from './../../../../models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
+import { Usuario } from 'src/app/models/usuario';
+import { UsuarioService } from '../../usuario.service';
+import { ErroService } from 'src/app/shared/erro/erro.service';
 
 @Component({
   selector: 'app-usuario-list',

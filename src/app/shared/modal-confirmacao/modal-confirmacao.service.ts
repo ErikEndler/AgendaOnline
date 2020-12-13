@@ -6,7 +6,7 @@ import { ModalConfirmacaoComponent } from './modal-confirmacao.component';
   providedIn: 'root',
 })
 export class ModalConfirmacaoService {
-  constructor(private modalservice: BsModalService) { }
+  constructor(private modalservice: BsModalService) {}
 
   showConfirm(title: string, msg: string, okTxt?: string, cancelText?: string) {
     const config: ModalOptions = {

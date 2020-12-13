@@ -4,7 +4,7 @@ import { delay, tap, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 export class CrudService<T extends generico> {
-  constructor(protected http: HttpClient, private API_URL) { }
+  constructor(protected http: HttpClient, private API_URL) {}
 
   headers = new HttpHeaders();
 

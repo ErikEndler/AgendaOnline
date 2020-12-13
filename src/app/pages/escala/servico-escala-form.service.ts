@@ -1,12 +1,11 @@
-import { async } from '@angular/core/testing';
-import { Escala } from './../../models/escala';
-import { ServicoFuncionario } from './../../models/servico-funcionario';
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { delay } from 'rxjs/operators';
 import { Servico } from 'src/app/models/servico';
 import { AppSettings } from 'src/app/shared/appSettings';
 import { Observable } from 'rxjs';
+import { Escala } from 'src/app/models/escala';
+import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
 
 @Injectable({
   providedIn: 'root',

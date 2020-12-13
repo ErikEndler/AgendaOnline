@@ -1,12 +1,11 @@
 import { ItemEscala } from 'src/app/models/itemEscala';
-import { ItemEscalaService } from '../item-escala.service';
-import { Escala } from './../../../../models/escala';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
-import { switchMap, take } from 'rxjs/operators';
-import { EMPTY, Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ErroService } from 'src/app/shared/erro/erro.service';
+import { Escala } from 'src/app/models/escala';
+import { ItemEscalaService } from '../item-escala.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-item-escala-form',
@@ -15,64 +14,78 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 })
 export class ItemEscalaFormComponent implements OnInit {
   formulario: FormGroup;
-  escalaIn: Escala;
   botaoAdicionar = true;
-  @Input() itemEscala: ItemEscala;
-
+  @Input() itemEscala: ItemEscala = new ItemEscala();
+  @Input() escalaId: number;
+  confirmResult: Subject<any>;
+  confirmResult2: Subject<boolean>;
 
   constructor(
     private formBuilder: FormBuilder,
-    private modalCOnfirm: ModalConfirmacaoService,
     private erroService: ErroService,
-    private itemEscalaService: ItemEscalaService
-  ) { }
+    private itemEscalaService: ItemEscalaService,
+    public bsModalRef: BsModalRef
+  ) {}
 
   ngOnInit(): void {
+    this.confirmResult = new Subject();
+    this.confirmResult2 = new Subject();
     this.formulario = this.formBuilder.group({
-      id: [],
-      escala: [],
-      hrInicial: [],
-      hrFinal: [],
+      id: [this.itemEscala?.id],
+      escala: [this.itemEscala?.escala],
+      hrInicial: [this.itemEscala?.hrInicial],
+      hrFinal: [this, this.itemEscala?.hrFinal],
     });
   }
-  onSubmit(): void {
-    if (this.formulario.valid) {
-      const result$ = this.modalCOnfirm.showConfirm(
-        'Confirmação',
-        'Deseja Salvar??',
-        'Confirmar'
+
+  onClose() {
+    this.confirmAndCLose(false);
+  }
+  onSubmit() {
+    if (this.itemEscala.escala === undefined) {
+      this.itemEscala.escala = this.escalaId;
+    }
+    console.log('sera enviado para salvar - - ', this.itemEscala);
+    this.itemEscalaService.save(this.itemEscala).subscribe(
+      (success: ItemEscala) => {
+        console.log('salvo com sucesso!');
+        if (this.itemEscala.id) {
+          this.confirmAndCLose(true);
+        } else {
+          this.confirmAndCLose(true, success);
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
+  }
+  onDelete() {
+    if (this.itemEscala.id) {
+      console.log('Entrou no delete!');
+      this.itemEscalaService.remove(this.itemEscala.id).subscribe(
+        (success: ItemEscala) => {
+          console.log('Deletado com sucesso !');
+          this.confirmResult.next(this.itemEscala.id);
+          this.bsModalRef.hide();
+        },
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+        }
       );
-      result$
-        .asObservable()
-        .pipe(
-          take(1),
-          switchMap((result) => (result ? this.salvar() : EMPTY))
-        )
-        .subscribe(
-          (success) => {
-            console.log('salvo com sucesso!');
-            this.itemEscalaService.salvarItemEscala();
-          },
-          (error) => {
-            console.error(error);
-            this.erroService.tratarErro(error);
-          }
-        );
     }
   }
-  onClose() {
-
-  }
-  salvar(): Observable<object> {
-    const horaInicio = this.formulario.controls['hrInicial'].value + ':00';
-    const horaFim = this.formulario.controls['hrFinal'].value + ':00';
-
-    this.formulario.controls['hrInicial'].setValue(horaInicio);
-    this.formulario.controls['hrFinal'].setValue(horaFim);
-
-    return this.itemEscalaService.save(this.formulario.value);
-  }
-  adicionar() {
-    this.botaoAdicionar = !this.botaoAdicionar;
+  confirmAndCLose(value: boolean, itemEscala?: ItemEscala) {
+    this.confirmResult2.next(value);
+    if (value === false) {
+      this.confirmResult.next(value);
+      this.bsModalRef.hide();
+    }
+    if (value === true) {
+      this.confirmResult.next(itemEscala);
+      this.bsModalRef.hide();
+    }
   }
 }
