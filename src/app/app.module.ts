@@ -31,13 +31,12 @@ import { ArchwizardModule } from 'angular-archwizard';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NotificacaoComponent } from './shared/notificacao/notificacao/notificacao.component';
 import { HomeEscalaComponent } from './pages/escala/home-escala/home-escala.component';
-import { EscalaFormComponent } from './pages/escala/escala/escala-form/escala-form.component';
-import { EscalaListComponent } from './pages/escala/escala/escala-list/escala-list.component';
 import { ItemEscalaListComponent } from './pages/escala/item-escala/item-escala-list/item-escala-list.component';
 import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 import { ServicoViewComponent } from './pages/servico-funcionario/servico-view/servico-view.component';
 import { NovoComponent } from './pages/escala/novo/novo.component';
+import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 
 @NgModule({
   declarations: [
@@ -56,14 +55,13 @@ import { NovoComponent } from './pages/escala/novo/novo.component';
     NotificacaoComponent,
     HomeEscalaComponent,
     ServicoEscalaFormComponent,
-    EscalaFormComponent,
-    EscalaListComponent,
     ItemEscalaListComponent,
     ItemEscalaFormComponent,
     ServicoFuncionarioComponent,
     FuncionarioviewComponent,
     ServicoViewComponent,
     NovoComponent,
+    AgendamentoComponent,
   ],
   imports: [
     FormsModule,

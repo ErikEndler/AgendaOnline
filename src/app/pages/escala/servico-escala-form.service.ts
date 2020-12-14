@@ -34,13 +34,11 @@ export class ServicoEscalaFormService {
     let str = '';
     idsServicos.forEach((e) => (str = str + '&servico=' + e));
     console.log('entrou teste');
-    return this.http
-      .get<Array<Escala[]>>(
-        AppSettings.url +
-          '/api/escala/servicofuncionario?funcionario=' +
-          idFuncionario +
-          str
-      )
-      .pipe(delay(200));
+    return this.http.get<Array<Escala[]>>(
+      AppSettings.url +
+        '/api/escala/servicofuncionario?funcionario=' +
+        idFuncionario +
+        str
+    );
   }
 }

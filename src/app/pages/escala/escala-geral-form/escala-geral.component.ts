@@ -1,7 +1,6 @@
 import { UsuarioService } from './../../usuario/usuario.service';
 import { Usuario } from 'src/app/models/usuario';
 import { ServicoFuncionarioService } from './../../servico-funcionario/servico-funcionario.service';
-import { EscalaService } from './../escala/escala.service';
 import { Servico } from 'src/app/models/servico';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -29,23 +28,20 @@ export class EscalageralComponent implements OnInit {
 
   constructor(
     private serviceServico: ServicoService,
-    private escalaService: EscalaService,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams
-      .subscribe(params => {
-        console.log(params); // { order: "popular" }
-        this.usuarioService.loadByID(params.id).subscribe((result) => this.funcionario = result);
-        // this.funcionarioId = params.id as number;
-        // this.funcionarioNome = params.nome;
-      });
+    this.activatedRoute.queryParams.subscribe((params) => {
+      console.log(params); // { order: "popular" }
+      this.usuarioService
+        .loadByID(params.id)
+        .subscribe((result) => (this.funcionario = result));
+      // this.funcionarioId = params.id as number;
+      // this.funcionarioNome = params.nome;
+    });
 
-    this.escalaService.eventoEscalaSelecionada.subscribe(
-      (result) => (this.selecionadoRtapa2 = result)
-    );
     this.list();
     // const escala = this.route.snapshot.data['escala'];
     // this.formulario = this.formBuilder.group({id: [escala.id],servico: [escala.servico],diaSemana: [escala.diaSemana],});
@@ -59,7 +55,7 @@ export class EscalageralComponent implements OnInit {
         this.loading = false;
         this.refreshListServico();
       },
-      (error) => { }
+      (error) => {}
     );
   }
   refreshListServico(): void {
@@ -70,13 +66,13 @@ export class EscalageralComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
-  onSelect(): void { }
+  onSelect(): void {}
 
   changeVisible(evento): void {
     console.log('consolelog do evento : ' + evento);
     this.visible = evento;
   }
-  nextEtapa2() { }
+  nextEtapa2() {}
 
-  finishFunction(): void { }
+  finishFunction(): void {}
 }

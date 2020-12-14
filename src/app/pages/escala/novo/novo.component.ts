@@ -5,12 +5,12 @@ import { ServicoFuncionario } from './../../../models/servico-funcionario';
 import { Component, Input, OnInit } from '@angular/core';
 import { ItemEscala } from 'src/app/models/itemEscala';
 import { Servico } from 'src/app/models/servico';
-import { EscalaService } from '../escala/escala.service';
 import { ServicoEscalaFormService } from '../servico-escala-form.service';
 import { Escala } from 'src/app/models/escala';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
+import { EscalaService } from '../escala.service';
 
 @Component({
   selector: 'app-novo',
@@ -33,7 +33,6 @@ export class NovoComponent implements OnInit {
   constructor(
     private servicoEscalaFormService: ServicoEscalaFormService,
     private erroService: ErroService,
-    private activatedRoute: ActivatedRoute,
     private escalaService: EscalaService,
     private usuarioService: UsuarioService
   ) {}

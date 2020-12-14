@@ -1,6 +1,4 @@
-import { ItemEscala } from './../models/itemEscala';
 import { Escala } from './../models/escala';
-import { EscalaService } from '../pages/escala/escala/escala.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -8,14 +6,13 @@ import {
   Resolve,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { EscalaService } from '../pages/escala/escala.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EscalaResolveGuard implements Resolve<Escala> {
-  constructor(
-    private serviceEscala: EscalaService,
-  ) { }
+  constructor(private serviceEscala: EscalaService) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot

@@ -1,0 +1,48 @@
+<div class="content">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Agendamentos</h4>
+    </div>
+    <div class="card-body">
+      <div>
+        <button class="btn btn-fill btn-info" (click)="agendaDia()">
+          Escala Dia
+        </button>
+      </div>
+      <div *ngIf="loading" class="d-flex justify-content-center">
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <div *ngIf="!loading" class="table-responsive">
+        <table class="table tablesorter" id="">
+          <thead class="text-primary">
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td scope="row"></td>
+              <td></td>
+              <td></td>
+
+              <td>
+                <button class="btn btn-info btn-icon">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-warning btn-icon">
+                  <i class="far fa-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
