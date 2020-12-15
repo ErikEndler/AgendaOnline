@@ -26,7 +26,7 @@
             <tr *ngIf="empy">
               <td id="tdvazio" colspan="7">VAZIO</td>
             </tr>
-            <tr *ngFor="let escala of escalas">
+            <tr *ngFor="let escala of escalas$ | async">
               <td *ngFor="let abc of escala">
                 {{ abc.servicoFuncionario.servico.nome
                 }}<app-item-escala-list

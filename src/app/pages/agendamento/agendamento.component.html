@@ -5,7 +5,7 @@
     </div>
     <div class="card-body">
       <div>
-        <button class="btn btn-fill btn-info" (click)="agendaDia()">
+        <button class="btn btn-fill btn-info" (click)="agendaDia('hoje')">
           Escala Dia
         </button>
       </div>
@@ -26,18 +26,14 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td scope="row"></td>
-              <td></td>
-              <td></td>
-
-              <td>
-                <button class="btn btn-info btn-icon">
-                  <i class="fas fa-edit"></i>
-                </button>
-                <button class="btn btn-warning btn-icon">
-                  <i class="far fa-trash-alt"></i>
-                </button>
+            <tr *ngIf="empy">
+              <td id="tdvazio" colspan="4">VAZIO</td>
+            </tr>
+            <tr
+              *ngFor="let agendamentos of agendamentos$ | async; let i = index"
+            >
+              <td *ngFor="let agendamento of agendamentos; let j = index">
+                {{ agendamento.horarioInicio }}-{{ agendamento.horarioFim }}
               </td>
             </tr>
           </tbody>

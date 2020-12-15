@@ -13,10 +13,13 @@ export class AgendamentoService extends CrudService<Agendamento> {
   constructor(protected http: HttpClient) {
     super(http, AppSettings.url + '/api/agendamento');
   }
-  listaAgendamentosData(data, id): Observable<Agendamento[]> {
-    const parametros = new HttpParams().set('data', data).set('id', id);
-
-    return this.http.get<Array<Agendamento>>(
+  listaAgendamentosData(datas, funcionario): Observable<Agendamento[][]> {
+    let parametros = new HttpParams();
+    parametros = parametros.set('funcionario', funcionario);
+    datas.forEach((element) => {
+      parametros = parametros.append('data', element);
+    });
+    return this.http.get<Array<Agendamento[]>>(
       AppSettings.url + '/api/agendamento/data',
       { params: parametros }
     );

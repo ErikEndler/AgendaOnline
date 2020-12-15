@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { EventEmitter, Injectable } from '@angular/core';
 import { delay } from 'rxjs/operators';
 import { Servico } from 'src/app/models/servico';
@@ -31,14 +31,14 @@ export class ServicoEscalaFormService {
     );
   }
   teste(idFuncionario: number, idsServicos: number[]) {
-    let str = '';
-    idsServicos.forEach((e) => (str = str + '&servico=' + e));
-    console.log('entrou teste');
+    let parametros = new HttpParams();
+    parametros = parametros.set('funcionario', idFuncionario.toString());
+    idsServicos.forEach(
+      (e) => (parametros = parametros.append('servico', e.toString()))
+    );
     return this.http.get<Array<Escala[]>>(
-      AppSettings.url +
-        '/api/escala/servicofuncionario?funcionario=' +
-        idFuncionario +
-        str
+      AppSettings.url + '/api/escala/servicofuncionario',
+      { params: parametros }
     );
   }
 }

@@ -11,6 +11,7 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from 'src/app/models/usuario';
 import { EscalaService } from '../escala.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-novo',
@@ -22,7 +23,7 @@ export class NovoComponent implements OnInit {
   loading = true;
   empy = true;
   servicoFuncionarioId: number;
-  escalas: Escala[][];
+  escalas$: Observable<Escala[][]>;
   escala: Escala;
   lista: any[];
   servicos: Servico[];
@@ -38,9 +39,6 @@ export class NovoComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //this.activatedRoute.queryParams.subscribe((params) => {
-    //  console.log(params); this.funcionarioId = params.id as number; this.getFuncionario(this.funcionarioId);
-    //  this.servicosIds = params.servicos;});
     this.servicoEscalaFormService.emitirServicos.subscribe(
       (result: Servico[]) => {
         this.servicos = result;
@@ -59,24 +57,24 @@ export class NovoComponent implements OnInit {
   listEscalas(dados?: Servico[]): void {
     this.loading = true;
     this.servicosIds = this.servicos.map((item) => item.id);
-    this.servicoEscalaFormService
-      .teste(this.funcionario.id, this.servicosIds)
-      .subscribe(
-        (result) => {
-          console.log('result ===', result);
-          this.escalas = result;
+    this.escalas$ = this.servicoEscalaFormService.teste(
+      this.funcionario.id,
+      this.servicosIds
+    );
+    this.escalas$.subscribe(
+      (result) => {
+        console.log('result ===', result);
 
-          if (this.escalas.length > 0) {
-            this.empy = false;
-          }
-          this.loading = false;
-          console.log('this.escalas ---- ', this.escalas);
-        },
-        (error) => {
-          console.error(error);
-          this.erroService.tratarErro(error);
+        if (result.length > 0) {
+          this.empy = false;
         }
-      );
+        this.loading = false;
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
   }
   retornaServico(idServico: number): string {
     console.log('idServico - ', idServico);

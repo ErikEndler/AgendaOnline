@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { ServicoFuncionario } from './../../../models/servico-funcionario';
 import { ServicoFuncionarioService } from './../../servico-funcionario/servico-funcionario.service';
 import { ErroService } from './../../../shared/erro/erro.service';
@@ -25,6 +26,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   servicoOut: Servico[] = [];
   servicos: Servico[];
   listaServico: Servico[];
+  listaServico$: Observable<Servico[]>;
   page = 1;
   pageSize = 4;
   collectionSize: any;
@@ -37,20 +39,21 @@ export class ServicoEscalaFormComponent implements OnInit {
   }
   list(): void {
     this.loading = true;
-    this.servicoFuncionarioService
-      .listarServicosFuncionario(this.funcionario.id)
-      .subscribe(
-        (dados) => {
-          this.listaServico = dados;
-          this.collectionSize = this.listaServico.length;
-          this.loading = false;
-          this.refreshListServico();
-        },
-        (error) => {
-          console.error(error);
-          this.erroService.tratarErro(error);
-        }
-      );
+    this.listaServico$ = this.servicoFuncionarioService.listarServicosFuncionario(
+      this.funcionario.id
+    );
+    this.listaServico$.subscribe(
+      (dados) => {
+        this.listaServico = dados;
+        this.collectionSize = this.listaServico.length;
+        this.loading = false;
+        this.refreshListServico();
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
   }
 
   refreshListServico(): void {
