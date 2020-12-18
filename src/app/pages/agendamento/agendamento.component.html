@@ -22,7 +22,9 @@
         <table class="table tablesorter" id="">
           <thead class="text-primary">
             <tr>
-              <th></th>
+              <th id="tdhead" *ngFor="let coluna of colunas; let j = index">
+                {{ coluna }}
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -38,6 +40,14 @@
             </tr>
           </tbody>
         </table>
+        <div>
+          <button
+            class="btn btn-fill btn-info"
+            (click)="adicionarAgendamento()"
+          >
+            Adicionar
+          </button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,3 +1,4 @@
+import { delay } from 'rxjs/operators';
 import { AgendamentoService } from './agendamento.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,7 @@ export class AgendamentoComponent implements OnInit {
   empy = true;
   funcionarioID: number;
   loading = false;
-  colunas: [];
+  colunas: string[] = [];
   agendamentos$: Observable<Agendamento[][]>;
 
   constructor(
@@ -25,23 +26,29 @@ export class AgendamentoComponent implements OnInit {
     this.funcionarioID = parseInt(sessionStorage.getItem('id'), 10);
   }
   agendaDia(data?): void {
+    this.loading = true;
     const dia: string[] = [];
     dia.push(data);
     this.agendamentos$ = this.agendamentoService.listaAgendamentosData(
       dia,
       this.funcionarioID
     );
-    this.agendamentos$.subscribe(
+    this.agendamentos$.pipe(delay(400)).subscribe(
       (sucess) => {
         console.log(sucess);
-        if (sucess.length > 0) {
+        if (sucess.indexOf(Agendamento[0]) !== -1) {
+          console.log('setou empy com false');
           this.empy = false;
         }
+        this.colunas.push('Hoje');
+        this.loading = false;
       },
       (error) => {
         console.error(error);
         this.erroService.tratarErro(error);
+        this.loading = false;
       }
     );
   }
+  adicionarAgendamento() {}
 }
