@@ -2,34 +2,35 @@
   <h5 class="modal-title" id="exampleModalLongTitle">{{ titulo }}</h5>
 </div>
 <div class="modal-body">
-  <form [formGroup]="formulario" (ngSubmit)="onSave()">
+  <form>
     <div class="row">
       <div class="col-md-10">
         <label> Data </label>
-        <input class="form-control" type="date" [(ngModel)]="data" />
+        <input (change)="selecionarData($event)" class="form-control" type="date" [(ngModel)]="data" name="data" />
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="campoData" class="row">
       <div class="col-md-10">
         <label> Servico </label>
-        <select class="form-control" [(ngModel)]="agendamento.servico">
+        <select class="form-control" [(ngModel)]="agendamento.servicoFuncionarioId"
+          name="agendamento.servicoFuncionarioId" (change)="selecionarServico()">
           <option *ngFor="let servico of servicos" [ngValue]="servico.id">
             {{ servico.nome }}
           </option>
         </select>
       </div>
     </div>
-    <div class="row">
+    <div *ngIf="campoServico" class="row">
       <div class="col-md-5">
         <div class="form-group">
           <label> Horario Inicio </label>
-          <input class="form-control" type="time" [(ngModel)]="hrInicial" />
+          <input (change)="atribuirHr()" class="form-control" type="time" [(ngModel)]="hrInicial" name="hrInicial" />
         </div>
       </div>
       <div class="col-md-5">
         <div class="form-group">
           <label> Horario Fim </label>
-          <input class="form-control" type="time" [(ngModel)]="hrInicial" />
+          <input disabled class="form-control" type="time" [(ngModel)]="hrFinal" name="hrFinal" />
         </div>
       </div>
     </div>
@@ -37,7 +38,7 @@
 </div>
 <div class="modal-footer">
   <button id="login" type="submit" class="btn btn-success" (click)="onSave()">
-    Login
+    Salvar
   </button>
   <button type="button" class="btn btn-warning" (click)="onClose()">
     Cancelar

@@ -25,7 +25,7 @@ export class ItemEscalaFormComponent implements OnInit {
     private erroService: ErroService,
     private itemEscalaService: ItemEscalaService,
     public bsModalRef: BsModalRef
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.confirmResult = new Subject();
@@ -38,10 +38,10 @@ export class ItemEscalaFormComponent implements OnInit {
     });
   }
 
-  onClose() {
+  onClose(): void {
     this.confirmAndCLose(false);
   }
-  onSubmit() {
+  onSubmit(): void {
     if (this.itemEscala.escala === undefined) {
       this.itemEscala.escala = this.escalaId;
     }
@@ -61,7 +61,7 @@ export class ItemEscalaFormComponent implements OnInit {
       }
     );
   }
-  onDelete() {
+  onDelete(): void {
     if (this.itemEscala.id) {
       console.log('Entrou no delete!');
       this.itemEscalaService.remove(this.itemEscala.id).subscribe(
@@ -77,7 +77,7 @@ export class ItemEscalaFormComponent implements OnInit {
       );
     }
   }
-  confirmAndCLose(value: boolean, itemEscala?: ItemEscala) {
+  confirmAndCLose(value: boolean, itemEscala?: ItemEscala): void {
     this.confirmResult2.next(value);
     if (value === false) {
       this.confirmResult.next(value);

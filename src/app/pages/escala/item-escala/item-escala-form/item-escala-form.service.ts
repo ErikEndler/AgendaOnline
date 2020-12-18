@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
 import { ItemEscala } from 'src/app/models/itemEscala';
 import { ItemEscalaFormComponent } from './item-escala-form.component';
 
@@ -7,9 +8,9 @@ import { ItemEscalaFormComponent } from './item-escala-form.component';
   providedIn: 'root',
 })
 export class ItemEscalaFormService {
-  constructor(private modalservice: BsModalService) {}
+  constructor(private modalservice: BsModalService) { }
 
-  openItemEscalaForm(idEscala: number, itemEscala?: ItemEscala) {
+  openItemEscalaForm(idEscala: number, itemEscala?: ItemEscala): Subject<any> {
     let bsModalRef: BsModalRef;
     bsModalRef = this.modalservice.show(ItemEscalaFormComponent);
     bsModalRef.content.escalaId = idEscala;

@@ -1,7 +1,7 @@
 export class Agendamento {
   id: number;
-  cliente: string;
-  servico: string;
+  clienteId: number;
+  servicoFuncionarioId: string;
   horarioInicio: string;
   horarioFim: string;
   notificacao: boolean;

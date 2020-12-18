@@ -33,7 +33,6 @@ export class FuncionarioviewComponent implements OnInit {
   listaServicosFuncionario: Servico[];
   listempy = true;
   listempy2 = true;
-  funcionarioid: number;
   funcionario: Usuario;
 
   constructor(
@@ -52,8 +51,7 @@ export class FuncionarioviewComponent implements OnInit {
     this.activatedRoute.queryParams
       .subscribe(params => {
         console.log(params); // { order: "popular" }
-        this.funcionarioid = params.id as number;
-        this.getFuncionario(this.funcionarioid);
+        this.getFuncionario(params.id as number);
       });
 
     this.list();
@@ -90,12 +88,12 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   listServicoFuncionario(): void {
-    if (this.funcionarioid === undefined) {
+    if (this.funcionario === undefined) {
       this.servicosFuncionario = null;
     } else {
       this.loading2 = true;
       this.servicoFuncionarioService
-        .listarServicosFuncionario(this.funcionarioid)
+        .listarServicosFuncionario(this.funcionario.id)
         .subscribe(
           (dados) => {
             this.listaServicosFuncionario = dados;
@@ -123,10 +121,9 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   adicionarServico(servico: Servico): void {
-
-    let servicoFuncionario: ServicoFuncionario = new ServicoFuncionario();
+    const servicoFuncionario: ServicoFuncionario = new ServicoFuncionario();
     servicoFuncionario.servico = servico;
-    servicoFuncionario.funcionario.id = this.funcionarioid;
+    servicoFuncionario.funcionario = this.funcionario;
     this.servicoFuncionarioService.save(servicoFuncionario).subscribe(
       (success) => {
         this.notificacaoService.criar(

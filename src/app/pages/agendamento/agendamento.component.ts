@@ -1,3 +1,4 @@
+import { FormService } from './form/form.service';
 import { delay } from 'rxjs/operators';
 import { AgendamentoService } from './agendamento.service';
 import { Observable } from 'rxjs';
@@ -19,8 +20,9 @@ export class AgendamentoComponent implements OnInit {
 
   constructor(
     private agendamentoService: AgendamentoService,
-    private erroService: ErroService
-  ) {}
+    private erroService: ErroService,
+    private formService: FormService
+  ) { }
 
   ngOnInit(): void {
     this.funcionarioID = parseInt(sessionStorage.getItem('id'), 10);
@@ -50,5 +52,7 @@ export class AgendamentoComponent implements OnInit {
       }
     );
   }
-  adicionarAgendamento() {}
+  adicionarAgendamento(): void {
+    this.formService.openFormulario(this.funcionarioID);
+  }
 }
