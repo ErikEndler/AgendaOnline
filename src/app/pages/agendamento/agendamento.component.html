@@ -6,27 +6,18 @@
     <div class="card-body">
       <div class="row">
         <div class="col-md-2">
-          <label>Agenda do dia</label>
+          <label>Agenda do dia</label><br>
           <button class="btn-sm btn-fill btn-info" (click)="agendaDia('hoje')">
             Listar
           </button>
         </div>
         <div class="col-md-3">
           <label> Agenda por Data </label>
-          <input
-            class="form-control"
-            type="date"
-            name="data"
-            (change)="agendaData($event)"
-          />
+          <input class="form-control" type="date" name="data" (change)="agendaData($event)" />
         </div>
       </div>
       <div *ngIf="loading" class="d-flex justify-content-center">
-        <div
-          class="spinner-border text-primary"
-          style="width: 3rem; height: 3rem"
-          role="status"
-        >
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
@@ -43,9 +34,7 @@
             <tr *ngIf="empy">
               <td id="tdvazio" colspan="4">VAZIO</td>
             </tr>
-            <tr
-              *ngFor="let agendamentos of agendamentos$ | async; let i = index"
-            >
+            <tr *ngFor="let agendamentos of agendamentos$ | async; let i = index">
               <td *ngFor="let agendamento of agendamentos; let j = index">
                 {{ agendamento.horarioInicio }}-{{ agendamento.horarioFim }}
               </td>
@@ -53,10 +42,7 @@
           </tbody>
         </table>
         <div>
-          <button
-            class="btn btn-fill btn-info"
-            (click)="adicionarAgendamento()"
-          >
+          <button class="btn btn-fill btn-info" (click)="adicionarAgendamento()">
             Adicionar
           </button>
         </div>

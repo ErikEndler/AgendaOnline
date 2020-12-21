@@ -10,6 +10,7 @@ import {
 } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppSettings } from 'src/app/shared/appSettings';
+import jwt_decode from 'jwt-decode';
 
 export class HttpsRequestInterceptor implements HttpInterceptor {
   loginReturn: LoginReturn;
@@ -19,18 +20,22 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
+    console.log('entrou no interseptador');
     const requestUrl: Array<any> = request.url.split('/');
-    //const apiUrl = 'localhost:8080';
     const apiUrl = AppSettings.urlReduzida;
-    this.loginReturn = JSON.parse(sessionStorage.getItem('auth'));
-    if (this.loginReturn != null) {
-      this.token = this.loginReturn.authorization;
+    if (sessionStorage.getItem('auth')) {
+      this.loginReturn = jwt_decode(sessionStorage.getItem('auth'));
+      if (this.loginReturn !== null && this.loginReturn !== undefined) {
+        //this.token = this.loginReturn.Authorization;
+        this.token = JSON.parse(sessionStorage.getItem('auth'));
+      }
     }
 
     if (this.token && requestUrl[2] === apiUrl) {
       const dupReq = request.clone({
         headers: request.headers.set('Authorization', this.token),
       });
+
       return next.handle(dupReq);
     } else {
       return next.handle(request);

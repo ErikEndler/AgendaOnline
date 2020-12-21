@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
-import { ServicoService } from '../../servico.service';
+import { ServicoService } from '../servico.service';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { Servico } from 'src/app/models/servico';
 
@@ -33,7 +33,7 @@ export class ServicoListComponent implements OnInit {
     private router: Router,
     private modalCOnfirm: ModalConfirmacaoService,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.list();

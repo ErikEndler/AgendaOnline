@@ -19,14 +19,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
 import { ReactiveFormsModule } from '@angular/forms';
-import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-list.component';
+import { UsuarioListComponent } from './pages/usuario/list/usuario-list.component';
 import { ModalConfirmacaoComponent } from './shared/modal-confirmacao/modal-confirmacao.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalLoginComponent } from './shared/modal-login/modal-login/modal-login.component';
 import { HomeComponent } from './pages/home/home/home.component';
-import { ServicoListComponent } from './pages/servico/list/servico-list/servico-list.component';
-import { ServicoComponent } from './pages/servico/form/servico/servico.component';
-import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
+import { ServicoListComponent } from './pages/servico/list/servico-list.component';
+import { ServicoComponent } from './pages/servico/form/servico.component';
+import { CadastroComponent } from './pages/usuario/cadastro/cadastro.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { NotificacaoComponent } from './shared/notificacao/notificacao/notificacao.component';
@@ -86,8 +86,9 @@ import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/a
     InterceptorModule,
     ArchwizardModule,
     SimpleNotificationsModule.forRoot(),
+
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

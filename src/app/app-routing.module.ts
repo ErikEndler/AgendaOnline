@@ -2,13 +2,13 @@ import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/a
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 import { EscalaResolveGuard } from './guards/escala-resolve.guard';
-import { CadastroComponent } from './pages/usuario/cadastro/cadastro/cadastro.component';
+import { CadastroComponent } from './pages/usuario/cadastro/cadastro.component';
 import { ServicoResolveGuard } from './guards/servico-resolve.guard';
-import { ServicoComponent } from './pages/servico/form/servico/servico.component';
-import { ServicoListComponent } from './pages/servico/list/servico-list/servico-list.component';
+import { ServicoComponent } from './pages/servico/form/servico.component';
+import { ServicoListComponent } from './pages/servico/list/servico-list.component';
 import { CategoriaResolverGuard } from './guards/categoria-resolver.guard';
 import { HomeComponent } from './pages/home/home/home.component';
-import { UsuarioListComponent } from './pages/usuario/list/usuario-list/usuario-list.component';
+import { UsuarioListComponent } from './pages/usuario/list/usuario-list.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UsuarioResolverGuard } from './guards/usuario-resolver.guard';
 import { UsuarioComponent } from './pages/usuario/form/usuario.component';
@@ -92,4 +92,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

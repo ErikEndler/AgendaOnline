@@ -4,7 +4,7 @@ import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { Usuario } from 'src/app/models/usuario';
-import { UsuarioService } from '../../usuario.service';
+import { UsuarioService } from '../usuario.service';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 
 @Component({
@@ -35,7 +35,7 @@ export class UsuarioListComponent implements OnInit {
     private modalCOnfirm: ModalConfirmacaoService,
     private serviceUsuario: UsuarioService,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.list();

@@ -8,107 +8,65 @@
         <div class="card-body">
           <form>
             <div class="row">
-              <div class="col-md-10">
+              <div class="col-md-5">
                 <label> Servico </label>
-                <select
-                  class="form-control"
-                  data-live-search="true"
-                  data-selectpicker
-                  [(ngModel)]="servicoFuncionario"
-                  name="agendamento.servicoFuncionarioId"
-                  (change)="selecionarServico()"
-                >
-                  <option
-                    *ngFor="let servicoFuncionario of listaServicoFuncionario"
-                    [ngValue]="servicoFuncionario"
-                  >
+                <select class="form-control" data-live-search="true" data-selectpicker [(ngModel)]="servicoFuncionario"
+                  name="agendamento.servicoFuncionarioId" (change)="selecionarServico()">
+                  <option *ngFor="let servicoFuncionario of listaServicoFuncionario" [ngValue]="servicoFuncionario">
                     {{ servicoFuncionario.servico.nome }}
                   </option>
                 </select>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-10">
-                <label> Data </label>
-                <input
-                  class="form-control"
-                  type="date"
-                  [(ngModel)]="data"
-                  name="data"
-                />
-              </div>
-            </div>
-            <div class="row">
               <div class="col-md-5">
-                <div class="form-group">
-                  <label> Horario Inicio </label>
-                  <input
-                    (change)="atribuirHr()"
-                    class="form-control"
-                    type="time"
-                    [(ngModel)]="hrInicial"
-                    name="hrInicial"
-                  />
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="form-group">
-                  <label> Horario Fim </label>
-                  <input
-                    readonly
-                    class="form-control"
-                    type="time"
-                    [(ngModel)]="hrFinal"
-                    name="hrFinal"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-10">
                 <label> Cliente </label>
-                <select
-                  class="form-control"
-                  data-live-search="true"
-                  data-selectpicker
-                  [(ngModel)]="agendamento.clienteId"
-                  name="agendamento.clienteId"
-                >
-                  <option
-                    *ngFor="let usuario of usuarios"
-                    [ngValue]="usuario.id"
-                  >
+                <select class="form-control" data-live-search="true" data-selectpicker
+                  [(ngModel)]="agendamento.clienteId" name="agendamento.clienteId">
+                  <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">
                     {{ usuario.nome }}
                   </option>
                 </select>
               </div>
             </div>
             <div class="row">
+              <div class="col-md-4">
+                <label> Data </label>
+                <input class="form-control" type="date" [(ngModel)]="data" name="data" />
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label> Horario Inicio </label>
+                  <input (change)="atribuirHr()" class="form-control" type="time" [(ngModel)]="hrInicial"
+                    name="hrInicial" />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label> Horario Fim </label>
+                  <input readonly class="form-control" type="time" [(ngModel)]="hrFinal" name="hrFinal" />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="row">
               <div class="col-md-10">
                 <label> Observação </label>
-                <textarea
-                  class="form-control"
-                  type="text"
-                  [(ngModel)]="agendamento.obs"
-                  name="agendamento.obs"
-                ></textarea>
+                <textarea class="form-control" type="text" [(ngModel)]="agendamento.obs"
+                  name="agendamento.obs"></textarea>
               </div>
             </div>
           </form>
         </div>
         <div class="card-footer">
-          <button
-            type="submit"
-            class="btn btn-fill btn-success"
-            (click)="onSave()"
-          >
+          <button type="submit" class="btn btn-fill btn-success" (click)="onSave()">
             Salvar
           </button>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="card card-user">
+      <div *ngIf="servicoFuncionario" class="card card-user">
         <div class="card-header">
           ESCALAS - {{ servicoFuncionario?.servico.nome }}
         </div>
@@ -119,16 +77,14 @@
               <tr *ngFor="let escala of escalas">
                 <td>{{ escala.diaSemana }}</td>
                 <td>
-                  <ng-container
-                    *ngIf="escala.itensEscala.length; else elseTemplate"
-                  >
+                  <ng-container *ngIf="escala.itensEscala.length; else elseTemplate">
                     <div *ngFor="let itemEscala of escala.itensEscala">
                       {{ itemEscala.hrInicial }} - {{ itemEscala.hrFinal }}
                     </div>
                   </ng-container>
                   <ng-template #elseTemplate>
-                    <a *ngIf="escala.itensEscala">--:-- --:--</a></ng-template
-                  >
+                    <a *ngIf="escala.itensEscala">--:-- --:--</a>
+                  </ng-template>
                 </td>
               </tr>
             </tbody>

@@ -9,7 +9,7 @@ import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.servi
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriaService } from 'src/app/pages/categoria/categoria.service';
-import { ServicoService } from '../../servico.service';
+import { ServicoService } from '../servico.service';
 
 @Component({
   selector: 'app-servico',
@@ -31,7 +31,7 @@ export class ServicoComponent implements OnInit {
     private categoriaService: CategoriaService,
     private notificacaoService: NotificacaoService,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.combobox();

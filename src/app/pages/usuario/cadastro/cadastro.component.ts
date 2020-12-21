@@ -1,10 +1,10 @@
-import { ErroService } from './../../../../shared/erro/erro.service';
+import { ErroService } from '../../../shared/erro/erro.service';
 import { Usuario } from 'src/app/models/usuario';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
-import { UsuarioService } from '../../usuario.service';
+import { UsuarioService } from '../usuario.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 
@@ -28,7 +28,7 @@ export class CadastroComponent implements OnInit {
     private modalCOnfirm: ModalConfirmacaoService,
     private router: Router,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const usuario = new Usuario();
