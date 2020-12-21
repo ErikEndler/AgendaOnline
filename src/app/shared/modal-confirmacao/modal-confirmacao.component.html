@@ -5,7 +5,12 @@
   </div>
   <div class="modal-body">{{ msg }}</div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="onClose()">
+    <button
+      type="button"
+      class="btn btn-warning"
+      data-dismiss="modal"
+      (click)="onClose()"
+    >
       {{ cancelTxt }}
     </button>
     <button class="btn btn-fill btn-success" (click)="onConfirme()">

@@ -29,17 +29,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let servico of servicos">
+            <tr *ngFor="let servicoF of listaServicoFuncionario">
               <td>
                 <input
                   type="checkbox"
-                  id="{{ servico.id }}"
+                  id="{{ servicoF.servico.id }}"
                   name="idServico"
-                  (change)="onChange(servico, $event.target.checked)"
+                  (change)="onChange(servicoF.servico, $event.target.checked)"
                 />
               </td>
-              <td>{{ servico.nome }}</td>
-              <td>{{ servico.descricao }}</td>
+              <td>{{ servicoF.servico.nome }}</td>
+              <td>{{ servicoF.servico.descricao }}</td>
             </tr>
           </tbody>
         </table>

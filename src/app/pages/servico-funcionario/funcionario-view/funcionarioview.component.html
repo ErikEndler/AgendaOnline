@@ -2,7 +2,7 @@
   <div class="centered-content">
     <div class="card">
       <div class="card-header">
-        <h3>Funcionário : {{funcionario?.nome}}</h3>
+        <h3>Funcionário : {{ funcionario?.nome }}</h3>
       </div>
       <div class="card-body">
         <div class="row">
@@ -25,19 +25,34 @@
                       <td id="tdvazio" colspan="4">VAZIO</td>
                     </tr>
                     <tr *ngFor="let servico of servicos">
-                      <td><button type="button" class="btn-sm btn-success"
-                          (click)="adicionarServico(servico)">Add</button></td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn-sm btn-success"
+                          (click)="adicionarServico(servico)"
+                        >
+                          Add
+                        </button>
+                      </td>
                       <td>{{ servico.nome }}</td>
                       <td>{{ servico.categoria.nome }}</td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="d-flex justify-content-between p-2">
-                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                    (pageChange)="refreshServico()">
+                  <ngb-pagination
+                    [collectionSize]="collectionSize"
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    (pageChange)="refreshServico()"
+                  >
                   </ngb-pagination>
-                  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
-                    (ngModelChange)="refreshServico()">
+                  <select
+                    class="custom-select"
+                    style="width: auto"
+                    [(ngModel)]="pageSize"
+                    (ngModelChange)="refreshServico()"
+                  >
                     <option [ngValue]="2">2 items per page</option>
                     <option [ngValue]="4">4 items per page</option>
                     <option [ngValue]="6">6 items per page</option>
@@ -64,22 +79,44 @@
                     <tr *ngIf="listempy2">
                       <td id="tdvazio" colspan="4">VAZIO</td>
                     </tr>
-                    <tr *ngFor="let servico of servicosFuncionario">
-                      <td><button type="button" class="btn-sm btn-danger" (click)="removerServico(servico)"><i
-                            class="far fa-trash-alt"></i></button></td>
-                      <td>{{ servico.nome }}</td>
-                      <td>{{ servico.categoria.nome }}</td>
-                      <td><button type="button" class="btn-sm btn-success" (click)="redirecionaEscala()">Escala</button>
+                    <tr *ngFor="let servicoF of servicosFuncionario">
+                      <td>
+                        <button
+                          type="button"
+                          class="btn-sm btn-danger"
+                          (click)="removerServico(servicoF.servico)"
+                        >
+                          <i class="far fa-trash-alt"></i>
+                        </button>
+                      </td>
+                      <td>{{ servicoF.servico.nome }}</td>
+                      <td>{{ servicoF.servico.categoria.nome }}</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn-sm btn-success"
+                          (click)="redirecionaEscala()"
+                        >
+                          Escala
+                        </button>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="d-flex justify-content-between p-2">
-                  <ngb-pagination [collectionSize]="collectionSize2" [(page)]="page2" [pageSize]="pageSize2"
-                    (pageChange)="refreshServicoFuncionario()">
+                  <ngb-pagination
+                    [collectionSize]="collectionSize2"
+                    [(page)]="page2"
+                    [pageSize]="pageSize2"
+                    (pageChange)="refreshServicoFuncionario()"
+                  >
                   </ngb-pagination>
-                  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize2"
-                    (ngModelChange)="refreshServicoFuncionario()">
+                  <select
+                    class="custom-select"
+                    style="width: auto"
+                    [(ngModel)]="pageSize2"
+                    (ngModelChange)="refreshServicoFuncionario()"
+                  >
                     <option [ngValue]="2">2 items per page</option>
                     <option [ngValue]="4">4 items per page</option>
                     <option [ngValue]="6">6 items per page</option>
@@ -91,7 +128,9 @@
         </div>
       </div>
       <div class="card-footer">
-        <button type="button" class="btn-sm btn-danger" (click)="teste()"><i class="far fa-trash-alt"></i></button>
+        <button type="button" class="btn-sm btn-danger" (click)="teste()">
+          <i class="far fa-trash-alt"></i>
+        </button>
       </div>
     </div>
   </div>

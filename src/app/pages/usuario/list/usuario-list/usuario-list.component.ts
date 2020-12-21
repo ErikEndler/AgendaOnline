@@ -74,7 +74,6 @@ export class UsuarioListComponent implements OnInit {
         this.collectionSize = this.lista.length;
         this.loading = false;
         this.refreshUsuarios();
-        // this.lista = this.usuarios;
       },
       (error) => {
         console.error(error);

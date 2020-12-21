@@ -25,7 +25,7 @@ export class ItemEscalaFormComponent implements OnInit {
     private erroService: ErroService,
     private itemEscalaService: ItemEscalaService,
     public bsModalRef: BsModalRef
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.confirmResult = new Subject();

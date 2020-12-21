@@ -19,9 +19,11 @@ export class EscalaService extends CrudService<Escala> {
       .get<Array<string>>(AppSettings.url + '/api/escala/dayweek')
       .pipe(delay(200));
   }
-  listarPorServico(id): Observable<Array<Escala>> {
+  listarPorServicoFuncionario(id): Observable<Array<Escala>> {
     return this.http
-      .get<Array<Escala>>(AppSettings.url + '/api/escala/servico/' + id)
+      .get<Array<Escala>>(
+        AppSettings.url + '/api/escala/servicofuncionario/' + id
+      )
       .pipe(delay(200));
   }
 }

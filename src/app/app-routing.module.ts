@@ -1,3 +1,4 @@
+import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 import { EscalaResolveGuard } from './guards/escala-resolve.guard';
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'sf', component: ServicoFuncionarioComponent },
   { path: 'sf2', component: FuncionarioviewComponent },
   { path: 'agendamento', component: AgendamentoComponent },
+  { path: 'agendamento/form', component: AgendamentoFormComponent },
 
   {
     path: 'escala',

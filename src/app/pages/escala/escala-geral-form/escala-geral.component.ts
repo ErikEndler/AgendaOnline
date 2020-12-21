@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServicoService } from '../../servico/servico.service';
+import { ErroService } from 'src/app/shared/erro/erro.service';
 
 @Component({
   selector: 'app-escala-geral',
@@ -29,7 +30,8 @@ export class EscalageralComponent implements OnInit {
   constructor(
     private serviceServico: ServicoService,
     private activatedRoute: ActivatedRoute,
-    private usuarioService: UsuarioService
+    private usuarioService: UsuarioService,
+    private erroService: ErroService
   ) {}
 
   ngOnInit(): void {
@@ -55,7 +57,10 @@ export class EscalageralComponent implements OnInit {
         this.loading = false;
         this.refreshListServico();
       },
-      (error) => {}
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
     );
   }
   refreshListServico(): void {
@@ -72,7 +77,6 @@ export class EscalageralComponent implements OnInit {
     console.log('consolelog do evento : ' + evento);
     this.visible = evento;
   }
-  nextEtapa2() {}
 
   finishFunction(): void {}
 }

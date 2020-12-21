@@ -5,14 +5,13 @@ import { NotificationsService } from 'angular2-notifications';
 @Component({
   selector: 'app-notificacao',
   templateUrl: './notificacao.component.html',
-  styleUrls: ['./notificacao.component.css']
+  styleUrls: ['./notificacao.component.css'],
 })
 export class NotificacaoComponent implements OnInit {
-
   constructor(
     private notifications: NotificationsService,
     private fb: FormBuilder
-  ) { }
+  ) {}
   type: string;
   title: string;
   content: string;
@@ -23,11 +22,9 @@ export class NotificacaoComponent implements OnInit {
   animate: 'fromRight';
   form: FormGroup;
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  public criar() {
+  public criar(): void {
     const temp = this.form.getRawValue();
     const title = temp.title;
     const content = temp.content;
@@ -39,5 +36,4 @@ export class NotificacaoComponent implements OnInit {
 
     this.notifications.create(title, content, type, temp);
   }
-
 }

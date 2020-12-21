@@ -10,7 +10,6 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
 
-
 @Component({
   selector: 'app-funcionarioview',
   templateUrl: './funcionarioview.component.html',
@@ -29,8 +28,8 @@ export class FuncionarioviewComponent implements OnInit {
   servico: Servico;
   servicos: Servico[];
   listaServicos: Servico[];
-  servicosFuncionario: Servico[];
-  listaServicosFuncionario: Servico[];
+  servicosFuncionario: ServicoFuncionario[];
+  listaServicosFuncionario: ServicoFuncionario[];
   listempy = true;
   listempy2 = true;
   funcionario: Usuario;
@@ -43,22 +42,19 @@ export class FuncionarioviewComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams
-      .subscribe(params => {
-        console.log(params); // { order: "popular" }
-        this.getFuncionario(params.id as number);
-      });
-
+    this.activatedRoute.queryParams.subscribe((params) => {
+      console.log(params);
+      this.getFuncionario(params.id as number);
+    });
     this.list();
-    this.listServicoFuncionario();
   }
-  getFuncionario(id: number) {
-    this.usuarioService.loadByID(id).subscribe((result) => this.funcionario = result);
+  getFuncionario(id: number): void {
+    this.usuarioService.loadByID(id).subscribe((result) => {
+      (this.funcionario = result), this.listServicoFuncionario();
+    });
   }
   list(): void {
     this.loading = true;
@@ -71,7 +67,6 @@ export class FuncionarioviewComponent implements OnInit {
         if (this.listaServicos.length > 0) {
           this.listempy = false;
         }
-        // this.lista = this.usuarios;
       },
       (error) => {
         console.error(error);
@@ -88,8 +83,11 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   listServicoFuncionario(): void {
+    console.log('iniciou list servico do func');
+
     if (this.funcionario === undefined) {
       this.servicosFuncionario = null;
+      console.log('sem funcionario');
     } else {
       this.loading2 = true;
       this.servicoFuncionarioService
@@ -101,9 +99,9 @@ export class FuncionarioviewComponent implements OnInit {
             this.loading2 = false;
             this.refreshServicoFuncionario();
             if (this.listaServicosFuncionario.length > 0) {
+              console.log('desabilitando empy');
               this.listempy2 = false;
             }
-            // this.lista = this.usuarios;
           },
           (error) => {
             console.error(error);
@@ -124,6 +122,7 @@ export class FuncionarioviewComponent implements OnInit {
     const servicoFuncionario: ServicoFuncionario = new ServicoFuncionario();
     servicoFuncionario.servico = servico;
     servicoFuncionario.funcionario = this.funcionario;
+    console.log('obj enviado salvar -', servicoFuncionario);
     this.servicoFuncionarioService.save(servicoFuncionario).subscribe(
       (success) => {
         this.notificacaoService.criar(
@@ -161,9 +160,13 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   redirecionaEscala() {
-    this.router.navigate(['escala'], { queryParams: { id: this.funcionario.id, nome: this.funcionario.nome } });
+    this.router.navigate(['escala'], {
+      queryParams: { id: this.funcionario.id, nome: this.funcionario.nome },
+    });
   }
   teste() {
-    this.servicoFuncionarioService.teste().subscribe(result => console.log(result));
+    this.servicoFuncionarioService
+      .teste()
+      .subscribe((result) => console.log(result));
   }
 }

@@ -25,6 +25,7 @@ export class ServicoResolveGuard implements Resolve<Servico> {
       id: null,
       categoria: null,
       nome: null,
+      tempo: null,
       descricao: null,
     });
   }

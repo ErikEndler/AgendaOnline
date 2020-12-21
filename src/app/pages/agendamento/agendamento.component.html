@@ -4,10 +4,22 @@
       <h4 class="card-title">Agendamentos</h4>
     </div>
     <div class="card-body">
-      <div>
-        <button class="btn btn-fill btn-info" (click)="agendaDia('hoje')">
-          Escala Dia
-        </button>
+      <div class="row">
+        <div class="col-md-2">
+          <label>Agenda do dia</label>
+          <button class="btn-sm btn-fill btn-info" (click)="agendaDia('hoje')">
+            Listar
+          </button>
+        </div>
+        <div class="col-md-3">
+          <label> Agenda por Data </label>
+          <input
+            class="form-control"
+            type="date"
+            name="data"
+            (change)="agendaData($event)"
+          />
+        </div>
       </div>
       <div *ngIf="loading" class="d-flex justify-content-center">
         <div

@@ -8,7 +8,7 @@ import { ItemEscalaFormComponent } from './item-escala-form.component';
   providedIn: 'root',
 })
 export class ItemEscalaFormService {
-  constructor(private modalservice: BsModalService) { }
+  constructor(private modalservice: BsModalService) {}
 
   openItemEscalaForm(idEscala: number, itemEscala?: ItemEscala): Subject<any> {
     let bsModalRef: BsModalRef;

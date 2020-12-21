@@ -15,7 +15,7 @@ export class ModalConfirmacaoComponent implements OnInit {
 
   confirmResult: Subject<boolean>;
 
-  constructor(public bsModalRef: BsModalRef) { }
+  constructor(public bsModalRef: BsModalRef) {}
 
   ngOnInit(): void {
     this.confirmResult = new Subject();

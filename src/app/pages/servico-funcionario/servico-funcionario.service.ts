@@ -15,9 +15,9 @@ export class ServicoFuncionarioService extends CrudService<ServicoFuncionario> {
   constructor(protected http: HttpClient) {
     super(http, AppSettings.url + '/api/servico/funcionario');
   }
-  listarServicosFuncionario(idFunc): Observable<Array<Servico>> {
+  listarServicosFuncionario(idFunc): Observable<Array<ServicoFuncionario>> {
     return this.http
-      .get<Array<Servico>>(
+      .get<Array<ServicoFuncionario>>(
         AppSettings.url + '/api/servico/funcionario/funcionario/' + idFunc
       )
       .pipe(delay(200));
@@ -33,8 +33,9 @@ export class ServicoFuncionarioService extends CrudService<ServicoFuncionario> {
   teste() {
     console.log('entrou teste');
     return this.http
-      .get(AppSettings.url +
-        '/api/escala/servicofuncionario?funcionario=1&servico=1&servico=2'
+      .get(
+        AppSettings.url +
+          '/api/escala/servicofuncionario?funcionario=1&servico=1&servico=2'
       )
       .pipe(delay(200));
   }

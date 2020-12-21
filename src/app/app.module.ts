@@ -39,7 +39,7 @@ import { NovoComponent } from './pages/escala/novo/novo.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { CampoControlErroComponent } from './shared/campo-control-erro/campo-control-erro.component';
 import { FormDebugComponent } from './shared/form-debug/form-debug.component';
-import { AgendamentoFormComponent } from './pages/agendamento/form/agendamento-form.component';
+import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
 
 @NgModule({
   declarations: [

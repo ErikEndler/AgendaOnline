@@ -39,7 +39,7 @@ export class ServicoComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       id: [servico.id],
       categoria: [servico.categoria],
-      //categoria: this.formBuilder.group({id: [],nome: [],descricao: [],}),
+      tempo: [servico.tempo],
       nome: [servico.nome],
       descricao: [servico.descricao],
     });

@@ -5,6 +5,7 @@ import { EMPTY } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalConfirmacaoService } from '../../../../shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
+import { ErroService } from 'src/app/shared/erro/erro.service';
 
 @Component({
   selector: 'app-categoria',
@@ -21,7 +22,8 @@ export class CategoriaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private categoriaService: CategoriaService,
-    private modalCOnfirm: ModalConfirmacaoService
+    private modalCOnfirm: ModalConfirmacaoService,
+    private erroService: ErroService
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +53,9 @@ export class CategoriaComponent implements OnInit {
         .subscribe(
           (success) => console.log('salvo com sucesso!'),
           (error) => {
-            console.error(error), console.log('ERRO AO SALVAR');
+            console.error(error);
+            console.log('ERRO AO SALVAR');
+            this.erroService.tratarErro(error);
           }
         );
       console.log(this.formulario.value);

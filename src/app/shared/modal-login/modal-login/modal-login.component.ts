@@ -6,6 +6,7 @@ import { ModalLoginService } from './../modal-login.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { ErroService } from '../../erro/erro.service';
 
 @Component({
   selector: 'app-modal-login',
@@ -21,7 +22,8 @@ export class ModalLoginComponent implements OnInit {
   constructor(
     public bsModalRef: BsModalRef,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private erroService: ErroService
   ) {}
 
   form: FormGroup = new FormGroup({
@@ -59,6 +61,7 @@ export class ModalLoginComponent implements OnInit {
           this.loading = false;
           console.log('Erro ao logar 2');
           console.error(error);
+          this.erroService.tratarErro(error);
         }
       );
   }

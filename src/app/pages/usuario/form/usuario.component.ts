@@ -39,7 +39,7 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.verificaCredencial();
-    this.usuario = this.route.snapshot.data['usuario'];
+    this.usuario = this.route.snapshot.data.usuario;
     if (this.usuario.role !== 'ROLE_USER' && this.usuario.role !== null) {
       this.disableAtribuicao = false;
     }
@@ -96,7 +96,7 @@ export class UsuarioComponent implements OnInit {
   debug(): void {
     this.debugEnable = !this.debugEnable;
   }
-  verificaValidTouched(campo) {
+  verificaValidTouched(campo): boolean {
     return (
       !this.formulario.get(campo).valid && this.formulario.get(campo).touched
     );
@@ -113,7 +113,7 @@ export class UsuarioComponent implements OnInit {
       const habilitaBotao = true;
     }
   }
-  atribuirFuncao() {
+  atribuirFuncao(): void {
     if (this.usuario.id === null || this.usuario.role === 'ROLE_USER') {
       this.notificacaoService.criar(
         NotificationType.Error,
@@ -125,5 +125,5 @@ export class UsuarioComponent implements OnInit {
       queryParams: { id: this.usuario.id, nome: this.usuario.nome },
     });
   }
-  atribuirEscala() {}
+  atribuirEscala(): void {}
 }

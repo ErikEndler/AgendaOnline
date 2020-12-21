@@ -1,10 +1,11 @@
-import { FormService } from './form/form.service';
+import { element } from 'protractor';
 import { delay } from 'rxjs/operators';
 import { AgendamentoService } from './agendamento.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { Agendamento } from 'src/app/models/agendamento';
 import { ErroService } from 'src/app/shared/erro/erro.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-agendamento',
@@ -21,8 +22,8 @@ export class AgendamentoComponent implements OnInit {
   constructor(
     private agendamentoService: AgendamentoService,
     private erroService: ErroService,
-    private formService: FormService
-  ) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.funcionarioID = parseInt(sessionStorage.getItem('id'), 10);
@@ -52,7 +53,15 @@ export class AgendamentoComponent implements OnInit {
       }
     );
   }
+  agendaData(evento) {
+    this.loading = true;
+    console.log(evento.target.value);
+  }
   adicionarAgendamento(): void {
-    this.formService.openFormulario(this.funcionarioID);
+    this.router.navigate(['agendamento/form'], {
+      queryParams: {
+        funcionarioId: this.funcionarioID,
+      },
+    });
   }
 }
