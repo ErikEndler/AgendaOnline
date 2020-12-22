@@ -26,13 +26,14 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private tokenService: TokenService
-  ) {}
+  ) { }
 
   logar(form) {
     this.confirmResult = new Subject();
     this.http.post(this.url, form).subscribe(
       (success) => {
         this.tokenObj = success as Token;
+        console.log('this.tokenObj : ', this.tokenObj);
         this.tokenService.setToken(this.tokenObj.token);
         this.confirmResult.next(true);
         this.eventoLogar.emit();

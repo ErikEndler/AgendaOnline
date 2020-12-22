@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
   providedIn: 'root',
 })
 export class TokenService {
-  constructor() {}
+  constructor() { }
   public setToken(tokenString: string): void {
     sessionStorage.setItem('token', tokenString);
     console.log('token ', sessionStorage.getItem('token'));
@@ -13,7 +13,6 @@ export class TokenService {
   }
   public getToken(): string {
     if (sessionStorage.length) {
-      console.log(sessionStorage.length);
       return sessionStorage.getItem('token');
     }
     return null;

@@ -1,3 +1,4 @@
+import { TokenService } from './../../auth/token.service';
 import { EventEmitter, Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
 import { HttpClient } from '@angular/common/http';
@@ -12,13 +13,13 @@ export class UsuarioService extends CrudService<Usuario> {
   user: LoginReturn;
   static eventoAdicionarServico = new EventEmitter();
 
-  constructor(protected http: HttpClient) {
+  constructor(protected http: HttpClient, private tokenService: TokenService) {
     //super(http, 'http://localhost:8080/api/usuario');
     super(http, AppSettings.url + '/api/usuario');
   }
   getCredencial(): LoginReturn {
-    console.log(sessionStorage.getItem('auth'));
-    this.user = JSON.parse(sessionStorage.getItem('auth'));
+    console.log(sessionStorage.getItem('token'));
+    this.user = this.tokenService.decodePayloadJWT();
     return this.user;
   }
 }

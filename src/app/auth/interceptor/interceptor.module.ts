@@ -20,7 +20,6 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    console.log('entrou no interseptador');
     const requestUrl: Array<any> = request.url.split('/');
     const apiUrl = AppSettings.urlReduzida;
     this.token = this.tokenService.getToken();
@@ -48,4 +47,4 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     },
   ],
 })
-export class InterceptorModule {}
+export class InterceptorModule { }

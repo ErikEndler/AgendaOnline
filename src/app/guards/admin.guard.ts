@@ -10,7 +10,6 @@ import {
 import { EMPTY, Observable } from 'rxjs';
 import { ModalLoginService } from '../shared/modal-login/modal-login.service';
 import { switchMap, take } from 'rxjs/operators';
-import jwt_decode from 'jwt-decode';
 import { TokenService } from '../auth/token.service';
 
 @Injectable({
@@ -22,7 +21,7 @@ export class AdminGuard implements CanActivate {
     private router: Router,
     private modalLoginService: ModalLoginService,
     private tokenService: TokenService
-  ) {}
+  ) { }
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -34,7 +33,6 @@ export class AdminGuard implements CanActivate {
     | UrlTree {
     if (this.tokenService.getToken()) {
       this.user = this.tokenService.decodePayloadJWT();
-      console.log('this.user - ', this.user);
     }
     if (this.user) {
       if (this.user.role === 'ROLE_ADMIN') {

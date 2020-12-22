@@ -11,9 +11,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private notificacao: NotificacaoService,
     private notification: NotificationsService
-  ) {}
-
-  ngOnInit(): void {}
+  ) { }
+  // https://medium.com/@josevieiraneto/push-notifications-com-server-sent-events-spring-boot-c2b7ee6febe9
+  ngOnInit(): void { }
   testando(): void {
     //this.notification.create('titulo12', 'contente12');
     this.notificacao.criar(NotificationType.Warn, 'tituloOO', 'menssagemGEM');
