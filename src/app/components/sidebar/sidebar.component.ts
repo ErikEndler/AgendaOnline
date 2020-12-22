@@ -1,3 +1,4 @@
+import { TokenService } from './../../auth/token.service';
 import { AuthService } from './../../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { LoginReturn } from 'src/app/models/loginReturn';
@@ -72,7 +73,7 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService, private tokenService: TokenService) {}
 
   ngOnInit() {
     this.auth.eventoLogar.subscribe(() => this.ngOnInit());
@@ -80,7 +81,7 @@ export class SidebarComponent implements OnInit {
     this.menuItems = this.routeInfo.filter((menuItem) => menuItem);
   }
   constroiIcones() {
-    this.loginReturn = JSON.parse(sessionStorage.getItem('auth'));
+    this.loginReturn = this.tokenService.decodePayloadJWT();
     this.routeInfo = [
       {
         path: '/home',

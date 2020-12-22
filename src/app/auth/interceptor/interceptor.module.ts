@@ -1,7 +1,7 @@
+import { TokenService } from './../token.service';
 import { LoginReturn } from './../../models/loginReturn';
 import { Observable } from 'rxjs';
-import { Injectable, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import {
   HttpEvent,
   HttpInterceptor,
@@ -10,11 +10,11 @@ import {
 } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppSettings } from 'src/app/shared/appSettings';
-import jwt_decode from 'jwt-decode';
 
 export class HttpsRequestInterceptor implements HttpInterceptor {
   loginReturn: LoginReturn;
-  token = null;
+  token: string = null;
+  tokenService = new TokenService();
 
   intercept(
     request: HttpRequest<any>,
@@ -23,16 +23,12 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     console.log('entrou no interseptador');
     const requestUrl: Array<any> = request.url.split('/');
     const apiUrl = AppSettings.urlReduzida;
-    if (sessionStorage.getItem('auth')) {
-      this.loginReturn = jwt_decode(sessionStorage.getItem('auth'));
-      if (this.loginReturn !== null && this.loginReturn !== undefined) {
-        //this.token = this.loginReturn.Authorization;
-        this.token = JSON.parse(sessionStorage.getItem('auth'));
-      }
-    }
+    this.token = this.tokenService.getToken();
 
     if (this.token && requestUrl[2] === apiUrl) {
+      // console.log(request.headers.set('Authorization', this.token));
       const dupReq = request.clone({
+        //headers: request.headers.set('Authorization', 'Bearer ' + this.token),
         headers: request.headers.set('Authorization', this.token),
       });
 
@@ -52,4 +48,4 @@ export class HttpsRequestInterceptor implements HttpInterceptor {
     },
   ],
 })
-export class InterceptorModule { }
+export class InterceptorModule {}
