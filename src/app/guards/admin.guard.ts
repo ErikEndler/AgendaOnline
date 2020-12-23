@@ -52,7 +52,7 @@ export class AdminGuard implements CanActivate {
           )
         )
         .subscribe(
-          (success) => console.log('logou e redirecionou'),
+          (success) => { console.log('logou e redirecionou'); return this.router.navigate([next.url.toString()]); },
           (error) => {
             console.error(error),
               console.log(error),

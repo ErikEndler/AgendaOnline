@@ -7,6 +7,7 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { TokenService } from '../auth/token.service';
 import { LoginReturn } from '../models/loginReturn';
 
 @Injectable({
@@ -15,7 +16,8 @@ import { LoginReturn } from '../models/loginReturn';
 export class UserGuard implements CanActivate {
   user: LoginReturn;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private tokenService: TokenService
+  ) {
     this.user = JSON.parse(sessionStorage.getItem('Authorization'));
   }
   canActivate(
@@ -26,10 +28,10 @@ export class UserGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (
-      sessionStorage.getItem('logado') === 'true' &&
-      (this.user.role === 'ROLE_ADMIN' || this.user.role === 'ROLE_USER')
-    ) {
+    if (this.tokenService.getToken()) {
+      this.user = this.tokenService.decodePayloadJWT();
+    }
+    if (this.user) {
       return true;
     } else {
       return this.router.navigate(['']);
