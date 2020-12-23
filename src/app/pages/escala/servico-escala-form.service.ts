@@ -13,7 +13,7 @@ import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
 export class ServicoEscalaFormService {
   emitirServicos = new EventEmitter<Servico[]>();
 
-  constructor(protected http: HttpClient) {}
+  constructor(protected http: HttpClient) { }
 
   emiteServicoEatapa2(servicoFuncionario: Servico[]): void {
     this.emitirServicos.emit(servicoFuncionario);
@@ -30,7 +30,7 @@ export class ServicoEscalaFormService {
       AppSettings.url + '/api/escala/servicofuncionario/' + idServicoFuncionario
     );
   }
-  teste(idFuncionario: number, idsServicos: number[]) {
+  listEscalasFuncionario(idFuncionario: number, idsServicos: number[]): Observable<Escala[][]> {
     let parametros = new HttpParams();
     parametros = parametros.set('funcionario', idFuncionario.toString());
     idsServicos.forEach(

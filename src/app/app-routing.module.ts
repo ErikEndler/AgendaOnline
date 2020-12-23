@@ -1,3 +1,4 @@
+import { UsuarioHomeComponent } from './pages/usuario/usuario-home.component';
 import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
@@ -23,12 +24,13 @@ import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/s
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'cadastro', component: CadastroComponent },
+  { path: 'novousuario', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
   { path: 'sf', component: ServicoFuncionarioComponent },
   { path: 'sf2', component: FuncionarioviewComponent },
   { path: 'agendamento', component: AgendamentoComponent },
   { path: 'agendamento/form', component: AgendamentoFormComponent },
+  { path: 'usuario', component: UsuarioHomeComponent },
 
   {
     path: 'escala',
@@ -36,21 +38,26 @@ const routes: Routes = [
     resolve: { escala: EscalaResolveGuard },
   },
   {
-    path: 'usuariolist',
+    path: 'usuario/list',
     component: UsuarioListComponent,
     canActivate: [AdminGuard],
   },
   {
-    path: 'usuario',
+    path: 'usuario/cadastro',
     component: UsuarioComponent,
     resolve: { usuario: UsuarioResolverGuard },
     canActivate: [AdminGuard],
   },
   {
-    path: 'usuarioEditar/:id',
+    path: 'funcionario/cadastro',
     component: UsuarioComponent,
     resolve: { usuario: UsuarioResolverGuard },
     canActivate: [AdminGuard],
+  },
+  {
+    path: 'perfil/:id',
+    component: UsuarioComponent,
+    resolve: { usuario: UsuarioResolverGuard },
   },
   {
     path: 'categorialist',

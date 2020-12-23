@@ -1,3 +1,4 @@
+import { UsuarioHomeComponent } from './pages/usuario/usuario-home.component';
 import { CategoriaListComponent } from './pages/categoria/list/categoria-list/categoria-list.component';
 import { CategoriaComponent } from './pages/categoria/form/categoria/categoria.component';
 import { ItemEscalaFormComponent } from './pages/escala/item-escala/item-escala-form/item-escala-form.component';
@@ -68,6 +69,7 @@ import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/a
     CampoControlErroComponent,
     FormDebugComponent,
     AgendamentoFormComponent,
+    UsuarioHomeComponent
   ],
   imports: [
     FormsModule,

@@ -73,15 +73,14 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor(private auth: AuthService, private tokenService: TokenService) {}
+  constructor(private auth: AuthService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.auth.eventoLogar.subscribe(() => this.ngOnInit());
     this.constroiIcones();
     this.menuItems = this.routeInfo.filter((menuItem) => menuItem);
   }
-  constroiIcones() {
-    this.loginReturn = this.tokenService.decodePayloadJWT();
+  constroiIcones(): void {
     this.routeInfo = [
       {
         path: '/home',
@@ -90,17 +89,12 @@ export class SidebarComponent implements OnInit {
         class: '',
       },
       {
-        path: '/usuarioEditar/' + this.loginReturn?.id,
+        path: '/usuario',
         title: 'User Profile',
         icon: 'tim-icons icon-single-02',
         class: '',
       },
-      {
-        path: '/usuariolist',
-        title: 'Listar Usuarios',
-        icon: 'tim-icons icon-align-center',
-        class: '',
-      },
+
       {
         path: '/categoria',
         title: 'Categoria Form',
@@ -133,7 +127,7 @@ export class SidebarComponent implements OnInit {
       },
     ];
   }
-  isMobileMenu() {
+  isMobileMenu(): boolean {
     if (window.innerWidth > 991) {
       return false;
     }

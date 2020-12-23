@@ -36,7 +36,7 @@ export class NovoComponent implements OnInit {
     private erroService: ErroService,
     private escalaService: EscalaService,
     private usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.servicoEscalaFormService.emitirServicos.subscribe(
@@ -57,7 +57,7 @@ export class NovoComponent implements OnInit {
   listEscalas(dados?: Servico[]): void {
     this.loading = true;
     this.servicosIds = this.servicos.map((item) => item.id);
-    this.escalas$ = this.servicoEscalaFormService.teste(
+    this.escalas$ = this.servicoEscalaFormService.listEscalasFuncionario(
       this.funcionario.id,
       this.servicosIds
     );

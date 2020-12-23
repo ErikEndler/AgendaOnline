@@ -24,7 +24,7 @@ export class ModalLoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   form: FormGroup = new FormGroup({
     cpf: new FormControl(''),
@@ -70,7 +70,7 @@ export class ModalLoginComponent implements OnInit {
     this.bsModalRef.hide();
   }
   cadastrar(): void {
-    this.router.navigate(['cadastro']);
+    this.router.navigate(['novousuario']);
     this.bsModalRef.hide();
   }
 }

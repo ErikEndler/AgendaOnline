@@ -12,3 +12,7 @@ input[type="radio"]:checked + label::before {
   font-weight: bold;
   line-height: 10px;
 }
+
+#iconbig {
+  font-size: 5em;
+}

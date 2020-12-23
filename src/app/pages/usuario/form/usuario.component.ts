@@ -35,7 +35,7 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.verificaCredencial();
@@ -43,7 +43,7 @@ export class UsuarioComponent implements OnInit {
     if (this.usuario.role !== 'ROLE_USER' && this.usuario.role !== null) {
       this.disableAtribuicao = false;
     }
-    if (this.usuario.role == null) {
+    if (this.usuario.role === null) {
       this.usuario.role = 'ROLE_USER';
     }
     this.formulario = this.formBuilder.group({
@@ -122,8 +122,13 @@ export class UsuarioComponent implements OnInit {
       );
     }
     this.router.navigate(['sf2'], {
+      queryParams: { id: this.usuario.id },
+    });
+  }
+  atribuirEscala(): void {
+    this.router.navigate(['escala'], {
       queryParams: { id: this.usuario.id, nome: this.usuario.nome },
     });
   }
-  atribuirEscala(): void {}
+
 }

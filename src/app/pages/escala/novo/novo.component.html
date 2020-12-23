@@ -5,16 +5,12 @@
     </div>
     <div class="card-body">
       <div *ngIf="loading" class="d-flex justify-content-center">
-        <div
-          class="spinner-border text-primary"
-          style="width: 3rem; height: 3rem"
-          role="status"
-        >
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
       <div *ngIf="!loading" class="table-responsive">
-        <table class="table tablesorter" id="">
+        <table class="table text-center" id="">
           <thead class="text-primary">
             <tr>
               <th *ngFor="let coluna of diasSemana" scope="col">
@@ -29,10 +25,7 @@
             <tr *ngFor="let escala of escalas$ | async">
               <td *ngFor="let abc of escala">
                 {{ abc.servicoFuncionario.servico.nome
-                }}<app-item-escala-list
-                  [itensEscala]="abc.itensEscala"
-                  [escalaId]="abc.id"
-                ></app-item-escala-list>
+                }}<app-item-escala-list [itensEscala]="abc.itensEscala" [escalaId]="abc.id"></app-item-escala-list>
               </td>
             </tr>
           </tbody>

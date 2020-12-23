@@ -8,6 +8,7 @@ import { Servico } from 'src/app/models/servico';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
 import { Usuario } from 'src/app/models/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-servico-escala-form',
@@ -19,8 +20,9 @@ export class ServicoEscalaFormComponent implements OnInit {
     private servicoEscalaFormService: ServicoEscalaFormService,
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
-    private servicoFuncionarioService: ServicoFuncionarioService
-  ) {}
+    private servicoFuncionarioService: ServicoFuncionarioService,
+    private router: Router,
+  ) { }
   selecionado = false;
   // servicoFuncionario: ServicoFuncionario[] = [];
   servicoOut: Servico[] = [];
@@ -87,9 +89,10 @@ export class ServicoEscalaFormComponent implements OnInit {
     }
     this.selecionado = true;
   }
-  teste() {
-    this.servicoEscalaFormService
-      .teste(1, [1, 2])
-      .subscribe((result) => console.log(result));
+
+  addServicos() {
+    this.router.navigate(['sf2'], {
+      queryParams: { id: this.funcionario.id },
+    });
   }
 }

@@ -42,7 +42,7 @@ export class FuncionarioviewComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -161,7 +161,7 @@ export class FuncionarioviewComponent implements OnInit {
   }
   redirecionaEscala() {
     this.router.navigate(['escala'], {
-      queryParams: { id: this.funcionario.id, nome: this.funcionario.nome },
+      queryParams: { id: this.funcionario.id },
     });
   }
   teste() {

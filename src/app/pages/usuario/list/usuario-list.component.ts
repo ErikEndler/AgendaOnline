@@ -41,7 +41,7 @@ export class UsuarioListComponent implements OnInit {
     this.list();
   }
   onEdit(id): void {
-    this.router.navigate(['usuarioEditar', id]);
+    this.router.navigate(['perfil', id]);
   }
   onDelete(id): void {
     const result$ = this.modalCOnfirm.showConfirm(
