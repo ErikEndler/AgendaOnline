@@ -38,7 +38,11 @@ const routes: Routes = [
     component: FuncionarioviewComponent,
     canActivate: [AdminGuard],
   },
-  { path: 'agendamento', component: AgendamentoComponent },
+  {
+    path: 'agendamento',
+    component: AgendamentoComponent,
+    canActivate: [AdminGuard],
+  },
   { path: 'agendamento/form', component: AgendamentoFormComponent },
   {
     path: 'usuario',
