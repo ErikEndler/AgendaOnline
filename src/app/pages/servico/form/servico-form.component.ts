@@ -12,11 +12,11 @@ import { CategoriaService } from 'src/app/pages/categoria/categoria.service';
 import { ServicoService } from '../servico.service';
 
 @Component({
-  selector: 'app-servico',
-  templateUrl: './servico.component.html',
-  styleUrls: ['./servico.component.css'],
+  selector: 'app-servico-form',
+  templateUrl: './servico-form.component.html',
+  styleUrls: ['./servico-form.component.css'],
 })
-export class ServicoComponent implements OnInit {
+export class ServicoFormComponent implements OnInit {
   formulario: FormGroup;
   hide = true;
   loading = false;
@@ -31,7 +31,7 @@ export class ServicoComponent implements OnInit {
     private categoriaService: CategoriaService,
     private notificacaoService: NotificacaoService,
     private erroService: ErroService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.combobox();

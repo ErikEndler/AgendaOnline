@@ -73,7 +73,7 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService) {}
 
   ngOnInit(): void {
     this.auth.eventoLogar.subscribe(() => this.ngOnInit());
@@ -94,35 +94,16 @@ export class SidebarComponent implements OnInit {
         icon: 'tim-icons icon-single-02',
         class: '',
       },
-
-      {
-        path: '/categoria',
-        title: 'Categoria Form',
-        icon: 'tim-icons icon-single-02',
-        class: '',
-      },
-      {
-        path: '/categorialist',
-        title: 'Listar Categorias',
-        icon: 'tim-icons icon-align-center',
-        class: '',
-      },
       {
         path: '/servico',
-        title: 'Servico Form',
-        icon: 'tim-icons icon-single-02',
+        title: 'Servico',
+        icon: 'fas fa-desktop',
         class: '',
       },
       {
-        path: '/servicolist',
-        title: 'Listar Serviços',
-        icon: 'tim-icons icon-align-center',
-        class: '',
-      },
-      {
-        path: '/escala',
-        title: 'Escala',
-        icon: 'far fa-calendar-alt',
+        path: '/agendamento',
+        title: 'Agendamento',
+        icon: 'far fa-clock',
         class: '',
       },
     ];

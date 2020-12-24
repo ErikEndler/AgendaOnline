@@ -6,27 +6,38 @@
     <div class="card-body">
       <div class="card">
         <div class="card-body">
-          <p>Olá <u>{{loginReturn.nome}}</u> vovê esta no módulo de Usuários. </p>
+          <p>
+            Olá <u>{{ loginReturn.nome }}</u> você esta no módulo de Usuários.
+          </p>
         </div>
       </div>
-
       <div class="row">
         <div class="col">
           <div class="card" id="cards">
             <div class="card-body">
-              <h3 class="card-title">Meu Perfil <button class="btn btn-link" (click)="perfil()"><i
-                    class="fas fa-user-circle"></i></button>
+              <h3 class="card-title">
+                Meu Perfil
+                <button class="btn btn-link" (click)="perfil()">
+                  <i class="fas fa-user-circle"></i>
+                </button>
               </h3>
-              <p class="card-text">Perfil de usuário, edite e visualize suas informações </p>
-              <a routerLink="/perfil/{{loginReturn.id}}" class="card-link">meu perfil</a>
+              <p class="card-text">
+                Perfil de usuário, edite e visualize suas informações
+              </p>
+              <a routerLink="/perfil/{{ loginReturn.id }}" class="card-link"
+                >meu perfil</a
+              >
             </div>
           </div>
         </div>
         <div *ngIf="admin" class="col">
           <div class="card" id="cards">
             <div class="card-body">
-              <h3 class="card-title">Novo Cliente <button class="btn btn-link" (click)="cliente()"> <i
-                    class="fas fa-user-plus"></i></button>
+              <h3 class="card-title">
+                Novo Cliente
+                <button class="btn btn-link" (click)="cliente()">
+                  <i class="fas fa-user-plus"></i>
+                </button>
               </h3>
               <p class="card-text">Adicione um novo Cliente</p>
               <a routerLink="/usuario/cadastro" class="card-link">Cadastrar</a>
@@ -36,27 +47,68 @@
         <div *ngIf="admin" class="col">
           <div class="card" id="cards">
             <div class="card-body">
-              <h3 class="card-title">Novo Funcionário <button class="btn btn-link" (click)="funcionario()"><i
-                    class="fas fa-user-plus"></i></button>
+              <h3 class="card-title">
+                Novo Funcionário
+                <button class="btn btn-link" (click)="funcionario()">
+                  <i class="fas fa-user-plus"></i>
+                </button>
               </h3>
               <p class="card-text">Adicione um novo Funcionário.</p>
-              <a routerLink="/funcionario/cadastro" class="card-link">Cadastrar</a>
+              <a routerLink="/funcionario/cadastro" class="card-link"
+                >Cadastrar</a
+              >
             </div>
           </div>
         </div>
         <div *ngIf="admin" class="col">
           <div class="card" id="cards">
             <div class="card-body">
-              <h3 class="card-title">Listar Usuários <button class="btn btn-link" (click)="listar()"><i
-                    class="far fa-list-alt"></i></button>
+              <h3 class="card-title">
+                Listar Usuários
+                <button class="btn btn-link" (click)="listar()">
+                  <i class="far fa-list-alt"></i>
+                </button>
               </h3>
               <p class="card-text">Exibe a lista de Usuários</p>
               <a routerLink="/usuario/list" class="card-link">Listar</a>
             </div>
           </div>
         </div>
+        <div *ngIf="admin" class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
+                Meus Servicos
+                <button class="btn btn-link" (click)="servicos()">
+                  <i class="far fa-list-alt"></i>
+                </button>
+              </h3>
+              <p class="card-text">Exibe a lista dos seus serviços</p>
+              <button class="btn btn-link" (click)="servicos()" id="link">
+                Meus Serviços
+              </button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="admin" class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
+                Minhas Escalas
+                <button class="btn btn-link" (click)="escalas()">
+                  <i class="far fa-list-alt"></i>
+                </button>
+              </h3>
+              <p class="card-text">
+                Acesse para visualizar e editar as escalas de seus serviços
+              </p>
+              <button class="btn btn-link" (click)="escalas()" id="link">
+                Minhas Escalas
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
   </div>
 </div>

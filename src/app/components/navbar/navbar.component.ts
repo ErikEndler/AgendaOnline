@@ -1,3 +1,5 @@
+import { TokenService } from './../../auth/token.service';
+import { LoginReturn } from 'src/app/models/loginReturn';
 import { AuthService } from './../../auth/auth.service';
 import { ModalLoginService } from './../../shared/modal-login/modal-login.service';
 import { Component, OnDestroy, ElementRef, OnInit } from '@angular/core';
@@ -19,7 +21,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   mobileMenuVisible: any = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
-
+  loginReturn: LoginReturn;
   public isCollapsed = true;
 
   closeResult: string;
@@ -30,7 +32,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private element: ElementRef,
     private router: Router,
     private modalService: NgbModal,
-    private authService: AuthService
+    private authService: AuthService,
+    private tokenService: TokenService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -66,6 +69,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.loginReturn = this.tokenService.decodePayloadJWT();
     window.addEventListener('resize', this.updateColor);
     this.listTitles = ROUTES.filter((listTitle) => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;

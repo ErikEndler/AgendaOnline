@@ -1,0 +1,67 @@
+<div class="content">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Serviços</h2>
+    </div>
+    <div class="card-body">
+      <div class="card">
+        <div class="card-body">
+          <p>
+            Olá <u>{{ loginReturn.nome }}</u> você esta no módulo de Serviços.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
+                Meus Serviços
+                <button class="btn btn-link" (click)="meusServicos()">
+                  <i class="fas fa-briefcase"></i>
+                </button>
+              </h3>
+              <p class="card-text">
+                Acesse para visualizar seus serviços, e poder atribuir mais
+                serviços a você ou remover.
+              </p>
+              <button class="btn btn-link" (click)="meusServicos()" id="link">
+                Meus Serviços
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
+                Cadastrar Serviço
+                <button class="btn btn-link" (click)="novoServico()">
+                  <i class="fas fa-user-plus"></i>
+                </button>
+              </h3>
+              <p class="card-text">Cadastre um novo Serviço no sistema.</p>
+              <a routerLink="/servico/cadastro" class="card-link">Cadastrar</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
+                Listar Serviços
+                <button class="btn btn-link" (click)="listarServicos()">
+                  <i class="far fa-list-alt"></i>
+                </button>
+              </h3>
+              <p class="card-text">
+                Exibe a lista de todos os Serviços cadastrados no sistema.
+              </p>
+              <a routerLink="/servico/list" class="card-link">Listar</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

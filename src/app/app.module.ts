@@ -26,7 +26,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ModalLoginComponent } from './shared/modal-login/modal-login/modal-login.component';
 import { HomeComponent } from './pages/home/home/home.component';
 import { ServicoListComponent } from './pages/servico/list/servico-list.component';
-import { ServicoComponent } from './pages/servico/form/servico.component';
+import { ServicoFormComponent } from './pages/servico/form/servico-form.component';
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro.component';
 import { ArchwizardModule } from 'angular-archwizard';
 import { SimpleNotificationsModule } from 'angular2-notifications';
@@ -41,6 +41,8 @@ import { AgendamentoComponent } from './pages/agendamento/agendamento.component'
 import { CampoControlErroComponent } from './shared/campo-control-erro/campo-control-erro.component';
 import { FormDebugComponent } from './shared/form-debug/form-debug.component';
 import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
+import { ServicoComponent } from './pages/servico/servico.component';
+import { AgendamentoHomeComponent } from './pages/agendamento/agendamento-home/agendamento-home.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,7 @@ import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/a
     ModalLoginComponent,
     HomeComponent,
     ServicoListComponent,
-    ServicoComponent,
+    ServicoFormComponent,
     CadastroComponent,
     EscalageralComponent,
     NotificacaoComponent,
@@ -69,7 +71,9 @@ import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/a
     CampoControlErroComponent,
     FormDebugComponent,
     AgendamentoFormComponent,
-    UsuarioHomeComponent
+    UsuarioHomeComponent,
+    ServicoComponent,
+    AgendamentoHomeComponent,
   ],
   imports: [
     FormsModule,
@@ -88,9 +92,8 @@ import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/a
     InterceptorModule,
     ArchwizardModule,
     SimpleNotificationsModule.forRoot(),
-
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

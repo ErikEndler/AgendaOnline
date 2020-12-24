@@ -1,11 +1,15 @@
 <div class="centered-content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title">Horários :</h4>
+      <h4 class="card-title">Escala de Horários :</h4>
     </div>
     <div class="card-body">
       <div *ngIf="loading" class="d-flex justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
           <span class="sr-only">Loading...</span>
         </div>
       </div>
@@ -25,7 +29,10 @@
             <tr *ngFor="let escala of escalas$ | async">
               <td *ngFor="let abc of escala">
                 {{ abc.servicoFuncionario.servico.nome
-                }}<app-item-escala-list [itensEscala]="abc.itensEscala" [escalaId]="abc.id"></app-item-escala-list>
+                }}<app-item-escala-list
+                  [itensEscala]="abc.itensEscala"
+                  [escalaId]="abc.id"
+                ></app-item-escala-list>
               </td>
             </tr>
           </tbody>
@@ -36,9 +43,6 @@
       <div class="btn-group">
         <button type="button" class="btn btn-warning" awPreviousStep>
           Voltar
-        </button>
-        <button type="button" class="btn btn-success" awNextStep>
-          Continue
         </button>
       </div>
     </div>

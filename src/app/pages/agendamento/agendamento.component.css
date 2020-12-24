@@ -4,3 +4,9 @@
 #tdhead {
   text-align: center;
 }
+.table {
+  color: antiquewhite;
+  padding: 0px;
+  white-space: nowrap;
+  width: auto;
+}

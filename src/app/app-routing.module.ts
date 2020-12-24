@@ -1,3 +1,5 @@
+import { ServicoComponent } from './pages/servico/servico.component';
+import { UserGuard } from './guards/user.guard';
 import { UsuarioHomeComponent } from './pages/usuario/usuario-home.component';
 import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
@@ -5,7 +7,7 @@ import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionari
 import { EscalaResolveGuard } from './guards/escala-resolve.guard';
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro.component';
 import { ServicoResolveGuard } from './guards/servico-resolve.guard';
-import { ServicoComponent } from './pages/servico/form/servico.component';
+import { ServicoFormComponent } from './pages/servico/form/servico-form.component';
 import { ServicoListComponent } from './pages/servico/list/servico-list.component';
 import { CategoriaResolverGuard } from './guards/categoria-resolver.guard';
 import { HomeComponent } from './pages/home/home/home.component';
@@ -26,16 +28,29 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'novousuario', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'sf', component: ServicoFuncionarioComponent },
-  { path: 'sf2', component: FuncionarioviewComponent },
+  {
+    path: 'sf2',
+    component: ServicoFuncionarioComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'sf',
+    component: FuncionarioviewComponent,
+    canActivate: [AdminGuard],
+  },
   { path: 'agendamento', component: AgendamentoComponent },
   { path: 'agendamento/form', component: AgendamentoFormComponent },
-  { path: 'usuario', component: UsuarioHomeComponent },
+  {
+    path: 'usuario',
+    component: UsuarioHomeComponent,
+    canActivate: [UserGuard],
+  },
 
   {
     path: 'escala',
     component: EscalageralComponent,
     resolve: { escala: EscalaResolveGuard },
+    canActivate: [AdminGuard],
   },
   {
     path: 'usuario/list',
@@ -58,6 +73,7 @@ const routes: Routes = [
     path: 'perfil/:id',
     component: UsuarioComponent,
     resolve: { usuario: UsuarioResolverGuard },
+    canActivate: [UserGuard],
   },
   {
     path: 'categorialist',
@@ -77,7 +93,7 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
-    path: 'servicolist',
+    path: 'servico/list',
     component: ServicoListComponent,
     canActivate: [AdminGuard],
   },
@@ -88,8 +104,14 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
+    path: 'servico/cadastro',
+    component: ServicoFormComponent,
+    resolve: { servico: ServicoResolveGuard },
+    canActivate: [AdminGuard],
+  },
+  {
     path: 'servicoEditar/:id',
-    component: ServicoComponent,
+    component: ServicoFormComponent,
     resolve: { servico: ServicoResolveGuard },
     canActivate: [AdminGuard],
   },
@@ -99,4 +121,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

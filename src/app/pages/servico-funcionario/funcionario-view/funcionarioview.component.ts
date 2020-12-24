@@ -22,7 +22,7 @@ export class FuncionarioviewComponent implements OnInit {
   pageSize2 = 4;
   collectionSize: any;
   collectionSize2: any;
-  colunasServico: string[] = ['selecione', 'nome', 'categoria'];
+  colunasServico: string[] = ['nome', 'categoria', 'selecione'];
   loading = true;
   loading2 = true;
   servico: Servico;
@@ -42,7 +42,7 @@ export class FuncionarioviewComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -127,7 +127,7 @@ export class FuncionarioviewComponent implements OnInit {
       (success) => {
         this.notificacaoService.criar(
           NotificationType.Success,
-          'Adicionado com Sucesso'
+          'Serviço adicionado com Sucesso'
         );
         console.log('Serviço Adicionado ao funcionario com sucesso!');
         this.listServicoFuncionario();

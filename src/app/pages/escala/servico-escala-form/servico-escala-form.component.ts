@@ -21,18 +21,19 @@ export class ServicoEscalaFormComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private servicoFuncionarioService: ServicoFuncionarioService,
-    private router: Router,
-  ) { }
+    private router: Router
+  ) {}
   selecionado = false;
   // servicoFuncionario: ServicoFuncionario[] = [];
   servicoOut: Servico[] = [];
   listaServicoFuncionario: ServicoFuncionario[];
+  lista: ServicoFuncionario[];
   listaServicoFuncionario$: Observable<ServicoFuncionario[]>;
   page = 1;
   pageSize = 4;
   collectionSize: any;
   loading = true;
-  colunas: string[] = ['select', 'nome', 'descrição'];
+  colunas: string[] = ['select', 'nome', 'descrição', 'categoria'];
   @Input() funcionario: Usuario;
 
   ngOnInit(): void {
@@ -47,7 +48,8 @@ export class ServicoEscalaFormComponent implements OnInit {
       (dados) => {
         this.collectionSize = dados.length;
         this.loading = false;
-        this.refreshListServico(dados);
+        this.listaServicoFuncionario = dados;
+        this.refreshListServico();
       },
       (error) => {
         console.error(error);
@@ -56,8 +58,8 @@ export class ServicoEscalaFormComponent implements OnInit {
     );
   }
 
-  refreshListServico(listaSF: ServicoFuncionario[]): void {
-    this.listaServicoFuncionario = listaSF
+  refreshListServico(): void {
+    this.lista = this.listaServicoFuncionario
       .map((servico, i) => ({ ...servico }))
       .slice(
         (this.page - 1) * this.pageSize,

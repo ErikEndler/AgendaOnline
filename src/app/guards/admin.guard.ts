@@ -11,6 +11,7 @@ import { EMPTY, Observable } from 'rxjs';
 import { ModalLoginService } from '../shared/modal-login/modal-login.service';
 import { switchMap, take } from 'rxjs/operators';
 import { TokenService } from '../auth/token.service';
+import { ErroService } from '../shared/erro/erro.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +21,9 @@ export class AdminGuard implements CanActivate {
   constructor(
     private router: Router,
     private modalLoginService: ModalLoginService,
-    private tokenService: TokenService
-  ) { }
+    private tokenService: TokenService,
+    private erroService: ErroService
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -52,11 +54,14 @@ export class AdminGuard implements CanActivate {
           )
         )
         .subscribe(
-          (success) => { console.log('logou e redirecionou'); return this.router.navigate([next.url.toString()]); },
+          (success) => {
+            console.log('logou e redirecionou');
+            return this.router.navigate([next.url.toString()]);
+          },
           (error) => {
-            console.error(error),
-              console.log(error),
-              console.log('ERRO AO redirecionar');
+            console.error(error);
+            console.log('ERRO AO redirecionar');
+            this.erroService.tratarErro(error);
           }
         );
 
