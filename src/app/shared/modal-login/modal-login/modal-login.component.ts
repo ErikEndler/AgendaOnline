@@ -24,7 +24,7 @@ export class ModalLoginComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private erroService: ErroService
-  ) { }
+  ) {}
 
   form: FormGroup = new FormGroup({
     cpf: new FormControl(''),
@@ -40,7 +40,6 @@ export class ModalLoginComponent implements OnInit {
   login(): void {
     // chama metodo do serviço para logar
     this.loading = true;
-
     const result$ = this.authService.logar(this.form.value);
     result$
       .asObservable()

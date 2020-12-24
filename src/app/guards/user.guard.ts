@@ -35,11 +35,12 @@ export class UserGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    console.log('entrou no user guard');
     if (this.tokenService.getToken()) {
       this.user = this.tokenService.decodePayloadJWT();
-    }
-    if (this.user) {
-      return true;
+      if (this.user) {
+        return true;
+      }
     } else {
       console.log('DESTINO : ' + next.url.toString());
       const result$ = this.modalLoginService.open(next.url.toString());

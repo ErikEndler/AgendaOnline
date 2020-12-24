@@ -33,14 +33,15 @@ export class AdminGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    console.log('entrou no admin guard');
     if (this.tokenService.getToken()) {
       this.user = this.tokenService.decodePayloadJWT();
-    }
-    if (this.user) {
-      if (this.user.role === 'ROLE_ADMIN') {
-        return true;
-      } else {
-        return false;
+      if (this.user) {
+        if (this.user.role === 'ROLE_ADMIN') {
+          return true;
+        } else {
+          return false;
+        }
       }
     } else {
       console.log('DESTINO : ' + next.url.toString());
@@ -64,7 +65,6 @@ export class AdminGuard implements CanActivate {
             this.erroService.tratarErro(error);
           }
         );
-
       return this.router.navigate(['home']);
     }
   }

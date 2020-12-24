@@ -26,6 +26,7 @@ export class FuncionarioGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    console.log('entrou no funcionario guard');
     if (
       sessionStorage.getItem('logado') === 'true' &&
       (this.user.role === 'ROLE_ADMIN' || this.user.role === 'ROLE_FUNCIONARIO')

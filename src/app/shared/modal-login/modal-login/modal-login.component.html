@@ -3,6 +3,11 @@
 </div>
 <div class="modal-body">
   <form [formGroup]="form" (ngSubmit)="login()">
+    <div class="text-center">
+      <div *ngIf="loading" class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-10">
         <label> CPF </label>
