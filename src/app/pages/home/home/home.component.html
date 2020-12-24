@@ -1,24 +1,43 @@
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title">HOME <i class="fas fa-desktop"></i></h4>
+      <nav class="navbar navbar-expand navbar">
+        <div class="collapse navbar-collapse" id="textoNavbar">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              Home <span class="sr-only">(Página atual)</span>
+            </li>
+          </ul>
+          <button
+            *ngIf="!logado"
+            class="btn btn-sm btn-secondary pull-right"
+            (click)="logar()"
+          >
+            LOGAR
+          </button>
+          <button
+            *ngIf="logado"
+            class="btn btn-sm btn-secondary pull-right"
+            (click)="perfil()"
+          >
+            PERFIL
+          </button>
+        </div>
+      </nav>
     </div>
     <div class="card-body">
-      <p>home works!</p>
       <!-- Rectangular switch -->
-      <label class="switch">
+      <!--<label class="switch">
         <input type="checkbox" />
         <span class="slider"></span>
-      </label>
-
+      </label>-->
       <!-- Rounded switch -->
-      <label class="switch">
+      <!--<label class="switch">
         <input type="checkbox" />
         <span class="slider round"></span>
-      </label>
+      </label>-->
 
-      <div class="spinner-border text-primary"></div>
-
+      <p>Bem vindo ao Agenda Online!</p>
       <simple-notifications></simple-notifications>
 
       <p>Usuario ADMIN para teste <br />cpf: 999.999.999-99 <br />senha: 123</p>

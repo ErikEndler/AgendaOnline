@@ -49,7 +49,6 @@ const routes: Routes = [
     component: UsuarioHomeComponent,
     canActivate: [UserGuard],
   },
-
   {
     path: 'escala',
     component: EscalageralComponent,
