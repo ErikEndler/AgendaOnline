@@ -84,7 +84,6 @@ export class FuncionarioviewComponent implements OnInit {
   }
   listServicoFuncionario(): void {
     console.log('iniciou list servico do func');
-
     if (this.funcionario === undefined) {
       this.servicosFuncionario = null;
       console.log('sem funcionario');
