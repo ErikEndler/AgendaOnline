@@ -86,9 +86,9 @@ export class AgendamentoFormComponent implements OnInit {
     this.buscaEscalas(this.servicoFuncionario.id);
   }
   atribuirHr(): void {
-    this.hrFinal = moment(this.hrInicial, 'hh:mm')
+    this.hrFinal = moment(this.hrInicial, 'HH:mm')
       .add(this.tempo, 'm')
-      .format('hh:mm');
+      .format('HH:mm');
     this.agendamento.horarioInicio = this.data + ' ' + this.hrInicial;
     this.agendamento.horarioFim = this.data + ' ' + this.hrFinal;
   }

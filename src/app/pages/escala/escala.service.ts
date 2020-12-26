@@ -20,10 +20,8 @@ export class EscalaService extends CrudService<Escala> {
       .pipe(delay(200));
   }
   listarPorServicoFuncionario(id): Observable<Array<Escala>> {
-    return this.http
-      .get<Array<Escala>>(
-        AppSettings.url + '/api/escala/servicofuncionario/' + id
-      )
-      .pipe(delay(200));
+    return this.http.get<Array<Escala>>(
+      AppSettings.url + '/api/escala/servicofuncionario/' + id
+    );
   }
 }

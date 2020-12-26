@@ -1,0 +1,87 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <h4>Etapa 3 - Selecione uma data</h4>
+    </div>
+    <div class="card-body">
+      <div class="card card-blue">
+        <div class="card-head">
+          Dias e intervalos de horários disponíveis para o
+          {{ servicoFuncionario?.servico.nome }}
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table tablesorter" style="margin-bottom: 0%">
+              <thead class="text-primary">
+                <tr>
+                  <th *ngFor="let dia of dias" scope="col">
+                    {{ dia }}
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="listempy">
+                  <td id="tdvazio" colspan="4">VAZIO</td>
+                </tr>
+                <tr>
+                  <td *ngFor="let escala of escalas$ | async; let i = index">
+                    <div *ngFor="let item of escala.itensEscala; let j = index">
+                      {{ item.hrInicial }}-{{ item.hrFinal }}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="card card-blue">
+        <div class="card-body">
+          <div class="text-center">
+            <label style="font-size: 1.1rem">Selecione uma Data</label>
+            <input
+              class="form-control"
+              type="date"
+              name="data"
+              (change)="dayselect($event.target.value)"
+            />
+          </div>
+          <div *ngIf="!horariosHide" class="text-center">
+            <label style="font-size: 1.1rem">Selecione Horario Inicio</label>
+
+            <div class="form-row align-items-center">
+              <input
+                style="margin-right: 0"
+                class="form-control"
+                type="time"
+                name="hrInicial"
+                [(ngModel)]="hrInicial"
+                (change)="selectHora()"
+              />
+              <input
+                readonly
+                style="margin-left: 0"
+                class="form-control"
+                type="time"
+                name="hrFinal"
+                [(ngModel)]="hrFinal"
+              />
+            </div>
+          </div>
+          <div *ngIf="loading" class="text-center">
+            <div class="spinner-border text-success" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <button awPreviousStep type="button" class="btn btn-warning" awNextStep>
+          <i class="fas fa-arrow-left"></i>Voltar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

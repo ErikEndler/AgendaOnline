@@ -18,21 +18,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto"></ul>
           <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-link" (click)="agendaDia('hoje')">
+            <button
+              class="btn btn-sm btn-secondary"
+              (click)="agendaDia('hoje')"
+            >
               Agenda do Dia
             </button>
             <input
-              *ngIf="!hide"
               (change)="agendaDia($event.target.value)"
               class="form-control mr-sm-2"
               type="date"
               name="data"
               aria-label="Search"
             />
-            <button class="btn btn-link" (click)="hide = !hide">
-              <i class="tim-icons icon-zoom-split"> </i>
-              <span class="d-lg-none d-md-block"> Search </span>
-            </button>
+            <i class="tim-icons icon-zoom-split"> </i>
+            <span class="d-lg-none d-md-block"> Search </span>
           </form>
         </div>
       </nav>

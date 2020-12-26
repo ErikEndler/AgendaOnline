@@ -22,7 +22,7 @@ export class ServicoComponent implements OnInit {
     this.router.navigate(['servico/cadastro']);
   }
   listarServicos() {
-    this.router.navigate(['servico/cadastro']);
+    this.router.navigate(['servico/list']);
   }
   meusServicos() {
     this.router.navigate(['sf'], {

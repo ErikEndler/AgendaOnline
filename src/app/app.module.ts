@@ -43,6 +43,9 @@ import { FormDebugComponent } from './shared/form-debug/form-debug.component';
 import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
 import { ServicoComponent } from './pages/servico/servico.component';
 import { AgendamentoHomeComponent } from './pages/agendamento/agendamento-home/agendamento-home.component';
+import { Etapa01Component } from './pages/agendamento/etapas/etapa01/etapa01.component';
+import { Etapa02Component } from './pages/agendamento/etapas/etapa02/etapa02.component';
+import { Etapa03Component } from './pages/agendamento/etapas/etapa03/etapa03.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,9 @@ import { AgendamentoHomeComponent } from './pages/agendamento/agendamento-home/a
     UsuarioHomeComponent,
     ServicoComponent,
     AgendamentoHomeComponent,
+    Etapa01Component,
+    Etapa02Component,
+    Etapa03Component,
   ],
   imports: [
     FormsModule,

@@ -22,6 +22,17 @@ export class ServicoFuncionarioService extends CrudService<ServicoFuncionario> {
       )
       .pipe(delay(200));
   }
+
+  listarFuncionariosDoServico(
+    idServico
+  ): Observable<Array<ServicoFuncionario>> {
+    return this.http
+      .get<Array<ServicoFuncionario>>(
+        AppSettings.url + '/api/servico/funcionario/servico/' + idServico
+      )
+      .pipe(delay(200));
+  }
+
   deletarServicoFUncionario(servicoFuncionario: ServicoFuncionario) {
     return this.http
       .post(

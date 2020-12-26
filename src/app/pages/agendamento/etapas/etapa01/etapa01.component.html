@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <h4>Etapa 1 - Escolha serviço para o agendmento</h4>
+    </div>
+    <div class="card-body">
+      <!--TABELA DOS SERVIÇOS-->
+      <div class="card-deck">
+        <div class="card card-blue">
+          <div class="card-body">
+            <div *ngIf="loading1" class="text-center">
+              <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <div *ngIf="!loading1" class="table-responsive">
+              <table class="table tablesorter" id="">
+                <thead class="text-primary">
+                  <tr>
+                    <th *ngFor="let coluna of colunas" scope="col">
+                      {{ coluna }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="listempy">
+                    <td id="tdvazio" colspan="4">VAZIO</td>
+                  </tr>
+                  <tr *ngFor="let servico of servicos">
+                    <td>{{ servico.nome }}</td>
+                    <td>{{ servico.descricao }}</td>
+                    <td>{{ servico.tempo }}</td>
+                    <td>
+                      <button
+                        type="button"
+                        class="btn-sm btn-info"
+                        (click)="avancar(servico.id)"
+                        awNextStep
+                      >
+                        Selecionar <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination
+                  [collectionSize]="collectionSize"
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  (pageChange)="refreshServico()"
+                >
+                </ngb-pagination>
+                <select
+                  class="custom-select"
+                  style="width: auto"
+                  [(ngModel)]="pageSize"
+                  (ngModelChange)="refreshServico()"
+                >
+                  <option [ngValue]="2">2 items per page</option>
+                  <option [ngValue]="4">4 items per page</option>
+                  <option [ngValue]="6">6 items per page</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>

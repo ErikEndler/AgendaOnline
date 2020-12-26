@@ -1,1 +1,14 @@
-<p>agendamento-home works!</p>
+<div class="content">
+  <div></div>
+  <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
+    <aw-wizard-step [stepTitle]="'etapa 01'"
+      ><app-etapa01></app-etapa01>
+    </aw-wizard-step>
+    <aw-wizard-step [stepTitle]="'etapa 02'"
+      ><app-etapa02></app-etapa02>
+    </aw-wizard-step>
+    <aw-wizard-step [stepTitle]="'etapa 03'"
+      ><app-etapa03></app-etapa03>
+    </aw-wizard-step>
+  </aw-wizard>
+</div>

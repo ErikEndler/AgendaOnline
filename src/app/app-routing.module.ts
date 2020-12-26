@@ -1,3 +1,4 @@
+import { AgendamentoHomeComponent } from './pages/agendamento/agendamento-home/agendamento-home.component';
 import { ServicoComponent } from './pages/servico/servico.component';
 import { UserGuard } from './guards/user.guard';
 import { UsuarioHomeComponent } from './pages/usuario/usuario-home.component';
@@ -40,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'agendamento',
-    component: AgendamentoComponent,
+    component: AgendamentoHomeComponent,
     canActivate: [AdminGuard],
   },
   { path: 'agendamento/form', component: AgendamentoFormComponent },
