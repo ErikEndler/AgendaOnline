@@ -1,3 +1,5 @@
+import { LoginReturn } from './../../../models/loginReturn';
+import { TokenService } from 'src/app/auth/token.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AgendamentoHomeComponent implements OnInit {
 
-  constructor() { }
+  loginReturn: LoginReturn;
+
+  constructor(private tokenService: TokenService) { }
 
   ngOnInit(): void {
+    this.loginReturn = this.tokenService.decodePayloadJWT();
   }
 
 }

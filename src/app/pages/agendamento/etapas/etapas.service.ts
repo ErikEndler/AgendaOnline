@@ -1,3 +1,4 @@
+import { Agendamento } from './../../../models/agendamento';
 import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
 import { EventEmitter, Injectable } from '@angular/core';
 
@@ -5,9 +6,10 @@ import { EventEmitter, Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class EtapasService {
-  constructor() {}
+  constructor() { }
   eventoServico = new EventEmitter<number>();
   eventoServicoFuncionario = new EventEmitter<ServicoFuncionario>();
+  eventoAgendamento = new EventEmitter<Agendamento>();
 
   emiteEventoServico(idServico: number): void {
     this.eventoServico.emit(idServico);
@@ -15,5 +17,9 @@ export class EtapasService {
 
   emiteServicoFuncionario(servicoFuncionario: ServicoFuncionario): void {
     this.eventoServicoFuncionario.emit(servicoFuncionario);
+  }
+
+  emiteAgendamento(agendamento: Agendamento): void {
+    this.eventoAgendamento.emit(agendamento);
   }
 }

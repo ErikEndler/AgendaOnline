@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <h4>Etapa 3 - Selecione uma data</h4>
+    </div>
+    <div class="card-body">
+      <div class="card card-blue">
+        <form>
+          <div>
+            <label>Nome</label>
+            <input class="form-control" type="text" name="nome" [(ngModel)]="clienteNome" readonly>
+          </div>
+          <div>
+            <label>Serviço</label>
+            <input class="form-control" type="text" name="servico" [(ngModel)]="servicoFuncionario?.servico.nome"
+              readonly>
+          </div>
+          <div>
+            <label>data</label>
+            <input readonly class="form-control" type="date" name="data" [(ngModel)]="data">
+          </div>
+          <div>
+            <label>Hoario</label>
+            <input readonly class="form-control" type="time" name="data" [(ngModel)]="hora">
+          </div>
+
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

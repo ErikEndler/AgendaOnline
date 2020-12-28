@@ -35,7 +35,7 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.verificaCredencial();
@@ -50,9 +50,9 @@ export class UsuarioComponent implements OnInit {
       id: [this.usuario.id],
       nome: [this.usuario.nome, Validators.required],
       cpf: [this.usuario.cpf, Validators.required],
-      email: [this.usuario.email, Validators.required],
+      email: [this.usuario.email],
       role: [this.usuario.role, Validators.required],
-      sexo: [this.usuario.sexo, Validators.required],
+      sexo: [this.usuario.sexo],
       telefone: [this.usuario.telefone, Validators.required],
       whatsapp: [this.usuario.whatsapp],
       senha: [this.usuario.senha],

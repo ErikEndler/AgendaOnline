@@ -37,14 +37,13 @@ export class CadastroComponent implements OnInit {
       id: [usuario.id],
       nome: [usuario.nome, Validators.required],
       cpf: [usuario.cpf, Validators.required],
-      email: [usuario.cpf],
+      email: [usuario.email],
       role: [usuario.role, Validators.required],
       sexo: [usuario.sexo],
       telefone: [usuario.telefone, Validators.required],
       whatsapp: [usuario.whatsapp],
       senha: [usuario.senha, Validators.required],
       notificacao: true,
-      notificacaoSms: false,
       notificacaoEmail: true,
       notificacaoWhatsapp: false,
     });
@@ -82,5 +81,10 @@ export class CadastroComponent implements OnInit {
 
   debug(): void {
     this.debugEnable = !this.debugEnable;
+  }
+  verificaValidTouched(campo): boolean {
+    return (
+      !this.formulario.get(campo).valid && this.formulario.get(campo).touched
+    );
   }
 }

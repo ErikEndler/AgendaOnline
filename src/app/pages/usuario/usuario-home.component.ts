@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./usuario-home.component.css'],
 })
 export class UsuarioHomeComponent implements OnInit {
-  constructor(private tokenService: TokenService, private router: Router) {}
+  constructor(private tokenService: TokenService, private router: Router) { }
   loginReturn: LoginReturn;
   admin = false;
 
@@ -29,7 +29,7 @@ export class UsuarioHomeComponent implements OnInit {
     this.router.navigate(['usuario/cadastro']);
   }
   listar(): void {
-    this.router.navigate(['servico/list']);
+    this.router.navigate(['usuario/list']);
   }
   funcionario(): void {
     this.router.navigate(['funcionario/cadastro']);

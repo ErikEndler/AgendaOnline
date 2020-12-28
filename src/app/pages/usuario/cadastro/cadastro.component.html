@@ -12,6 +12,8 @@
                 <div class="form-group">
                   <label> Nome (Obrigatório) </label>
                   <input class="form-control" placeholder="Nome" type="text" formControlName="nome" />
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Nome é obrigatório.">
+                  </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4">
@@ -34,6 +36,8 @@
                   <label> CPF (Obrigatorio)</label>
                   <input class="form-control" placeholder="000.000.000-00" type="text" [mask]="maskCpf"
                     formControlName="cpf" />
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('cpf')" msgErro="CPF é obrigatório.">
+                  </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4 px-md-1">
@@ -41,6 +45,8 @@
                   <label> Telefone (Obrigatório) </label>
                   <input class="form-control" placeholder="(00) 00000-0000" type="text" [mask]="maskFone"
                     formControlName="telefone" />
+                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('telefone')"
+                    msgErro="Telefone é obrigatório."></app-campo-control-erro>
                 </div>
               </div>
 

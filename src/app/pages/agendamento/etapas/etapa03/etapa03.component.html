@@ -39,47 +39,44 @@
         <div class="card-body">
           <div class="text-center">
             <label style="font-size: 1.1rem">Selecione uma Data</label>
-            <input
-              class="form-control"
-              type="date"
-              name="data"
-              (change)="dayselect($event.target.value)"
-            />
+            <input class="form-control" type="date" name="data" (change)="dayselect($event.target.value)" />
           </div>
           <div *ngIf="!horariosHide" class="text-center">
-            <label style="font-size: 1.1rem">Selecione Horario Inicio</label>
+            <label style="font-size: 1.1rem">Selecione Horario de Inicio</label>
 
             <div class="form-row align-items-center">
-              <input
-                style="margin-right: 0"
-                class="form-control"
-                type="time"
-                name="hrInicial"
-                [(ngModel)]="hrInicial"
-                (change)="selectHora()"
-              />
-              <input
-                readonly
-                style="margin-left: 0"
-                class="form-control"
-                type="time"
-                name="hrFinal"
-                [(ngModel)]="hrFinal"
-              />
+              <input style="margin-right: 0" class="form-control" type="time" name="hrInicial" [(ngModel)]="hrInicial"
+                (change)="selectHora()" />
+              <input readonly style="margin-left: 0" class="form-control" type="time" name="hrFinal"
+                [(ngModel)]="hrFinal" />
             </div>
+          </div>
+          <div class="text-center">
+            <label style="font-size: 1.1rem">Observação</label>
+            <textarea style="min-width: 50%;" class="form-control" [(ngModel)]="agendamento.obs"></textarea>
           </div>
           <div *ngIf="loading" class="text-center">
             <div class="spinner-border text-success" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
+          <div>
+            <label style="font-size: 1.1rem">Receber Notificações sobre este Agendamento </label>
+            <label class="switch">
+              <input [(ngModel)]="agendamento.notificacao" type="checkbox" id="notificacao" checked />
+              <span class="slider round"></span>
+            </label>
+          </div>
         </div>
       </div>
     </div>
     <div class="card-footer">
       <div class="btn-group">
-        <button awPreviousStep type="button" class="btn btn-warning" awNextStep>
+        <button awPreviousStep type="button" class="btn btn-warning">
           <i class="fas fa-arrow-left"></i>Voltar
+        </button>
+        <button type="button" class="btn btn-warning" awNextStep (click)="finalizar()">
+          Finalizar <i class="fas fa-arrow-right"></i>
         </button>
       </div>
     </div>

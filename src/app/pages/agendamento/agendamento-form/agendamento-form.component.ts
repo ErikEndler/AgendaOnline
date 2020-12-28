@@ -1,3 +1,5 @@
+import { LoginReturn } from './../../../models/loginReturn';
+import { TokenService } from './../../../auth/token.service';
 import { EscalaService } from './../../escala/escala.service';
 import { Escala } from './../../../models/escala';
 import { Component, OnInit } from '@angular/core';
@@ -31,6 +33,7 @@ export class AgendamentoFormComponent implements OnInit {
   confirmResult: Subject<any>;
   tempo: string;
   escalas: Escala[];
+  loginReturn: LoginReturn;
 
   constructor(
     private servicoFuncionarioService: ServicoFuncionarioService,
@@ -39,23 +42,20 @@ export class AgendamentoFormComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private activatedRoute: ActivatedRoute,
-    private escalaService: EscalaService
-  ) {}
+    private escalaService: EscalaService,
+    private tokenService: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
       console.log(params);
-      if (params.funcionarioId) {
-        this.funcionarioID = params.funcionarioId;
-        this.listarSF();
-      } else {
-        this.funcionarioID = parseInt(sessionStorage.getItem('id'), 10);
-        this.listarSF();
-      }
       if (params.agendamentoId) {
         this.buscaAgendamento(params.agendamentoId);
       }
     });
+    this.loginReturn = this.tokenService.decodePayloadJWT();
+    this.funcionarioID = this.loginReturn.id;
+
     this.usuarioService.list().subscribe((result) => (this.usuarios = result));
   }
   listarSF(): void {

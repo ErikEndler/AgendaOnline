@@ -31,16 +31,16 @@ export class ServicoFormComponent implements OnInit {
     private categoriaService: CategoriaService,
     private notificacaoService: NotificacaoService,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.combobox();
     const servico = this.route.snapshot.data['servico'];
     this.formulario = this.formBuilder.group({
       id: [servico.id],
-      categoria: [servico.categoria],
-      tempo: [servico.tempo],
-      nome: [servico.nome],
+      categoria: [servico.categoria, Validators.required],
+      tempo: [servico.tempo, Validators.required],
+      nome: [servico.nome, Validators.required],
       descricao: [servico.descricao],
     });
   }
@@ -93,5 +93,10 @@ export class ServicoFormComponent implements OnInit {
   }
   comparaCategoria(obj1, obj2) {
     return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2;
+  }
+  verificaValidTouched(campo): boolean {
+    return (
+      !this.formulario.get(campo).valid && this.formulario.get(campo).touched
+    );
   }
 }

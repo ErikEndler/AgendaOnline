@@ -2,7 +2,7 @@ import { Agendamento } from './../../../../models/agendamento';
 import { Observable } from 'rxjs';
 import { Escala } from './../../../../models/escala';
 import { EscalaService } from './../../../escala/escala.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
 import { ServicoFuncionarioService } from 'src/app/pages/servico-funcionario/servico-funcionario.service';
 import { ErroService } from 'src/app/shared/erro/erro.service';
@@ -17,6 +17,7 @@ import { NotificationType } from 'angular2-notifications';
   styleUrls: ['./etapa03.component.css'],
 })
 export class Etapa03Component implements OnInit {
+  @Input() clienteId: number;
   listempy = false;
   horariosHide = true;
   page = 1;
@@ -33,24 +34,26 @@ export class Etapa03Component implements OnInit {
   hrFinal: string;
 
   constructor(
-    private servicoFuncionarioService: ServicoFuncionarioService,
     private erroService: ErroService,
     private etapasService: EtapasService,
     private escalaService: EscalaService,
     private notificacaoService: NotificacaoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    this.agendamento.notificacao = true;
     this.etapasService.eventoServicoFuncionario.subscribe((result) => {
       this.servicoFuncionario = result;
       this.agendamento.servicoFuncionarioId = result.id;
       this.buscaEscala();
     });
+    this.agendamento.clienteId = this.clienteId;
   }
   buscaEscala(): void {
     this.escalas$ = this.escalaService.listarPorServicoFuncionario(
       this.servicoFuncionario.id
     );
+    this.dias = [];
     this.escalas$.subscribe((result) =>
       result.forEach((e) => {
         if (e.itensEscala.length > 0) {
@@ -67,6 +70,7 @@ export class Etapa03Component implements OnInit {
         this.data = valor;
         this.horariosHide = false;
       } else {
+        this.horariosHide = true;
         this.notificacaoService.criar(
           NotificationType.Warn,
           moment(valor).format('dddd'),
@@ -84,9 +88,15 @@ export class Etapa03Component implements OnInit {
 
     this.loading = false;
   }
-  selectHora() {
+  selectHora(): void {
     this.hrFinal = moment(this.hrInicial, 'HH:mm')
       .add(this.servicoFuncionario.servico.tempo, 'm')
       .format('HH:mm');
+    this.agendamento.horarioInicio = this.data + ' ' + this.hrInicial;
+    this.agendamento.horarioFim = this.data + ' ' + this.hrFinal;
+  }
+  finalizar(): void {
+    console.log(this.agendamento);
+    this.etapasService.emiteAgendamento(this.agendamento);
   }
 }
