@@ -31,17 +31,18 @@ export class AgendamentoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.userLogin = this.tokenService.decodePayloadJWT()
+    this.userLogin = this.tokenService.decodePayloadJWT();
     this.funcionarioID = this.userLogin.id;
   }
   trim(string: string): string {
-    return string.slice(-4);
+    return string.slice(-5);
   }
   agendaDia(data?): void {
     this.loading = true;
     this.empy = true;
     const dia: string[] = [];
     dia.push(data);
+    dia.push('2020-12-30');
     this.agendamentos$ = this.agendamentoService.listaAgendamentosData(
       dia,
       this.funcionarioID
@@ -56,6 +57,7 @@ export class AgendamentoComponent implements OnInit {
         }
         this.colunas = [];
         this.colunas.push(data);
+        this.colunas.push('2020-12-30');
         this.loading = false;
       },
       (error) => {

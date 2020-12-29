@@ -1,7 +1,7 @@
 <div class="container">
   <div class="card text-center">
     <div class="card-header">
-      <h4>Etapa 3 - Selecione uma data</h4>
+      <h4>Etapa 4 - Confirmação</h4>
     </div>
     <div class="card-body">
       <div class="card card-blue">
@@ -16,17 +16,37 @@
               readonly>
           </div>
           <div>
-            <label>data</label>
+            <label>Data</label>
             <input readonly class="form-control" type="date" name="data" [(ngModel)]="data">
           </div>
           <div>
-            <label>Hoario</label>
-            <input readonly class="form-control" type="time" name="data" [(ngModel)]="hora">
+            <label>Horario</label>
+            <input readonly class="form-control" type="time" [(ngModel)]="hora" name="hora">
           </div>
-
-
+          <div>
+            <label>Receber Notificações</label>
+            <label class="switch">
+              <input disabled [(ngModel)]="agendamento.notificacao" type="checkbox" id="notificacao" name="box" />
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div>
+            <label>Observação</label>
+            <textarea readonly style="min-width: 50%;" class="form-control" [(ngModel)]="agendamento.obs"
+              name="obs"></textarea>
+          </div>
         </form>
 
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <button awPreviousStep type="button" class="btn btn-warning">
+          <i class="fas fa-arrow-left"></i>Voltar
+        </button>
+        <button type="button" class="btn btn-warning" (click)="onSave()">
+          Agendar <i class="fas fa-arrow-right"></i>
+        </button>
       </div>
     </div>
   </div>

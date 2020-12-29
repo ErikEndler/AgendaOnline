@@ -40,8 +40,13 @@ const routes: Routes = [
     canActivate: [AdminGuard],
   },
   {
-    path: 'agendamento',
+    path: 'agendamento/novo',
     component: AgendamentoHomeComponent,
+    canActivate: [AdminGuard],
+  },
+  {
+    path: 'agendamento',
+    component: AgendamentoComponent,
     canActivate: [AdminGuard],
   },
   { path: 'agendamento/form', component: AgendamentoFormComponent },
@@ -125,4 +130,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

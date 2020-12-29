@@ -82,7 +82,7 @@ export class AgendamentoFormComponent implements OnInit {
   }
   selecionarServico(): void {
     this.tempo = this.servicoFuncionario.servico.tempo;
-    this.agendamento.servicoFuncionarioId = this.servicoFuncionario.id;
+    this.agendamento.servicoFuncionario = this.servicoFuncionario;
     this.buscaEscalas(this.servicoFuncionario.id);
   }
   atribuirHr(): void {

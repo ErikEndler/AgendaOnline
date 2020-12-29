@@ -19,8 +19,8 @@
               </div>
               <div class="col-md-6">
                 <label> Cliente </label>
-                <select class="form-control" data-live-search="true" data-selectpicker
-                  [(ngModel)]="agendamento.clienteId" name="agendamento.clienteId">
+                <select class="form-control" data-live-search="true" data-selectpicker [(ngModel)]="agendamento.cliente"
+                  name="agendamento.clienteId">
                   <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">
                     {{ usuario.nome }}
                   </option>

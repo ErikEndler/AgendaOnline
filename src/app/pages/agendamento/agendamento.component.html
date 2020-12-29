@@ -3,34 +3,19 @@
     <div class="card-header">
       <nav class="navbar navbar-expand navbar">
         <a class="navbar-brand">Agendamentos</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto"></ul>
           <form class="form-inline my-2 my-lg-0">
-            <button
-              class="btn btn-sm btn-secondary"
-              (click)="agendaDia('hoje')"
-            >
+            <button class="btn btn-sm btn-secondary" (click)="agendaDia('hoje')">
               Agenda do Dia
             </button>
-            <input
-              (change)="agendaDia($event.target.value)"
-              class="form-control mr-sm-2"
-              type="date"
-              name="data"
-              aria-label="Search"
-            />
+            <input (change)="agendaDia($event.target.value)" class="form-control mr-sm-2" type="date" name="data"
+              aria-label="Search" />
             <i class="tim-icons icon-zoom-split"> </i>
             <span class="d-lg-none d-md-block"> Search </span>
           </form>
@@ -38,52 +23,42 @@
       </nav>
     </div>
     <div class="card-body">
-      <div *ngIf="loading" class="d-flex justify-content-center">
-        <div
-          class="spinner-border text-primary"
-          style="width: 3rem; height: 3rem"
-          role="status"
-        >
+      <div *ngIf=loading class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <div *ngIf="!loading" class="table-responsive">
-        <table
-          *ngFor="let agds of agendamentos$ | async; let i = index"
-          class="table tablesorter"
-          id=""
-        >
-          <thead class="text-primary">
-            <tr>
-              <th id="tdhead" *ngFor="let coluna of colunas; let j = index">
-                {{ coluna }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngIf="empy">
-              <td id="tdvazio" colspan="4">VAZIO</td>
-            </tr>
-            <tr *ngFor="let agd of agds; let j = index">
-              <td>{{ trim(agd.horarioInicio) }}-{{ trim(agd.horarioFim) }}</td>
-              <td>Cliente X</td>
-              <td><span class="badge badge-info">Servico A</span></td>
-              <td>
-                <button class="btn-sm btn-link">
-                  <i class="fas fa-info-circle"></i>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div>
-          <button
-            class="btn btn-fill btn-info"
-            (click)="adicionarAgendamento()"
-          >
-            Adicionar
-          </button>
+      <div *ngIf=!loading class="table-responsive">
+        <div class="row">
+          <div *ngFor="let agds of agendamentos$ | async; let i = index" class="col">
+            <div class="card card-blue">
+              <div class="card-header text-center">{{colunas[i]}}</div>
+              <div class="card-body">
+                <table class="table tablesorter" id="">
+                  <thead class="text-primary">
+                    <tr>
+                      <!--<th id="tdhead" *ngFor="let coluna of colunas" scope="col">{{ coluna }}</th>-->
+                      <th>HORA INICIO</th>
+                      <th>HORA FIM</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="empy">
+                      <td id="tdvazio" colspan="4">VAZIO</td>
+                    </tr>
+                    <tr *ngFor="let agd of agds; let j = index">
+                      <td>{{ trim(agd.horarioInicio) }}-{{ trim(agd.horarioFim)}}</td>
+                      <td>{{agd.cliente.nome}}</td>
+                      <td>{{agd.servicoFuncionario.servico.nome}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+          </div>
         </div>
+
       </div>
     </div>
   </div>

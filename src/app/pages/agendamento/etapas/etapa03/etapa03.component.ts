@@ -10,6 +10,8 @@ import { EtapasService } from '../etapas.service';
 import * as moment from 'moment';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
+import { Usuario } from 'src/app/models/usuario';
+import { UsuarioService } from 'src/app/pages/usuario/usuario.service';
 
 @Component({
   selector: 'app-etapa03',
@@ -37,17 +39,19 @@ export class Etapa03Component implements OnInit {
     private erroService: ErroService,
     private etapasService: EtapasService,
     private escalaService: EscalaService,
-    private notificacaoService: NotificacaoService
+    private notificacaoService: NotificacaoService,
+    private usuarioService: UsuarioService
+
   ) { }
 
   ngOnInit(): void {
     this.agendamento.notificacao = true;
     this.etapasService.eventoServicoFuncionario.subscribe((result) => {
       this.servicoFuncionario = result;
-      this.agendamento.servicoFuncionarioId = result.id;
+      this.agendamento.servicoFuncionario = result;
       this.buscaEscala();
     });
-    this.agendamento.clienteId = this.clienteId;
+    this.usuarioService.loadByID(this.clienteId).subscribe((result) => this.agendamento.cliente = result);
   }
   buscaEscala(): void {
     this.escalas$ = this.escalaService.listarPorServicoFuncionario(

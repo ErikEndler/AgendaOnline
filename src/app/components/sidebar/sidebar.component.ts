@@ -73,7 +73,7 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.auth.eventoLogar.subscribe(() => this.ngOnInit());
@@ -101,7 +101,7 @@ export class SidebarComponent implements OnInit {
         class: '',
       },
       {
-        path: '/agendamento',
+        path: '/agendamento/novo',
         title: 'Agendamento',
         icon: 'far fa-clock',
         class: '',
