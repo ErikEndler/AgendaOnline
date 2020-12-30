@@ -28,9 +28,9 @@
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <div *ngIf=!loading class="table-responsive">
-        <div class="row">
-          <div *ngFor="let agds of agendamentos$ | async; let i = index" class="col">
+      <div *ngIf=!loading>
+        <div class="row justify-content-center">
+          <div *ngFor="let agds of agendamentos$ | async; let i = index" class="col-auto ">
             <div class="card card-blue">
               <div class="card-header text-center">{{colunas[i]}}</div>
               <div class="card-body">
@@ -38,8 +38,10 @@
                   <thead class="text-primary">
                     <tr>
                       <!--<th id="tdhead" *ngFor="let coluna of colunas" scope="col">{{ coluna }}</th>-->
-                      <th>HORA INICIO</th>
-                      <th>HORA FIM</th>
+                      <th>HORÁRIO</th>
+                      <th>CLIENTE</th>
+                      <th>SERVIÇO</th>
+                      <th>STATUS</th>
                     </tr>
                   </thead>
                   <tbody>

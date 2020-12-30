@@ -42,7 +42,6 @@ export class AgendamentoComponent implements OnInit {
     this.empy = true;
     const dia: string[] = [];
     dia.push(data);
-    dia.push('2020-12-30');
     this.agendamentos$ = this.agendamentoService.listaAgendamentosData(
       dia,
       this.funcionarioID
@@ -57,7 +56,6 @@ export class AgendamentoComponent implements OnInit {
         }
         this.colunas = [];
         this.colunas.push(data);
-        this.colunas.push('2020-12-30');
         this.loading = false;
       },
       (error) => {

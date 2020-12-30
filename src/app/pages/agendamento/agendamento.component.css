@@ -7,3 +7,8 @@
 .table {
   color: antiquewhite;
 }
+.col {
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
