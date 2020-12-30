@@ -69,7 +69,10 @@ export class Etapa03Component implements OnInit {
   dayselect(valor): void {
     moment.locale('pt-br');
     this.loading = true;
-    if (moment(valor).format('DD-MM-yyyy') >= moment().format('DD-MM-yyyy')) {
+    console.log(moment(valor).format('yyyy-MM-DD'));
+    console.log(moment().format('yyyy-MM-DD'));
+
+    if (moment(valor).format('yyyy-MM-DD') >= moment().format('yyyy-MM-DD')) {
       if (this.dias.indexOf(moment(valor).format('dddd')) !== -1) {
         this.data = valor;
         this.horariosHide = false;
