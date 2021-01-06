@@ -93,7 +93,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   }
 
   addServicos() {
-    this.router.navigate(['sf2'], {
+    this.router.navigate(['sf'], {
       queryParams: { id: this.funcionario.id },
     });
   }

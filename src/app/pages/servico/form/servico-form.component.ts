@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
@@ -30,8 +30,9 @@ export class ServicoFormComponent implements OnInit {
     private modalCOnfirm: ModalConfirmacaoService,
     private categoriaService: CategoriaService,
     private notificacaoService: NotificacaoService,
-    private erroService: ErroService
-  ) { }
+    private erroService: ErroService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.combobox();
@@ -98,5 +99,8 @@ export class ServicoFormComponent implements OnInit {
     return (
       !this.formulario.get(campo).valid && this.formulario.get(campo).touched
     );
+  }
+  addCategoria() {
+    this.router.navigate(['categoria']);
   }
 }

@@ -35,7 +35,6 @@ import { HomeEscalaComponent } from './pages/escala/home-escala/home-escala.comp
 import { ItemEscalaListComponent } from './pages/escala/item-escala/item-escala-list/item-escala-list.component';
 import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
-import { ServicoViewComponent } from './pages/servico-funcionario/servico-view/servico-view.component';
 import { NovoComponent } from './pages/escala/novo/novo.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { CampoControlErroComponent } from './shared/campo-control-erro/campo-control-erro.component';
@@ -67,7 +66,6 @@ import { Etapa04Component } from './pages/agendamento/etapas/etapa04/etapa04.com
     ItemEscalaFormComponent,
     ServicoFuncionarioComponent,
     FuncionarioviewComponent,
-    ServicoViewComponent,
     NovoComponent,
     AgendamentoComponent,
     CategoriaComponent,

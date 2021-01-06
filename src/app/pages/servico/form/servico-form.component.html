@@ -1,5 +1,7 @@
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"
+></script>
 
 <div class="content">
   <div class="row">
@@ -14,54 +16,106 @@
               <div class="col">
                 <div class="form-group">
                   <label> Nome </label>
-                  <input class="form-control" placeholder="Nome" type="text" formControlName="nome" />
-                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Nome é obrigatório.">
+                  <input
+                    class="form-control"
+                    placeholder="Nome"
+                    type="text"
+                    formControlName="nome"
+                  />
+                  <app-campo-control-erro
+                    [mostrarErro]="verificaValidTouched('nome')"
+                    msgErro="Nome é obrigatório."
+                  >
                   </app-campo-control-erro>
                 </div>
               </div>
-
             </div>
             <div class="row">
               <div class="col-md-4">
                 <div class="form-group">
                   <label> Tempo Segerido </label>
-                  <input class="form-control" type="time" formControlName="tempo" />
-                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('tempo')" msgErro="Tempo é obrigatório.">
+                  <input
+                    class="form-control"
+                    type="time"
+                    formControlName="tempo"
+                  />
+                  <app-campo-control-erro
+                    [mostrarErro]="verificaValidTouched('tempo')"
+                    msgErro="Tempo é obrigatório."
+                  >
                   </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4">
                 <label> Categoria </label>
-                <select class="form-control" formControlName="categoria" [compareWith]="comparaCategoria">
-                  <option *ngFor="let categoria of categorias" [ngValue]="categoria">
+                <select
+                  class="form-control"
+                  formControlName="categoria"
+                  [compareWith]="comparaCategoria"
+                >
+                  <option
+                    *ngFor="let categoria of categorias"
+                    [ngValue]="categoria"
+                  >
                     {{ categoria.nome }}
                   </option>
                 </select>
-                <app-campo-control-erro [mostrarErro]="verificaValidTouched('categoria')"
-                  msgErro="Categoria é obrigatório."></app-campo-control-erro>
+                <app-campo-control-erro
+                  [mostrarErro]="verificaValidTouched('categoria')"
+                  msgErro="Categoria é obrigatório."
+                ></app-campo-control-erro>
               </div>
             </div>
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group">
                   <label> Descrição </label>
-                  <input class="form-control" placeholder="Home Address" type="text" formControlName="descricao" />
+                  <input
+                    class="form-control"
+                    placeholder="Home Address"
+                    type="text"
+                    formControlName="descricao"
+                  />
                 </div>
               </div>
             </div>
           </form>
         </div>
         <div class="card-footer">
-          <button type="submit" class="btn btn-fill btn-success" [disabled]="!formulario.valid" (click)="onSubmit()">
+          <button
+            type="submit"
+            class="btn btn-fill btn-success"
+            [disabled]="!formulario.valid"
+            (click)="onSubmit()"
+          >
             Salvar
           </button>
         </div>
         <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="debug()" />
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="customSwitch1"
+            (change)="debug()"
+          />
           <label class="custom-control-label" for="customSwitch1">Debug</label>
         </div>
         <div class="card-body" *ngIf="debugEnable">
           <app-form-debug [form]="formulario"></app-form-debug>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <label>Adicione Mais categoria de Serviços</label> <br />
+          <button
+            type="submit"
+            class="btn btn-fill btn-secundary"
+            (click)="addCategoria()"
+          >
+            Adicionar Categoria
+          </button>
         </div>
       </div>
     </div>
