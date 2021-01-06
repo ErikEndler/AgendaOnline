@@ -1,7 +1,4 @@
-import { Agendamento } from './../../../../models/agendamento';
 import { Observable } from 'rxjs';
-import { Escala } from './../../../../models/escala';
-import { EscalaService } from './../../../escala/escala.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
 import { ServicoFuncionarioService } from 'src/app/pages/servico-funcionario/servico-funcionario.service';
@@ -12,6 +9,16 @@ import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.servi
 import { NotificationType } from 'angular2-notifications';
 import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/pages/usuario/usuario.service';
+import { Escala } from 'src/app/models/escala';
+import { Agendamento } from 'src/app/models/agendamento';
+import { EscalaService } from 'src/app/pages/escala/escala.service';
+import { AgendamentoService } from '../../agendamento.service';
+
+export class Disponibilidade {
+  situacao: boolean;
+  horaI: string;
+  horaF: string;
+}
 
 @Component({
   selector: 'app-etapa03',
@@ -19,8 +26,11 @@ import { UsuarioService } from 'src/app/pages/usuario/usuario.service';
   styleUrls: ['./etapa03.component.css'],
 })
 export class Etapa03Component implements OnInit {
+
+  disponibilidade: Disponibilidade[];
   @Input() clienteId: number;
   listempy = false;
+  listempy2 = true;
   horariosHide = true;
   page = 1;
   pageSize = 4;
@@ -36,6 +46,7 @@ export class Etapa03Component implements OnInit {
   hrFinal: string;
 
   constructor(
+    private agendamentoService: AgendamentoService,
     private erroService: ErroService,
     private etapasService: EtapasService,
     private escalaService: EscalaService,
@@ -74,6 +85,7 @@ export class Etapa03Component implements OnInit {
 
     if (moment(valor).format('yyyy-MM-DD') >= moment().format('yyyy-MM-DD')) {
       if (this.dias.indexOf(moment(valor).format('dddd')) !== -1) {
+        this.obterDisponibilidade(moment(valor).format('yyyy-MM-DD'));
         this.data = valor;
         this.horariosHide = false;
       } else {
@@ -105,5 +117,18 @@ export class Etapa03Component implements OnInit {
   finalizar(): void {
     console.log(this.agendamento);
     this.etapasService.emiteAgendamento(this.agendamento);
+  }
+  obterDisponibilidade(data): void {
+    this.agendamentoService.disponibilidadeDia(data, this.servicoFuncionario.funcionario.id).subscribe((result) => {
+      this.disponibilidade = result;
+      console.log('result', result);
+      if (result.length > 0) {
+        this.listempy2 = false;
+      }
+    },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      });
   }
 }

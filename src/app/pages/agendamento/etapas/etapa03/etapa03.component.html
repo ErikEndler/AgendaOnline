@@ -35,83 +35,79 @@
           </div>
         </div>
       </div>
-      <div class="card card-blue">
-        <div class="card-body">
-          <div class="text-center">
-            <label style="font-size: 1.1rem">Selecione uma Data</label>
-            <input
-              class="form-control"
-              type="date"
-              name="data"
-              (change)="dayselect($event.target.value)"
-            />
-          </div>
-          <div *ngIf="!horariosHide" class="text-center">
-            <label style="font-size: 1.1rem">Selecione Horario de Inicio</label>
+      <div class="row">
+        <div class="col">
+          <div class="card card-blue">
+            <div class="card-body">
+              <div class="text-center">
+                <label style="font-size: 1.1rem">Selecione uma Data</label>
+                <input class="form-control" type="date" name="data" (change)="dayselect($event.target.value)" />
+              </div>
+              <div *ngIf="!horariosHide" class="text-center">
+                <label style="font-size: 1.1rem">Selecione Horario de Inicio</label>
 
-            <div class="form-row align-items-center">
-              <input
-                style="margin-right: 0"
-                class="form-control"
-                type="time"
-                name="hrInicial"
-                [(ngModel)]="hrInicial"
-                (change)="selectHora()"
-              />
-              <input
-                readonly
-                style="margin-left: 0"
-                class="form-control"
-                type="time"
-                name="hrFinal"
-                [(ngModel)]="hrFinal"
-              />
+                <div class="form-row align-items-center">
+                  <input style="margin-right: 0" class="form-control" type="time" name="hrInicial"
+                    [(ngModel)]="hrInicial" (change)="selectHora()" />
+                  <input readonly style="margin-left: 0" class="form-control" type="time" name="hrFinal"
+                    [(ngModel)]="hrFinal" />
+                </div>
+              </div>
+              <div class="text-center">
+                <label style="font-size: 1.1rem">Observação</label>
+                <textarea style="min-width: 60%" class="form-control" [(ngModel)]="agendamento.obs"></textarea>
+              </div>
+              <div *ngIf="loading" class="text-center">
+                <div class="spinner-border text-success" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+              <div>
+                <label style="font-size: 1.1rem">Receber Notificações sobre este Agendamento
+                </label>
+                <label class="switch">
+                  <input [(ngModel)]="agendamento.notificacao" type="checkbox" id="notificacao" checked />
+                  <span class="slider round"></span>
+                </label>
+              </div>
             </div>
           </div>
-          <div class="text-center">
-            <label style="font-size: 1.1rem">Observação</label>
-            <textarea
-              style="min-width: 50%"
-              class="form-control"
-              [(ngModel)]="agendamento.obs"
-            ></textarea>
-          </div>
-          <div *ngIf="loading" class="text-center">
-            <div class="spinner-border text-success" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-          </div>
-          <div>
-            <label style="font-size: 1.1rem"
-              >Receber Notificações sobre este Agendamento
-            </label>
-            <label class="switch">
-              <input
-                [(ngModel)]="agendamento.notificacao"
-                type="checkbox"
-                id="notificacao"
-                checked
-              />
-              <span class="slider round"></span>
-            </label>
+        </div>
+        <div class="col-3">
+          <div class="table-responsive">
+            <table class="table tablesorter" style="margin-bottom: 0%">
+              <thead class="text-primary">
+                <tr>
+                  <th>HORARIOS</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="listempy2">
+                  <td id="tdvazio" colspan="4">VAZIO</td>
+                </tr>
+                <tr *ngFor="let disp of disponibilidade; let j = index">
+                  <td *ngIf="disp.situacao" style="background-color: forestgreen;"> {{disp.horaI}}-{{disp.horaF}}</td>
+                  <td *ngIf="!disp.situacao" style="background-color: darkred;"> {{disp.horaI}}-{{disp.horaF}}</td>
+                </tr>
+
+
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
+
     </div>
     <div class="card-footer">
       <div class="btn-group">
         <button awPreviousStep type="button" class="btn btn-warning">
           <i class="fas fa-arrow-left"></i>Voltar
         </button>
-        <button
-          type="button"
-          class="btn btn-warning"
-          awNextStep
-          (click)="finalizar()"
-        >
+        <button type="button" class="btn btn-warning" awNextStep (click)="finalizar()">
           Finalizar <i class="fas fa-arrow-right"></i>
         </button>
       </div>
     </div>
   </div>
+
 </div>
