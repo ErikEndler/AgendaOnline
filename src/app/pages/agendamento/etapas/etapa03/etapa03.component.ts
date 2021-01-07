@@ -26,6 +26,7 @@ export class Disponibilidade {
   styleUrls: ['./etapa03.component.css'],
 })
 export class Etapa03Component implements OnInit {
+  button = false;
 
   disponibilidade: Disponibilidade[];
   @Input() clienteId: number;
@@ -113,6 +114,7 @@ export class Etapa03Component implements OnInit {
       .format('HH:mm');
     this.agendamento.horarioInicio = this.data + ' ' + this.hrInicial;
     this.agendamento.horarioFim = this.data + ' ' + this.hrFinal;
+    this.button = true;
   }
   finalizar(): void {
     console.log(this.agendamento);

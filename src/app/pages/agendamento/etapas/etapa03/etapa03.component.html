@@ -78,7 +78,7 @@
             <table class="table tablesorter" style="margin-bottom: 0%">
               <thead class="text-primary">
                 <tr>
-                  <th>HORARIOS</th>
+                  <th>HORARIOS DISPONÍVEIS</th>
                 </tr>
               </thead>
               <tbody>
@@ -87,7 +87,7 @@
                 </tr>
                 <tr *ngFor="let disp of disponibilidade; let j = index">
                   <td *ngIf="disp.situacao" style="background-color: forestgreen;"> {{disp.horaI}}-{{disp.horaF}}</td>
-                  <td *ngIf="!disp.situacao" style="background-color: darkred;"> {{disp.horaI}}-{{disp.horaF}}</td>
+                  <!--<td *ngIf="!disp.situacao" style="background-color: darkred;"> {{disp.horaI}}-{{disp.horaF}}</td>-->
                 </tr>
 
 
@@ -103,7 +103,7 @@
         <button awPreviousStep type="button" class="btn btn-warning">
           <i class="fas fa-arrow-left"></i>Voltar
         </button>
-        <button type="button" class="btn btn-warning" awNextStep (click)="finalizar()">
+        <button type="button" class="btn btn-warning" awNextStep (click)="finalizar()" [disabled]="!button">
           Finalizar <i class="fas fa-arrow-right"></i>
         </button>
       </div>

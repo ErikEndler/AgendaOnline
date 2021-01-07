@@ -5,6 +5,7 @@ import { ServicoService } from './../../../servico/servico.service';
 import { Component, OnInit } from '@angular/core';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-etapa01',
@@ -27,8 +28,10 @@ export class Etapa01Component implements OnInit {
   constructor(
     private servicoService: ServicoService,
     private erroService: ErroService,
-    private etapasService: EtapasService
-  ) {}
+    private etapasService: EtapasService,
+    private router: Router,
+
+  ) { }
 
   ngOnInit(): void {
     this.teste = moment().endOf('month').format('DD/MM/YYYY');
@@ -65,5 +68,8 @@ export class Etapa01Component implements OnInit {
   }
   avancar(id): void {
     this.etapasService.emiteEventoServico(id);
+  }
+  cancelar() {
+    this.router.navigate(['home']);
   }
 }
