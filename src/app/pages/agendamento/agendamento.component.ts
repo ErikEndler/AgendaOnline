@@ -23,21 +23,28 @@ export class AgendamentoComponent implements OnInit {
   loading = false;
   colunas: string[] = [];
   agendamentos$: Observable<Agendamento[][]>;
+  dia: string;
+  data: string;
 
   constructor(
     private agendamentoService: AgendamentoService,
     private erroService: ErroService,
     private router: Router,
     private tokenService: TokenService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userLogin = this.tokenService.decodePayloadJWT();
     this.funcionarioID = this.userLogin.id;
-    this.agendaDia(moment().format('yyyy-MM-DD'));
+    this.dia = moment().format('yyyy-MM-DD');
+    this.data = this.dia;
+    this.agendaHoje();
   }
   trim(string: string): string {
     return string.slice(-5);
+  }
+  agendaHoje() {
+    this.agendaDia(this.dia);
   }
   agendaDia(data?): void {
     this.loading = true;
@@ -74,5 +81,15 @@ export class AgendamentoComponent implements OnInit {
         funcionarioId: this.funcionarioID,
       },
     });
+  }
+  avancar() {
+    this.data = moment(this.data).add(1, 'd').format('yyyy-MM-DD');
+    console.log(this.data);
+    this.agendaDia(this.data);
+  }
+  voltar() {
+    this.data = moment(this.data).subtract(1, 'd').format('yyyy-MM-DD');
+    console.log(this.data);
+    this.agendaDia(this.data);
   }
 }
