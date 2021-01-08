@@ -53,8 +53,7 @@ export class Etapa03Component implements OnInit {
     private escalaService: EscalaService,
     private notificacaoService: NotificacaoService,
     private usuarioService: UsuarioService
-
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.agendamento.notificacao = true;
@@ -63,7 +62,9 @@ export class Etapa03Component implements OnInit {
       this.agendamento.servicoFuncionario = result;
       this.buscaEscala();
     });
-    this.usuarioService.loadByID(this.clienteId).subscribe((result) => this.agendamento.cliente = result);
+    this.usuarioService
+      .loadByID(this.clienteId)
+      .subscribe((result) => (this.agendamento.cliente = result));
   }
   buscaEscala(): void {
     this.escalas$ = this.escalaService.listarPorServicoFuncionario(
@@ -121,16 +122,21 @@ export class Etapa03Component implements OnInit {
     this.etapasService.emiteAgendamento(this.agendamento);
   }
   obterDisponibilidade(data): void {
-    this.agendamentoService.disponibilidadeDia(data, this.servicoFuncionario.funcionario.id).subscribe((result) => {
-      this.disponibilidade = result;
-      console.log('result', result);
-      if (result.length > 0) {
-        this.listempy2 = false;
-      }
-    },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
-      });
+    console.log(data, ' - ', this.servicoFuncionario.id);
+    this.agendamentoService
+      .disponibilidadeDia(data, this.servicoFuncionario.id)
+      .subscribe(
+        (result) => {
+          this.disponibilidade = result;
+          console.log('result', result);
+          if (result.length > 0) {
+            this.listempy2 = false;
+          }
+        },
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+        }
+      );
   }
 }

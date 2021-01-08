@@ -1,0 +1,69 @@
+<div class="content">
+  <div class="card">
+    <div class="card-header">
+      <nav class="navbar navbar-expand navbar">
+        <!--<a class="navbar-brand">Meus Agendamentos</a>-->
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <i class="far fa-calendar-alt"></i>
+          <ul class="navbar-nav">
+            <li class="nav-item active">
+              <a class="nav-link">Meus Agendamentos</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="card-body">
+      <div class="card card-blue">
+        <div class="card-body">
+          <table class="table tablesorter" id="">
+            <thead class="text-primary">
+              <tr>
+                <th>DATA</th>
+                <th>HORÁRIO</th>
+                <th>SERVIÇO</th>
+                <th>PROFISSIONAL</th>
+                <th>STATUS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngIf="empy">
+                <td id="tdvazio" colspan="5" style="text-align: center">
+                  Sem Agendamentos
+                </td>
+              </tr>
+              <tr *ngFor="let agendamento of agendamentos">
+                <td>{{ trimData(agendamento) }}</td>
+                <td>{{ trimHora(agendamento) }}</td>
+                <td>{{ agendamento.servicoFuncionario.servico.nome }}</td>
+                <td>{{ agendamento.servicoFuncionario.funcionario.nome }}</td>
+                <td>STATUS</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-between p-2">
+            <ngb-pagination
+              [collectionSize]="collectionSize"
+              [(page)]="page"
+              [pageSize]="pageSize"
+              (pageChange)="refresh()"
+            >
+            </ngb-pagination>
+
+            <select
+              class="custom-select"
+              style="width: auto"
+              [(ngModel)]="pageSize"
+              (ngModelChange)="refresh()"
+            >
+              <option [ngValue]="2">2 items per page</option>
+              <option [ngValue]="4">4 items per page</option>
+              <option [ngValue]="6">6 items per page</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

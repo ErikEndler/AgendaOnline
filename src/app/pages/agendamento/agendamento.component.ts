@@ -8,6 +8,7 @@ import { Agendamento } from 'src/app/models/agendamento';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { Router } from '@angular/router';
 import { LoginReturn } from 'src/app/models/loginReturn';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-agendamento',
@@ -28,11 +29,12 @@ export class AgendamentoComponent implements OnInit {
     private erroService: ErroService,
     private router: Router,
     private tokenService: TokenService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.userLogin = this.tokenService.decodePayloadJWT();
     this.funcionarioID = this.userLogin.id;
+    this.agendaDia(moment().format('yyyy-MM-DD'));
   }
   trim(string: string): string {
     return string.slice(-5);

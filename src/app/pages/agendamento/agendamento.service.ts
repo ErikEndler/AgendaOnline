@@ -33,4 +33,9 @@ export class AgendamentoService extends CrudService<Agendamento> {
       { params: parametros }
     );
   }
+  agendamentoCliente(idCLiente: number): Observable<Agendamento[]> {
+    return this.http.get<Array<Agendamento>>(
+      AppSettings.url + '/api/agendamento/cliente/' + idCLiente
+    );
+  }
 }
