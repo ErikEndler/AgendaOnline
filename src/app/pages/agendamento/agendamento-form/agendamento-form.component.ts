@@ -22,8 +22,9 @@ import { Agendamento } from 'src/app/models/agendamento';
   styleUrls: ['./agendamento-form.component.css'],
 })
 export class AgendamentoFormComponent implements OnInit {
-  agendamento: Agendamento = new Agendamento();
+  agendamento: Agendamento;
   funcionarioID: number;
+  listaFuncionarios: Usuario[];
   listaServicoFuncionario: ServicoFuncionario[];
   servicoFuncionario: ServicoFuncionario;
   usuarios: Usuario[];
@@ -47,24 +48,31 @@ export class AgendamentoFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      console.log(params);
-      if (params.agendamentoId) {
-        this.buscaAgendamento(params.agendamentoId);
-      }
-    });
+    this.agendamento = this.activatedRoute.snapshot.data.agendamento;
+    console.log(this.agendamento);
+    if (this.agendamento.id) {
+      this.dataHora();
+      this.selecionarServico();
+    }
+    this.listarFuncionarios();
+    this.listarSF();
     this.loginReturn = this.tokenService.decodePayloadJWT();
     this.funcionarioID = this.loginReturn.id;
-
     this.usuarioService.list().subscribe((result) => (this.usuarios = result));
+  }
+  listarFuncionarios(): void {
+    this.usuarioService.listarFuncionarios().subscribe((result) => { this.listaFuncionarios = result; },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      });
   }
   listarSF(): void {
     this.servicoFuncionarioService
-      .listarServicosFuncionario(this.funcionarioID)
+      .listarServicosFuncionario(this.agendamento.servicoFuncionario.funcionario.id)
       .subscribe(
         (result) => {
-          (this.listaServicoFuncionario = result),
-            console.log(this.funcionarioID);
+          (this.listaServicoFuncionario = result);
         },
         (error) => {
           console.error(error);
@@ -72,18 +80,19 @@ export class AgendamentoFormComponent implements OnInit {
         }
       );
   }
-  buscaAgendamento(agendamentoId: number): void {
-    this.agendamentoService.loadByID(agendamentoId).subscribe((result) => {
-      this.agendamento = result;
-      this.hrFinal = this.agendamento.horarioFim.slice(-4);
-      this.hrInicial = this.agendamento.horarioInicio.slice(-4);
-      this.data = this.agendamento.horarioInicio.slice(10);
-    });
+  dataHora(): void {
+    this.hrFinal = this.agendamento.horarioFim.slice(-5);
+    console.log(this.hrFinal);
+    this.hrInicial = this.agendamento.horarioInicio.slice(-5);
+    console.log(this.hrInicial);
+    this.data = this.agendamento.horarioInicio.slice(0, 10);
+    console.log(this.data);
+
   }
   selecionarServico(): void {
-    this.tempo = this.servicoFuncionario.servico.tempo;
-    this.agendamento.servicoFuncionario = this.servicoFuncionario;
-    this.buscaEscalas(this.servicoFuncionario.id);
+    this.tempo = this.agendamento.servicoFuncionario.servico.tempo;
+    console.log(this.tempo);
+    this.buscaEscalas();
   }
   atribuirHr(): void {
     this.hrFinal = moment(this.hrInicial, 'HH:mm')
@@ -92,11 +101,12 @@ export class AgendamentoFormComponent implements OnInit {
     this.agendamento.horarioInicio = this.data + ' ' + this.hrInicial;
     this.agendamento.horarioFim = this.data + ' ' + this.hrFinal;
   }
-  buscaEscalas(idServicoFuncionario: number): void {
+  buscaEscalas(): void {
+    console.log('entrou busca escala');
     this.escalaService
-      .listarPorServicoFuncionario(idServicoFuncionario)
+      .listarPorServicoFuncionario(this.agendamento.servicoFuncionario.id)
       .subscribe(
-        (result) => (this.escalas = result),
+        (result) => { this.escalas = result; console.log(result); },
         (error) => {
           console.error(error);
           this.erroService.tratarErro(error);
@@ -118,5 +128,11 @@ export class AgendamentoFormComponent implements OnInit {
         this.erroService.tratarErro(error);
       }
     );
+  }
+  comparar(obj1, obj2): boolean {
+    return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2;
+  }
+  show(): void {
+    console.log(this.agendamento);
   }
 }

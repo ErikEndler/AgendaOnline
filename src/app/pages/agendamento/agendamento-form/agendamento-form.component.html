@@ -8,10 +8,20 @@
         <div class="card-body">
           <form>
             <div class="row">
+              <div class="col"><label> Funcionário </label>
+                <select class="form-control" data-selectpicker [(ngModel)]="agendamento.servicoFuncionario"
+                  name="agendamento.servicoFuncionarioId" (change)="selecionarServico()" [compareWith]="comparar">
+                  <option *ngFor="let funcionario of listaFuncionarios" [ngValue]="funcionario">
+                    {{ funcionario.nome }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-6">
                 <label> Servico </label>
-                <select class="form-control" data-live-search="true" data-selectpicker [(ngModel)]="servicoFuncionario"
-                  name="agendamento.servicoFuncionarioId" (change)="selecionarServico()">
+                <select class="form-control" data-selectpicker [(ngModel)]="agendamento.servicoFuncionario"
+                  name="agendamento.servicoFuncionarioId" (change)="selecionarServico()" [compareWith]="comparar">
                   <option *ngFor="let servicoFuncionario of listaServicoFuncionario" [ngValue]="servicoFuncionario">
                     {{ servicoFuncionario.servico.nome }}
                   </option>
@@ -19,9 +29,9 @@
               </div>
               <div class="col-md-6">
                 <label> Cliente </label>
-                <select class="form-control" data-live-search="true" data-selectpicker [(ngModel)]="agendamento.cliente"
-                  name="agendamento.clienteId">
-                  <option *ngFor="let usuario of usuarios" [ngValue]="usuario.id">
+                <select class="form-control" data-selectpicker [(ngModel)]="agendamento.cliente"
+                  name="agendamento.clienteId" [compareWith]="comparar">
+                  <option *ngFor="let usuario of usuarios" [ngValue]="usuario">
                     {{ usuario.nome }}
                   </option>
                 </select>
@@ -60,13 +70,16 @@
           <button type="submit" class="btn btn-fill btn-success" (click)="onSave()">
             Salvar
           </button>
+          <button class="btn btn-fill btn-success" (click)="show()">
+            Show
+          </button>
         </div>
       </div>
     </div>
     <div class="col-md-4">
-      <div *ngIf="servicoFuncionario" class="card card-user">
+      <div class="card card-user">
         <div class="card-header">
-          ESCALAS - {{ servicoFuncionario?.servico.nome }}
+          ESCALAS - {{ agendamento?.servicoFuncionario.servico.nome }}
         </div>
 
         <div class="card-body">

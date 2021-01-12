@@ -1,3 +1,4 @@
+import { AgendamentoResolveGuard } from './guards/agendamento-resolve.guard';
 import { AgendamentoClienteComponent } from './pages/agendamento/cliente/agendamento-cliente.component';
 import { AgendamentoHomeComponent } from './pages/agendamento/agendamento-home/agendamento-home.component';
 import { ServicoComponent } from './pages/servico/servico.component';
@@ -50,7 +51,11 @@ const routes: Routes = [
     component: AgendamentoComponent,
     canActivate: [AdminGuard],
   },
-  { path: 'agendamento/form', component: AgendamentoFormComponent },
+  {
+    path: 'agendamento/form/:id',
+    component: AgendamentoFormComponent,
+    resolve: { agendamento: AgendamentoResolveGuard },
+  },
   { path: 'meusagendamentos', component: AgendamentoClienteComponent },
 
   {
@@ -133,4 +138,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

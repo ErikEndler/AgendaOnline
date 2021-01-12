@@ -38,25 +38,16 @@
                 <td>{{ trimHora(agendamento) }}</td>
                 <td>{{ agendamento.servicoFuncionario.servico.nome }}</td>
                 <td>{{ agendamento.servicoFuncionario.funcionario.nome }}</td>
-                <td>STATUS</td>
+                <td><button class="btn btn-warning btn-sm">{{agendamento.status}}</button> </td>
               </tr>
             </tbody>
           </table>
           <div class="d-flex justify-content-between p-2">
-            <ngb-pagination
-              [collectionSize]="collectionSize"
-              [(page)]="page"
-              [pageSize]="pageSize"
-              (pageChange)="refresh()"
-            >
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+              (pageChange)="refresh()">
             </ngb-pagination>
 
-            <select
-              class="custom-select"
-              style="width: auto"
-              [(ngModel)]="pageSize"
-              (ngModelChange)="refresh()"
-            >
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
               <option [ngValue]="2">2 items per page</option>
               <option [ngValue]="4">4 items per page</option>
               <option [ngValue]="6">6 items per page</option>

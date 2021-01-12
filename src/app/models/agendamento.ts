@@ -9,4 +9,5 @@ export class Agendamento {
   horarioFim: string;
   notificacao: boolean;
   obs: string;
+  status: string;
 }

@@ -59,6 +59,8 @@
                       <td>{{ trim(agd.horarioInicio) }}-{{ trim(agd.horarioFim)}}</td>
                       <td>{{agd.cliente.nome}}</td>
                       <td>{{agd.servicoFuncionario.servico.nome}}</td>
+                      <!--<td><span class="badge badge-warning" (click)="editar(agd.id)">{{agd.status}}</span>-->
+                      <td><button class="btn btn-warning btn-sm" (click)="editar(agd.id)">{{agd.status}}</button> </td>
                     </tr>
                   </tbody>
                 </table>

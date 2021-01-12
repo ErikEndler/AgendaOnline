@@ -40,10 +40,10 @@ export class AgendamentoComponent implements OnInit {
     this.data = this.dia;
     this.agendaHoje();
   }
-  trim(string: string): string {
-    return string.slice(-5);
+  trim(palavra: string): string {
+    return palavra.slice(-5);
   }
-  agendaHoje() {
+  agendaHoje(): void {
     this.agendaDia(this.dia);
   }
   agendaDia(data?): void {
@@ -82,14 +82,18 @@ export class AgendamentoComponent implements OnInit {
       },
     });
   }
-  avancar() {
+  avancar(): void {
     this.data = moment(this.data).add(1, 'd').format('yyyy-MM-DD');
     console.log(this.data);
     this.agendaDia(this.data);
   }
-  voltar() {
+  voltar(): void {
     this.data = moment(this.data).subtract(1, 'd').format('yyyy-MM-DD');
     console.log(this.data);
     this.agendaDia(this.data);
+  }
+  editar(id) {
+    this.router.navigate(['agendamento/form/' + id]);
+
   }
 }
