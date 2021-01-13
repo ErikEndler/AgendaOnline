@@ -9,7 +9,7 @@ import { LoginReturn } from 'src/app/models/loginReturn';
   styleUrls: ['./agendamento.component.css'],
 })
 export class AgendamentoComponent implements OnInit {
-  constructor(private tokenService: TokenService, private router: Router) {}
+  constructor(private tokenService: TokenService, private router: Router) { }
   loginReturn: LoginReturn;
   admin = false;
 
@@ -21,5 +21,11 @@ export class AgendamentoComponent implements OnInit {
     ) {
       this.admin = true;
     }
+  }
+  meusAgendamentos(): void {
+    this.router.navigate(['agendamentoView']);
+  }
+  novo(): void {
+    this.router.navigate(['agendamento/novo']);
   }
 }

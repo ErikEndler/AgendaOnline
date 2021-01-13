@@ -10,23 +10,14 @@
             <div class="row">
               <div class="col">
                 <label> Funcionário </label>
-                <input
-                  readonly
-                  class="form-control"
-                  type="text"
+                <input readonly class="form-control" type="text"
                   [(ngModel)]="agendamento.servicoFuncionario.funcionario.nome"
-                  name="agendamento.servicoFuncionarioFuncionario"
-                />
+                  name="agendamento.servicoFuncionarioFuncionario" />
               </div>
               <div class="col-md-3">
                 <label> Status </label>
-                <select
-                  class="form-control"
-                  data-selectpicker
-                  [(ngModel)]="agendamento.status"
-                  name="agendamento.status"
-                  [compareWith]="compararStatus"
-                >
+                <select class="form-control" data-selectpicker [(ngModel)]="agendamento.status"
+                  name="agendamento.status" [compareWith]="compararStatus">
                   <option *ngFor="let status of listaStatus" [ngValue]="status">
                     {{ status }}
                   </option>
@@ -36,31 +27,17 @@
             <div class="row">
               <div class="col-md-6">
                 <label> Servico </label>
-                <select
-                  class="form-control"
-                  data-selectpicker
-                  [(ngModel)]="agendamento.servicoFuncionario"
-                  name="agendamento.servicoFuncionarioId"
-                  (change)="selecionarServico()"
-                  [compareWith]="comparar"
-                >
-                  <option
-                    *ngFor="let servicoFuncionario of listaServicoFuncionario"
-                    [ngValue]="servicoFuncionario"
-                  >
+                <select class="form-control" data-selectpicker [(ngModel)]="agendamento.servicoFuncionario"
+                  name="agendamento.servicoFuncionarioId" (change)="selecionarServico()" [compareWith]="comparar">
+                  <option *ngFor="let servicoFuncionario of listaServicoFuncionario" [ngValue]="servicoFuncionario">
                     {{ servicoFuncionario.servico.nome }}
                   </option>
                 </select>
               </div>
               <div class="col-md-6">
                 <label> Cliente </label>
-                <select
-                  class="form-control"
-                  data-selectpicker
-                  [(ngModel)]="agendamento.cliente"
-                  name="agendamento.clienteId"
-                  [compareWith]="comparar"
-                >
+                <select class="form-control" data-selectpicker [(ngModel)]="agendamento.cliente"
+                  name="agendamento.clienteId" [compareWith]="comparar">
                   <option *ngFor="let usuario of usuarios" [ngValue]="usuario">
                     {{ usuario.nome }}
                   </option>
@@ -70,35 +47,19 @@
             <div class="row">
               <div class="col-md-5">
                 <label> Data </label>
-                <input
-                  class="form-control"
-                  type="date"
-                  [(ngModel)]="data"
-                  name="data"
-                />
+                <input class="form-control" type="date" [(ngModel)]="data" name="data" />
               </div>
               <div class="col">
                 <div class="form-group">
                   <label> Horario Inicio </label>
-                  <input
-                    (change)="atribuirHr()"
-                    class="form-control"
-                    type="time"
-                    [(ngModel)]="hrInicial"
-                    name="hrInicial"
-                  />
+                  <input (change)="atribuirHr()" class="form-control" type="time" [(ngModel)]="hrInicial"
+                    name="hrInicial" />
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label> Horario Fim </label>
-                  <input
-                    readonly
-                    class="form-control"
-                    type="time"
-                    [(ngModel)]="hrFinal"
-                    name="hrFinal"
-                  />
+                  <input readonly class="form-control" type="time" [(ngModel)]="hrFinal" name="hrFinal" />
                 </div>
               </div>
             </div>
@@ -106,30 +67,30 @@
             <div class="row">
               <div class="col">
                 <label> Observação </label>
-                <textarea
-                  class="form-control"
-                  type="text"
-                  [(ngModel)]="agendamento.obs"
-                  name="agendamento.obs"
-                ></textarea>
+                <textarea class="form-control" type="text" [(ngModel)]="agendamento.obs"
+                  name="agendamento.obs"></textarea>
               </div>
             </div>
           </form>
         </div>
         <div class="card-footer">
-          <button
-            type="submit"
-            class="btn btn-fill btn-success"
-            (click)="onSave()"
-          >
-            Salvar
-          </button>
-          <button class="btn btn-fill btn-danger" (click)="cancel()">
-            Cancelar
-          </button>
-          <button class="btn btn-fill btn-success" (click)="show()">
-            Show
-          </button>
+          <div class="row">
+            <div class="col-auto mr-auto">
+              <button type="submit" class="btn btn-fill btn-success" (click)="onSave()">
+                Salvar
+              </button>
+            </div>
+            <div class="col-auto mr-auto">
+              <button class="btn btn-fill btn-danger" (click)="cancel()">
+                Cancelar
+              </button>
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-fill btn-info " style="text-align: right;" (click)="show()">
+                Show
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -145,9 +106,7 @@
               <tr *ngFor="let escala of escalas">
                 <td>{{ escala.diaSemana }}</td>
                 <td>
-                  <ng-container
-                    *ngIf="escala.itensEscala.length; else elseTemplate"
-                  >
+                  <ng-container *ngIf="escala.itensEscala.length; else elseTemplate">
                     <div *ngFor="let itemEscala of escala.itensEscala">
                       {{ itemEscala.hrInicial }} - {{ itemEscala.hrFinal }}
                     </div>

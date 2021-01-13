@@ -40,14 +40,12 @@
             <div class="card-body">
               <h3 class="card-title">
                 Meus Agendamentos
-                <button class="btn btn-link">
+                <button class="btn btn-link" (click)="meusAgendamentos()">
                   <i class="far fa-calendar-alt"></i>
                 </button>
               </h3>
               <p class="card-text">Visualize e acompanhe seus agendamentos.</p>
-              <a routerLink="/agendamentoView" class="card-link"
-                >meus agendamentos</a
-              >
+              <a routerLink="/agendamentoView" class="card-link">meus agendamentos</a>
             </div>
           </div>
         </div>
@@ -56,14 +54,12 @@
             <div class="card-body">
               <h3 class="card-title">
                 Novo agendamento
-                <button class="btn btn-link">
+                <button class="btn btn-link" (click)="novo()">
                   <i class="fas fa-calendar-plus"></i>
                 </button>
               </h3>
               <p class="card-text">Adicione um novo agendamento.</p>
-              <a routerLink="/agendamento/novo" class="card-link"
-                >novo agendamento</a
-              >
+              <a routerLink="/agendamento/novo" class="card-link">novo agendamento</a>
             </div>
           </div>
         </div>

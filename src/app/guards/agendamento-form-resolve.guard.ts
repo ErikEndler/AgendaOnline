@@ -7,7 +7,7 @@ import { AgendamentoService } from '../pages/agendamento/agendamento.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AgendamentoResolveGuard implements Resolve<Agendamento> {
+export class AgendamentoFormResolveGuard implements Resolve<Agendamento> {
   constructor(private service: AgendamentoService) { }
   resolve(
     route: ActivatedRouteSnapshot,
