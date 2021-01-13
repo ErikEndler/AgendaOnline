@@ -1,3 +1,4 @@
+import { AgendamentoViewComponent } from './pages/agendamento/agendamento-view/agendamento-view.component';
 import { UsuarioHomeComponent } from './pages/usuario/usuario-home.component';
 import { CategoriaListComponent } from './pages/categoria/list/categoria-list/categoria-list.component';
 import { CategoriaComponent } from './pages/categoria/form/categoria/categoria.component';
@@ -36,7 +37,6 @@ import { ItemEscalaListComponent } from './pages/escala/item-escala/item-escala-
 import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 import { NovoComponent } from './pages/escala/novo/novo.component';
-import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { CampoControlErroComponent } from './shared/campo-control-erro/campo-control-erro.component';
 import { FormDebugComponent } from './shared/form-debug/form-debug.component';
 import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
@@ -47,6 +47,7 @@ import { Etapa02Component } from './pages/agendamento/etapas/etapa02/etapa02.com
 import { Etapa03Component } from './pages/agendamento/etapas/etapa03/etapa03.component';
 import { Etapa04Component } from './pages/agendamento/etapas/etapa04/etapa04.component';
 import { AgendamentoClienteComponent } from './pages/agendamento/cliente/agendamento-cliente.component';
+import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,6 @@ import { AgendamentoClienteComponent } from './pages/agendamento/cliente/agendam
     ServicoFuncionarioComponent,
     FuncionarioviewComponent,
     NovoComponent,
-    AgendamentoComponent,
     CategoriaComponent,
     CategoriaListComponent,
     CampoControlErroComponent,
@@ -82,6 +82,8 @@ import { AgendamentoClienteComponent } from './pages/agendamento/cliente/agendam
     Etapa03Component,
     Etapa04Component,
     AgendamentoClienteComponent,
+    AgendamentoViewComponent,
+    AgendamentoComponent,
   ],
   imports: [
     FormsModule,

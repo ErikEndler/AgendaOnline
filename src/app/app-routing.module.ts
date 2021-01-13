@@ -1,3 +1,5 @@
+import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
+import { FuncionarioGuard } from './guards/funcionario.guard';
 import { AgendamentoResolveGuard } from './guards/agendamento-resolve.guard';
 import { AgendamentoClienteComponent } from './pages/agendamento/cliente/agendamento-cliente.component';
 import { AgendamentoHomeComponent } from './pages/agendamento/agendamento-home/agendamento-home.component';
@@ -5,7 +7,6 @@ import { ServicoComponent } from './pages/servico/servico.component';
 import { UserGuard } from './guards/user.guard';
 import { UsuarioHomeComponent } from './pages/usuario/usuario-home.component';
 import { AgendamentoFormComponent } from './pages/agendamento/agendamento-form/agendamento-form.component';
-import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { FuncionarioviewComponent } from './pages/servico-funcionario/funcionario-view/funcionarioview.component';
 import { EscalaResolveGuard } from './guards/escala-resolve.guard';
 import { CadastroComponent } from './pages/usuario/cadastro/cadastro.component';
@@ -26,30 +27,32 @@ import { CategoriaComponent } from './pages/categoria/form/categoria/categoria.c
 import { CategoriaListComponent } from './pages/categoria/list/categoria-list/categoria-list.component';
 import { EscalageralComponent } from './pages/escala/escala-geral-form/escala-geral.component';
 import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
+import { AgendamentoViewComponent } from './pages/agendamento/agendamento-view/agendamento-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'novousuario', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'agendamento', component: AgendamentoComponent },
   {
     path: 'sf2',
     component: ServicoFuncionarioComponent,
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'sf',
     component: FuncionarioviewComponent,
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'agendamento/novo',
     component: AgendamentoHomeComponent,
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
-    path: 'agendamento',
-    component: AgendamentoComponent,
-    canActivate: [AdminGuard],
+    path: 'agendamentoView',
+    component: AgendamentoViewComponent,
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'agendamento/form/:id',
@@ -67,18 +70,18 @@ const routes: Routes = [
     path: 'escala',
     component: EscalageralComponent,
     resolve: { escala: EscalaResolveGuard },
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'usuario/list',
     component: UsuarioListComponent,
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'usuario/cadastro',
     component: UsuarioComponent,
     resolve: { usuario: UsuarioResolverGuard },
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'funcionario/cadastro',
@@ -112,25 +115,25 @@ const routes: Routes = [
   {
     path: 'servico/list',
     component: ServicoListComponent,
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'servico',
     component: ServicoComponent,
     resolve: { servico: ServicoResolveGuard },
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'servico/cadastro',
     component: ServicoFormComponent,
     resolve: { servico: ServicoResolveGuard },
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
   {
     path: 'servicoEditar/:id',
     component: ServicoFormComponent,
     resolve: { servico: ServicoResolveGuard },
-    canActivate: [AdminGuard],
+    canActivate: [FuncionarioGuard],
   },
 ];
 
@@ -138,4 +141,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

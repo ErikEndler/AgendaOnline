@@ -65,4 +65,21 @@ export class AgendamentoClienteComponent implements OnInit {
   trimHora(agendamento: Agendamento): string {
     return agendamento.horarioInicio.slice(-5);
   }
+  aplicaCss(status) {
+    if (status === 'PENDENTE') {
+      return 'btn-warning';
+    }
+    if (status === 'AGENDADO') {
+      return 'btn-info';
+    }
+    if (status === 'ATENDIDO') {
+      return 'btn-success';
+    }
+    if (status === 'CANCELADO') {
+      return 'btn-default';
+    }
+    if (status === 'FALTOU') {
+      return 'btn-danger';
+    }
+  }
 }

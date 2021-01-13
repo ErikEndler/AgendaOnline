@@ -25,6 +25,8 @@ export class AgendamentoService extends CrudService<Agendamento> {
     );
   }
   disponibilidadeDia(data, idFuncionario): Observable<Disponibilidade[]> {
+    console.log('disponibilidadeDia - data ', data);
+    console.log('disponibilidadeDia - idFuncionario ', idFuncionario);
     let parametros = new HttpParams();
     parametros = parametros.set('funcionario', idFuncionario);
     parametros = parametros.set('data', data);
@@ -36,6 +38,11 @@ export class AgendamentoService extends CrudService<Agendamento> {
   agendamentoCliente(idCLiente: number): Observable<Agendamento[]> {
     return this.http.get<Array<Agendamento>>(
       AppSettings.url + '/api/agendamento/cliente/' + idCLiente
+    );
+  }
+  listaStatus(): Observable<string[]> {
+    return this.http.get<Array<string>>(
+      AppSettings.url + '/api/agendamento/listastatus'
     );
   }
 }

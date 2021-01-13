@@ -28,7 +28,7 @@ export class CadastroComponent implements OnInit {
     private modalCOnfirm: ModalConfirmacaoService,
     private router: Router,
     private erroService: ErroService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const usuario = new Usuario();

@@ -17,14 +17,12 @@ export class UsuarioService extends CrudService<Usuario> {
     super(http, AppSettings.url + '/api/usuario');
   }
   getCredencial(): LoginReturn {
-    console.log(sessionStorage.getItem('token'));
     this.user = this.tokenService.decodePayloadJWT();
     return this.user;
   }
   listarFuncionarios(): Observable<Usuario[]> {
-    return this.http
-      .get<Array<Usuario>>(
-        AppSettings.url + '/api/usuario/funcionarios'
-      );
+    return this.http.get<Array<Usuario>>(
+      AppSettings.url + '/api/usuario/funcionarios'
+    );
   }
 }

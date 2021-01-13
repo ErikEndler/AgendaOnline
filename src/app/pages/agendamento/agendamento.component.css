@@ -1,14 +1,10 @@
-#tdvazio {
-  text-align: center;
+.far,
+.fas {
+  font-size: 3em;
 }
-#tdhead {
-  text-align: center;
+#cards {
+  min-width: 20rem;
 }
-.table {
-  color: antiquewhite;
-}
-.col {
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
+#link {
+  color: #ba54f5;
 }

@@ -13,7 +13,7 @@ import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.servi
 import { UsuarioService } from '../../usuario/usuario.service';
 import * as moment from 'moment';
 import { NotificationType } from 'angular2-notifications';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Agendamento } from 'src/app/models/agendamento';
 
 @Component({
@@ -35,7 +35,7 @@ export class AgendamentoFormComponent implements OnInit {
   tempo: string;
   escalas: Escala[];
   loginReturn: LoginReturn;
-
+  listaStatus: string[];
   constructor(
     private servicoFuncionarioService: ServicoFuncionarioService,
     private usuarioService: UsuarioService,
@@ -44,8 +44,9 @@ export class AgendamentoFormComponent implements OnInit {
     private erroService: ErroService,
     private activatedRoute: ActivatedRoute,
     private escalaService: EscalaService,
-    private tokenService: TokenService
-  ) { }
+    private tokenService: TokenService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
@@ -54,25 +55,43 @@ export class AgendamentoFormComponent implements OnInit {
       this.dataHora();
       this.selecionarServico();
     }
+    this.listarStatus();
     this.listarFuncionarios();
     this.listarSF();
     this.loginReturn = this.tokenService.decodePayloadJWT();
     this.funcionarioID = this.loginReturn.id;
     this.usuarioService.list().subscribe((result) => (this.usuarios = result));
   }
-  listarFuncionarios(): void {
-    this.usuarioService.listarFuncionarios().subscribe((result) => { this.listaFuncionarios = result; },
+  listarStatus(): void {
+    this.agendamentoService.listaStatus().subscribe(
+      (result) => {
+        this.listaStatus = result;
+      },
       (error) => {
         console.error(error);
         this.erroService.tratarErro(error);
-      });
+      }
+    );
+  }
+  listarFuncionarios(): void {
+    this.usuarioService.listarFuncionarios().subscribe(
+      (result) => {
+        this.listaFuncionarios = result;
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
   }
   listarSF(): void {
     this.servicoFuncionarioService
-      .listarServicosFuncionario(this.agendamento.servicoFuncionario.funcionario.id)
+      .listarServicosFuncionario(
+        this.agendamento.servicoFuncionario.funcionario.id
+      )
       .subscribe(
         (result) => {
-          (this.listaServicoFuncionario = result);
+          this.listaServicoFuncionario = result;
         },
         (error) => {
           console.error(error);
@@ -87,7 +106,6 @@ export class AgendamentoFormComponent implements OnInit {
     console.log(this.hrInicial);
     this.data = this.agendamento.horarioInicio.slice(0, 10);
     console.log(this.data);
-
   }
   selecionarServico(): void {
     this.tempo = this.agendamento.servicoFuncionario.servico.tempo;
@@ -106,7 +124,10 @@ export class AgendamentoFormComponent implements OnInit {
     this.escalaService
       .listarPorServicoFuncionario(this.agendamento.servicoFuncionario.id)
       .subscribe(
-        (result) => { this.escalas = result; console.log(result); },
+        (result) => {
+          this.escalas = result;
+          console.log(result);
+        },
         (error) => {
           console.error(error);
           this.erroService.tratarErro(error);
@@ -132,7 +153,13 @@ export class AgendamentoFormComponent implements OnInit {
   comparar(obj1, obj2): boolean {
     return obj1 && obj2 ? obj1.id === obj2.id : obj1 === obj2;
   }
+  compararStatus(obj1, obj2): boolean {
+    return obj1 && obj2 ? obj1 === obj2 : obj1 === obj2;
+  }
   show(): void {
     console.log(this.agendamento);
+  }
+  cancel(): void {
+    this.router.navigate(['agendamento']);
   }
 }
