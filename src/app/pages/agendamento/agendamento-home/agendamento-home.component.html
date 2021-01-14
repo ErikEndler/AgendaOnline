@@ -1,6 +1,9 @@
 <div class="content">
   <div></div>
   <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
+    <aw-wizard-step *ngIf="admin" [stepTitle]="'etapa 0'">
+      <app-etapa00></app-etapa00>
+    </aw-wizard-step>
     <aw-wizard-step [stepTitle]="'etapa 01'">
       <app-etapa01></app-etapa01>
     </aw-wizard-step>
@@ -8,7 +11,7 @@
       <app-etapa02></app-etapa02>
     </aw-wizard-step>
     <aw-wizard-step [stepTitle]="'etapa 03'">
-      <app-etapa03 [clienteId]="loginReturn.id"></app-etapa03>
+      <app-etapa03 [usuarioLogado]="loginReturn"></app-etapa03>
     </aw-wizard-step>
     <aw-wizard-step [stepTitle]="'etapa 04'">
       <app-etapa04 [clienteNome]="loginReturn.nome"></app-etapa04>

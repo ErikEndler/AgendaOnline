@@ -12,7 +12,7 @@ import { EscalaService } from '../pages/escala/escala.service';
   providedIn: 'root',
 })
 export class EscalaResolveGuard implements Resolve<Escala> {
-  constructor(private serviceEscala: EscalaService) {}
+  constructor(private serviceEscala: EscalaService) { }
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
@@ -20,11 +20,6 @@ export class EscalaResolveGuard implements Resolve<Escala> {
     if (route.params && route.params.id) {
       return this.serviceEscala.loadByID(route.params.id);
     }
-    return of({
-      id: null,
-      diaSemana: null,
-      servicoFuncionario: null,
-      itensEscala: null,
-    });
+    return of(new Escala());
   }
 }

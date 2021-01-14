@@ -10,12 +10,26 @@
             <div class="card-body">
               <h3 class="card-title">
                 Meus Agendamentos
-                <button class="btn btn-link">
+                <button (click)="meusAgendamentosCLiente()" class="btn btn-link">
                   <i class="far fa-calendar-alt"></i>
                 </button>
               </h3>
               <p class="card-text">Visualize e acompanhe seus agendamentos.</p>
-              <a routerLink="" class="card-link">meus agendamentos</a>
+              <a routerLink="/meusagendamentos" class="card-link">meus agendamentos</a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!admin" class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
+                Agendar Horário
+                <button class="btn btn-link" (click)="novo()">
+                  <i class="fas fa-calendar-plus"></i>
+                </button>
+              </h3>
+              <p class="card-text">Solicite um agendamento de Horário, e aguarde a aprovação.</p>
+              <a routerLink="/agendamento/novo" class="card-link">novo agendamento</a>
             </div>
           </div>
         </div>

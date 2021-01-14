@@ -73,7 +73,7 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.auth.eventoLogar.subscribe(() => this.ngOnInit());
@@ -94,12 +94,7 @@ export class SidebarComponent implements OnInit {
         icon: 'tim-icons icon-single-02',
         class: '',
       },
-      {
-        path: '/servico',
-        title: 'Servico',
-        icon: 'fas fa-desktop',
-        class: '',
-      },
+
       {
         path: '/agendamento',
         title: 'Agendamento',
@@ -107,6 +102,16 @@ export class SidebarComponent implements OnInit {
         class: '',
       },
     ];
+    if (this.loginReturn) {
+      if (this.loginReturn.role !== 'ROLE_USER') {
+        this.routeInfo.push({
+          path: '/servico',
+          title: 'Servico',
+          icon: 'fas fa-desktop',
+          class: '',
+        });
+      }
+    }
   }
   isMobileMenu(): boolean {
     if (window.innerWidth > 991) {

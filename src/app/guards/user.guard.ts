@@ -6,8 +6,7 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { EMPTY, Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { TokenService } from '../auth/token.service';
 import { LoginReturn } from '../models/loginReturn';
 import { ErroService } from '../shared/erro/erro.service';
@@ -42,15 +41,16 @@ export class UserGuard implements CanActivate {
         return true;
       }
     } else {
-      console.log('DESTINO next.url : ' + next.url.toString());
-      console.log('DESTINO state.url : ' + state.url.toString());
-      console.log('DESTINO next.pathFromRoot : ' + next.pathFromRoot);
-
       const result$ = this.modalLoginService.open(next.url.toString());
       result$.asObservable().subscribe(
-        (success) => {
-          console.log('logou e redirecionou');
-          return this.router.navigate([state.url.toString()]);
+        (result) => {
+          console.log('success do userguards ', result);
+          if (result === true) {
+            console.log('logou e redirecionou');
+            return this.router.navigate([state.url.toString()]);
+          } else {
+            return false;
+          }
         },
         (error) => {
           console.error(error);

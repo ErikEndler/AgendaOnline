@@ -109,7 +109,7 @@
       </div>
       <div class="col-md-4">
         <!-- ADICIONA RSERVIÇO -->
-        <div class="card card-user">
+        <div *ngIf="admin" class="card card-user">
           <div class="card-footer">
             <button class="btn btn-fill btn-secondary" [disabled]="disableAtribuicao"
               (click)="atribuirFuncao()">Atribuir Serviço</button>

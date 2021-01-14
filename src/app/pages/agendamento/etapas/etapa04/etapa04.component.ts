@@ -27,7 +27,7 @@ export class Etapa04Component implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.agendamento = new Agendamento();
+    // this.agendamento = new Agendamento();
     this.etapasService.eventoServicoFuncionario.subscribe((result) => this.servicoFuncionario = result);
     this.etapasService.eventoAgendamento.subscribe((result) => {
       this.agendamento = result;

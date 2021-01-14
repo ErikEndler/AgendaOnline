@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class ServicoResolveGuard implements Resolve<Servico> {
-  constructor(private service: ServicoService) {}
+  constructor(private service: ServicoService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -21,12 +21,6 @@ export class ServicoResolveGuard implements Resolve<Servico> {
     if (route.params && route.params.id) {
       return this.service.loadByID(route.params.id);
     }
-    return of({
-      id: null,
-      categoria: null,
-      nome: null,
-      tempo: null,
-      descricao: null,
-    });
+    return of(new Servico());
   }
 }

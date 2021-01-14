@@ -50,19 +50,17 @@ export class FuncionarioGuard implements CanActivate {
       }
     } else {
       console.log('DESTINO : ' + next.url.toString());
-      const result$ = this.modalLoginService.open(next.url.toString());
+      const result$ = this.modalLoginService.open(state.url.toString());
       result$
         .asObservable()
-        .pipe(
-          take(1),
-          switchMap((result) =>
-            result ? this.router.navigate([next.url.toString()]) : EMPTY
-          )
-        )
         .subscribe(
-          (success) => {
-            console.log('logou e redirecionou');
-            return this.router.navigate([next.url.toString()]);
+          (result) => {
+            if (result === true) {
+              console.log('logou e redirecionou');
+              return this.router.navigate([state.url.toString()]);
+            } else {
+              return false;
+            }
           },
           (error) => {
             console.error(error);

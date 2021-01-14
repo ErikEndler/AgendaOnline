@@ -12,7 +12,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class CategoriaResolverGuard implements Resolve<Categoria> {
-  constructor(private service: CategoriaService) {}
+  constructor(private service: CategoriaService) { }
 
   resolve(
     route: ActivatedRouteSnapshot,
@@ -21,10 +21,6 @@ export class CategoriaResolverGuard implements Resolve<Categoria> {
     if (route.params && route.params.id) {
       return this.service.loadByID(route.params.id);
     }
-    return of({
-      id: null,
-      nome: null,
-      descricao: null,
-    });
+    return of(new Categoria());
   }
 }

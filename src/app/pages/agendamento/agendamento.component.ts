@@ -22,6 +22,10 @@ export class AgendamentoComponent implements OnInit {
       this.admin = true;
     }
   }
+  meusAgendamentosCLiente(): void {
+    this.router.navigate(['meusagendamentos']);
+
+  }
   meusAgendamentos(): void {
     this.router.navigate(['agendamentoView']);
   }

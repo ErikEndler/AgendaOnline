@@ -10,6 +10,7 @@ import { Usuario } from 'src/app/models/usuario';
   styleUrls: ['./agendamento-home.component.css']
 })
 export class AgendamentoHomeComponent implements OnInit {
+  admin: boolean;
 
   loginReturn: LoginReturn;
 
@@ -19,6 +20,9 @@ export class AgendamentoHomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
+    if (this.loginReturn.role === 'ROLE_ADMIN' || this.loginReturn.role === 'ROLE_FUNCIONARIO') {
+      this.admin = true;
+    }
   }
 
 }

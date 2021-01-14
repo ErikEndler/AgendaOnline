@@ -17,6 +17,7 @@ import { NotificationType } from 'angular2-notifications';
   styleUrls: ['./usuario.component.css'],
 })
 export class UsuarioComponent implements OnInit {
+  admin = false;
   user: LoginReturn;
   formulario: FormGroup;
   hide = true;
@@ -35,7 +36,7 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.verificaCredencial();
@@ -110,7 +111,7 @@ export class UsuarioComponent implements OnInit {
   verificaCredencial(): void {
     this.user = this.serviceUsuario.getCredencial();
     if (this.user.role !== 'ROLE_USER') {
-      const habilitaBotao = true;
+      this.admin = true;
     }
   }
   atribuirFuncao(): void {

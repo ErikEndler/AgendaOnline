@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'novousuario', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'agendamento', component: AgendamentoComponent },
+  { path: 'agendamento', component: AgendamentoComponent, canActivate: [UserGuard], },
   {
     path: 'sf2',
     component: ServicoFuncionarioComponent,
@@ -141,4 +141,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

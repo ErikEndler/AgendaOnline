@@ -1,3 +1,4 @@
+import { LoginReturn } from './../../../../models/loginReturn';
 import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
@@ -29,7 +30,8 @@ export class Etapa03Component implements OnInit {
   button = false;
 
   disponibilidade: Disponibilidade[];
-  @Input() clienteId: number;
+  //@Input() clienteId: number;
+  @Input() usuarioLogado: LoginReturn;
   listempy = false;
   listempy2 = true;
   horariosHide = true;
@@ -53,7 +55,7 @@ export class Etapa03Component implements OnInit {
     private escalaService: EscalaService,
     private notificacaoService: NotificacaoService,
     private usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.agendamento.notificacao = true;
@@ -62,9 +64,21 @@ export class Etapa03Component implements OnInit {
       this.agendamento.servicoFuncionario = result;
       this.buscaEscala();
     });
-    this.usuarioService
-      .loadByID(this.clienteId)
-      .subscribe((result) => (this.agendamento.cliente = result));
+    this.cliente();
+
+  }
+  cliente(): void {
+    if (this.usuarioLogado.role === 'ROLE_USER') {
+      this.usuarioService
+        .loadByID(this.usuarioLogado.id)
+        .subscribe((result) => (this.agendamento.cliente = result));
+    } else {
+      this.agendamento.status = 'AGENDADO';
+      this.etapasService.eventoCliente.subscribe((result) => {
+        console.log('cliente :', result);
+        this.agendamento.cliente = result;
+      });
+    }
   }
   buscaEscala(): void {
     this.escalas$ = this.escalaService.listarPorServicoFuncionario(

@@ -8,7 +8,7 @@ export class TokenService {
   constructor() { }
   public setToken(tokenString: string): void {
     sessionStorage.setItem('token', tokenString);
-    console.log('token ', sessionStorage.getItem('token'));
+    // console.log('token ', sessionStorage.getItem('token'));
     sessionStorage.setItem('logado', 'true');
   }
   public getToken(): string {

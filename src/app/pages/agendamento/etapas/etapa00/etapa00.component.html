@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="card text-center">
+    <div class="card-header">
+      <h4>Etapa 0 - Escolha Cliente para o agendmento</h4>
+    </div>
+    <div class="card-body">
+      <div class="card-deck">
+        <div class="card card-blue">
+          <div class="card-body">
+            <div *ngIf="loading" class="text-center">
+              <div class="spinner-border text-success" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+            <div *ngIf="!loading" class="table-responsive">
+              <table class="table tablesorter">
+                <thead class="text-primary">
+                  <tr>
+                    <th *ngFor="let coluna of colunas" scope="col">
+                      {{ coluna }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="listempy">
+                    <td id="tdvazio" colspan="4">VAZIO</td>
+                  </tr>
+                  <tr *ngFor="let usuario of usuarios">
+                    <td>{{usuario.nome}}</td>
+                    <td>{{usuario.cpf}}</td>
+                    <td>{{usuario.email}}</td>
+                    <td>
+                      <button (click)="selecionarUsuario(usuario)" type="button" class="btn-sm btn-info" awNextStep>
+                        Selecionar <i class="fas fa-arrow-right"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                  (pageChange)="refresh()">
+                </ngb-pagination>
+                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+                  <option [ngValue]="2">2 itens por pagina</option>
+                  <option [ngValue]="4">4 itens por pagina</option>
+                  <option [ngValue]="6">6 itens por pagina</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="btn-group">
+        <button type="button" class="btn btn-danger" (click)="cancelar()">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,7 +30,7 @@ export class Etapa01Component implements OnInit {
     private erroService: ErroService,
     private etapasService: EtapasService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.teste = moment().endOf('month').format('DD/MM/YYYY');
@@ -68,7 +68,7 @@ export class Etapa01Component implements OnInit {
   avancar(id): void {
     this.etapasService.emiteEventoServico(id);
   }
-  cancelar() {
+  cancelar(): void {
     this.router.navigate(['agendamento']);
   }
 }

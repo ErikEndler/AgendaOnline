@@ -8,7 +8,7 @@
         <form>
           <div>
             <label>Nome</label>
-            <input class="form-control" type="text" name="nome" [(ngModel)]="clienteNome" readonly>
+            <input class="form-control" type="text" name="nome" [(ngModel)]="agendamento?.cliente.nome" readonly>
           </div>
           <div>
             <label>Serviço</label>
@@ -26,14 +26,15 @@
           <div>
             <label>Receber Notificações</label>
             <label class="switch">
-              <input disabled [(ngModel)]="agendamento.notificacao" type="checkbox" id="notificacao" name="box" />
+              <input disabled *ngIf="agendamento" [(ngModel)]="agendamento.notificacao" type="checkbox" id="notificacao"
+                name="box" />
               <span class="slider round"></span>
             </label>
           </div>
           <div>
             <label>Observação</label>
-            <textarea readonly style="min-width: 50%;" class="form-control" [(ngModel)]="agendamento.obs"
-              name="obs"></textarea>
+            <textarea readonly style="min-width: 50%;" class="form-control" *ngIf="agendamento"
+              [(ngModel)]="agendamento.obs" name="obs"></textarea>
           </div>
         </form>
 
