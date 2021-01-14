@@ -42,27 +42,22 @@ export class UserGuard implements CanActivate {
         return true;
       }
     } else {
-      console.log('DESTINO : ' + next.url.toString());
+      console.log('DESTINO next.url : ' + next.url.toString());
+      console.log('DESTINO state.url : ' + state.url.toString());
+      console.log('DESTINO next.pathFromRoot : ' + next.pathFromRoot);
+
       const result$ = this.modalLoginService.open(next.url.toString());
-      result$
-        .asObservable()
-        .pipe(
-          take(1),
-          switchMap((result) =>
-            result ? this.router.navigate([next.url.toString()]) : EMPTY
-          )
-        )
-        .subscribe(
-          (success) => {
-            console.log('logou e redirecionou');
-            return this.router.navigate([next.url.toString()]);
-          },
-          (error) => {
-            console.error(error);
-            console.log('ERRO AO redirecionar');
-            this.erroService.tratarErro(error);
-          }
-        );
+      result$.asObservable().subscribe(
+        (success) => {
+          console.log('logou e redirecionou');
+          return this.router.navigate([state.url.toString()]);
+        },
+        (error) => {
+          console.error(error);
+          console.log('ERRO AO redirecionar');
+          this.erroService.tratarErro(error);
+        }
+      );
       return this.router.navigate(['home']);
     }
   }

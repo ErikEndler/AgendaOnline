@@ -47,7 +47,7 @@ const routes: Routes = [
   {
     path: 'agendamento/novo',
     component: AgendamentoHomeComponent,
-    canActivate: [FuncionarioGuard],
+    canActivate: [UserGuard],
   },
   {
     path: 'agendamentoView',

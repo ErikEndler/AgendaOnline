@@ -42,4 +42,7 @@ export class HomeComponent implements OnInit {
   perfil(): void {
     this.router.navigate(['perfil/', this.loginReturn.id]);
   }
+  agendar(): void {
+    this.router.navigate(['agendamento/novo']);
+  }
 }
