@@ -77,6 +77,20 @@
             </div>
           </div>
         </div>
+        <div *ngIf="admin" class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
+                Agendamentos em Aberto
+                <button class="btn btn-link" (click)="agendamentoAberto()">
+                  <i class="bi bi-calendar2-check"></i>
+                </button>
+              </h3>
+              <p class="card-text">Visualize e acompanhe seus agendamentos.</p>
+              <a routerLink="/agendamento/status" class="card-link">Agendamentos em Aberto</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

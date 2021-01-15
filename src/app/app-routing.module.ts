@@ -1,3 +1,4 @@
+import { AgendamentoStatusComponent } from './pages/agendamento/agendamento-status/agendamento-status.component';
 import { AtendimentoComponent } from './pages/atendimento/atendimento.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { FuncionarioGuard } from './guards/funcionario.guard';
@@ -62,6 +63,7 @@ const routes: Routes = [
   },
   { path: 'meusagendamentos', component: AgendamentoClienteComponent },
   { path: 'atendimento', component: AtendimentoComponent },
+  { path: 'agendamento/status', component: AgendamentoStatusComponent },
 
   {
     path: 'usuario',

@@ -112,6 +112,12 @@ export class SidebarComponent implements OnInit {
           icon: 'fas fa-desktop',
           class: '',
         });
+        this.routeInfo.push({
+          path: '/atendimento',
+          title: 'Atendimento',
+          icon: 'bi bi-briefcase',
+          class: '',
+        });
       }
     }
   }

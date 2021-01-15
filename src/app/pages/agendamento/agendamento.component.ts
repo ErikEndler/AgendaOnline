@@ -32,4 +32,7 @@ export class AgendamentoComponent implements OnInit {
   novo(): void {
     this.router.navigate(['agendamento/novo']);
   }
+  agendamentoAberto() {
+
+  }
 }

@@ -1,0 +1,55 @@
+<div class="content">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="card-title">Status Agendamentos</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="card text-center" id="cards">
+            <div class="card-body">
+              <label style="font-size: 1.2rem;">
+                Status
+              </label>
+              <select (change)="selecionarStatus()" class="form-control" data-selectpicker [(ngModel)]="statusSelect"
+                name="status">
+                <option *ngFor="let status of listaStatus" [ngValue]="status">
+                  {{ status }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!loading" class="table-responsive">
+        <table class="table tablesorter" id="">
+          <thead class="text-primary">
+            <tr>
+              <th>Horario</th>
+              <th>Cliente</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let agendamento of listaAgendamentos">
+              <td scope="row">{{ agendamento.horarioInicio }}</td>
+              <td scope="row">{{ agendamento.cliente.nome }}</td>
+
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-between p-2">
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refresh()">
+          </ngb-pagination>
+
+          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="4">4 items per page</option>
+            <option [ngValue]="6">6 items per page</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
