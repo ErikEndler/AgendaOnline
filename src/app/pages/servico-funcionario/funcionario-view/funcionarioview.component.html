@@ -33,11 +33,7 @@
                       <td>{{ servico.nome }}</td>
                       <td>{{ servico.categoria.nome }}</td>
                       <td>
-                        <button
-                          type="button"
-                          class="btn-sm btn-info"
-                          (click)="adicionarServico(servico)"
-                        >
+                        <button type="button" class="btn-sm btn-info" (click)="adicionarServico(servico)">
                           Adicionar <i class="fas fa-arrow-right"></i>
                         </button>
                       </td>
@@ -45,22 +41,14 @@
                   </tbody>
                 </table>
                 <div class="d-flex justify-content-between p-2">
-                  <ngb-pagination
-                    [collectionSize]="collectionSize"
-                    [(page)]="page"
-                    [pageSize]="pageSize"
-                    (pageChange)="refreshServico()"
-                  >
+                  <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+                    (pageChange)="refreshServico()">
                   </ngb-pagination>
-                  <select
-                    class="custom-select"
-                    style="width: auto"
-                    [(ngModel)]="pageSize"
-                    (ngModelChange)="refreshServico()"
-                  >
-                    <option [ngValue]="2">2 items per page</option>
-                    <option [ngValue]="4">4 items per page</option>
-                    <option [ngValue]="6">6 items per page</option>
+                  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
+                    (ngModelChange)="refreshServico()">
+                    <option [ngValue]="2">2 itens por página</option>
+                    <option [ngValue]="4">4 itens por página</option>
+                    <option [ngValue]="6">6 itens por página</option>
                   </select>
                 </div>
               </div>
@@ -91,22 +79,14 @@
                     </tr>
                     <tr *ngFor="let servicoF of servicosFuncionario">
                       <td>
-                        <button
-                          type="button"
-                          class="btn-sm btn-danger"
-                          (click)="removerServico(servicoF.servico)"
-                        >
+                        <button type="button" class="btn-sm btn-danger" (click)="removerServico(servicoF.servico)">
                           <i class="far fa-trash-alt"></i>
                         </button>
                       </td>
                       <td>{{ servicoF.servico.nome }}</td>
                       <td>{{ servicoF.servico.categoria.nome }}</td>
                       <td>
-                        <button
-                          type="button"
-                          class="btn-sm btn-info"
-                          (click)="redirecionaEscala()"
-                        >
+                        <button type="button" class="btn-sm btn-info" (click)="redirecionaEscala()">
                           Escala
                         </button>
                       </td>
@@ -114,22 +94,14 @@
                   </tbody>
                 </table>
                 <div class="d-flex justify-content-between p-2">
-                  <ngb-pagination
-                    [collectionSize]="collectionSize2"
-                    [(page)]="page2"
-                    [pageSize]="pageSize2"
-                    (pageChange)="refreshServicoFuncionario()"
-                  >
+                  <ngb-pagination [collectionSize]="collectionSize2" [(page)]="page2" [pageSize]="pageSize2"
+                    (pageChange)="refreshServicoFuncionario()">
                   </ngb-pagination>
-                  <select
-                    class="custom-select"
-                    style="width: auto"
-                    [(ngModel)]="pageSize2"
-                    (ngModelChange)="refreshServicoFuncionario()"
-                  >
-                    <option [ngValue]="2">2 items per page</option>
-                    <option [ngValue]="4">4 items per page</option>
-                    <option [ngValue]="6">6 items per page</option>
+                  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize2"
+                    (ngModelChange)="refreshServicoFuncionario()">
+                    <option [ngValue]="2">2 itens por página</option>
+                    <option [ngValue]="4">4 itens por página</option>
+                    <option [ngValue]="6">6 itens por página</option>
                   </select>
                 </div>
               </div>

@@ -73,10 +73,12 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService, private tokenService: TokenService
+  ) { }
 
   ngOnInit(): void {
     this.auth.eventoLogar.subscribe(() => this.ngOnInit());
+    this.loginReturn = this.tokenService.decodePayloadJWT();
     this.constroiIcones();
     this.menuItems = this.routeInfo.filter((menuItem) => menuItem);
   }

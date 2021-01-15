@@ -49,6 +49,7 @@ import { Etapa04Component } from './pages/agendamento/etapas/etapa04/etapa04.com
 import { AgendamentoClienteComponent } from './pages/agendamento/cliente/agendamento-cliente.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { Etapa00Component } from './pages/agendamento/etapas/etapa00/etapa00.component';
+import { AtendimentoComponent } from './pages/atendimento/atendimento.component';
 
 @NgModule({
   declarations: [
@@ -86,6 +87,7 @@ import { Etapa00Component } from './pages/agendamento/etapas/etapa00/etapa00.com
     AgendamentoViewComponent,
     AgendamentoComponent,
     Etapa00Component,
+    AtendimentoComponent,
   ],
   imports: [
     FormsModule,

@@ -48,6 +48,7 @@ export class AuthService {
   }
   deslogar() {
     sessionStorage.clear();
+    this.eventoLogar.emit();
     this.router.navigate(['home']);
   }
 }

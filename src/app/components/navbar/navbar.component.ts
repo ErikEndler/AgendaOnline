@@ -33,7 +33,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
     private modalService: NgbModal,
     private authService: AuthService,
-    private tokenService: TokenService
+    private tokenService: TokenService,
+    private auth: AuthService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -69,6 +70,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.auth.eventoLogar.subscribe(() => this.ngOnInit());
+
     this.loginReturn = this.tokenService.decodePayloadJWT();
     window.addEventListener('resize', this.updateColor);
     this.listTitles = ROUTES.filter((listTitle) => listTitle);
@@ -203,7 +206,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return 'Dashboard';
   }
 
-  newopen() {}
+  newopen() { }
   open(content) {
     this.modalService
       .open(content, { windowClass: 'modal-search' })

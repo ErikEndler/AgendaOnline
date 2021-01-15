@@ -32,7 +32,8 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let usuario of usuarios">
-                    <td><button type="button" class="btn-sm btn-success" (click)="selecionarFuncionario(usuario)">Selecionar</button></td>
+                    <td><button type="button" class="btn-sm btn-success"
+                        (click)="selecionarFuncionario(usuario)">Selecionar</button></td>
                     <td>{{ usuario.nome }}</td>
                     <td>{{ usuario.cpf }}</td>
                     <td>{{ usuario.email }}</td>
@@ -43,10 +44,11 @@
                 <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
                   (pageChange)="refreshUsuarios()">
                 </ngb-pagination>
-                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshUsuarios()">
-                  <option [ngValue]="2">2 items per page</option>
-                  <option [ngValue]="4">4 items per page</option>
-                  <option [ngValue]="6">6 items per page</option>
+                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize"
+                  (ngModelChange)="refreshUsuarios()">
+                  <option [ngValue]="2">2 itens por página</option>
+                  <option [ngValue]="4">4 itens por página</option>
+                  <option [ngValue]="6">6 itens por página</option>
                 </select>
               </div>
             </div>
@@ -78,42 +80,44 @@
             <h4 class="title">Escolha Serviço</h4>
           </div>
           <div class="card-body">
-        <div class="table-responsive">
-        <table class="table tablesorter" id="">
-          <thead class="text-primary">
-            <tr>
-              <th *ngFor="let coluna of colunasServico" scope="col">
-                {{ coluna }}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let servico of servicos">
-              <td><button type="button" class="btn-sm btn-success" (click)="selecionarServico(servico)">Selecionar</button></td>
-              <td>{{ servico.nome }}</td>
-              <td>{{ servico.categoria }}</td>
-              <td>{{ servico.descricao }}</td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="d-flex justify-content-between p-2">
-          <ngb-pagination [collectionSize]="collectionSizeS" [(page)]="pageS" [pageSize]="pageSizeS"
-            (pageChange)="refreshServico()">
-          </ngb-pagination>
-          <select class="custom-select" style="width: auto" [(ngModel)]="pageSizeS" (ngModelChange)="refreshServico()">
-            <option [ngValue]="2">2 items per page</option>
-            <option [ngValue]="4">4 items per page</option>
-            <option [ngValue]="6">6 items per page</option>
-          </select>
-        </div>
+            <div class="table-responsive">
+              <table class="table tablesorter" id="">
+                <thead class="text-primary">
+                  <tr>
+                    <th *ngFor="let coluna of colunasServico" scope="col">
+                      {{ coluna }}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let servico of servicos">
+                    <td><button type="button" class="btn-sm btn-success"
+                        (click)="selecionarServico(servico)">Selecionar</button></td>
+                    <td>{{ servico.nome }}</td>
+                    <td>{{ servico.categoria }}</td>
+                    <td>{{ servico.descricao }}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex justify-content-between p-2">
+                <ngb-pagination [collectionSize]="collectionSizeS" [(page)]="pageS" [pageSize]="pageSizeS"
+                  (pageChange)="refreshServico()">
+                </ngb-pagination>
+                <select class="custom-select" style="width: auto" [(ngModel)]="pageSizeS"
+                  (ngModelChange)="refreshServico()">
+                  <option [ngValue]="2">2 items per page</option>
+                  <option [ngValue]="4">4 items per page</option>
+                  <option [ngValue]="6">6 items per page</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-fill btn-danger" awPreviousStep>Back</button>
+            <button type="button" class="btn btn-success" awNextStep>Avançar</button>
+          </div>
         </div>
       </div>
-        <div class="card-footer">
-          <button type="button"class="btn btn-fill btn-danger" awPreviousStep>Back</button>
-          <button type="button" class="btn btn-success" awNextStep>Avançar</button>
-        </div>
-    </div>
-  </div>
     </aw-wizard-step>
     <aw-wizard-step [stepTitle]="'Finalizar'">
       <div class="centered-content">
@@ -138,8 +142,8 @@
             </div>
           </div>
           <div class="card-footer">
-            <button type="button"class="btn btn-fill btn-danger" awPreviousStep>Back</button>
-            <button type="button"class="btn btn-fill btn-success" (click)="onSubmit()">Cadastrar</button>
+            <button type="button" class="btn btn-fill btn-danger" awPreviousStep>Back</button>
+            <button type="button" class="btn btn-fill btn-success" (click)="onSubmit()">Cadastrar</button>
           </div>
         </div>
       </div>

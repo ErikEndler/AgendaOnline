@@ -1,3 +1,4 @@
+import { AtendimentoComponent } from './pages/atendimento/atendimento.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
 import { FuncionarioGuard } from './guards/funcionario.guard';
 import { AgendamentoFormResolveGuard } from './guards/agendamento-form-resolve.guard';
@@ -60,6 +61,7 @@ const routes: Routes = [
     resolve: { agendamento: AgendamentoFormResolveGuard },
   },
   { path: 'meusagendamentos', component: AgendamentoClienteComponent },
+  { path: 'atendimento', component: AtendimentoComponent },
 
   {
     path: 'usuario',

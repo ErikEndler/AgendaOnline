@@ -5,11 +5,7 @@
     </div>
     <div class="card-body">
       <div *ngIf="loading" class="d-flex justify-content-center">
-        <div
-          class="spinner-border text-primary"
-          style="width: 3rem; height: 3rem"
-          role="status"
-        >
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
@@ -31,16 +27,10 @@
               <td scope="row">{{ servico.categoria.nome }}</td>
 
               <td>
-                <button
-                  class="btn btn-info btn-icon"
-                  (click)="onEdit(servico.id)"
-                >
+                <button class="btn btn-info btn-icon" (click)="onEdit(servico.id)">
                   <i class="fas fa-edit"></i>
                 </button>
-                <button
-                  class="btn btn-warning btn-icon"
-                  (click)="onDelete(servico.id)"
-                >
+                <button class="btn btn-warning btn-icon" (click)="onDelete(servico.id)">
                   <i class="far fa-trash-alt"></i>
                 </button>
               </td>
@@ -48,23 +38,14 @@
           </tbody>
         </table>
         <div class="d-flex justify-content-between p-2">
-          <ngb-pagination
-            [collectionSize]="collectionSize"
-            [(page)]="page"
-            [pageSize]="pageSize"
-            (pageChange)="refresh()"
-          >
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refresh()">
           </ngb-pagination>
 
-          <select
-            class="custom-select"
-            style="width: auto"
-            [(ngModel)]="pageSize"
-            (ngModelChange)="refresh()"
-          >
-            <option [ngValue]="2">2 items per page</option>
-            <option [ngValue]="4">4 items per page</option>
-            <option [ngValue]="6">6 items per page</option>
+          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+            <option [ngValue]="2">2 itens por página</option>
+            <option [ngValue]="4">4 itens por página</option>
+            <option [ngValue]="6">6 itens por página</option>
           </select>
         </div>
       </div>
