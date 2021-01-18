@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="card">
+    <div class="card-header text-center">
+      <h3>Recuperação de Senha</h3>
+    </div>
+    <div class="card-body text-center">
+      <div>
+        <p>Informe CPF e email para redefinir sua senha.</p>
+      </div>
+
+      <div *ngIf="loading" class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+      <form [formGroup]="formulario">
+        <div>
+          <label>CPF</label>
+          <input class="form-control" type="text" formControlName="cpf" placeholder="000.000.000-00" [mask]="maskCpf">
+        </div>
+        <div>
+          <label>Email</label>
+          <input class="form-control" type="text" formControlName="email">
+        </div>
+      </form>
+      <div *ngIf="erro" class="alert alert-danger" role="alert">
+        CPF ou email invalidos !
+      </div>
+      <div *ngIf="sucesso" class="alert alert-success" role="alert">
+        Senha redefinida, cheque seu email.
+      </div>
+
+
+    </div>
+    <div class="card-footer text-center">
+      <div class="btn-group">
+        <button type="button" class="btn btn-warning">
+          Voltar
+        </button>
+        <button type="button" class="btn btn-success">
+          Enviar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

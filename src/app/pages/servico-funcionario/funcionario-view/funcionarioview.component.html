@@ -27,7 +27,7 @@
                   </thead>
                   <tbody>
                     <tr *ngIf="listempy">
-                      <td id="tdvazio" colspan="4">VAZIO</td>
+                      <td id="tdvazio" colspan="3">VAZIO</td>
                     </tr>
                     <tr *ngFor="let servico of servicos">
                       <td>{{ servico.nome }}</td>
@@ -68,7 +68,7 @@
                 <table class="table tablesorter" id="">
                   <thead class="text-primary">
                     <tr>
-                      <th *ngFor="let coluna of colunasServico" scope="col">
+                      <th *ngFor="let coluna of colunasServico2" scope="col">
                         {{ coluna }}
                       </th>
                     </tr>

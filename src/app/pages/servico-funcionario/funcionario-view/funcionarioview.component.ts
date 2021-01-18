@@ -23,6 +23,7 @@ export class FuncionarioviewComponent implements OnInit {
   collectionSize: any;
   collectionSize2: any;
   colunasServico: string[] = ['nome', 'categoria', 'selecione'];
+  colunasServico2: string[] = ['Excluir', 'nome', 'categoria', 'selecione'];
   loading = true;
   loading2 = true;
   servico: Servico;
@@ -42,7 +43,7 @@ export class FuncionarioviewComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -158,12 +159,12 @@ export class FuncionarioviewComponent implements OnInit {
         }
       );
   }
-  redirecionaEscala() {
+  redirecionaEscala(): void {
     this.router.navigate(['escala'], {
       queryParams: { id: this.funcionario.id },
     });
   }
-  teste() {
+  teste(): void {
     this.servicoFuncionarioService
       .teste()
       .subscribe((result) => console.log(result));

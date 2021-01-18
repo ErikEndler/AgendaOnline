@@ -1,3 +1,4 @@
+import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuperar-senha.component';
 import { MeusAtendimentosComponent } from './pages/atendimento/meus-atendimentos/meus-atendimentos.component';
 import { AgendamentoStatusComponent } from './pages/agendamento/agendamento-status/agendamento-status.component';
 import { AtendimentoComponent } from './pages/atendimento/atendimento.component';
@@ -31,6 +32,8 @@ import { CategoriaListComponent } from './pages/categoria/list/categoria-list/ca
 import { EscalageralComponent } from './pages/escala/escala-geral-form/escala-geral.component';
 import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
 import { AgendamentoViewComponent } from './pages/agendamento/agendamento-view/agendamento-view.component';
+import { ListarComponent } from './pages/atendimento/atender/listar/listar.component';
+import { FormComponent } from './pages/atendimento/atender/form/form.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -69,6 +72,9 @@ const routes: Routes = [
   { path: 'meusagendamentos', component: AgendamentoClienteComponent },
   { path: 'atendimento', component: AtendimentoComponent },
   { path: 'atendimento/funcionario', component: MeusAtendimentosComponent },
+  { path: 'atendimento/agendamentos', component: ListarComponent },
+  { path: 'atendimento/atender', component: FormComponent },
+  { path: 'recuperarsenha', component: RecuperarSenhaComponent },
 
   { path: 'agendamento/status', component: AgendamentoStatusComponent },
 
@@ -152,4 +158,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

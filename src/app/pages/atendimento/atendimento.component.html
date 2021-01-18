@@ -17,15 +17,27 @@
           <div class="card" id="cards">
             <div class="card-body">
               <h3 class="card-title">
+                Atender
+                <button class="btn btn-link" (click)="atender()">
+                  <i class="fas fa-briefcase"></i>
+                </button>
+              </h3>
+              <p class="card-text">Iniciar um atendimento.</p>
+              <a routerLink="/atendimento/agendamentos" class="card-link">atender</a>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card" id="cards">
+            <div class="card-body">
+              <h3 class="card-title">
                 Meus Atendimentos
                 <button class="btn btn-link" (click)="meusAtendimentos()">
                   <i class="fas fa-user-circle"></i>
                 </button>
               </h3>
               <p class="card-text">Visualize seus atendimentos</p>
-              <a routerLink="/atendimento/funcionario" class="card-link"
-                >meus atendimentos</a
-              >
+              <a routerLink="/atendimento/funcionario" class="card-link">meus atendimentos</a>
             </div>
           </div>
         </div>

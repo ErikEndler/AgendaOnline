@@ -54,4 +54,12 @@ export class AgendamentoService extends CrudService<Agendamento> {
       AppSettings.url + '/api/agendamento/listastatus'
     );
   }
+  agendamentoAtendivel(idFuncionario): Observable<Agendamento[]> {
+    let parametros = new HttpParams();
+    parametros = parametros.set('funcionario', idFuncionario);
+    return this.http.get<Array<Agendamento>>(
+      AppSettings.url + '/api/agendamento/atendivel',
+      { params: parametros }
+    );
+  }
 }

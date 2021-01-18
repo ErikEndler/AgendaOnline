@@ -52,6 +52,9 @@ import { Etapa00Component } from './pages/agendamento/etapas/etapa00/etapa00.com
 import { AtendimentoComponent } from './pages/atendimento/atendimento.component';
 import { AgendamentoStatusComponent } from './pages/agendamento/agendamento-status/agendamento-status.component';
 import { MeusAtendimentosComponent } from './pages/atendimento/meus-atendimentos/meus-atendimentos.component';
+import { ListarComponent } from './pages/atendimento/atender/listar/listar.component';
+import { FormComponent } from './pages/atendimento/atender/form/form.component';
+import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuperar-senha.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,9 @@ import { MeusAtendimentosComponent } from './pages/atendimento/meus-atendimentos
     AtendimentoComponent,
     AgendamentoStatusComponent,
     MeusAtendimentosComponent,
+    ListarComponent,
+    FormComponent,
+    RecuperarSenhaComponent,
   ],
   imports: [
     FormsModule,
