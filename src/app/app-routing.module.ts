@@ -1,3 +1,4 @@
+import { MeusAtendimentosComponent } from './pages/atendimento/meus-atendimentos/meus-atendimentos.component';
 import { AgendamentoStatusComponent } from './pages/agendamento/agendamento-status/agendamento-status.component';
 import { AtendimentoComponent } from './pages/atendimento/atendimento.component';
 import { AgendamentoComponent } from './pages/agendamento/agendamento.component';
@@ -35,7 +36,11 @@ const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'novousuario', component: CadastroComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'agendamento', component: AgendamentoComponent, canActivate: [UserGuard], },
+  {
+    path: 'agendamento',
+    component: AgendamentoComponent,
+    canActivate: [UserGuard],
+  },
   {
     path: 'sf2',
     component: ServicoFuncionarioComponent,
@@ -63,6 +68,8 @@ const routes: Routes = [
   },
   { path: 'meusagendamentos', component: AgendamentoClienteComponent },
   { path: 'atendimento', component: AtendimentoComponent },
+  { path: 'atendimento/funcionario', component: MeusAtendimentosComponent },
+
   { path: 'agendamento/status', component: AgendamentoStatusComponent },
 
   {
@@ -145,4 +152,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

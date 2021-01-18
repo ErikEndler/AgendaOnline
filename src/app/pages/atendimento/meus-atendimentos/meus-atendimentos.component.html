@@ -4,55 +4,34 @@
       <h2 class="card-title">Status Agendamentos</h2>
     </div>
     <div class="card-body">
-      <div class="row">
-        <div class="col">
-          <div class="text-center" id="cards">
-            <div class="card-body">
-              <label style="font-size: 1.2rem"> Status </label>
-              <select
-                (change)="selecionarStatus()"
-                class="form-control"
-                data-selectpicker
-                [(ngModel)]="statusSelect"
-                name="status"
-              >
-                <option *ngFor="let status of listaStatus" [ngValue]="status">
-                  {{ status }}
-                </option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="!hide" class="text-center"><p>Selecione um Status</p></div>
       <div *ngIf="!loading" class="table-responsive">
         <table class="table tablesorter" id="">
           <thead class="text-primary">
             <tr>
               <th>Data</th>
               <th>Horario</th>
-              <th>Cliente</th>
               <th>Serviço</th>
-              <th>Status</th>
+              <th>Funcionario</th>
+              <th>Nota</th>
               <th>Editar</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let agendamento of listaAgendamentos">
-              <td>{{ trimData(agendamento.horarioInicio) }}</td>
+            <tr *ngFor="let atendimento of listaAtendimento">
+              <td>{{ trimData(atendimento.inicio) }}</td>
               <td>
-                {{ trim(agendamento.horarioInicio) }} -
-                {{ trim(agendamento.horarioFim) }}
+                {{ trim(atendimento.inicio) }} -
+                {{ trim(atendimento.fim) }}
               </td>
-              <td>{{ agendamento.cliente.nome }}</td>
               <td>
-                {{ agendamento.servicoFuncionario.servico.nome }}
+                {{ atendimento.agendamento.servicoFuncionario.servico.nome }}
               </td>
-              <td>{{ agendamento.status }}</td>
               <td>
-                <button class="btn btn-sm" (click)="editar(agendamento.id)">
-                  Editar
-                </button>
+                {{ atendimento.funcionario.nome }}
+              </td>
+              <td>{{ atendimento.avaliacao }}</td>
+              <td>
+                <button class="btn btn-sm">Editar</button>
               </td>
             </tr>
           </tbody>

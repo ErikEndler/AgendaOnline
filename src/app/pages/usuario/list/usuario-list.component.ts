@@ -14,7 +14,7 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 })
 export class UsuarioListComponent implements OnInit {
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
   collectionSize: any;
   usuarios: Usuario[];
   colunas: string[] = [
@@ -35,7 +35,7 @@ export class UsuarioListComponent implements OnInit {
     private modalCOnfirm: ModalConfirmacaoService,
     private serviceUsuario: UsuarioService,
     private erroService: ErroService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.list();

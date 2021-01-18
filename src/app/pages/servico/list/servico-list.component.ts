@@ -15,7 +15,7 @@ import { Servico } from 'src/app/models/servico';
 export class ServicoListComponent implements OnInit {
   loading = true;
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
   collectionSize: any;
   servicos: Servico[];
   colunas: string[] = [
@@ -33,7 +33,7 @@ export class ServicoListComponent implements OnInit {
     private router: Router,
     private modalCOnfirm: ModalConfirmacaoService,
     private erroService: ErroService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.list();

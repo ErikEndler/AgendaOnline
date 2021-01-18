@@ -1,5 +1,5 @@
 import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
-import { Usuario } from "./usuario";
+import { Usuario } from './usuario';
 
 export class Agendamento {
   id: number;

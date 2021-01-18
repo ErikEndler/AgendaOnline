@@ -30,7 +30,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   lista: ServicoFuncionario[];
   listaServicoFuncionario$: Observable<ServicoFuncionario[]>;
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
   collectionSize: any;
   loading = true;
   colunas: string[] = ['select', 'nome', 'descrição', 'categoria'];

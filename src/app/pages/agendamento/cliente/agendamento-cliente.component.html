@@ -39,7 +39,10 @@
                 <td>{{ agendamento.servicoFuncionario.servico.nome }}</td>
                 <td>{{ agendamento.servicoFuncionario.funcionario.nome }}</td>
                 <td>
-                  <button [ngClass]="aplicaCss(agendamento.status)" class="btn btn-sm">
+                  <button
+                    [ngClass]="aplicaCss(agendamento.status)"
+                    class="btn btn-sm"
+                  >
                     {{ agendamento.status }}
                   </button>
                 </td>
@@ -47,14 +50,23 @@
             </tbody>
           </table>
           <div class="d-flex justify-content-between p-2">
-            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-              (pageChange)="refresh()">
+            <ngb-pagination
+              [collectionSize]="collectionSize"
+              [(page)]="page"
+              [pageSize]="pageSize"
+              (pageChange)="refresh()"
+            >
             </ngb-pagination>
 
-            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
-              <option [ngValue]="2">2 itens por página</option>
-              <option [ngValue]="4">4 itens por página</option>
-              <option [ngValue]="6">6 itens por página</option>
+            <select
+              class="custom-select"
+              style="width: auto"
+              [(ngModel)]="pageSize"
+              (ngModelChange)="refresh()"
+            >
+              <option [ngValue]="5">5 itens por página</option>
+              <option [ngValue]="10">10 itens por página</option>
+              <option [ngValue]="20">20 itens por página</option>
             </select>
           </div>
         </div>

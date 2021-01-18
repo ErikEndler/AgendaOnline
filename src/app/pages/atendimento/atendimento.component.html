@@ -7,7 +7,8 @@
       <div class="card">
         <div class="card-body">
           <p>
-            Olá <u>{{ loginReturn.nome }}</u> você esta no módulo de Atendimentos.
+            Olá <u>{{ loginReturn.nome }}</u> você esta no módulo de
+            Atendimentos.
           </p>
         </div>
       </div>
@@ -17,19 +18,17 @@
             <div class="card-body">
               <h3 class="card-title">
                 Meus Atendimentos
-                <button class="btn btn-link">
+                <button class="btn btn-link" (click)="meusAtendimentos()">
                   <i class="fas fa-user-circle"></i>
                 </button>
               </h3>
-              <p class="card-text">
-                Visualize seus atendimentos
-              </p>
-              <a routerLink="" class="card-link">meu perfil</a>
+              <p class="card-text">Visualize seus atendimentos</p>
+              <a routerLink="/atendimento/funcionario" class="card-link"
+                >meus atendimentos</a
+              >
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>

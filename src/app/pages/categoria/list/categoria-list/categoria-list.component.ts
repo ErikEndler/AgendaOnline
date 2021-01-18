@@ -15,7 +15,7 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 export class CategoriaListComponent implements OnInit {
   loading = true;
   page = 1;
-  pageSize = 4;
+  pageSize = 5;
   collectionSize: any;
   categorias: Categoria[];
   colunas: string[] = ['id', 'nome', 'descricao', 'opções'];

@@ -22,7 +22,7 @@ export class AgendamentoClienteComponent implements OnInit {
   userLogin: LoginReturn;
   loading = false;
   page = 1;
-  pageSize = 4;
+  pageSize = 10;
   collectionSize: any;
 
   ngOnInit(): void {

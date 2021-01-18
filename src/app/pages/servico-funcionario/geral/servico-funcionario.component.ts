@@ -25,8 +25,8 @@ export class ServicoFuncionarioComponent implements OnInit {
 
   page = 1;
   pageS = 1;
-  pageSize = 4;
-  pageSizeS = 4;
+  pageSize = 5;
+  pageSizeS = 5;
   collectionSize: any;
   collectionSizeS: any;
   usuarios: Usuario[];

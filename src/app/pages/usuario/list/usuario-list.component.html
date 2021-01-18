@@ -4,12 +4,16 @@
       <h4 class="card-title">Tabela Usuario</h4>
     </div>
     <div class="card-body">
-      <div *ngIf=loading class="d-flex justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+      <div *ngIf="loading" class="d-flex justify-content-center">
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
           <span class="sr-only">Loading...</span>
         </div>
       </div>
-      <div *ngIf=!loading class="table-responsive">
+      <div *ngIf="!loading" class="table-responsive">
         <table class="table tablesorter" id="">
           <thead class="text-primary">
             <tr>
@@ -28,10 +32,16 @@
               <td>{{ usuario.telefone }}</td>
               <td>{{ usuario.whatsapp }}</td>
               <td>
-                <button class="btn btn-info btn-icon" (click)="onEdit(usuario.id)">
+                <button
+                  class="btn btn-info btn-icon"
+                  (click)="onEdit(usuario.id)"
+                >
                   <i class="fas fa-edit"></i>
                 </button>
-                <button class="btn btn-warning btn-icon" (click)="onDelete(usuario.id)">
+                <button
+                  class="btn btn-warning btn-icon"
+                  (click)="onDelete(usuario.id)"
+                >
                   <i class="far fa-trash-alt"></i>
                 </button>
               </td>
@@ -39,14 +49,23 @@
           </tbody>
         </table>
         <div class="d-flex justify-content-between p-2">
-          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-            (pageChange)="refreshUsuarios()">
+          <ngb-pagination
+            [collectionSize]="collectionSize"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            (pageChange)="refreshUsuarios()"
+          >
           </ngb-pagination>
 
-          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refreshUsuarios()">
-            <option [ngValue]="2">2 itens por página</option>
-            <option [ngValue]="4">4 itens por página</option>
-            <option [ngValue]="6">6 itens por página</option>
+          <select
+            class="custom-select"
+            style="width: auto"
+            [(ngModel)]="pageSize"
+            (ngModelChange)="refreshUsuarios()"
+          >
+            <option [ngValue]="5">5 itens por página</option>
+            <option [ngValue]="10">10 itens por página</option>
+            <option [ngValue]="20">20 itens por página</option>
           </select>
         </div>
       </div>
