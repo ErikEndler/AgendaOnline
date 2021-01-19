@@ -1,8 +1,20 @@
 <div class="content">
   <div class="card">
-    <div class="card-header text-center">
-      <h3>Recuperação de Senha</h3>
+    <div class="card-header">
+      <nav class="navbar navbar-expand navbar">
+        <div class="collapse navbar-collapse" id="textoNavbar">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              Recuperação de Senha <span class="sr-only">(Página atual)</span>
+            </li>
+          </ul>
+          <button class="btn btn-sm btn-secondary pull-right" (click)="logar()">
+            LOGAR
+          </button>
+        </div>
+      </nav>
     </div>
+
     <div class="card-body text-center">
       <div>
         <p>Informe CPF e email para redefinir sua senha.</p>
@@ -29,15 +41,13 @@
       <div *ngIf="sucesso" class="alert alert-success" role="alert">
         Senha redefinida, cheque seu email.
       </div>
-
-
     </div>
     <div class="card-footer text-center">
       <div class="btn-group">
-        <button type="button" class="btn btn-warning">
-          Voltar
+        <button type="button" class="btn btn-danger">
+          Cancelar
         </button>
-        <button type="button" class="btn btn-success">
+        <button type="button" class="btn btn-success" (click)="submit()">
           Enviar
         </button>
       </div>

@@ -25,4 +25,7 @@ export class UsuarioService extends CrudService<Usuario> {
       AppSettings.url + '/api/usuario/funcionarios'
     );
   }
+  novaSenha(objeto) {
+    return this.http.post(AppSettings.url + '/api/usuario/recuperarSenha', objeto);
+  }
 }

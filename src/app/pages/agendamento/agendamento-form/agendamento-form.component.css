@@ -1,0 +1,4 @@
+.form-control[disabled] {
+  background-color: #3f4262;
+  color: rgba(255, 255, 255, 0.8);
+}

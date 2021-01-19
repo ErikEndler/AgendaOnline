@@ -36,6 +36,7 @@ export class AgendamentoFormComponent implements OnInit {
   escalas: Escala[];
   loginReturn: LoginReturn;
   listaStatus: string[];
+  disableSelect = true;
   constructor(
     private servicoFuncionarioService: ServicoFuncionarioService,
     private usuarioService: UsuarioService,
@@ -46,7 +47,7 @@ export class AgendamentoFormComponent implements OnInit {
     private escalaService: EscalaService,
     private tokenService: TokenService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
@@ -156,10 +157,17 @@ export class AgendamentoFormComponent implements OnInit {
   compararStatus(obj1, obj2): boolean {
     return obj1 && obj2 ? obj1 === obj2 : obj1 === obj2;
   }
-  show(): void {
-    console.log(this.agendamento);
+  atender(): void {
+    this.router.navigate(['atendimento/atender']);
   }
   cancel(): void {
-    this.router.navigate(['agendamento']);
+    if (this.disableSelect === false) {
+      this.disableSelect = true;
+    } else {
+      this.router.navigate(['agendamento']);
+    }
+  }
+  onEdit(): void {
+    this.disableSelect = false;
   }
 }

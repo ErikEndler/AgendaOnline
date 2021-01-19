@@ -6,6 +6,8 @@ import { NotificationsService, NotificationType } from 'angular2-notifications';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { ModalLoginService } from 'src/app/shared/modal-login/modal-login.service';
 import { Router } from '@angular/router';
+import { timer } from "rxjs";
+
 
 @Component({
   selector: 'app-home',
@@ -15,17 +17,24 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   loginReturn: LoginReturn;
   logado = false;
+  time: any;
+  isRunning: any;
   constructor(
     private notificacao: NotificacaoService,
     private tokenService: TokenService,
     private authService: AuthService,
     private modalLoginService: ModalLoginService,
     private router: Router
-  ) {}
+  ) { }
   // https://medium.com/@josevieiraneto/push-notifications-com-server-sent-events-spring-boot-c2b7ee6febe9
   ngOnInit(): void {
     this.authService.eventoLogar.subscribe(() => this.metodo());
     this.metodo();
+    timer(0, 1000).subscribe(ellapsedCycles => {
+      if (this.isRunning) {
+        this.time--;
+      }
+    });
   }
   metodo(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
@@ -44,5 +53,8 @@ export class HomeComponent implements OnInit {
   }
   agendar(): void {
     this.router.navigate(['agendamento/novo']);
+  }
+  toggleTimer() {
+    this.isRunning = !this.isRunning;
   }
 }
