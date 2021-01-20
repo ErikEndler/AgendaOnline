@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private modalLoginService: ModalLoginService,
     private router: Router
-  ) {}
+  ) { }
   segundos: number = 0;
   minutos: number = 0;
   interval;
@@ -58,31 +58,18 @@ export class HomeComponent implements OnInit {
   agendar(): void {
     this.router.navigate(['agendamento/novo']);
   }
-
-  teste() {
-    console.log(moment().format('hh:mm:ss'));
-  }
-
-  startTimer() {
-    this.interval = setInterval(() => {
-      if (this.segundos < 60) {
-        this.segundos++;
-      } else {
-        this.segundos = 0;
-        this.minutos++;
-      }
-    }, 1000);
-  }
-
-  pauseTimer() {
+  pauseTimer(): void {
     clearInterval(this.interval);
   }
-  startInfinito() {
+  startInfinito(): void {
     this.interval = setInterval(() => {
       this.segundos++;
       this.hrFinal = moment(0, 'HH:mm:ss')
         .add(this.segundos, 's')
         .format('HH:mm:ss');
     }, 1000);
+  }
+  clearTime(): void {
+    this.segundos = 0;
   }
 }

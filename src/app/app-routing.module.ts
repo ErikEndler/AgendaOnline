@@ -1,3 +1,4 @@
+import { Agendamento } from './models/agendamento';
 import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuperar-senha.component';
 import { MeusAtendimentosComponent } from './pages/atendimento/meus-atendimentos/meus-atendimentos.component';
 import { AgendamentoStatusComponent } from './pages/agendamento/agendamento-status/agendamento-status.component';
@@ -34,6 +35,7 @@ import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/s
 import { AgendamentoViewComponent } from './pages/agendamento/agendamento-view/agendamento-view.component';
 import { ListarComponent } from './pages/atendimento/atender/listar/listar.component';
 import { FormComponent } from './pages/atendimento/atender/form/form.component';
+import { AtenderGuard } from './guards/atender.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -73,7 +75,10 @@ const routes: Routes = [
   { path: 'atendimento', component: AtendimentoComponent },
   { path: 'atendimento/funcionario', component: MeusAtendimentosComponent },
   { path: 'atendimento/agendamentos', component: ListarComponent },
-  { path: 'atendimento/atender', component: FormComponent },
+  {
+    path: 'atendimento/atender/:id', component: FormComponent,
+    resolve: { agendamento: AtenderGuard },
+  },
   { path: 'recuperarsenha', component: RecuperarSenhaComponent },
 
   { path: 'agendamento/status', component: AgendamentoStatusComponent },

@@ -32,11 +32,11 @@ export class ServicoFormComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.combobox();
-    const servico = this.route.snapshot.data['servico'];
+    const servico = this.route.snapshot.data.servico;
     this.formulario = this.formBuilder.group({
       id: [servico.id],
       categoria: [servico.categoria, Validators.required],

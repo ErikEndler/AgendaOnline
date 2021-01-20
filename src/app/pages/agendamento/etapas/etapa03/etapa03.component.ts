@@ -53,7 +53,7 @@ export class Etapa03Component implements OnInit {
     private escalaService: EscalaService,
     private notificacaoService: NotificacaoService,
     private usuarioService: UsuarioService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.agendamento.notificacao = true;
@@ -129,6 +129,8 @@ export class Etapa03Component implements OnInit {
     this.button = true;
   }
   finalizar(): void {
+    this.agendamento.horarioInicio = this.data + ' ' + this.hrInicial;
+    this.agendamento.horarioFim = this.data + ' ' + this.hrFinal;
     console.log(this.agendamento);
     this.etapasService.emiteAgendamento(this.agendamento);
   }

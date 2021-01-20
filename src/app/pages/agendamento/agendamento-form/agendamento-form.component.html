@@ -91,7 +91,7 @@
                 Cancelar
               </button>
             </div>
-            <div class="col-auto">
+            <div *ngIf="btnAtender" class="col-auto">
               <button class="btn btn-fill btn-info" style="text-align: right" (click)="atender()">
                 Atender
               </button>

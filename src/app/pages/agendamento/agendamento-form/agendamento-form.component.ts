@@ -37,6 +37,7 @@ export class AgendamentoFormComponent implements OnInit {
   loginReturn: LoginReturn;
   listaStatus: string[];
   disableSelect = true;
+  btnAtender = false;
   constructor(
     private servicoFuncionarioService: ServicoFuncionarioService,
     private usuarioService: UsuarioService,
@@ -51,6 +52,9 @@ export class AgendamentoFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
+    if (this.agendamento.status === 'AGENDADO') {
+      this.btnAtender = true;
+    }
     console.log(this.agendamento);
     if (this.agendamento.id) {
       this.dataHora();
@@ -158,7 +162,7 @@ export class AgendamentoFormComponent implements OnInit {
     return obj1 && obj2 ? obj1 === obj2 : obj1 === obj2;
   }
   atender(): void {
-    this.router.navigate(['atendimento/atender']);
+    this.router.navigate(['atendimento/atender/' + this.agendamento.id]);
   }
   cancel(): void {
     if (this.disableSelect === false) {

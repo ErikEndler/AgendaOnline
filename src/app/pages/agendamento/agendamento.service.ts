@@ -1,6 +1,6 @@
 import { Disponibilidade } from './etapas/etapa03/etapa03.component';
 import { Agendamento } from './../../models/agendamento';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { CrudService } from 'src/app/shared/crud-service';
 import { AppSettings } from 'src/app/shared/appSettings';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -13,6 +13,7 @@ export class AgendamentoService extends CrudService<Agendamento> {
   constructor(protected http: HttpClient) {
     super(http, AppSettings.url + '/api/agendamento');
   }
+
   listaAgendamentosData(datas, funcionario): Observable<Agendamento[][]> {
     let parametros = new HttpParams();
     parametros = parametros.set('funcionario', funcionario);
