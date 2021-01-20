@@ -2,13 +2,11 @@ import { LoginReturn } from './../../../../models/loginReturn';
 import { Observable } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
-import { ServicoFuncionarioService } from 'src/app/pages/servico-funcionario/servico-funcionario.service';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { EtapasService } from '../etapas.service';
 import * as moment from 'moment';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
-import { Usuario } from 'src/app/models/usuario';
 import { UsuarioService } from 'src/app/pages/usuario/usuario.service';
 import { Escala } from 'src/app/models/escala';
 import { Agendamento } from 'src/app/models/agendamento';
@@ -55,7 +53,7 @@ export class Etapa03Component implements OnInit {
     private escalaService: EscalaService,
     private notificacaoService: NotificacaoService,
     private usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.agendamento.notificacao = true;
@@ -65,7 +63,6 @@ export class Etapa03Component implements OnInit {
       this.buscaEscala();
     });
     this.cliente();
-
   }
   cliente(): void {
     if (this.usuarioLogado.role === 'ROLE_USER') {

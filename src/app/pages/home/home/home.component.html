@@ -8,10 +8,18 @@
               Home <span class="sr-only">(Página atual)</span>
             </li>
           </ul>
-          <button *ngIf="!logado" class="btn btn-sm btn-secondary pull-right" (click)="logar()">
+          <button
+            *ngIf="!logado"
+            class="btn btn-sm btn-secondary pull-right"
+            (click)="logar()"
+          >
             LOGAR
           </button>
-          <button *ngIf="logado" class="btn btn-sm btn-secondary pull-right" (click)="perfil()">
+          <button
+            *ngIf="logado"
+            class="btn btn-sm btn-secondary pull-right"
+            (click)="perfil()"
+          >
             PERFIL
           </button>
         </div>
@@ -35,17 +43,26 @@
       <p>Usuario ADMIN para teste <br />cpf: 999.999.999-99 <br />senha: 123</p>
       <br />
       <p>Usuario Comum para teste <br />cpf: 111.111.111-11 <br />senha: 132</p>
-      <br>
+      <br />
       <div>
         <button class="btn px-3" (click)="agendar()">
           <i class="far fa-calendar-alt pr-2"></i> Agendar Horário
         </button>
-
       </div>
       <i class="bi bi-star-half"></i>
-      <button (click)="toggleTimer()">Toggle timer</button>
-      <div>{{ time }}</div>
 
+      <button (click)="startInfinito()">Start Timer</button>
+      <button (click)="pauseTimer()">Pause</button>
+
+      <p>{{ minutos }} : {{ segundos }}</p>
+      <input
+        readonly
+        style="margin-left: 0"
+        class="form-control"
+        type="time"
+        name="hrFinal"
+        [(ngModel)]="hrFinal"
+      />
     </div>
   </div>
 </div>

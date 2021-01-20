@@ -6,8 +6,8 @@ import { NotificationsService, NotificationType } from 'angular2-notifications';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { ModalLoginService } from 'src/app/shared/modal-login/modal-login.service';
 import { Router } from '@angular/router';
-import { timer } from "rxjs";
-
+import { timer } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -25,12 +25,16 @@ export class HomeComponent implements OnInit {
     private authService: AuthService,
     private modalLoginService: ModalLoginService,
     private router: Router
-  ) { }
+  ) {}
+  segundos: number = 0;
+  minutos: number = 0;
+  interval;
+  hrFinal;
   // https://medium.com/@josevieiraneto/push-notifications-com-server-sent-events-spring-boot-c2b7ee6febe9
   ngOnInit(): void {
     this.authService.eventoLogar.subscribe(() => this.metodo());
     this.metodo();
-    timer(0, 1000).subscribe(ellapsedCycles => {
+    timer(0, 1000).subscribe((ellapsedCycles) => {
       if (this.isRunning) {
         this.time--;
       }
@@ -54,7 +58,31 @@ export class HomeComponent implements OnInit {
   agendar(): void {
     this.router.navigate(['agendamento/novo']);
   }
-  toggleTimer() {
-    this.isRunning = !this.isRunning;
+
+  teste() {
+    console.log(moment().format('hh:mm:ss'));
+  }
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.segundos < 60) {
+        this.segundos++;
+      } else {
+        this.segundos = 0;
+        this.minutos++;
+      }
+    }, 1000);
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
+  startInfinito() {
+    this.interval = setInterval(() => {
+      this.segundos++;
+      this.hrFinal = moment(0, 'HH:mm:ss')
+        .add(this.segundos, 's')
+        .format('HH:mm:ss');
+    }, 1000);
   }
 }
