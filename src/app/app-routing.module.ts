@@ -33,8 +33,8 @@ import { CategoriaListComponent } from './pages/categoria/list/categoria-list/ca
 import { EscalageralComponent } from './pages/escala/escala-geral-form/escala-geral.component';
 import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/servico-funcionario.component';
 import { AgendamentoViewComponent } from './pages/agendamento/agendamento-view/agendamento-view.component';
-import { ListarComponent } from './pages/atendimento/atender/listar/listar.component';
-import { FormComponent } from './pages/atendimento/atender/form/form.component';
+import { ListarComponent } from './pages/atendimento/atender/atender-listar/listar.component';
+import { FormComponent } from './pages/atendimento/atender/atender-form/form.component';
 import { AtenderGuard } from './guards/atender.guard';
 
 const routes: Routes = [

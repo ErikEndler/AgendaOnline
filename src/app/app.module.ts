@@ -52,9 +52,10 @@ import { Etapa00Component } from './pages/agendamento/etapas/etapa00/etapa00.com
 import { AtendimentoComponent } from './pages/atendimento/atendimento.component';
 import { AgendamentoStatusComponent } from './pages/agendamento/agendamento-status/agendamento-status.component';
 import { MeusAtendimentosComponent } from './pages/atendimento/meus-atendimentos/meus-atendimentos.component';
-import { ListarComponent } from './pages/atendimento/atender/listar/listar.component';
-import { FormComponent } from './pages/atendimento/atender/form/form.component';
+import { ListarComponent } from './pages/atendimento/atender/atender-listar/listar.component';
+import { FormComponent } from './pages/atendimento/atender/atender-form/form.component';
 import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuperar-senha.component';
+import { ModalAvaliacaoComponent } from './pages/avaliacao/modal-avaliacao/modal-avaliacao.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuper
     ListarComponent,
     FormComponent,
     RecuperarSenhaComponent,
+    ModalAvaliacaoComponent,
   ],
   imports: [
     FormsModule,
@@ -120,4 +122,4 @@ import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuper
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

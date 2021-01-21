@@ -1,5 +1,5 @@
-import { LoginReturn } from './../../../../models/loginReturn';
-import { AgendamentoService } from './../../../agendamento/agendamento.service';
+import { LoginReturn } from '../../../../models/loginReturn';
+import { AgendamentoService } from '../../../agendamento/agendamento.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TokenService } from 'src/app/auth/token.service';

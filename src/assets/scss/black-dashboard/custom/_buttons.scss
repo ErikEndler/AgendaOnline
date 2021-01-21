@@ -124,7 +124,8 @@
   @include btn-styles($white, $white);
 }
 
-.btn {
+.btn,
+.btn-sm {
   &:disabled,
   &[disabled],
   &.disabled {

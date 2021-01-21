@@ -1,56 +1,46 @@
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h2 class="card-title">Status Agendamentos</h2>
+      <h2 class="card-title">Meus Atendimentos</h2>
     </div>
     <div class="card-body">
       <div *ngIf="!loading" class="table-responsive">
         <table class="table tablesorter" id="">
           <thead class="text-primary">
             <tr>
-              <th>Data</th>
-              <th>Horario</th>
+              <th>Data Agendada</th>
+              <th>Atendimento</th>
               <th>Serviço</th>
-              <th>Funcionario</th>
-              <th>Nota</th>
-              <th>Editar</th>
+              <th>Cliente</th>
+              <th>Informação</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let atendimento of listaAtendimento">
-              <td>{{ trimData(atendimento.inicio) }}</td>
+              <td>{{ trimData(atendimento.agendamento.horarioInicio) }} <br> {{
+                trim(atendimento.agendamento.horarioInicio)
+                }}-{{ trim(atendimento.agendamento.horarioFim) }}</td>
               <td>
-                {{ trim(atendimento.inicio) }} -
-                {{ trim(atendimento.fim) }}
+                {{ trimData(atendimento.inicio) }} <br>
+                {{ trim(atendimento.inicio) }}-{{ trim(atendimento.fim) }}
               </td>
-              <td>
-                {{ atendimento.agendamento.servicoFuncionario.servico.nome }}
-              </td>
+
               <td>
                 {{ atendimento.funcionario.nome }}
               </td>
-              <td>{{ atendimento.avaliacao }}</td>
+              <td>{{ atendimento.agendamento.cliente.nome }}</td>
               <td>
-                <button class="btn btn-sm">Editar</button>
+                <button class="btn btn-sm"><i class="fas fa-info-circle"></i> Info</button>
               </td>
             </tr>
           </tbody>
         </table>
         <div class="d-flex justify-content-between p-2">
-          <ngb-pagination
-            [collectionSize]="collectionSize"
-            [(page)]="page"
-            [pageSize]="pageSize"
-            (pageChange)="refresh()"
-          >
+          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+            (pageChange)="refresh()">
           </ngb-pagination>
 
-          <select
-            class="custom-select"
-            style="width: auto"
-            [(ngModel)]="pageSize"
-            (ngModelChange)="refresh()"
-          >
+          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
             <option [ngValue]="5">5 itens por página</option>
             <option [ngValue]="10">10 itens por página</option>
             <option [ngValue]="15">15 itens por página</option>
