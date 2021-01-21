@@ -36,7 +36,7 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.verificaCredencial();
