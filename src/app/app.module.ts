@@ -56,6 +56,7 @@ import { ListarComponent } from './pages/atendimento/atender/atender-listar/list
 import { FormComponent } from './pages/atendimento/atender/atender-form/form.component';
 import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuperar-senha.component';
 import { ModalAvaliacaoComponent } from './pages/avaliacao/modal-avaliacao/modal-avaliacao.component';
+import { RatingComponent } from './shared/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { ModalAvaliacaoComponent } from './pages/avaliacao/modal-avaliacao/modal
     FormComponent,
     RecuperarSenhaComponent,
     ModalAvaliacaoComponent,
+    RatingComponent,
   ],
   imports: [
     FormsModule,

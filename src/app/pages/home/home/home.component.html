@@ -8,18 +8,10 @@
               Home <span class="sr-only">(Página atual)</span>
             </li>
           </ul>
-          <button
-            *ngIf="!logado"
-            class="btn btn-sm btn-secondary pull-right"
-            (click)="logar()"
-          >
+          <button *ngIf="!logado" class="btn btn-sm btn-secondary pull-right" (click)="logar()">
             LOGAR
           </button>
-          <button
-            *ngIf="logado"
-            class="btn btn-sm btn-secondary pull-right"
-            (click)="perfil()"
-          >
+          <button *ngIf="logado" class="btn btn-sm btn-secondary pull-right" (click)="perfil()">
             PERFIL
           </button>
         </div>
@@ -50,19 +42,10 @@
         </button>
       </div>
       <i class="bi bi-star-half"></i>
+      <!--<app-rating (respostaNota)="receberNota($event)"></app-rating>-->
 
-      <button (click)="startInfinito()">Start Timer</button>
-      <button (click)="pauseTimer()">Pause</button>
 
-      <p>{{ minutos }} : {{ segundos }}</p>
-      <input
-        readonly
-        style="margin-left: 0"
-        class="form-control"
-        type="time"
-        name="hrFinal"
-        [(ngModel)]="hrFinal"
-      />
+
     </div>
   </div>
 </div>

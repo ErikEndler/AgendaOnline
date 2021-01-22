@@ -72,4 +72,8 @@ export class HomeComponent implements OnInit {
   clearTime(): void {
     this.segundos = 0;
   }
+  receberNota(resposta) {
+    console.log('pai nota recebida : ', resposta);
+  }
+
 }
