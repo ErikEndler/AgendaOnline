@@ -1,3 +1,4 @@
+import { RatingService } from './../../../shared/rating/rating.service';
 import { AuthService } from './../../../auth/auth.service';
 import { LoginReturn } from './../../../models/loginReturn';
 import { TokenService } from './../../../auth/token.service';
@@ -24,8 +25,9 @@ export class HomeComponent implements OnInit {
     private tokenService: TokenService,
     private authService: AuthService,
     private modalLoginService: ModalLoginService,
-    private router: Router
-  ) { }
+    private router: Router,
+    private ratingService: RatingService
+  ) {}
   segundos: number = 0;
   minutos: number = 0;
   interval;
@@ -72,8 +74,7 @@ export class HomeComponent implements OnInit {
   clearTime(): void {
     this.segundos = 0;
   }
-  receberNota(resposta) {
+  receberNota(resposta): void {
     console.log('pai nota recebida : ', resposta);
   }
-
 }

@@ -44,7 +44,7 @@ export class FormComponent implements OnInit {
     private modalConfirm: ModalConfirmacaoService,
     private notificacaoService: NotificacaoService,
     private atendimentoService: AtendimentoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
@@ -62,15 +62,11 @@ export class FormComponent implements OnInit {
     this.horaFinal = this.agendamento.horarioFim.slice(-5);
     this.horaInicial = this.agendamento.horarioInicio.slice(-5);
   }
-  pauseTimer(): void {
-    this.btn1Disabled = false;
 
-    clearInterval(this.interval);
-  }
   startInfinito(): void {
-    this.horarios = true;
+    //this.horarios = true;
     this.inicioAtendimento = moment().format('HH:mm');
-    this.btn1 = 'continuar';
+    this.btn1 = 'Atendendo...';
     this.btn1Disabled = true;
     this.interval = setInterval(() => {
       this.segundos++;
@@ -90,37 +86,47 @@ export class FormComponent implements OnInit {
     this.fimAtendimento = '';
   }
   finalizarAtendimento(): void {
-    const result$ = this.modalConfirm.showConfirm(
-      'Confirmação',
-      'Deseja Finalizar Atendimento? Das ' + this.inicioAtendimento + ' as ' + this.fimAtendimento,
-      'Confirmar'
-    );
-    result$.asObservable().subscribe(
-      () => {
-        this.atendimento.inicio = this.data + ' ' + this.inicioAtendimento;
-        this.atendimento.fim = this.data + ' ' + this.fimAtendimento;
-        console.log(this.atendimento);
-        this.atendimentoService.save(this.atendimento).subscribe(() => {
-          this.notificacaoService.criar(
-            NotificationType.Success,
-            'Salvo com Sucesso'
-          );
+    if (this.inicioAtendimento && this.fimAtendimento) {
+      const result$ = this.modalConfirm.showConfirm(
+        'Confirmação',
+        'Deseja Finalizar Atendimento? Das ' +
+          this.inicioAtendimento +
+          ' as ' +
+          this.fimAtendimento,
+        'Confirmar'
+      );
+      result$.asObservable().subscribe(
+        (result) => {
+          if (result) {
+            this.atendimento.inicio = this.data + ' ' + this.inicioAtendimento;
+            this.atendimento.fim = this.data + ' ' + this.fimAtendimento;
+            console.log(this.atendimento);
+            this.atendimentoService.save(this.atendimento).subscribe(
+              () => {
+                this.notificacaoService.criar(
+                  NotificationType.Success,
+                  'Salvo com Sucesso'
+                );
+              },
+              (error) => {
+                console.error(error);
+                this.erroService.tratarErro(error);
+              }
+            );
+          }
         },
-          (error) => {
-            console.error(error);
-            this.erroService.tratarErro(error);
-          });
-      },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
-      }
-    );
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+        }
+      );
+    }
   }
   atenderAgora(): void {
     this.emAtendimento = true;
     this.cronometro = true;
     this.campos = true;
+    this.startInfinito();
   }
   lancarAtendimento(): void {
     this.emAtendimento = true;

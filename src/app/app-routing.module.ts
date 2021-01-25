@@ -1,3 +1,5 @@
+import { ViewAtendimentoComponent } from './pages/atendimento/view-atendimento/view-atendimento.component';
+import { AtendimentoResolveGuard } from './guards/atendimento-resolve.guard';
 import { Agendamento } from './models/agendamento';
 import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuperar-senha.component';
 import { MeusAtendimentosComponent } from './pages/atendimento/meus-atendimentos/meus-atendimentos.component';
@@ -35,7 +37,7 @@ import { ServicoFuncionarioComponent } from './pages/servico-funcionario/geral/s
 import { AgendamentoViewComponent } from './pages/agendamento/agendamento-view/agendamento-view.component';
 import { ListarComponent } from './pages/atendimento/atender/atender-listar/listar.component';
 import { FormComponent } from './pages/atendimento/atender/atender-form/form.component';
-import { AtenderGuard } from './guards/atender.guard';
+import { AtenderResolveGuard } from './guards/atender-resolve.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -76,8 +78,14 @@ const routes: Routes = [
   { path: 'atendimento/funcionario', component: MeusAtendimentosComponent },
   { path: 'atendimento/agendamentos', component: ListarComponent },
   {
-    path: 'atendimento/atender/:id', component: FormComponent,
-    resolve: { agendamento: AtenderGuard },
+    path: 'atendimento/atender/:id',
+    component: FormComponent,
+    resolve: { agendamento: AtenderResolveGuard },
+  },
+  {
+    path: 'atendimento/:id',
+    component: ViewAtendimentoComponent,
+    resolve: { atendimento: AtendimentoResolveGuard },
   },
   { path: 'recuperarsenha', component: RecuperarSenhaComponent },
 
@@ -163,4 +171,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

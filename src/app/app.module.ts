@@ -57,6 +57,7 @@ import { FormComponent } from './pages/atendimento/atender/atender-form/form.com
 import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuperar-senha.component';
 import { ModalAvaliacaoComponent } from './pages/avaliacao/modal-avaliacao/modal-avaliacao.component';
 import { RatingComponent } from './shared/rating/rating.component';
+import { ViewAtendimentoComponent } from './pages/atendimento/view-atendimento/view-atendimento.component';
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import { RatingComponent } from './shared/rating/rating.component';
     RecuperarSenhaComponent,
     ModalAvaliacaoComponent,
     RatingComponent,
+    ViewAtendimentoComponent,
   ],
   imports: [
     FormsModule,

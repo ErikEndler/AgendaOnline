@@ -16,7 +16,9 @@
                   class="form-control"
                   type="text"
                   name="funcionario"
-                  [(ngModel)]="agendamento.servicoFuncionario.funcionario.nome"
+                  [(ngModel)]="
+                    atendimento.agendamento.servicoFuncionario.funcionario.nome
+                  "
                 />
               </div>
               <div class="col-md-3">
@@ -26,7 +28,7 @@
                   class="form-control"
                   type="text"
                   name="status"
-                  [(ngModel)]="agendamento.status"
+                  [(ngModel)]="atendimento.agendamento.status"
                 />
               </div>
             </div>
@@ -39,7 +41,9 @@
                   name="servico"
                   type="text"
                   name="servico"
-                  [(ngModel)]="agendamento.servicoFuncionario.servico.nome"
+                  [(ngModel)]="
+                    atendimento.agendamento.servicoFuncionario.servico.nome
+                  "
                 />
               </div>
               <div class="col-md-6">
@@ -49,7 +53,7 @@
                   class="form-control"
                   type="text"
                   name="cliente"
-                  [(ngModel)]="agendamento.cliente.nome"
+                  [(ngModel)]="atendimento.agendamento.cliente.nome"
                 />
               </div>
             </div>
@@ -61,7 +65,7 @@
                   class="form-control"
                   type="date"
                   name="data"
-                  [(ngModel)]="data"
+                  value="{{ trimData(atendimento.agendamento.horarioInicio) }}"
                 />
               </div>
               <div class="col">
@@ -70,9 +74,11 @@
                   <input
                     readonly
                     class="form-control"
-                    type="text"
+                    type="time"
                     name="horaInicial"
-                    [(ngModel)]="horaInicial"
+                    value="{{
+                      trimHora(atendimento.agendamento.horarioInicio)
+                    }}"
                   />
                 </div>
               </div>
@@ -85,7 +91,7 @@
                     type="time"
                     name="hrFinal"
                     name="horaFinal"
-                    [(ngModel)]="horaFinal"
+                    value="{{ trimHora(atendimento.agendamento.horarioFim) }}"
                   />
                 </div>
               </div>
@@ -99,89 +105,21 @@
                   class="form-control"
                   type="text"
                   name="agendamento.obs"
-                  [(ngModel)]="agendamento.obs"
+                  [(ngModel)]="atendimento.agendamento.obs"
                 ></textarea>
               </div>
             </div>
           </form>
         </div>
       </div>
-
       <div class="row">
-        <div *ngIf="cronometro" class="col">
-          <div class="card card-blue">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <label
-                    >Cronômetro
-                    <i class="fas fa-stopwatch" style="font-size: 1.2rem"></i
-                  ></label>
-                  <input
-                    readonly
-                    style="margin: 0"
-                    class="form-control time"
-                    type="time"
-                    name="cronometro"
-                    [(ngModel)]="time"
-                  />
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-auto">
-                  <label>Inicio Atendimento</label>
-                  <input
-                    [readonly]="campos"
-                    style="margin: 0"
-                    class="form-control time"
-                    type="time"
-                    name="inicioAtendimento"
-                    [(ngModel)]="inicioAtendimento"
-                  />
-                </div>
-                <div class="col-md-auto">
-                  <label>Fim Atendimento</label>
-                  <input
-                    [readonly]="campos"
-                    style="margin: 0"
-                    class="form-control time"
-                    type="time"
-                    name="fimAtendimento"
-                    [(ngModel)]="fimAtendimento"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="card-footer">
-              <button
-                class="btn-sm btn-fill btn-info"
-                (click)="startInfinito()"
-                [disabled]="btn1Disabled"
-              >
-                <i class="fas fa-play"></i> {{ btn1 }}
-              </button>
-
-              <button class="btn-sm btn-fill btn-danger" (click)="clearTime()">
-                <i class="fas fa-history"></i> Reset
-              </button>
-              <button
-                [disabled]="!btn1Disabled"
-                class="btn-sm btn-fill btn-success"
-                (click)="finalizarAtendimento()"
-              >
-                Finalizar Atendimento
-              </button>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="horarios" class="col">
+        <div class="col">
           <div class="card card-blue">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-auto">
                   <label>Inicio Atendimento</label>
                   <input
-                    [readonly]="campos"
                     style="margin-left: 0"
                     class="form-control time"
                     type="time"
@@ -192,7 +130,6 @@
                 <div class="col-md-auto">
                   <label>Fim Atendimento</label>
                   <input
-                    [readonly]="campos"
                     style="margin-left: 0"
                     class="form-control time"
                     type="time"
@@ -200,43 +137,45 @@
                     [(ngModel)]="fimAtendimento"
                   />
                 </div>
+                <div class="col-md-auto">
+                  <label>Nota Avaliação</label>
+                  <p style="text-align: center">
+                    <button
+                      class="btn btn-link"
+                      (click)="onRatingStar(true, true)"
+                    >
+                      {{ this.atendimento?.avaliacao?.notaFuncionario }}
+                      <i class="fas fa-star"></i>
+                    </button>
+                  </p>
+                </div>
+                <div class="col-md-auto">
+                  <label>Nota Avaliação(Cliente)</label>
+                  <p style="text-align: center">
+                    <button
+                      class="btn btn-link"
+                      (click)="onRatingStar(false, false)"
+                    >
+                      {{ this.atendimento?.avaliacao?.notaFuncionario }}
+                      <i class="fas fa-star"></i>
+                    </button>
+                  </p>
+                </div>
               </div>
             </div>
             <div class="card-footer">
+              <button class="btn-sm btn-fill btn-success" (click)="onSubmit()">
+                Editar Atendimento
+              </button>
               <button
-                class="btn-sm btn-fill btn-success"
-                (click)="finalizarAtendimento()"
+                style="margin-left: 10px"
+                class="btn-sm btn-fill btn-danger"
               >
-                Finalizar Atendimento
+                Cancelar
               </button>
             </div>
           </div>
         </div>
-      </div>
-      <div>
-        <button
-          *ngIf="!emAtendimento"
-          class="btn-sm btn-fill btn-info"
-          (click)="atenderAgora()"
-        >
-          Atender Agora
-        </button>
-        <button
-          *ngIf="!emAtendimento"
-          style="margin-left: 10px"
-          class="btn-sm btn-fill btn-info"
-          (click)="lancarAtendimento()"
-        >
-          Inserir Atendimento
-        </button>
-        <button
-          *ngIf="emAtendimento"
-          style="margin-left: 10px"
-          class="btn-sm btn-fill btn-danger"
-          (click)="cancelarAtendimento()"
-        >
-          Cancelar
-        </button>
       </div>
     </div>
   </div>

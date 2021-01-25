@@ -27,12 +27,12 @@ export class ServicoFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private servicoService: ServicoService,
-    private modalCOnfirm: ModalConfirmacaoService,
+    private modalConfirm: ModalConfirmacaoService,
     private categoriaService: CategoriaService,
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.combobox();
@@ -56,7 +56,7 @@ export class ServicoFormComponent implements OnInit {
   }
   onSubmit(): void {
     if (this.formulario.valid) {
-      const result$ = this.modalCOnfirm.showConfirm(
+      const result$ = this.modalConfirm.showConfirm(
         'Confirmação',
         'Deseja Salvar??',
         'Confirmar'

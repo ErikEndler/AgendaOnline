@@ -4,6 +4,7 @@ import { AtendimentoService } from './../atendimento.service';
 import { Component, OnInit } from '@angular/core';
 import { TokenService } from 'src/app/auth/token.service';
 import { ErroService } from 'src/app/shared/erro/erro.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meus-atendimentos',
@@ -14,7 +15,8 @@ export class MeusAtendimentosComponent implements OnInit {
   constructor(
     private atendimentoService: AtendimentoService,
     private tokenService: TokenService,
-    private erroService: ErroService
+    private erroService: ErroService,
+    private router: Router
   ) {}
   loginReturn: LoginReturn;
   listaAtendimento: Atendimento[];
@@ -48,4 +50,7 @@ export class MeusAtendimentosComponent implements OnInit {
     return palavra.slice(0, 10);
   }
   refresh(): void {}
+  onInfo(id) {
+    this.router.navigate(['atendimento/' + id]);
+  }
 }

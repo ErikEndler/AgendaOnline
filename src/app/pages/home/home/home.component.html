@@ -8,10 +8,18 @@
               Home <span class="sr-only">(Página atual)</span>
             </li>
           </ul>
-          <button *ngIf="!logado" class="btn btn-sm btn-secondary pull-right" (click)="logar()">
+          <button
+            *ngIf="!logado"
+            class="btn btn-sm btn-secondary pull-right"
+            (click)="logar()"
+          >
             LOGAR
           </button>
-          <button *ngIf="logado" class="btn btn-sm btn-secondary pull-right" (click)="perfil()">
+          <button
+            *ngIf="logado"
+            class="btn btn-sm btn-secondary pull-right"
+            (click)="perfil()"
+          >
             PERFIL
           </button>
         </div>
@@ -41,11 +49,6 @@
           <i class="far fa-calendar-alt pr-2"></i> Agendar Horário
         </button>
       </div>
-      <i class="bi bi-star-half"></i>
-      <!--<app-rating (respostaNota)="receberNota($event)"></app-rating>-->
-
-
-
     </div>
   </div>
 </div>
