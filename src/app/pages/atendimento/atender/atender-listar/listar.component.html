@@ -24,10 +24,10 @@
             </tr>
             <tr *ngFor="let agendamento of agendamentos">
               <td>{{ agendamento.horarioInicio }}</td>
-              <td>{{ agendamento.cliente }}</td>
+              <td>{{ agendamento.cliente.nome }}</td>
               <td>{{ agendamento.servicoFuncionario.servico.nome }}</td>
               <td>
-                <button class="btn-sm btn-info" (click)="atender()">
+                <button class="btn-sm btn-info" (click)="atender(agendamento.id)">
                   Atender
                 </button>
               </td>

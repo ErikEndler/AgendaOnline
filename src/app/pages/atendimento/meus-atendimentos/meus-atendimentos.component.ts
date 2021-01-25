@@ -17,9 +17,10 @@ export class MeusAtendimentosComponent implements OnInit {
     private tokenService: TokenService,
     private erroService: ErroService,
     private router: Router
-  ) {}
+  ) { }
   loginReturn: LoginReturn;
   listaAtendimento: Atendimento[];
+  atendimentos: Atendimento[];
   loading: false;
   page = 1;
   pageSize = 10;
@@ -34,7 +35,9 @@ export class MeusAtendimentosComponent implements OnInit {
       .atendimentoPorFuncionario(this.loginReturn.id)
       .subscribe(
         (result) => {
-          this.listaAtendimento = result;
+          this.atendimentos = result;
+          this.collectionSize = this.atendimentos.length;
+          this.refresh();
         },
         (error) => {
           console.error(error);
@@ -43,13 +46,21 @@ export class MeusAtendimentosComponent implements OnInit {
         }
       );
   }
+  refresh(): void {
+    this.listaAtendimento = this.atendimentos
+      .map((obj, i) => ({ ...obj }))
+      .slice(
+        (this.page - 1) * this.pageSize,
+        (this.page - 1) * this.pageSize + this.pageSize
+      );
+  }
   trim(palavra: string): string {
     return palavra.slice(-5);
   }
   trimData(palavra: string): string {
     return palavra.slice(0, 10);
   }
-  refresh(): void {}
+
   onInfo(id) {
     this.router.navigate(['atendimento/' + id]);
   }

@@ -61,8 +61,8 @@ export class ListarComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
-  atender(): void {
-    this.router.navigate(['atendimento/form']);
+  atender(id): void {
+    this.router.navigate(['atendimento/atender/' + id]);
   }
   agendamentosPendentes(): void {
     this.router.navigate(['agendamento/status']);

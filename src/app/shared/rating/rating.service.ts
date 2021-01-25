@@ -8,29 +8,37 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
   providedIn: 'root',
 })
 export class RatingService {
-  constructor(private modalservice: BsModalService) {}
+  constructor(private modalservice: BsModalService) { }
   showratingStar(
     atendimento: Atendimento,
     funcionario: boolean,
     edit: boolean,
     avaliacao?: Avaliacao
   ) {
-    const config: ModalOptions = {
-      class: 'modal-dialog',
-    };
+    let config: ModalOptions = null;
+    if (avaliacao) {
+      config = {
+        class: 'modal-dialog',
+        initialState: { edit, funcionario, atendimento, avaliacao }
+      };
+    } else {
+      config = {
+        class: 'modal-dialog',
+        initialState: { edit, funcionario, atendimento }
+      };
+    }
     const bsModalRef: BsModalRef = this.modalservice.show(
       RatingComponent,
       config
     );
 
-    bsModalRef.content.edit = edit;
-    bsModalRef.content.atendimento = atendimento;
 
-    bsModalRef.content.funcionario = funcionario;
-
-    if (avaliacao) {
-      bsModalRef.content.avaliacao = avaliacao;
-    }
+    // if (avaliacao) {
+    //   let newAvaliacao = new Avaliacao();
+    //   newAvaliacao = avaliacao;
+    //   console.log('setou avaliacao: ', avaliacao);
+    //   bsModalRef.content.avaliacao = newAvaliacao;
+    // }
     return (bsModalRef.content as RatingComponent).confirmResult;
   }
 }

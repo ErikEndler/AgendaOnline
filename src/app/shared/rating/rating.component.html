@@ -3,95 +3,62 @@
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalLongTitle">Avaliação</h5>
   </div>
-  <div class="modal-body" [formGroup]="formulario">
+  <div class="modal-body">
     <div class="page__demo">
       <div class="page__group">
-        <div class="rating">
-          <div *ngIf="funcionario">
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc1"
-              formControlName="notaFuncionario"
-              value="1"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc2"
-              formControlName="notaFuncionario"
-              value="2"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc3"
-              formControlName="notaFuncionario"
-              value="3"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc4"
-              formControlName="notaFuncionario"
-              value="4"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc5"
-              formControlName="notaFuncionario"
-              value="5"
-              (change)="click()"
-            />
-          </div>
-          <div *ngIf="!funcionario">
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc1"
-              formControlName="notaCLiente"
-              value="1"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc2"
-              formControlName="notaCLiente"
-              value="2"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc3"
-              formControlName="notaCLiente"
-              value="3"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc4"
-              formControlName="notaCLiente"
-              value="4"
-              (change)="click()"
-            />
-            <input
-              type="radio"
-              class="rating__control screen-reader"
-              id="rc5"
-              formControlName="notaCLiente"
-              value="5"
-              (change)="click()"
-            />
-          </div>
-
+        <div *ngIf="funcionario" class="rating">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc1"
+            (click)="click(1)" [checked]="avaliacao.notaFuncionario===1">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc2"
+            (click)="click(2)" [checked]="avaliacao.notaFuncionario===2">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc3"
+            (click)="click(3)" [checked]="avaliacao.notaFuncionario===3">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc4"
+            (click)="click(4)" [checked]="avaliacao.notaFuncionario===4">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc5"
+            (click)="click(5)" [checked]="avaliacao.notaFuncionario===5">
+          <label for="rc1" class="rating__item">
+            <svg class="rating__star">
+              <use xlink:href="#star"></use>
+            </svg>
+            <span class="screen-reader">1</span>
+          </label>
+          <label for="rc2" class="rating__item">
+            <svg class="rating__star">
+              <use xlink:href="#star"></use>
+            </svg>
+            <span class="screen-reader">2</span>
+          </label>
+          <label for="rc3" class="rating__item">
+            <svg class="rating__star">
+              <use xlink:href="#star"></use>
+            </svg>
+            <span class="screen-reader">3</span>
+          </label>
+          <label for="rc4" class="rating__item">
+            <svg class="rating__star">
+              <use xlink:href="#star"></use>
+            </svg>
+            <span class="screen-reader">4</span>
+          </label>
+          <label for="rc5" class="rating__item">
+            <svg class="rating__star">
+              <use xlink:href="#star"></use>
+            </svg>
+            <span class="screen-reader">5</span>
+          </label>
+        </div>
+        <div *ngIf="!funcionario" class="rating">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc1"
+            (click)="click(1)" [checked]="avaliacao.notaCLiente===1">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc2"
+            (click)="click(2)" [checked]="avaliacao.notaCLiente===2">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc3"
+            (click)="click(3)" [checked]="avaliacao.notaCLiente===3">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc4"
+            (click)="click(4)" [checked]="avaliacao.notaCLiente===4">
+          <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc5"
+            (click)="click(5)" [checked]="avaliacao.notaCLiente===5">
           <label for="rc1" class="rating__item">
             <svg class="rating__star">
               <use xlink:href="#star"></use>
@@ -124,33 +91,26 @@
           </label>
         </div>
       </div>
+
     </div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
+      <symbol id="star" viewBox="0 0 26 28">
+        <path
+          d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z" />
+      </symbol>
+    </svg>
+
     <label>Comentário </label>
-    <textarea
-      *ngIf="funcionario"
-      formControlName="obsuncionario"
-      name="obsuncionario"
-      class="form-control"
-      rows="3"
-    ></textarea>
-    <textarea
-      *ngIf="!funcionario"
-      formControlName="obsCliente"
-      name="obsCliente"
-      class="form-control"
-      rows="3"
-    ></textarea>
+    <textarea *ngIf="funcionario" [(ngModel)]="obsFuncionario" name="obsFuncionario" class="form-control"
+      rows="3"></textarea>
+    <textarea [readOnly]="!funcionario" *ngIf="!funcionario" [(ngModel)]="obsCliente" name="obsCliente"
+      class="form-control" rows="3"></textarea>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-warning"
-      data-dismiss="modal"
-      (click)="onClose()"
-    >
+    <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="onClose()">
       Cancelar
     </button>
-    <button class="btn btn-fill btn-success" (click)="onConfirme()">
+    <button class="btn btn-fill btn-success" [disabled]="!edit" (click)="onConfirme()">
       Avaliar
     </button>
   </div>
@@ -159,7 +119,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
   <symbol id="star" viewBox="0 0 26 28">
     <path
-      d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z"
-    />
+      d="M26 10.109c0 .281-.203.547-.406.75l-5.672 5.531 1.344 7.812c.016.109.016.203.016.313 0 .406-.187.781-.641.781a1.27 1.27 0 0 1-.625-.187L13 21.422l-7.016 3.687c-.203.109-.406.187-.625.187-.453 0-.656-.375-.656-.781 0-.109.016-.203.031-.313l1.344-7.812L.39 10.859c-.187-.203-.391-.469-.391-.75 0-.469.484-.656.875-.719l7.844-1.141 3.516-7.109c.141-.297.406-.641.766-.641s.625.344.766.641l3.516 7.109 7.844 1.141c.375.063.875.25.875.719z" />
   </symbol>
 </svg>

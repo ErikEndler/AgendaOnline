@@ -5,5 +5,5 @@ export class Avaliacao {
   notaCLiente: number;
   notaFuncionario: number;
   obsCliente: string;
-  obsuncionario: string;
+  obsFuncionario: string;
 }

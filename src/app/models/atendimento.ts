@@ -7,5 +7,4 @@ export class Atendimento {
   funcionario: Usuario;
   inicio: string;
   fim: string;
-  avaliacao: Avaliacao;
 }

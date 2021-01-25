@@ -9,6 +9,7 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificacaoService } from '../notificacao/notificacao.service';
 import { NotificationType } from 'angular2-notifications';
 import { ErroService } from '../erro/erro.service';
+import { AvaliacaoService } from 'src/app/pages/avaliacao/avaliacao.service';
 
 @Component({
   selector: 'app-rating',
@@ -21,10 +22,12 @@ export class RatingComponent implements OnInit {
     public bsModalRef: BsModalRef,
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
-    private atendimentoService: AtendimentoService
-  ) {}
+    private avaliacaoService: AvaliacaoService
+  ) { }
   formulario: FormGroup;
-  @Input() nota: number;
+  nota: number;
+  obsCliente: string;
+  obsFuncionario: string;
   @Input() avaliacao: Avaliacao = new Avaliacao();
   @Input() edit = false;
   @Input() funcionario = false;
@@ -36,32 +39,49 @@ export class RatingComponent implements OnInit {
     console.log('func: ', this.funcionario);
     console.log('edit: ', this.edit);
     this.confirmResult = new Subject();
-    this.loadFormulario();
+    this.obsCliente = this.avaliacao.obsCliente;
+    this.obsFuncionario = this.avaliacao.obsFuncionario;
+    //this.disableCampos();
+    //this.loadFormulario();
+  }
+  disableCampos() {
+    if (!this.edit) {
+      return 'disabled';
+    }
   }
   loadFormulario(): void {
     this.formulario = this.formBuilder.group({
-      id: [this.avaliacao.id],
-      atendimento: [this.avaliacao.atendimento],
-      notaCLiente: [this.avaliacao.notaCLiente],
-      notaFuncionario: [this.avaliacao.notaFuncionario],
-      obsCliente: [this.avaliacao.obsCliente],
-      obsuncionario: [this.avaliacao.obsuncionario],
+      id: [this.avaliacao?.id],
+      atendimento: [this.avaliacao?.atendimento],
+      notaCLiente: [this.avaliacao?.notaCLiente],
+      notaFuncionario: [this.avaliacao?.notaFuncionario],
+      obsCliente: [this.avaliacao?.obsCliente],
+      obsFuncionario: [this.avaliacao?.obsFuncionario],
     });
   }
-  click(): void {
-    this.avaliacao.atendimento = this.atendimento;
-    //this.loadFormulario();
+  click(nota: number): void {
+    this.nota = nota;
+    // this.formulario.get('atendimento').setValue(this.atendimento);
     console.log('func: ', this.funcionario);
     console.log('edit: ', this.edit);
-    console.log(this.formulario.value);
+    console.log('nota: ', this.nota);
+    console.log(this.avaliacao);
   }
   onClose(): void {
     this.confirmResult.next(false);
     this.bsModalRef.hide();
   }
   onConfirme(): void {
-    this.confirmResult.next(this.formulario.value);
-    this.atendimentoService.save(this.formulario.value).subscribe(
+    if (this.funcionario) {
+      this.avaliacao.notaFuncionario = this.nota;
+      this.avaliacao.obsFuncionario = this.obsFuncionario;
+    } else {
+      this.avaliacao.notaCLiente = this.nota;
+      this.avaliacao.obsCliente = this.obsCliente;
+    }
+    console.log(this.avaliacao);
+    this.confirmResult.next(this.avaliacao);
+    this.avaliacaoService.save(this.avaliacao).subscribe(
       (result) => {
         this.notificacaoService.criar(
           NotificationType.Success,

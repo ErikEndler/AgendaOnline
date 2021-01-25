@@ -18,9 +18,10 @@ export class AgendamentoStatusComponent implements OnInit {
     private erroService: ErroService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
   loginReturn: LoginReturn;
   listaAgendamentos: Agendamento[];
+  agendamentos: Agendamento[];
   listaStatus: string[];
   statusSelect = 'PENDENTE';
   hide = false;
@@ -47,10 +48,12 @@ export class AgendamentoStatusComponent implements OnInit {
       .agendamentoPorStatus(this.loginReturn.id, this.statusSelect)
       .subscribe(
         (result) => {
-          this.listaAgendamentos = result;
+          this.agendamentos = result;
+          this.collectionSize = this.agendamentos.length;
           console.log(result);
           this.loading = false;
           this.hide = true;
+          this.refresh();
         },
         (error) => {
           console.error(error);
@@ -62,7 +65,14 @@ export class AgendamentoStatusComponent implements OnInit {
     console.log(this.statusSelect);
     this.listarPorStatus();
   }
-  refresh(): void {}
+  refresh(): void {
+    this.listaAgendamentos = this.agendamentos
+      .map((obj, i) => ({ ...obj }))
+      .slice(
+        (this.page - 1) * this.pageSize,
+        (this.page - 1) * this.pageSize + this.pageSize
+      );
+  }
 
   trim(palavra: string): string {
     return palavra.slice(-5);
