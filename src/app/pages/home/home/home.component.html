@@ -8,18 +8,10 @@
               Home <span class="sr-only">(Página atual)</span>
             </li>
           </ul>
-          <button
-            *ngIf="!logado"
-            class="btn btn-sm btn-secondary pull-right"
-            (click)="logar()"
-          >
+          <button *ngIf="!logado" class="btn btn-sm btn-secondary pull-right" (click)="logar()">
             LOGAR
           </button>
-          <button
-            *ngIf="logado"
-            class="btn btn-sm btn-secondary pull-right"
-            (click)="perfil()"
-          >
+          <button *ngIf="logado" class="btn btn-sm btn-secondary pull-right" (click)="perfil()">
             PERFIL
           </button>
         </div>
@@ -49,6 +41,27 @@
           <i class="far fa-calendar-alt pr-2"></i> Agendar Horário
         </button>
       </div>
+      <div>
+        <button class="btn px-3" (click)="conectar()">
+          conectar
+        </button>
+      </div>
+      <div>
+        <button class="btn px-3" (click)="desconectar()">
+          Desconectar
+        </button>
+      </div>
+      <div>
+        <button class="btn px-3" (click)="start()">
+          Start(ouvir)
+        </button>
+      </div>
+      <div>
+        <button class="btn px-3" (click)="stop()">
+          Stop(ouvir)
+        </button>
+      </div>
+
     </div>
   </div>
 </div>

@@ -1,3 +1,4 @@
+import { NotificacaoRxService } from './../../../components/notificacao/notificacao-rx.service';
 import { RatingService } from './../../../shared/rating/rating.service';
 import { AuthService } from './../../../auth/auth.service';
 import { LoginReturn } from './../../../models/loginReturn';
@@ -21,13 +22,14 @@ export class HomeComponent implements OnInit {
   time: any;
   isRunning: any;
   constructor(
+    private notificacaoRxService: NotificacaoRxService,
     private notificacao: NotificacaoService,
     private tokenService: TokenService,
     private authService: AuthService,
     private modalLoginService: ModalLoginService,
     private router: Router,
     private ratingService: RatingService
-  ) {}
+  ) { }
   segundos: number = 0;
   minutos: number = 0;
   interval;
@@ -76,5 +78,18 @@ export class HomeComponent implements OnInit {
   }
   receberNota(resposta): void {
     console.log('pai nota recebida : ', resposta);
+  }
+  conectar() {
+    this.notificacaoRxService.connectClicked(this.loginReturn.cpf);
+  }
+  desconectar() {
+    this.notificacaoRxService.disconnectClicked();
+
+  }
+  start() {
+    this.notificacaoRxService.startClicked();
+  }
+  stop() {
+    this.notificacaoRxService.stopClicked();
   }
 }
