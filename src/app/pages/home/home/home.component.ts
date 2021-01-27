@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     private modalLoginService: ModalLoginService,
     private router: Router,
     private ratingService: RatingService
-  ) { }
+  ) {}
   segundos: number = 0;
   minutos: number = 0;
   interval;
@@ -84,7 +84,6 @@ export class HomeComponent implements OnInit {
   }
   desconectar() {
     this.notificacaoRxService.disconnectClicked();
-
   }
   start() {
     this.notificacaoRxService.startClicked();
