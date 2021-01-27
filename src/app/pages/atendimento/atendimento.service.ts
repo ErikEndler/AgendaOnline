@@ -17,4 +17,9 @@ export class AtendimentoService extends CrudService<Atendimento> {
       AppSettings.url + '/api/atendimento/funcionario/' + idFuncionario
     );
   }
+  atendimentoPorAgendamento(idAgendamento): Observable<Atendimento> {
+    return this.http.get<Atendimento>(
+      AppSettings.url + '/api/atendimento/agendamento/' + idAgendamento
+    );
+  }
 }

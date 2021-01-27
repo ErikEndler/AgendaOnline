@@ -50,15 +50,15 @@
         </div>
         <div *ngIf="!funcionario" class="rating">
           <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc1"
-            (click)="click(1)" [checked]="avaliacao.notaCLiente===1">
+            (click)="click(1)" [checked]="avaliacao.notaCliente===1">
           <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc2"
-            (click)="click(2)" [checked]="avaliacao.notaCLiente===2">
+            (click)="click(2)" [checked]="avaliacao.notaCliente===2">
           <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc3"
-            (click)="click(3)" [checked]="avaliacao.notaCLiente===3">
+            (click)="click(3)" [checked]="avaliacao.notaCliente===3">
           <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc4"
-            (click)="click(4)" [checked]="avaliacao.notaCLiente===4">
+            (click)="click(4)" [checked]="avaliacao.notaCliente===4">
           <input [disabled]="!edit" type="radio" name="rating-star" class="rating__control screen-reader" id="rc5"
-            (click)="click(5)" [checked]="avaliacao.notaCLiente===5">
+            (click)="click(5)" [checked]="avaliacao.notaCliente===5">
           <label for="rc1" class="rating__item">
             <svg class="rating__star">
               <use xlink:href="#star"></use>
@@ -103,7 +103,7 @@
     <label>Comentário </label>
     <textarea *ngIf="funcionario" [(ngModel)]="obsFuncionario" name="obsFuncionario" class="form-control"
       rows="3"></textarea>
-    <textarea [readOnly]="!funcionario" *ngIf="!funcionario" [(ngModel)]="obsCliente" name="obsCliente"
+    <textarea [readOnly]="funcionario" *ngIf="!funcionario" [(ngModel)]="obsCliente" name="obsCliente"
       class="form-control" rows="3"></textarea>
   </div>
   <div class="modal-footer">

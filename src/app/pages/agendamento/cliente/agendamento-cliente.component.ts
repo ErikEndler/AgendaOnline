@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AgendamentoService } from './../agendamento.service';
 import { Agendamento } from './../../../models/agendamento';
 import { Component, OnInit } from '@angular/core';
@@ -14,8 +15,9 @@ export class AgendamentoClienteComponent implements OnInit {
   constructor(
     private agendamentoService: AgendamentoService,
     private tokenService: TokenService,
+    private router: Router,
     private erroService: ErroService
-  ) {}
+  ) { }
   listaAgendamento: Agendamento[];
   agendamentos: Agendamento[];
   empy = false;
@@ -34,13 +36,11 @@ export class AgendamentoClienteComponent implements OnInit {
     this.agendamentoService.agendamentoCliente(this.userLogin.id).subscribe(
       (result) => {
         if (result.length) {
-          console.log('entrou no lengt >0');
           this.listaAgendamento = result;
           this.collectionSize = this.listaAgendamento.length;
           this.loading = false;
           this.refresh();
         } else {
-          console.log('else do lengt >0');
           this.empy = true;
         }
       },
@@ -81,5 +81,10 @@ export class AgendamentoClienteComponent implements OnInit {
     if (status === 'FALTOU') {
       return 'btn-danger';
     }
+  }
+  OnAgendamento(id: number) {
+    this.router.navigate(['agendamento/cliente/' + id]);
+
+    // agendamento/cliente/
   }
 }

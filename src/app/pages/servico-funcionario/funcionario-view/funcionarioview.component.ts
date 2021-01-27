@@ -47,7 +47,6 @@ export class FuncionarioviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
-      console.log(params);
       this.getFuncionario(params.id as number);
     });
     this.list();

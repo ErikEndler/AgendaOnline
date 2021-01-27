@@ -11,82 +11,42 @@
             <div class="row">
               <div class="col">
                 <label> Funcionário </label>
-                <input
-                  readonly
-                  class="form-control"
-                  type="text"
-                  name="funcionario"
-                  [(ngModel)]="agendamento.servicoFuncionario.funcionario.nome"
-                />
+                <input readonly class="form-control" type="text" name="funcionario"
+                  [(ngModel)]="agendamento.servicoFuncionario.funcionario.nome" />
               </div>
               <div class="col-md-3">
                 <label> Status </label>
-                <input
-                  readonly
-                  class="form-control"
-                  type="text"
-                  name="status"
-                  [(ngModel)]="agendamento.status"
-                />
+                <input readonly class="form-control" type="text" name="status" [(ngModel)]="agendamento.status" />
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <label> Servico </label>
-                <input
-                  readonly
-                  class="form-control"
-                  name="servico"
-                  type="text"
-                  name="servico"
-                  [(ngModel)]="agendamento.servicoFuncionario.servico.nome"
-                />
+                <input readonly class="form-control" name="servico" type="text" name="servico"
+                  [(ngModel)]="agendamento.servicoFuncionario.servico.nome" />
               </div>
               <div class="col-md-6">
                 <label> Cliente </label>
-                <input
-                  readonly
-                  class="form-control"
-                  type="text"
-                  name="cliente"
-                  [(ngModel)]="agendamento.cliente.nome"
-                />
+                <input readonly class="form-control" type="text" name="cliente"
+                  [(ngModel)]="agendamento.cliente.nome" />
               </div>
             </div>
             <div class="row">
               <div class="col-md-5">
                 <label> Data </label>
-                <input
-                  readonly
-                  class="form-control"
-                  type="date"
-                  name="data"
-                  [(ngModel)]="data"
-                />
+                <input readonly class="form-control" type="date" name="data" [(ngModel)]="data" />
               </div>
               <div class="col">
                 <div class="form-group">
                   <label> Horario Inicio </label>
-                  <input
-                    readonly
-                    class="form-control"
-                    type="text"
-                    name="horaInicial"
-                    [(ngModel)]="horaInicial"
-                  />
+                  <input readonly class="form-control" type="text" name="horaInicial" [(ngModel)]="horaInicial" />
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label> Horario Fim </label>
-                  <input
-                    readonly
-                    class="form-control"
-                    type="time"
-                    name="hrFinal"
-                    name="horaFinal"
-                    [(ngModel)]="horaFinal"
-                  />
+                  <input readonly class="form-control" type="time" name="hrFinal" name="horaFinal"
+                    [(ngModel)]="horaFinal" />
                 </div>
               </div>
             </div>
@@ -94,13 +54,8 @@
             <div class="row">
               <div class="col">
                 <label> Observação </label>
-                <textarea
-                  readonly
-                  class="form-control"
-                  type="text"
-                  name="agendamento.obs"
-                  [(ngModel)]="agendamento.obs"
-                ></textarea>
+                <textarea readonly class="form-control" type="text" name="agendamento.obs"
+                  [(ngModel)]="agendamento.obs"></textarea>
               </div>
             </div>
           </form>
@@ -113,62 +68,34 @@
             <div class="card-body">
               <div class="row">
                 <div class="col">
-                  <label
-                    >Cronômetro
-                    <i class="fas fa-stopwatch" style="font-size: 1.2rem"></i
-                  ></label>
-                  <input
-                    readonly
-                    style="margin: 0"
-                    class="form-control time"
-                    type="time"
-                    name="cronometro"
-                    [(ngModel)]="time"
-                  />
+                  <label>Cronômetro
+                    <i class="fas fa-stopwatch" style="font-size: 1.2rem"></i></label>
+                  <input readonly style="margin: 0" class="form-control time" type="time" name="cronometro"
+                    [(ngModel)]="time" />
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-auto">
                   <label>Inicio Atendimento</label>
-                  <input
-                    [readonly]="campos"
-                    style="margin: 0"
-                    class="form-control time"
-                    type="time"
-                    name="inicioAtendimento"
-                    [(ngModel)]="inicioAtendimento"
-                  />
+                  <input [readonly]="campos" style="margin: 0" class="form-control time" type="time"
+                    name="inicioAtendimento" [(ngModel)]="inicioAtendimento" />
                 </div>
                 <div class="col-md-auto">
                   <label>Fim Atendimento</label>
-                  <input
-                    [readonly]="campos"
-                    style="margin: 0"
-                    class="form-control time"
-                    type="time"
-                    name="fimAtendimento"
-                    [(ngModel)]="fimAtendimento"
-                  />
+                  <input [readonly]="campos" style="margin: 0" class="form-control time" type="time"
+                    name="fimAtendimento" [(ngModel)]="fimAtendimento" />
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <button
-                class="btn-sm btn-fill btn-info"
-                (click)="startInfinito()"
-                [disabled]="btn1Disabled"
-              >
+              <button class="btn-sm btn-fill btn-info" (click)="startInfinito()" [disabled]="btn1Disabled">
                 <i class="fas fa-play"></i> {{ btn1 }}
               </button>
 
               <button class="btn-sm btn-fill btn-danger" (click)="clearTime()">
                 <i class="fas fa-history"></i> Reset
               </button>
-              <button
-                [disabled]="!btn1Disabled"
-                class="btn-sm btn-fill btn-success"
-                (click)="finalizarAtendimento()"
-              >
+              <button [disabled]="!btn1Disabled" class="btn-sm btn-fill btn-success" (click)="finalizarAtendimento()">
                 Finalizar Atendimento
               </button>
             </div>
@@ -180,33 +107,18 @@
               <div class="row">
                 <div class="col-md-auto">
                   <label>Inicio Atendimento</label>
-                  <input
-                    [readonly]="campos"
-                    style="margin-left: 0"
-                    class="form-control time"
-                    type="time"
-                    name="inicioAtendimento"
-                    [(ngModel)]="inicioAtendimento"
-                  />
+                  <input [readonly]="campos" style="margin-left: 0" class="form-control time" type="time"
+                    name="inicioAtendimento" [(ngModel)]="inicioAtendimento" />
                 </div>
                 <div class="col-md-auto">
                   <label>Fim Atendimento</label>
-                  <input
-                    [readonly]="campos"
-                    style="margin-left: 0"
-                    class="form-control time"
-                    type="time"
-                    name="fimAtendimento"
-                    [(ngModel)]="fimAtendimento"
-                  />
+                  <input [readonly]="campos" style="margin-left: 0" class="form-control time" type="time"
+                    name="fimAtendimento" [(ngModel)]="fimAtendimento" />
                 </div>
               </div>
             </div>
             <div class="card-footer">
-              <button
-                class="btn-sm btn-fill btn-success"
-                (click)="finalizarAtendimento()"
-              >
+              <button class="btn-sm btn-fill btn-success" (click)="finalizarAtendimento()">
                 Finalizar Atendimento
               </button>
             </div>
@@ -214,27 +126,15 @@
         </div>
       </div>
       <div>
-        <button
-          *ngIf="!emAtendimento"
-          class="btn-sm btn-fill btn-info"
-          (click)="atenderAgora()"
-        >
+        <button *ngIf="!emAtendimento" class="btn-sm btn-fill btn-info" (click)="atenderAgora()">
           Atender Agora
         </button>
-        <button
-          *ngIf="!emAtendimento"
-          style="margin-left: 10px"
-          class="btn-sm btn-fill btn-info"
-          (click)="lancarAtendimento()"
-        >
+        <button *ngIf="!emAtendimento" style="margin-left: 10px" class="btn-sm btn-fill btn-info"
+          (click)="lancarAtendimento()">
           Inserir Atendimento
         </button>
-        <button
-          *ngIf="emAtendimento"
-          style="margin-left: 10px"
-          class="btn-sm btn-fill btn-danger"
-          (click)="cancelarAtendimento()"
-        >
+        <button *ngIf="emAtendimento" style="margin-left: 10px" class="btn-sm btn-fill btn-danger"
+          (click)="cancelarAtendimento()">
           Cancelar
         </button>
       </div>

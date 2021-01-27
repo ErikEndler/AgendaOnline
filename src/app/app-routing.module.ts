@@ -1,3 +1,4 @@
+import { AgendamentoClienteViewComponent } from './pages/agendamento/cliente/agendamento-cliente-view/agendamento-cliente-view.component';
 import { ViewAtendimentoComponent } from './pages/atendimento/view-atendimento/view-atendimento.component';
 import { AtendimentoResolveGuard } from './guards/atendimento-resolve.guard';
 import { Agendamento } from './models/agendamento';
@@ -71,6 +72,11 @@ const routes: Routes = [
   {
     path: 'agendamento/form/:id',
     component: AgendamentoFormComponent,
+    resolve: { agendamento: AgendamentoFormResolveGuard },
+  },
+  {
+    path: 'agendamento/cliente/:id',
+    component: AgendamentoClienteViewComponent,
     resolve: { agendamento: AgendamentoFormResolveGuard },
   },
   { path: 'meusagendamentos', component: AgendamentoClienteComponent },
@@ -171,4 +177,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

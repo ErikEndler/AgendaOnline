@@ -21,4 +21,7 @@ export class AtendimentoComponent implements OnInit {
   atender(): void {
     this.router.navigate(['atendimento/agendamentos']);
   }
+  avaliacoes() {
+
+  }
 }

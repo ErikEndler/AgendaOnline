@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class NotificacaoRxService {
-  constructor(private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService) { }
 
   loginReturn: LoginReturn = this.tokenService.decodePayloadJWT();
   private client: RxStomp;
@@ -35,7 +35,7 @@ export class NotificacaoRxService {
 
   private watchForNotifications(cpf?: string) {
     this.client
-      .watch('/user/notification/item')
+      .watch('/notification/' + cpf)
       .pipe(
         map((response) => {
           const text: string = JSON.parse(response.body).text;

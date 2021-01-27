@@ -21,7 +21,9 @@
               </thead>
               <tbody>
                 <tr *ngIf="listempy">
-                  <td id="tdvazio" colspan="4">VAZIO</td>
+                  <td id="tdvazio" colspan="7">
+                    <p style="color: darkorange;">Não há horários disponíveis</p>
+                  </td>
                 </tr>
                 <tr>
                   <td *ngFor="let escala of escalas$ | async; let i = index">
@@ -41,7 +43,8 @@
             <div class="card-body">
               <div class="text-center">
                 <label style="font-size: 1.1rem">Selecione uma Data</label>
-                <input class="form-control" type="date" name="data" (change)="dayselect($event.target.value)" />
+                <input [disabled]="listempy" class="form-control" type="date" name="data"
+                  (change)="dayselect($event.target.value)" />
               </div>
               <div *ngIf="!horariosHide" class="text-center">
                 <label style="font-size: 1.1rem">Selecione Horario de Inicio</label>
@@ -55,7 +58,8 @@
               </div>
               <div class="text-center">
                 <label style="font-size: 1.1rem">Observação</label>
-                <textarea style="min-width: 60%" class="form-control" [(ngModel)]="agendamento.obs"></textarea>
+                <textarea [disabled]="listempy" style="min-width: 60%" class="form-control"
+                  [(ngModel)]="agendamento.obs"></textarea>
               </div>
               <div *ngIf="loading" class="text-center">
                 <div class="spinner-border text-success" role="status">

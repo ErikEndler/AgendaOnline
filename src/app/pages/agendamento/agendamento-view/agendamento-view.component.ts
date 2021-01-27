@@ -31,7 +31,7 @@ export class AgendamentoViewComponent implements OnInit {
     private erroService: ErroService,
     private router: Router,
     private tokenService: TokenService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userLogin = this.tokenService.decodePayloadJWT();
@@ -57,10 +57,7 @@ export class AgendamentoViewComponent implements OnInit {
     );
     this.agendamentos$.pipe(delay(400)).subscribe(
       (sucess) => {
-        console.log('sucess[0].length', sucess[0].length);
-        console.log('sucess.length', sucess);
         if (sucess[0].length) {
-          console.log('setou empy com false');
           this.empy = false;
         }
         this.colunas = [];

@@ -58,6 +58,8 @@ import { RecuperarSenhaComponent } from './pages/usuario/recuperar-senha/recuper
 import { ModalAvaliacaoComponent } from './pages/avaliacao/modal-avaliacao/modal-avaliacao.component';
 import { RatingComponent } from './shared/rating/rating.component';
 import { ViewAtendimentoComponent } from './pages/atendimento/view-atendimento/view-atendimento.component';
+import { AgendamentoClienteViewComponent } from './pages/agendamento/cliente/agendamento-cliente-view/agendamento-cliente-view.component';
+import { MinhasAvaliacoesComponent } from './pages/avaliacao/minhas-avaliacoes/minhas-avaliacoes.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +106,8 @@ import { ViewAtendimentoComponent } from './pages/atendimento/view-atendimento/v
     ModalAvaliacaoComponent,
     RatingComponent,
     ViewAtendimentoComponent,
+    AgendamentoClienteViewComponent,
+    MinhasAvaliacoesComponent,
   ],
   imports: [
     FormsModule,

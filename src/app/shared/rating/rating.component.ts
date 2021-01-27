@@ -53,7 +53,7 @@ export class RatingComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       id: [this.avaliacao?.id],
       atendimento: [this.avaliacao?.atendimento],
-      notaCLiente: [this.avaliacao?.notaCLiente],
+      notaCLiente: [this.avaliacao?.notaCliente],
       notaFuncionario: [this.avaliacao?.notaFuncionario],
       obsCliente: [this.avaliacao?.obsCliente],
       obsFuncionario: [this.avaliacao?.obsFuncionario],
@@ -76,7 +76,7 @@ export class RatingComponent implements OnInit {
       this.avaliacao.notaFuncionario = this.nota;
       this.avaliacao.obsFuncionario = this.obsFuncionario;
     } else {
-      this.avaliacao.notaCLiente = this.nota;
+      this.avaliacao.notaCliente = this.nota;
       this.avaliacao.obsCliente = this.obsCliente;
     }
     console.log(this.avaliacao);

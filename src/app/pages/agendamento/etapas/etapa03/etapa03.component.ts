@@ -30,7 +30,7 @@ export class Etapa03Component implements OnInit {
   disponibilidade: Disponibilidade[];
   //@Input() clienteId: number;
   @Input() usuarioLogado: LoginReturn;
-  listempy = false;
+  listempy = true;
   listempy2 = true;
   horariosHide = true;
   page = 1;
@@ -45,6 +45,7 @@ export class Etapa03Component implements OnInit {
   data: string;
   hrInicial: string;
   hrFinal: string;
+  escalaVazia = false;
 
   constructor(
     private agendamentoService: AgendamentoService,
@@ -82,12 +83,19 @@ export class Etapa03Component implements OnInit {
       this.servicoFuncionario.id
     );
     this.dias = [];
-    this.escalas$.subscribe((result) =>
+    this.escalas$.subscribe((result) => {
+      this.listempy = true;
       result.forEach((e) => {
         if (e.itensEscala.length > 0) {
           this.dias.push(e.diaSemana);
+          this.listempy = false;
         }
-      })
+      });
+    },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
     );
   }
   dayselect(valor): void {

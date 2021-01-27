@@ -6,6 +6,9 @@
           <h5 class="title">Agendamento</h5>
         </div>
         <div class="card-body">
+          <div *ngIf="statusPendente" class="alert" style="background-color: coral;" role="alert">
+            Este atendimento esta pendente !
+          </div>
           <form>
             <div class="row">
               <div class="col">
@@ -82,7 +85,8 @@
               </button>
             </div>
             <div *ngIf="disableSelect" class="col-auto mr-auto">
-              <button type="submit" class="btn btn-fill btn-success" (click)="onEdit()">
+              <button type="submit" class="btn btn-fill btn-success" (click)="onEdit()" data-toggle="tooltip"
+                data-placement="left" title="Clique para habilitar Edição">
                 Editar
               </button>
             </div>
@@ -92,8 +96,15 @@
               </button>
             </div>
             <div *ngIf="btnAtender" class="col-auto">
-              <button class="btn btn-fill btn-info" style="text-align: right" (click)="atender()">
+              <button class="btn btn-fill btn-info" style="text-align: right" (click)="atender()" data-toggle="tooltip"
+                data-placement="left" title="Atender o agendamento">
                 Atender
+              </button>
+            </div>
+            <div *ngIf="statusPendente" class="col-auto">
+              <button class="btn btn-fill btn-info" style="text-align: right" (click)="confirmar()"
+                data-toggle="tooltip" data-placement="left" title="{{textoconfirmacao}}">
+                Confirmar Agendamento
               </button>
             </div>
           </div>

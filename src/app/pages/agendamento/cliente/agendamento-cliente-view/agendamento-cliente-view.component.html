@@ -1,7 +1,7 @@
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h4 class="title">Atendimento</h4>
+      <h4 class="title">Agendamento</h4>
     </div>
     <div class="card-body">
       <div class="card card-blue">
@@ -12,39 +12,38 @@
               <div class="col">
                 <label> Funcionário </label>
                 <input readonly class="form-control" type="text" name="funcionario" [(ngModel)]="
-                    atendimento.agendamento.servicoFuncionario.funcionario.nome
+                    agendamento.servicoFuncionario.funcionario.nome
                   " />
               </div>
               <div class="col-md-3">
                 <label> Status </label>
-                <input readonly class="form-control" type="text" name="status"
-                  [(ngModel)]="atendimento.agendamento.status" />
+                <input readonly class="form-control" type="text" name="status" [(ngModel)]="agendamento.status" />
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
                 <label> Servico </label>
                 <input readonly class="form-control" name="servico" type="text" name="servico" [(ngModel)]="
-                    atendimento.agendamento.servicoFuncionario.servico.nome
+                    agendamento.servicoFuncionario.servico.nome
                   " />
               </div>
               <div class="col-md-6">
                 <label> Cliente </label>
                 <input readonly class="form-control" type="text" name="cliente"
-                  [(ngModel)]="atendimento.agendamento.cliente.nome" />
+                  [(ngModel)]="agendamento.cliente.nome" />
               </div>
             </div>
             <div class="row">
               <div class="col-md-5">
                 <label> Data </label>
                 <input readonly class="form-control" type="date" name="data"
-                  value="{{ trimData(atendimento.agendamento.horarioInicio) }}" />
+                  value="{{ trimData(agendamento.horarioInicio) }}" />
               </div>
               <div class="col">
                 <div class="form-group">
                   <label> Horario Inicio </label>
                   <input readonly class="form-control" type="time" name="horaInicial" value="{{
-                      trimHora(atendimento.agendamento.horarioInicio)
+                      trimHora(agendamento.horarioInicio)
                     }}" />
                 </div>
               </div>
@@ -52,7 +51,7 @@
                 <div class="form-group">
                   <label> Horario Fim </label>
                   <input readonly class="form-control" type="time" name="hrFinal" name="horaFinal"
-                    value="{{ trimHora(atendimento.agendamento.horarioFim) }}" />
+                    value="{{ trimHora(agendamento.horarioFim) }}" />
                 </div>
               </div>
             </div>
@@ -61,56 +60,45 @@
               <div class="col">
                 <label> Observação </label>
                 <textarea readonly class="form-control" type="text" name="agendamento.obs"
-                  [(ngModel)]="atendimento.agendamento.obs"></textarea>
+                  [(ngModel)]="agendamento.obs"></textarea>
               </div>
             </div>
           </form>
         </div>
       </div>
-      <div class="row">
+      <div *ngIf="!hideAtendimento" class="row">
         <div class="col">
           <div class="card card-blue">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-auto">
                   <label>Inicio Atendimento</label>
-                  <input [readOnly]="!editar" style="margin-left: 0" class="form-control time" type="time"
-                    name="inicioAtendimento" [(ngModel)]="inicioAtendimento" />
+                  <input readOnly style="margin-left: 0" class="form-control time" type="time" name="inicioAtendimento"
+                    [(ngModel)]="inicioAtendimento" />
                 </div>
                 <div class="col-md-auto">
                   <label>Fim Atendimento</label>
-                  <input [readOnly]="!editar" style="margin-left: 0" class="form-control time" type="time"
-                    name="fimAtendimento" [(ngModel)]="fimAtendimento" />
+                  <input readOnly style="margin-left: 0" class="form-control time" type="time" name="fimAtendimento"
+                    [(ngModel)]="fimAtendimento" />
                 </div>
                 <div class="col-md-auto">
                   <label>Nota Avaliação</label>
                   <p style="text-align: center">
-                    <button class="btn btn-link" (click)="onRatingStar(true, true)">
-                      {{this.avaliacao?.notaFuncionario}}<i class="fas fa-star"></i>
-                    </button>
-                  </p>
-                </div>
-                <div class="col-md-auto">
-                  <label>Nota Avaliação(Cliente)</label>
-                  <p style="text-align: center">
-                    <button class="btn btn-link" (click)="onRatingStar(false, false)">
+                    <button class="btn btn-link" (click)="onRatingStar(false, true)">
                       {{this.avaliacao?.notaCliente}} <i class="fas fa-star"></i>
                     </button>
                   </p>
                 </div>
               </div>
             </div>
-            <div class="card-footer">
-              <button class="btn-sm btn-fill btn-success" (click)="onSubmit()">
-                {{btnEditar}}
-              </button>
-              <button style="margin-left: 10px" class="btn-sm btn-fill btn-danger" (click)="onCancel()">
-                Cancelar
-              </button>
-            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div class="card-footer">
+      <button style="margin-left: 10px" class="btn-sm btn-fill btn-danger" (click)="onCancel()">
+        Cancelar
+      </button>
     </div>
   </div>
 </div>

@@ -38,6 +38,9 @@ export class AgendamentoFormComponent implements OnInit {
   listaStatus: string[];
   disableSelect = true;
   btnAtender = false;
+  statusPendente: boolean;
+  msgSUcesso = 'Agendamento Salvo com Sucesso';
+  textoconfirmacao = 'Confirme o agendamento e muda seu STATUS para "AGENDADO"!'
   constructor(
     private servicoFuncionarioService: ServicoFuncionarioService,
     private usuarioService: UsuarioService,
@@ -55,6 +58,9 @@ export class AgendamentoFormComponent implements OnInit {
     if (this.agendamento.status === 'AGENDADO') {
       this.btnAtender = true;
     }
+    if (this.agendamento.status === 'PENDENTE') {
+      this.statusPendente = true;
+    }
     console.log(this.agendamento);
     if (this.agendamento.id) {
       this.dataHora();
@@ -67,6 +73,7 @@ export class AgendamentoFormComponent implements OnInit {
     this.funcionarioID = this.loginReturn.id;
     this.usuarioService.list().subscribe((result) => (this.usuarios = result));
   }
+
   listarStatus(): void {
     this.agendamentoService.listaStatus().subscribe(
       (result) => {
@@ -125,7 +132,6 @@ export class AgendamentoFormComponent implements OnInit {
     this.agendamento.horarioFim = this.data + ' ' + this.hrFinal;
   }
   buscaEscalas(): void {
-    console.log('entrou busca escala');
     this.escalaService
       .listarPorServicoFuncionario(this.agendamento.servicoFuncionario.id)
       .subscribe(
@@ -139,15 +145,15 @@ export class AgendamentoFormComponent implements OnInit {
         }
       );
   }
-  onSave(): void {
-    console.log('agendamento - - ', this.agendamento);
+  onSave(msg?: string): void {
     this.agendamentoService.save(this.agendamento).subscribe(
       (result) => {
         this.notificacaoService.criar(
           NotificationType.Success,
-          'Salvo com Sucesso'
+          msg ? msg : this.msgSUcesso
         );
         console.log('Agendamento salvo com sucesso!');
+        this.router.navigate(['agendamento']);
       },
       (error) => {
         console.error(error);
@@ -173,5 +179,9 @@ export class AgendamentoFormComponent implements OnInit {
   }
   onEdit(): void {
     this.disableSelect = false;
+  }
+  confirmar(): void {
+    this.agendamento.status = 'AGENDADO';
+    this.onSave('Agendamento Confirmado');
   }
 }
