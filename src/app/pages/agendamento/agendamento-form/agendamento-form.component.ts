@@ -15,7 +15,7 @@ import * as moment from 'moment';
 import { NotificationType } from 'angular2-notifications';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agendamento } from 'src/app/models/agendamento';
-
+// https://api.whatsapp.com/send?phone=5562991507989&text=oi%20tudo%20bem
 @Component({
   selector: 'app-agendamento-form',
   templateUrl: './agendamento-form.component.html',
@@ -146,6 +146,8 @@ export class AgendamentoFormComponent implements OnInit {
       );
   }
   onSave(msg?: string): void {
+    this.atribuirHr();
+    console.log(this.agendamento);
     this.agendamentoService.save(this.agendamento).subscribe(
       (result) => {
         this.notificacaoService.criar(
@@ -183,5 +185,8 @@ export class AgendamentoFormComponent implements OnInit {
   confirmar(): void {
     this.agendamento.status = 'AGENDADO';
     this.onSave('Agendamento Confirmado');
+  }
+  sendWhatsapp() {
+    window.open('https://api.whatsapp.com/send?phone=' + this.agendamento.cliente.whatsapp);
   }
 }

@@ -64,7 +64,7 @@ export class NotificacaoRxService {
 
   stopClicked() {
     if (this.client && this.client.connected) {
-      this.client.publish({ destination: '/swns/stop2' });
+      this.client.publish({ destination: '/swns/stop' });
     }
   }
 }

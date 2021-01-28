@@ -102,9 +102,15 @@
               </button>
             </div>
             <div *ngIf="statusPendente" class="col-auto">
-              <button class="btn btn-fill btn-info" style="text-align: right" (click)="confirmar()"
-                data-toggle="tooltip" data-placement="left" title="{{textoconfirmacao}}">
+              <button [disabled]="!disableSelect" class="btn btn-fill btn-info" style="text-align: right"
+                (click)="confirmar()" data-toggle="tooltip" data-placement="left" title="{{textoconfirmacao}}">
                 Confirmar Agendamento
+              </button>
+            </div>
+            <div *ngIf="statusPendente" class="col-auto">
+              <button [disabled]="!disableSelect" class="btn btn-sm btn-success" style="text-align: right"
+                (click)="sendWhatsapp()" data-toggle="tooltip" data-placement="left" title="Whatsapp">
+                <i class="fab fa-whatsapp" style="font-size: 1.9rem;"></i>
               </button>
             </div>
           </div>
