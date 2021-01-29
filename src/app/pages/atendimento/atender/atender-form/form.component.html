@@ -125,19 +125,21 @@
           </div>
         </div>
       </div>
-      <div>
-        <button *ngIf="!emAtendimento" class="btn-sm btn-fill btn-info" (click)="atenderAgora()">
-          Atender Agora
-        </button>
-        <button *ngIf="!emAtendimento" style="margin-left: 10px" class="btn-sm btn-fill btn-info"
-          (click)="lancarAtendimento()">
-          Inserir Atendimento
-        </button>
-        <button *ngIf="emAtendimento" style="margin-left: 10px" class="btn-sm btn-fill btn-danger"
-          (click)="cancelarAtendimento()">
-          Cancelar
-        </button>
-      </div>
+
+    </div>
+    <div class="card-footer">
+      <button *ngIf="!emAtendimento" [disabled]="disableAtenderAgora" class="btn-sm btn-fill btn-info"
+        (click)="atenderAgora()">
+        Atender Agora
+      </button>
+      <button *ngIf="!emAtendimento" style="margin-left: 10px" class="btn-sm btn-fill btn-info"
+        (click)="lancarAtendimento()">
+        Inserir Atendimento
+      </button>
+      <button *ngIf="emAtendimento" style="margin-left: 10px" class="btn-sm btn-fill btn-danger"
+        (click)="cancelarAtendimento()">
+        Cancelar
+      </button>
     </div>
   </div>
 </div>

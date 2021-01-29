@@ -35,6 +35,7 @@ export class FormComponent implements OnInit {
   horarios = false;
   emAtendimento = false;
   campos = true;
+  disableAtenderAgora: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,7 +45,7 @@ export class FormComponent implements OnInit {
     private modalConfirm: ModalConfirmacaoService,
     private notificacaoService: NotificacaoService,
     private atendimentoService: AtendimentoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
@@ -54,6 +55,12 @@ export class FormComponent implements OnInit {
       this.atendimento.funcionario = result;
     });
     this.loadAgendamento();
+    this.verificaAtenderAgora();
+  }
+  verificaAtenderAgora(): void {
+    if (moment().format('yyyy-MM-DD') > moment(this.agendamento.horarioInicio).format('yyyy-MM-DD')) {
+      this.disableAtenderAgora = true;
+    }
   }
   loadAgendamento(): void {
     this.data = this.agendamento.horarioInicio.slice(0, 10);
@@ -90,9 +97,9 @@ export class FormComponent implements OnInit {
       const result$ = this.modalConfirm.showConfirm(
         'Confirmação',
         'Deseja Finalizar Atendimento? Das ' +
-          this.inicioAtendimento +
-          ' as ' +
-          this.fimAtendimento,
+        this.inicioAtendimento +
+        ' as ' +
+        this.fimAtendimento,
         'Confirmar'
       );
       result$.asObservable().subscribe(

@@ -23,7 +23,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   private sidebarVisible: boolean;
   loginReturn: LoginReturn;
   public isCollapsed = true;
-
   closeResult: string;
 
   constructor(
@@ -39,6 +38,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.location = location;
     this.sidebarVisible = false;
   }
+  // VARIAVEIS NOTIFICAÇÃO
+  // fazer piscar
+  // https://codepen.io/anasandoval90/pen/jPXxaR
+  novoAgendamento;
+  agendamentoPendente;
+
   // function that adds color white/transparent to the navbar on resize (this is for the collapse)
   updateColor = () => {
     const navbar = document.getElementsByClassName('navbar')[0];
