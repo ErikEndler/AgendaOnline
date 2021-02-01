@@ -18,6 +18,7 @@ export class ModalLoginComponent implements OnInit {
   loading = false;
   titulo = 'Login';
   maskCpf = '000.000.000-00';
+  erro = false;
 
   constructor(
     public bsModalRef: BsModalRef,
@@ -54,12 +55,14 @@ export class ModalLoginComponent implements OnInit {
           } else {
             this.loading = false;
             console.log(success + ' Erro ao logar! 2');
+            this.erro = true;
           }
         },
         (error) => {
           this.loading = false;
           console.log('Erro ao logar 2');
           console.error(error);
+
           this.erroService.tratarErro(error);
         }
       );

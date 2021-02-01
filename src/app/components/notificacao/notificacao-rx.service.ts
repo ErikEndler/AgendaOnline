@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class NotificacaoRxService {
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService) {}
 
   loginReturn: LoginReturn = this.tokenService.decodePayloadJWT();
   private client: RxStomp;
@@ -18,7 +18,7 @@ export class NotificacaoRxService {
   public notifications: string[] = [];
 
   connectClicked(cpf?: string) {
-    if (!this.client || this.client.connected) {
+    if (!this.client || !this.client.connected) {
       this.client = new RxStomp();
       this.client.configure({
         webSocketFactory: () =>

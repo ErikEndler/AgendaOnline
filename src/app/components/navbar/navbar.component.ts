@@ -211,7 +211,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return 'Dashboard';
   }
 
-  newopen() { }
+  newopen() {}
   open(content) {
     this.modalService
       .open(content, { windowClass: 'modal-search' })

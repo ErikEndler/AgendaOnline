@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { LoginReturn } from '../models/loginReturn';
 import { AppSettings } from '../shared/appSettings';
 import jwt_decode from 'jwt-decode';
+import { NotificacaoRxService } from '../components/notificacao/notificacao-rx.service';
 
 declare interface Token {
   token: string;
@@ -24,9 +25,10 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
+    private notificacaoRxService: NotificacaoRxService,
     private router: Router,
     private tokenService: TokenService
-  ) { }
+  ) {}
 
   logar(form) {
     this.confirmResult = new Subject();
@@ -37,6 +39,8 @@ export class AuthService {
         this.tokenService.setToken(this.tokenObj.token);
         this.confirmResult.next(true);
         this.eventoLogar.emit();
+        this.loginReturn = this.tokenService.decodePayloadJWT();
+        this.notificacaoRxService.connectClicked(this.loginReturn.cpf);
       },
       (error) => {
         console.log('Erro ao logar ! 1');
@@ -46,9 +50,11 @@ export class AuthService {
     );
     return this.confirmResult;
   }
+
   deslogar() {
     sessionStorage.clear();
     this.eventoLogar.emit();
     this.router.navigate(['home']);
+    this.notificacaoRxService.disconnectClicked();
   }
 }
