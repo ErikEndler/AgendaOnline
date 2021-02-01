@@ -60,6 +60,7 @@ import { RatingComponent } from './shared/rating/rating.component';
 import { ViewAtendimentoComponent } from './pages/atendimento/view-atendimento/view-atendimento.component';
 import { AgendamentoClienteViewComponent } from './pages/agendamento/cliente/agendamento-cliente-view/agendamento-cliente-view.component';
 import { MinhasAvaliacoesComponent } from './pages/avaliacao/minhas-avaliacoes/minhas-avaliacoes.component';
+import { AjudaComponent } from './pages/ajuda/ajuda.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +109,7 @@ import { MinhasAvaliacoesComponent } from './pages/avaliacao/minhas-avaliacoes/m
     ViewAtendimentoComponent,
     AgendamentoClienteViewComponent,
     MinhasAvaliacoesComponent,
+    AjudaComponent,
   ],
   imports: [
     FormsModule,

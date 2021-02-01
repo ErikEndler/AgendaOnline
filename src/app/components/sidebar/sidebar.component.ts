@@ -103,6 +103,7 @@ export class SidebarComponent implements OnInit {
         icon: 'far fa-clock',
         class: '',
       },
+
     ];
     if (this.loginReturn) {
       if (this.loginReturn.role !== 'ROLE_USER') {
@@ -120,6 +121,12 @@ export class SidebarComponent implements OnInit {
         });
       }
     }
+    this.routeInfo.push({
+      path: '/ajuda',
+      title: 'Ajuda',
+      icon: 'far fa-question-circle',
+      class: '',
+    });
   }
   isMobileMenu(): boolean {
     if (window.innerWidth > 991) {

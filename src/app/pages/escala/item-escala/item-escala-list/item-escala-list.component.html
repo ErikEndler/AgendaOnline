@@ -1,32 +1,19 @@
 <div class="text-center" *ngIf="itensEscala?.length <= 0">
-  <button
-    type="button"
-    class="btn btn-info btn-sm"
-    (click)="editarItemEscala()"
-  >
+  <button type="button" class="btn btn-info btn-sm" (click)="editarItemEscala()">
     --:-- --:--
   </button>
 </div>
 <div class="text-center" *ngIf="itensEscala?.length > 0">
   <div *ngFor="let item of itensEscala; let i = index">
-    <button
-      type="button"
-      class="btn btn-info btn-sm"
-      (click)="editarItemEscala(item, i)"
-    >
+    <button type="button" class="btn btn-info btn-sm" (click)="editarItemEscala(item, i)">
       {{ item.hrInicial }} - {{ item.hrFinal }}
     </button>
   </div>
 </div>
-<div class="text-center">
-  <button
-    (click)="editarItemEscala()"
-    type="button"
-    class="btn btn-sm btn-info btn-icon"
-    data-toggle="tooltip"
-    title="Adicionar"
-  >
+<!--Botão de adicionar nova escala-->
+<!--<div class="text-center">
+  <button (click)="editarItemEscala()" type="button" class="btn btn-sm btn-info btn-icon" data-toggle="tooltip"
+    title="Adicionar">
     <i class="fas fa-plus-circle"></i>
   </button>
-</div>
-<!--primary secondary success danger warning info Light Dark-->
+</div>-->

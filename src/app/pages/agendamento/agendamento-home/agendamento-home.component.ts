@@ -11,7 +11,6 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class AgendamentoHomeComponent implements OnInit {
   admin: boolean;
-
   loginReturn: LoginReturn;
 
   constructor(
