@@ -72,6 +72,7 @@ export class AgendamentoFormComponent implements OnInit {
     this.loginReturn = this.tokenService.decodePayloadJWT();
     this.funcionarioID = this.loginReturn.id;
     this.usuarioService.list().subscribe((result) => (this.usuarios = result));
+    this.conflitos();
   }
 
   listarStatus(): void {
@@ -186,7 +187,12 @@ export class AgendamentoFormComponent implements OnInit {
     this.agendamento.status = 'AGENDADO';
     this.onSave('Agendamento Confirmado');
   }
-  sendWhatsapp() {
+  sendWhatsapp(): void {
     window.open('https://api.whatsapp.com/send?phone=' + this.agendamento.cliente.whatsapp);
+  }
+  conflitos() {
+    this.agendamentoService.agendamentosPendentesConflito(this.agendamento.id).subscribe(
+      (result) => console.log('conflitos : ', result)
+    );
   }
 }

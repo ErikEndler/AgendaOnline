@@ -63,4 +63,9 @@ export class AgendamentoService extends CrudService<Agendamento> {
       { params: parametros }
     );
   }
+  agendamentosPendentesConflito(id: number): Observable<number[]> {
+    return this.http.get<Array<number>>(
+      AppSettings.url + '/api/agendamento/listar/conflitos/' + id
+    );
+  }
 }
