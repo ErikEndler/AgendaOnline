@@ -1,3 +1,4 @@
+import { UsuarioService } from 'src/app/pages/usuario/usuario.service';
 import { TokenService } from './../../auth/token.service';
 import { LoginReturn } from 'src/app/models/loginReturn';
 import { AuthService } from './../../auth/auth.service';
@@ -24,9 +25,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   loginReturn: LoginReturn;
   public isCollapsed = true;
   closeResult: string;
+  agendados: number;
+  pendentes: number;
+  novoPendente = true;
 
   constructor(
     private modalLoginService: ModalLoginService,
+    private usuarioService: UsuarioService,
     location: Location,
     private element: ElementRef,
     private router: Router,
@@ -75,7 +80,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.auth.eventoLogar.subscribe(() => this.ngOnInit());
+    this.auth.eventoLogar.subscribe(() => {
+      this.ngOnInit();
+    });
 
     this.loginReturn = this.tokenService.decodePayloadJWT();
     window.addEventListener('resize', this.updateColor);
@@ -90,6 +97,20 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.mobileMenuVisible = 0;
       }
     });
+    //this.notificacao();
+  }
+
+  notificacao() {
+    if (this.loginReturn) {
+      this.usuarioService
+        .buscarNotificacaoBase(this.loginReturn.id)
+        .subscribe((result) => {
+          console.log(result);
+          this.agendados = result[0];
+          this.pendentes = result[1];
+        });
+    }
+    console.log('nada feito');
   }
 
   collapse(): void {

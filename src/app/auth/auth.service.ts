@@ -22,6 +22,7 @@ export class AuthService {
   tokenObj: Token;
 
   eventoLogar = new EventEmitter();
+  eventoDeslogar = new EventEmitter();
 
   constructor(
     private http: HttpClient,
@@ -38,9 +39,9 @@ export class AuthService {
         console.log('this.tokenObj : ', this.tokenObj);
         this.tokenService.setToken(this.tokenObj.token);
         this.confirmResult.next(true);
-        this.eventoLogar.emit();
         this.loginReturn = this.tokenService.decodePayloadJWT();
         this.notificacaoRxService.connectClicked(this.loginReturn.cpf);
+        this.eventoLogar.emit();
       },
       (error) => {
         console.log('Erro ao logar ! 1');
@@ -53,7 +54,7 @@ export class AuthService {
 
   deslogar() {
     sessionStorage.clear();
-    this.eventoLogar.emit();
+    this.eventoDeslogar.emit();
     this.router.navigate(['home']);
     this.notificacaoRxService.disconnectClicked();
   }

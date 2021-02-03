@@ -36,7 +36,8 @@ export class HomeComponent implements OnInit {
   hrFinal;
   // https://medium.com/@josevieiraneto/push-notifications-com-server-sent-events-spring-boot-c2b7ee6febe9
   ngOnInit(): void {
-    this.authService.eventoLogar.subscribe(() => this.metodo());
+    this.authService.eventoLogar.subscribe(() => (this.logado = true));
+    this.authService.eventoDeslogar.subscribe(() => (this.logado = false));
     this.metodo();
     timer(0, 1000).subscribe((ellapsedCycles) => {
       if (this.isRunning) {

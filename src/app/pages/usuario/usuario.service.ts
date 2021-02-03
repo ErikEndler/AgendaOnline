@@ -26,6 +26,14 @@ export class UsuarioService extends CrudService<Usuario> {
     );
   }
   novaSenha(objeto) {
-    return this.http.post(AppSettings.url + '/api/usuario/recuperarSenha', objeto);
+    return this.http.post(
+      AppSettings.url + '/api/usuario/recuperarSenha',
+      objeto
+    );
+  }
+  buscarNotificacaoBase(idFuncionario: number): Observable<number[]> {
+    return this.http.get<Array<number>>(
+      AppSettings.url + '/api/usuario/notificacao/geral/' + idFuncionario
+    );
   }
 }
