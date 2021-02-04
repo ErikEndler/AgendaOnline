@@ -68,4 +68,11 @@ export class AgendamentoService extends CrudService<Agendamento> {
       AppSettings.url + '/api/agendamento/listar/conflitos/' + id
     );
   }
+  listaAgendamentosConflitamtes(
+    idAgendamento: number
+  ): Observable<Agendamento[]> {
+    return this.http.get<Array<Agendamento>>(
+      AppSettings.url + '/api/agendamento/conflitos/' + idAgendamento
+    );
+  }
 }

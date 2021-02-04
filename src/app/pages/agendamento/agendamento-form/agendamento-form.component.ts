@@ -40,7 +40,8 @@ export class AgendamentoFormComponent implements OnInit {
   btnAtender = false;
   statusPendente: boolean;
   msgSUcesso = 'Agendamento Salvo com Sucesso';
-  textoconfirmacao = 'Confirme o agendamento e muda seu STATUS para "AGENDADO"!'
+  textoconfirmacao =
+    'Confirme o agendamento e muda seu STATUS para "AGENDADO"!';
   constructor(
     private servicoFuncionarioService: ServicoFuncionarioService,
     private usuarioService: UsuarioService,
@@ -51,7 +52,7 @@ export class AgendamentoFormComponent implements OnInit {
     private escalaService: EscalaService,
     private tokenService: TokenService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
@@ -188,11 +189,13 @@ export class AgendamentoFormComponent implements OnInit {
     this.onSave('Agendamento Confirmado');
   }
   sendWhatsapp(): void {
-    window.open('https://api.whatsapp.com/send?phone=' + this.agendamento.cliente.whatsapp);
+    window.open(
+      'https://api.whatsapp.com/send?phone=' + this.agendamento.cliente.whatsapp
+    );
   }
   conflitos() {
-    this.agendamentoService.agendamentosPendentesConflito(this.agendamento.id).subscribe(
-      (result) => console.log('conflitos : ', result)
-    );
+    this.agendamentoService
+      .listaAgendamentosConflitamtes(this.agendamento.id)
+      .subscribe((result) => console.log('conflitos : ', result));
   }
 }
