@@ -4,7 +4,13 @@ import { ErroService } from './../../../shared/erro/erro.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { EMPTY } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ModalConfirmacaoService } from '../../../shared/modal-confirmacao/modal-confirmacao.service';
 import { switchMap, take } from 'rxjs/operators';
 import { UsuarioService } from './../usuario.service';
@@ -27,6 +33,7 @@ export class UsuarioComponent implements OnInit {
   debugEnable = false;
   usuario: Usuario;
   disableAtribuicao = true;
+  confirmaSenha: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +46,11 @@ export class UsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.verificaCredencial();
+    if (this.router.url.match(/.*perfil*/)) {
+      console.log('URL = ' + this.router.url);
+      this.verificaCredencial();
+    }
+
     this.usuario = this.route.snapshot.data.usuario;
     if (this.usuario.role !== 'ROLE_USER' && this.usuario.role !== null) {
       this.disableAtribuicao = false;
@@ -80,7 +91,12 @@ export class UsuarioComponent implements OnInit {
         )
         .subscribe(
           (success) => {
-            console.log('salvo com sucesso!'), this.router.navigate(['']);
+            this.notificacaoService.criar(
+              NotificationType.Success,
+              'Salvo com Sucesso'
+            );
+            console.log('Usuario Cadastrado!'),
+              this.router.navigate(['/usuario']);
           },
           (error) => {
             console.error(error);
@@ -101,6 +117,23 @@ export class UsuarioComponent implements OnInit {
     return (
       !this.formulario.get(campo).valid && this.formulario.get(campo).touched
     );
+  }
+  confirmarSenha(): boolean {
+    if (
+      this.confirmaSenha !== this.formulario.controls.senha.value &&
+      this.formulario.get('senha').touched
+    ) {
+      return false;
+    }
+    return true;
+  }
+  habilitaEnviar(): boolean {
+    if (this.formulario.valid) {
+      if (this.confirmaSenha === this.formulario.controls.senha.value) {
+        return false;
+      }
+    }
+    return true;
   }
   aplicaCssErro(campo) {
     return {

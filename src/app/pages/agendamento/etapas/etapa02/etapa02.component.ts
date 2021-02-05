@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
 import { ServicoFuncionarioService } from 'src/app/pages/servico-funcionario/servico-funcionario.service';
 import { ErroService } from 'src/app/shared/erro/erro.service';
+import { EscalaService } from 'src/app/pages/escala/escala.service';
+import { Escala } from 'src/app/models/escala';
 
 @Component({
   selector: 'app-etapa02',
@@ -13,7 +15,6 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 export class Etapa02Component implements OnInit {
   servicosFuncionario: ServicoFuncionario[];
   listaServicosFuncionario: ServicoFuncionario[];
-  listaServicosFuncionario$: Observable<ServicoFuncionario[]>;
   listempy = true;
   page = 1;
   pageSize = 4;
@@ -21,10 +22,13 @@ export class Etapa02Component implements OnInit {
   loading1 = false;
   colunas: string[] = ['Serviço', 'Funcionário', 'select'];
   idServico: number;
+  escalas$: Observable<Escala[]>;
+  count: number;
 
   constructor(
     private servicoFuncionarioService: ServicoFuncionarioService,
     private erroService: ErroService,
+    private escalaService: EscalaService,
     private etapasService: EtapasService
   ) {}
 
@@ -35,26 +39,27 @@ export class Etapa02Component implements OnInit {
     });
   }
   list(): void {
+    this.listaServicosFuncionario = null;
+
     this.loading1 = true;
-    this.listaServicosFuncionario$ = this.servicoFuncionarioService.listarFuncionariosDoServico(
-      this.idServico
-    );
-    this.listaServicosFuncionario$.subscribe(
-      (sucess) => {
-        this.collectionSize = sucess.length;
-        this.listaServicosFuncionario = sucess;
-        this.loading1 = false;
-        if (sucess.length > 0) {
-          this.listempy = false;
+    this.servicoFuncionarioService
+      .listarFuncionariosDoServico(this.idServico)
+      .subscribe(
+        (sucess) => {
+          this.collectionSize = sucess.length;
+          this.listaServicosFuncionario = sucess;
+          this.loading1 = false;
+          if (sucess.length > 0) {
+            this.listempy = false;
+          }
+          this.refresh();
+        },
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+          this.loading1 = false;
         }
-        this.refresh();
-      },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
-        this.loading1 = false;
-      }
-    );
+      );
   }
   refresh(): void {
     this.servicosFuncionario = this.listaServicosFuncionario
@@ -66,5 +71,30 @@ export class Etapa02Component implements OnInit {
   }
   avancar(servicoFuncionario): void {
     this.etapasService.emiteServicoFuncionario(servicoFuncionario);
+  }
+  buscaEscala(servicoFuncionario: ServicoFuncionario) {
+    if (servicoFuncionario) {
+      this.escalaService
+        .listarPorServicoFuncionario(servicoFuncionario.id)
+        .subscribe(
+          (result) => {
+            if (result[0].itensEscala.length > 0) {
+            }
+            result[0];
+            result.forEach((e) => {
+              if (e.itensEscala.length > 0) {
+                return true;
+              }
+              return false;
+            });
+          },
+          (error) => {
+            console.error(error);
+            this.erroService.tratarErro(error);
+            return false;
+          }
+        );
+    }
+    return false;
   }
 }

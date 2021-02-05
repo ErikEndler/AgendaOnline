@@ -73,8 +73,7 @@ export class SidebarComponent implements OnInit {
 
   menuItems: any[];
 
-  constructor(private auth: AuthService, private tokenService: TokenService
-  ) { }
+  constructor(private auth: AuthService, private tokenService: TokenService) {}
 
   ngOnInit(): void {
     this.auth.eventoLogar.subscribe(() => this.ngOnInit());
@@ -92,7 +91,7 @@ export class SidebarComponent implements OnInit {
       },
       {
         path: '/usuario',
-        title: 'User Profile',
+        title: 'Perfil Usuário',
         icon: 'tim-icons icon-single-02',
         class: '',
       },
@@ -103,7 +102,6 @@ export class SidebarComponent implements OnInit {
         icon: 'far fa-clock',
         class: '',
       },
-
     ];
     if (this.loginReturn) {
       if (this.loginReturn.role !== 'ROLE_USER') {

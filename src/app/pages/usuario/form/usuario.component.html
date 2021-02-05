@@ -1,5 +1,7 @@
-<script type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"></script>
+<script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js"
+></script>
 
 <div class="content">
   <form [formGroup]="formulario">
@@ -14,22 +16,45 @@
               <div class="col-md-8">
                 <div class="form-group" [ngClass]="aplicaCssErro('nome')">
                   <label> Nome </label>
-                  <input class="form-control" placeholder="Nome" type="text" formControlName="nome" id='nome' />
-                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('nome')" msgErro="Nome é obrigatório.">
+                  <input
+                    class="form-control"
+                    placeholder="Nome"
+                    type="text"
+                    formControlName="nome"
+                    id="nome"
+                  />
+                  <app-campo-control-erro
+                    [mostrarErro]="verificaValidTouched('nome')"
+                    msgErro="Nome é obrigatório."
+                  >
                   </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4">
                 <label> Sexo </label>
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="masculino" class="custom-control-input" formControlName="sexo"
-                    value="masculino" />
-                  <label class="custom-control-label" for="masculino">Masculino</label>
+                  <input
+                    type="radio"
+                    id="masculino"
+                    class="custom-control-input"
+                    formControlName="sexo"
+                    value="masculino"
+                  />
+                  <label class="custom-control-label" for="masculino"
+                    >Masculino</label
+                  >
                 </div>
                 <div class="custom-control custom-radio">
-                  <input type="radio" id="feminino" class="custom-control-input" value="feminino"
-                    formControlName="sexo" />
-                  <label class="custom-control-label" for="feminino">Feminino</label>
+                  <input
+                    type="radio"
+                    id="feminino"
+                    class="custom-control-input"
+                    value="feminino"
+                    formControlName="sexo"
+                  />
+                  <label class="custom-control-label" for="feminino"
+                    >Feminino</label
+                  >
                 </div>
               </div>
             </div>
@@ -37,7 +62,12 @@
               <div class="col-md-12">
                 <div class="form-group">
                   <label> Email </label>
-                  <input class="form-control" placeholder="Home Address" type="Email" formControlName="email" />
+                  <input
+                    class="form-control"
+                    placeholder="Home Address"
+                    type="Email"
+                    formControlName="email"
+                  />
                 </div>
               </div>
             </div>
@@ -45,26 +75,46 @@
               <div class="col-md-4 pr-md-1">
                 <div class="form-group">
                   <label> CPF </label>
-                  <input class="form-control" placeholder="000.000.000-00" type="text" [mask]="maskCpf"
-                    formControlName="cpf" />
-                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('cpf')" msgErro="CPF é obrigatório.">
+                  <input
+                    class="form-control"
+                    placeholder="000.000.000-00"
+                    type="text"
+                    [mask]="maskCpf"
+                    formControlName="cpf"
+                  />
+                  <app-campo-control-erro
+                    [mostrarErro]="verificaValidTouched('cpf')"
+                    msgErro="CPF é obrigatório."
+                  >
                   </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4 px-md-1">
                 <div class="form-group">
                   <label> Telefone </label>
-                  <input class="form-control" placeholder="(00) 00000-0000" type="text" [mask]="maskFone"
-                    formControlName="telefone" />
-                  <app-campo-control-erro [mostrarErro]="verificaValidTouched('telefone')"
-                    msgErro="Telefone é obrigatório."></app-campo-control-erro>
+                  <input
+                    class="form-control"
+                    placeholder="(00) 00000-0000"
+                    type="text"
+                    [mask]="maskFone"
+                    formControlName="telefone"
+                  />
+                  <app-campo-control-erro
+                    [mostrarErro]="verificaValidTouched('telefone')"
+                    msgErro="Telefone é obrigatório."
+                  ></app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4 pl-md-1">
                 <div class="form-group">
                   <label> WhatsApp </label>
-                  <input class="form-control" placeholder="(00) 0 0000 - 0000" type="text" [mask]="maskFone"
-                    formControlName="whatsapp" />
+                  <input
+                    class="form-control"
+                    placeholder="(00) 0 0000 - 0000"
+                    type="text"
+                    [mask]="maskFone"
+                    formControlName="whatsapp"
+                  />
                 </div>
               </div>
             </div>
@@ -72,35 +122,73 @@
               <div class="col-md-4">
                 <div class="form-group">
                   <label> Senha </label>
-                  <input class="form-control" placeholder="******" type="password" [type]="hide ? 'password' : 'text'"
-                    formControlName="senha" />
+                  <input
+                    class="form-control"
+                    placeholder="******"
+                    type="password"
+                    [type]="hide ? 'password' : 'text'"
+                    formControlName="senha"
+                  />
+                  <app-campo-control-erro
+                    [mostrarErro]="!confirmarSenha()"
+                    msgErro="Senhas não iguais."
+                  >
+                  </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4">
                 <div class="form-group">
-                  <label> Senha </label>
-                  <input class="form-control" placeholder="******" [type]="hide ? 'password' : 'text'" />
+                  <label> Confirmar Senha </label>
+                  <input
+                    class="form-control"
+                    placeholder="******"
+                    [type]="hide ? 'password' : 'text'"
+                    [(ngModel)]="confirmaSenha"
+                    [ngModelOptions]="{ standalone: true }"
+                  />
+                  <app-campo-control-erro
+                    [mostrarErro]="!confirmarSenha()"
+                    msgErro="Senhas não iguais."
+                  >
+                  </app-campo-control-erro>
                 </div>
               </div>
               <div class="col-md-4">
                 <label> </label>
                 <div>
-                  <button class="btn btn-warning btn-icon" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-                    <i class="{{ hide ? 'far fa-eye-slash' : 'fas fa-eye' }}"></i>
+                  <button
+                    class="btn btn-warning btn-icon"
+                    (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide"
+                  >
+                    <i
+                      class="{{ hide ? 'far fa-eye-slash' : 'fas fa-eye' }}"
+                    ></i>
                   </button>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-footer">
-            <button class="btn btn-fill btn-success" [disabled]="!formulario.valid" (click)="onSubmit()">
+            <button
+              class="btn btn-fill btn-success"
+              [disabled]="habilitaEnviar()"
+              (click)="onSubmit()"
+            >
               Salvar
             </button>
           </div>
           <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="customSwitch1" (change)="debug()" />
-            <label class="custom-control-label" for="customSwitch1">Debug</label>
+            <input
+              type="checkbox"
+              class="custom-control-input"
+              id="customSwitch1"
+              (change)="debug()"
+            />
+            <label class="custom-control-label" for="customSwitch1"
+              >Debug</label
+            >
           </div>
           <div class="card-body" *ngIf="debugEnable">
             <app-form-debug [form]="formulario"></app-form-debug>
@@ -111,10 +199,20 @@
         <!-- ADICIONA RSERVIÇO -->
         <div *ngIf="admin" class="card card-user">
           <div class="card-footer">
-            <button class="btn btn-fill btn-secondary" [disabled]="disableAtribuicao"
-              (click)="atribuirFuncao()">Atribuir Serviço</button>
-            <button class="btn btn-fill btn-secondary" [disabled]="disableAtribuicao"
-              (click)="atribuirEscala()">Atribuir Escala</button>
+            <button
+              class="btn btn-fill btn-secondary"
+              [disabled]="disableAtribuicao"
+              (click)="atribuirFuncao()"
+            >
+              Atribuir Serviço
+            </button>
+            <button
+              class="btn btn-fill btn-secondary"
+              [disabled]="disableAtribuicao"
+              (click)="atribuirEscala()"
+            >
+              Atribuir Escala
+            </button>
           </div>
         </div>
         <!-- NOTIFICAÇOES -->
@@ -128,7 +226,7 @@
             <div class="row">
               <div class="col-md-2">
                 <label class="switch">
-                  <input type="checkbox" formControlName="notificacaoEmail">
+                  <input type="checkbox" formControlName="notificacaoEmail" />
                   <span class="slider round"></span>
                 </label>
               </div>
@@ -139,7 +237,10 @@
             <div class="row">
               <div class="col-md-2">
                 <label class="switch">
-                  <input type="checkbox" formControlName="notificacaoWhatsapp">
+                  <input
+                    type="checkbox"
+                    formControlName="notificacaoWhatsapp"
+                  />
                   <span class="slider round"></span>
                 </label>
               </div>

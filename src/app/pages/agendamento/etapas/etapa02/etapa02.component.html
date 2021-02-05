@@ -29,7 +29,12 @@
                     <td>{{ servicoFunc.servico.nome }}</td>
                     <td>{{ servicoFunc.funcionario.nome }}</td>
                     <td>
-                      <button type="button" class="btn-sm btn-info" (click)="avancar(servicoFunc)" awNextStep>
+                      <button
+                        type="button"
+                        class="btn-sm btn-info"
+                        (click)="avancar(servicoFunc)"
+                        awNextStep
+                      >
                         Selecionar <i class="fas fa-arrow-right"></i>
                       </button>
                     </td>
@@ -37,10 +42,19 @@
                 </tbody>
               </table>
               <div class="d-flex justify-content-between p-2">
-                <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-                  (pageChange)="refresh()">
+                <ngb-pagination
+                  [collectionSize]="collectionSize"
+                  [(page)]="page"
+                  [pageSize]="pageSize"
+                  (pageChange)="refresh()"
+                >
                 </ngb-pagination>
-                <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+                <select
+                  class="custom-select"
+                  style="width: auto"
+                  [(ngModel)]="pageSize"
+                  (ngModelChange)="refresh()"
+                >
                   <option [ngValue]="2">2 itens por pagina</option>
                   <option [ngValue]="4">4 itens por pagina</option>
                   <option [ngValue]="6">6 itens por pagina</option>

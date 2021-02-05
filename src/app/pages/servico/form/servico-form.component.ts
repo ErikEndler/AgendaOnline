@@ -101,6 +101,15 @@ export class ServicoFormComponent implements OnInit {
     );
   }
   addCategoria() {
-    this.router.navigate(['categoria']);
+    const result$ = this.modalConfirm.showConfirm(
+      'Redirecionamento',
+      'Será redirecionado e perdera dados preenchidos.',
+      'Continuar'
+    );
+    result$.subscribe((result) => {
+      if (result) {
+        this.router.navigate(['categoria']);
+      }
+    });
   }
 }
