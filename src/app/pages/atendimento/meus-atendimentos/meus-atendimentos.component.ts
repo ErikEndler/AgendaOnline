@@ -17,7 +17,7 @@ export class MeusAtendimentosComponent implements OnInit {
     private tokenService: TokenService,
     private erroService: ErroService,
     private router: Router
-  ) { }
+  ) {}
   loginReturn: LoginReturn;
   listaAtendimento: Atendimento[];
   atendimentos: Atendimento[];
@@ -63,5 +63,8 @@ export class MeusAtendimentosComponent implements OnInit {
 
   onInfo(id) {
     this.router.navigate(['atendimento/' + id]);
+  }
+  voltarPagina() {
+    window.history.back();
   }
 }

@@ -18,7 +18,7 @@ export class AgendamentoStatusComponent implements OnInit {
     private erroService: ErroService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
   loginReturn: LoginReturn;
   listaAgendamentos: Agendamento[];
   agendamentos: Agendamento[];
@@ -82,5 +82,8 @@ export class AgendamentoStatusComponent implements OnInit {
   }
   editar(id): void {
     this.router.navigate(['agendamento/form/' + id]);
+  }
+  voltarPagina() {
+    window.history.back();
   }
 }

@@ -17,7 +17,7 @@ export class AgendamentoClienteComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router,
     private erroService: ErroService
-  ) { }
+  ) {}
   listaAgendamento: Agendamento[];
   agendamentos: Agendamento[];
   empy = false;
@@ -86,5 +86,8 @@ export class AgendamentoClienteComponent implements OnInit {
     this.router.navigate(['agendamento/cliente/' + id]);
 
     // agendamento/cliente/
+  }
+  voltar() {
+    window.history.back();
   }
 }

@@ -8,7 +8,14 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Serviço Form</h5>
+          <button
+            class="btn btn-sm"
+            style="margin-left: 0ch"
+            (click)="voltarPagina()"
+          >
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <a style="font-size: 1.2rem" class="title"> Serviço Form</a>
         </div>
         <div class="card-body">
           <form [formGroup]="formulario" (ngSubmit)="onSubmit()">

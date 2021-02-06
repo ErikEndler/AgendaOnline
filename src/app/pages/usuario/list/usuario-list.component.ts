@@ -89,4 +89,7 @@ export class UsuarioListComponent implements OnInit {
         (this.page - 1) * this.pageSize + this.pageSize
       );
   }
+  voltarPagina() {
+    window.history.back();
+  }
 }

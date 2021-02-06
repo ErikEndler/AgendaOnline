@@ -1,11 +1,22 @@
 <div class="content">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title">Agendamentos</h4>
+      <button
+        class="btn btn-sm"
+        style="margin-left: 0ch"
+        (click)="voltarPagina()"
+      >
+        <i class="fas fa-arrow-left"></i>
+      </button>
+      <a style="font-size: 1.2rem" class="title"> Agendamentos</a>
     </div>
     <div class="card-body">
       <div *ngIf="loading" class="d-flex justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
+        <div
+          class="spinner-border text-primary"
+          style="width: 3rem; height: 3rem"
+          role="status"
+        >
           <span class="sr-only">Loading...</span>
         </div>
       </div>
@@ -27,7 +38,10 @@
               <td>{{ agendamento.cliente.nome }}</td>
               <td>{{ agendamento.servicoFuncionario.servico.nome }}</td>
               <td>
-                <button class="btn-sm btn-info" (click)="atender(agendamento.id)">
+                <button
+                  class="btn-sm btn-info"
+                  (click)="atender(agendamento.id)"
+                >
                   Atender
                 </button>
               </td>
@@ -35,11 +49,20 @@
           </tbody>
         </table>
         <div class="d-flex justify-content-between p-2">
-          <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
-            (pageChange)="refresh()">
+          <ngb-pagination
+            [collectionSize]="collectionSize"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            (pageChange)="refresh()"
+          >
           </ngb-pagination>
 
-          <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
+          <select
+            class="custom-select"
+            style="width: auto"
+            [(ngModel)]="pageSize"
+            (ngModelChange)="refresh()"
+          >
             <option [ngValue]="5">5 itens por página</option>
             <option [ngValue]="10">10 itens por página</option>
             <option [ngValue]="20">20 itens por página</option>

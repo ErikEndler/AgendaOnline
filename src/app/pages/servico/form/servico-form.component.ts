@@ -112,4 +112,7 @@ export class ServicoFormComponent implements OnInit {
       }
     });
   }
+  voltarPagina() {
+    window.history.back();
+  }
 }
