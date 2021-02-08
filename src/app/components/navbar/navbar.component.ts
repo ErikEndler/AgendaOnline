@@ -8,6 +8,9 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
+import { switchMap, take } from 'rxjs/operators';
+import { EMPTY } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -38,6 +41,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private authService: AuthService,
     private tokenService: TokenService,
+    private modalConfirm: ModalConfirmacaoService,
     private auth: AuthService
   ) {
     this.location = location;
@@ -69,7 +73,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.modalLoginService.open();
   }
   logout(): void {
-    this.authService.deslogar();
+    // this.authService.deslogar();
+    this.modalConfirm.showConfirm(
+      'Deslogar',
+      'Deseja Deslogar??',
+      'Confirmar'
+    ).subscribe(result => { if (result) { this.authService.deslogar(); } });
+
   }
   verificaLogin(): boolean {
     if (sessionStorage.getItem('logado')) {
@@ -97,7 +107,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
         this.mobileMenuVisible = 0;
       }
     });
-    //this.notificacao();
+    // this.notificacao();
   }
 
   notificacao() {
@@ -232,7 +242,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return 'Dashboard';
   }
 
-  newopen() {}
+  newopen() { }
   open(content) {
     this.modalService
       .open(content, { windowClass: 'modal-search' })
