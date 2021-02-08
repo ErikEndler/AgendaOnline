@@ -18,7 +18,7 @@ export class AgendamentoStatusComponent implements OnInit {
     private erroService: ErroService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) {}
+  ) { }
   loginReturn: LoginReturn;
   listaAgendamentos: Agendamento[];
   agendamentos: Agendamento[];
@@ -40,6 +40,9 @@ export class AgendamentoStatusComponent implements OnInit {
         this.erroService.tratarErro(error);
       }
     );
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.statusSelect = (params.status);
+    });
     this.loginReturn = this.tokenService.decodePayloadJWT();
     this.listarPorStatus();
   }
