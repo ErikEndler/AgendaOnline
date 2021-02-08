@@ -9,16 +9,15 @@ import { Agendamento } from 'src/app/models/agendamento';
 @Component({
   selector: 'app-listar',
   templateUrl: './listar.component.html',
-  styleUrls: ['./listar.component.css']
+  styleUrls: ['./listar.component.css'],
 })
 export class ListarComponent implements OnInit {
-
   constructor(
     private tokenService: TokenService,
     private router: Router,
     private erroService: ErroService,
     private agendamentoService: AgendamentoService
-  ) { }
+  ) {}
   loginReturn: LoginReturn;
   lista: Agendamento[];
   agendamentos: Agendamento[];
@@ -28,7 +27,6 @@ export class ListarComponent implements OnInit {
   loading = false;
   colunas: string[] = ['Horário', 'Cliente', 'Serviço', 'opções'];
   listEmpy = true;
-
 
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
@@ -51,7 +49,8 @@ export class ListarComponent implements OnInit {
         console.log('Erro ao listar');
         this.erroService.tratarErro(error);
         this.loading = false;
-      });
+      }
+    );
   }
   refresh(): void {
     this.agendamentos = this.lista
@@ -66,5 +65,8 @@ export class ListarComponent implements OnInit {
   }
   agendamentosPendentes(): void {
     this.router.navigate(['agendamento/status']);
+  }
+  voltarPagina() {
+    window.history.back();
   }
 }

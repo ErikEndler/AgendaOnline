@@ -1,7 +1,7 @@
 import { AtendimentoService } from '../../atendimento.service';
 import { UsuarioService } from '../../../usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Agendamento } from 'src/app/models/agendamento';
 import * as moment from 'moment';
 import { Atendimento } from 'src/app/models/atendimento';
@@ -44,8 +44,9 @@ export class FormComponent implements OnInit {
     private erroService: ErroService,
     private modalConfirm: ModalConfirmacaoService,
     private notificacaoService: NotificacaoService,
+    private router: Router,
     private atendimentoService: AtendimentoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
@@ -58,7 +59,10 @@ export class FormComponent implements OnInit {
     this.verificaAtenderAgora();
   }
   verificaAtenderAgora(): void {
-    if (moment().format('yyyy-MM-DD') > moment(this.agendamento.horarioInicio).format('yyyy-MM-DD')) {
+    if (
+      moment().format('yyyy-MM-DD') >
+      moment(this.agendamento.horarioInicio).format('yyyy-MM-DD')
+    ) {
       this.disableAtenderAgora = true;
     }
   }
@@ -97,9 +101,9 @@ export class FormComponent implements OnInit {
       const result$ = this.modalConfirm.showConfirm(
         'Confirmação',
         'Deseja Finalizar Atendimento? Das ' +
-        this.inicioAtendimento +
-        ' as ' +
-        this.fimAtendimento,
+          this.inicioAtendimento +
+          ' as ' +
+          this.fimAtendimento,
         'Confirmar'
       );
       result$.asObservable().subscribe(
@@ -114,6 +118,7 @@ export class FormComponent implements OnInit {
                   NotificationType.Success,
                   'Salvo com Sucesso'
                 );
+                this.router.navigate(['/atendimento/funcionario']);
               },
               (error) => {
                 console.error(error);

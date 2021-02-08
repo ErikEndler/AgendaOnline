@@ -13,7 +13,7 @@ import { Avaliacao } from 'src/app/models/avaliacao';
 @Component({
   selector: 'app-agendamento-cliente-view',
   templateUrl: './agendamento-cliente-view.component.html',
-  styleUrls: ['./agendamento-cliente-view.component.css']
+  styleUrls: ['./agendamento-cliente-view.component.css'],
 })
 export class AgendamentoClienteViewComponent implements OnInit {
   agendamento: Agendamento;
@@ -33,7 +33,7 @@ export class AgendamentoClienteViewComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private ratingService: RatingService,
     private avaliacaoService: AvaliacaoService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
@@ -45,41 +45,50 @@ export class AgendamentoClienteViewComponent implements OnInit {
     }
   }
   buscaAtendimento(): void {
-    this.atendimentoService.atendimentoPorAgendamento(this.agendamento.id).subscribe(
+    this.atendimentoService
+      .atendimentoPorAgendamento(this.agendamento.id)
+      .subscribe(
+        (result) => {
+          this.atendimento = result;
+          this.hideAtendimento = false;
+          console.log(this.atendimento);
+          this.inicioAtendimento = this.trimHora(this.atendimento.inicio);
+          this.fimAtendimento = this.trimHora(this.atendimento.fim);
+          this.buscaAvaliacao();
+        },
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+        }
+      );
+  }
+  buscaAvaliacao(): void {
+    this.avaliacaoService.avaliacaoAtendimento(this.atendimento.id).subscribe(
       (result) => {
-        this.atendimento = result;
-        this.hideAtendimento = false;
-        console.log(this.atendimento);
-        this.inicioAtendimento = this.trimHora(this.atendimento.inicio);
-        this.fimAtendimento = this.trimHora(this.atendimento.fim);
-        this.buscaAvaliacao();
+        this.avaliacao = result;
+        console.log('avaliação = ', this.avaliacao);
       },
       (error) => {
         console.error(error);
         this.erroService.tratarErro(error);
-      });
-  }
-  buscaAvaliacao(): void {
-    this.avaliacaoService.avaliacaoAtendimento(this.atendimento.id).subscribe(
-      (result) => { this.avaliacao = result; console.log('avaliação = ', this.avaliacao) },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
-      });
+      }
+    );
   }
   onRatingStar(funcionario: boolean, edit: boolean): void {
     if (this.avaliacao) {
-      console.log('com avaliaçao')
+      console.log('com avaliaçao');
       this.ratingService
         .showratingStar(this.atendimento, false, edit, this.avaliacao)
         .subscribe((result) => {
           console.log(result);
+          //location.reload();
         });
     } else {
       this.ratingService
         .showratingStar(this.atendimento, false, edit)
         .subscribe((result) => {
           console.log(result);
+          //location.reload();
         });
     }
   }
@@ -90,7 +99,6 @@ export class AgendamentoClienteViewComponent implements OnInit {
     return valor.slice(0, 10);
   }
   onCancel() {
-
+    window.history.back();
   }
-
 }

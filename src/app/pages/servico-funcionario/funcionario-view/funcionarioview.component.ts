@@ -43,7 +43,7 @@ export class FuncionarioviewComponent implements OnInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -167,5 +167,8 @@ export class FuncionarioviewComponent implements OnInit {
     this.servicoFuncionarioService
       .teste()
       .subscribe((result) => console.log(result));
+  }
+  voltarPagina() {
+    window.history.back();
   }
 }

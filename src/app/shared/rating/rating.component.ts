@@ -23,7 +23,7 @@ export class RatingComponent implements OnInit {
     private notificacaoService: NotificacaoService,
     private erroService: ErroService,
     private avaliacaoService: AvaliacaoService
-  ) { }
+  ) {}
   formulario: FormGroup;
   nota: number;
   obsCliente: string;
@@ -41,6 +41,7 @@ export class RatingComponent implements OnInit {
     this.confirmResult = new Subject();
     this.obsCliente = this.avaliacao.obsCliente;
     this.obsFuncionario = this.avaliacao.obsFuncionario;
+    this.avaliacao.atendimento = this.atendimento;
     //this.disableCampos();
     //this.loadFormulario();
   }

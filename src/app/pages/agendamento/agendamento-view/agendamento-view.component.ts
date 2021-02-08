@@ -31,7 +31,7 @@ export class AgendamentoViewComponent implements OnInit {
     private erroService: ErroService,
     private router: Router,
     private tokenService: TokenService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.userLogin = this.tokenService.decodePayloadJWT();
@@ -108,5 +108,8 @@ export class AgendamentoViewComponent implements OnInit {
     if (status === 'FALTOU') {
       return 'btn-danger';
     }
+  }
+  voltarPagina() {
+    window.history.back();
   }
 }

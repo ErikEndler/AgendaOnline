@@ -164,4 +164,7 @@ export class UsuarioComponent implements OnInit {
       queryParams: { id: this.usuario.id },
     });
   }
+  voltar() {
+    window.history.back();
+  }
 }

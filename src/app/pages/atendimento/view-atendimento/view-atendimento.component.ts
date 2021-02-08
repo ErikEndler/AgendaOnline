@@ -31,7 +31,7 @@ export class ViewAtendimentoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private ratingService: RatingService,
     private avaliacaoService: AvaliacaoService
-  ) { }
+  ) {}
   atendimento: Atendimento;
   formularioAtendimento: FormGroup;
   fimAtendimento: string;
@@ -50,11 +50,14 @@ export class ViewAtendimentoComponent implements OnInit {
   }
   buscaAvaliacao(): void {
     this.avaliacaoService.avaliacaoAtendimento(this.atendimento.id).subscribe(
-      (result) => { this.avaliacao = result; },
+      (result) => {
+        this.avaliacao = result;
+      },
       (error) => {
         console.error(error);
         this.erroService.tratarErro(error);
-      });
+      }
+    );
   }
   formularioCreate(): void {
     this.formularioAtendimento = this.formBuilder.group({
@@ -131,7 +134,7 @@ export class ViewAtendimentoComponent implements OnInit {
   }
   onRatingStar(funcionario: boolean, edit: boolean): void {
     if (this.avaliacao) {
-      console.log('com avaliaçao')
+      console.log('com avaliaçao');
       this.ratingService
         .showratingStar(this.atendimento, funcionario, edit, this.avaliacao)
         .subscribe((result) => {
@@ -144,6 +147,5 @@ export class ViewAtendimentoComponent implements OnInit {
           console.log(result);
         });
     }
-
   }
 }
