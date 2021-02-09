@@ -2,3 +2,17 @@
   background-color: #3f4262;
   color: rgba(255, 255, 255, 0.8);
 }
+#conflito {
+  border-color: darkorange;
+  border-width: 2px;
+  border-top-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-bottom-color: darkorange;
+  border-left-width: 2px;
+  border-left-style: solid;
+  border-left-color: darkorange;
+  border-right-width: 2px;
+  border-right-style: solid;
+  border-right-color: darkorange;
+}

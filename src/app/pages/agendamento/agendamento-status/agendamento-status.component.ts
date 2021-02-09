@@ -41,7 +41,12 @@ export class AgendamentoStatusComponent implements OnInit {
       }
     );
     this.activatedRoute.queryParams.subscribe((params) => {
-      this.statusSelect = (params.status);
+      if (params.status) {
+        this.statusSelect = (params.status).toUpperCase();
+        console.log(this.statusSelect);
+      }
+
+
     });
     this.loginReturn = this.tokenService.decodePayloadJWT();
     this.listarPorStatus();

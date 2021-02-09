@@ -11,5 +11,6 @@ export class Usuario {
   notificacao: boolean;
   notificacaoEmail: boolean;
   notificacaoWhatsapp: boolean;
+  score: number;
   token?: string;
 }

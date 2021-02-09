@@ -15,6 +15,7 @@ import * as moment from 'moment';
 import { NotificationType } from 'angular2-notifications';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Agendamento } from 'src/app/models/agendamento';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
 // https://api.whatsapp.com/send?phone=5562991507989&text=oi%20tudo%20bem
 @Component({
   selector: 'app-agendamento-form',
@@ -22,6 +23,8 @@ import { Agendamento } from 'src/app/models/agendamento';
   styleUrls: ['./agendamento-form.component.css'],
 })
 export class AgendamentoFormComponent implements OnInit {
+  agendamentosConflito: Agendamento[];
+  countConflitos: number;
   agendamento: Agendamento;
   funcionarioID: number;
   listaFuncionarios: Usuario[];
@@ -51,8 +54,9 @@ export class AgendamentoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private escalaService: EscalaService,
     private tokenService: TokenService,
+    private modalCOnfirm: ModalConfirmacaoService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
@@ -185,17 +189,28 @@ export class AgendamentoFormComponent implements OnInit {
     this.disableSelect = false;
   }
   confirmar(): void {
-    this.agendamento.status = 'AGENDADO';
-    this.onSave('Agendamento Confirmado');
+    const result$ = this.modalCOnfirm.showConfirm(
+      'Agendamento conflitante !',
+      'Ao confirmar este agendamento, os demais agendamentos em conflito serão cancelados!',
+      'Confirmar'
+    );
+    //this.agendamento.status = 'AGENDADO';
+    // this.onSave('Agendamento Confirmado');
   }
   sendWhatsapp(): void {
     window.open(
       'https://api.whatsapp.com/send?phone=' + this.agendamento.cliente.whatsapp
     );
   }
-  conflitos() {
+  conflitos(): Agendamento[] {
     this.agendamentoService
       .listaAgendamentosConflitamtes(this.agendamento.id)
-      .subscribe((result) => console.log('conflitos : ', result));
+      .subscribe((result) => {
+        console.log('conflitos : ', result);
+        this.countConflitos = result.length;
+        this.agendamentosConflito = result;
+      });
+    return this.agendamentosConflito;
   }
+
 }

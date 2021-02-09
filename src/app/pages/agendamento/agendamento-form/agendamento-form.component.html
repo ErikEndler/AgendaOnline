@@ -7,8 +7,14 @@
         </div>
         <div class="card-body">
           <div *ngIf="statusPendente" class="alert" style="background-color: coral;" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
             Este atendimento esta pendente !
           </div>
+          <div *ngIf="countConflitos>1" class="alert" style="background-color: coral;" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            Agendamento conflitante !
+          </div>
+
           <form>
             <div class="row">
               <div class="col">
@@ -118,11 +124,33 @@
       </div>
     </div>
     <div class="col-md-4">
+      <div *ngIf="agendamentosConflito.length>1" id="conflito" class="card ">
+        <div class="card-header">
+          Agendamentos Conflito <i style="color: darkorange;" class="fas fa-exclamation-triangle"></i>
+        </div>
+        <div class="card-body">
+          <table *ngIf="agendamentosConflito.length>1" class="table tablesorter">
+            <thead class="text-primary">
+              <tr>
+                <th> Cliente </th>
+                <th> Serviço </th>
+                <th> Faltas </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let agd of agendamentosConflito">
+                <td>{{ agd.cliente.nome }}</td>
+                <td>{{ agd.servicoFuncionario.servico.nome }}</td>
+                <td>{{ agd.cliente.score }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
       <div class="card card-user">
         <div class="card-header">
           ESCALAS - {{ agendamento?.servicoFuncionario.servico.nome }}
         </div>
-
         <div class="card-body">
           <table class="table table-sm">
             <tbody>
@@ -141,8 +169,10 @@
               </tr>
             </tbody>
           </table>
+
         </div>
       </div>
+
     </div>
   </div>
 </div>
