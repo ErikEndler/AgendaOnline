@@ -30,6 +30,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   closeResult: string;
   agendados: number;
   pendentes: number;
+  naoAtendido: number;
+  exibirNaoAtendido = false;
+  exibirAgendado = false;
   novoPendente = true;
 
   constructor(
@@ -118,9 +121,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
           console.log(result);
           this.agendados = result[0];
           this.pendentes = result[1];
+          this.naoAtendido = result[2];
+          if (this.loginReturn.role !== 'ROLE_USER' && this.naoAtendido > 0) {
+            this.exibirNaoAtendido = true;
+          }
+          if (this.loginReturn.role === 'ROLE_USER' && this.agendados > 0) {
+            this.exibirAgendado = true;
+          }
         });
     }
-    console.log('nada feito');
   }
 
   collapse(): void {
@@ -268,4 +277,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     window.removeEventListener('resize', this.updateColor);
   }
+
+
 }

@@ -10,15 +10,8 @@
       </div>
       <a class="navbar-brand" href="javascript:void(0)"> {{ getTitle() }} </a>
     </div>
-    <button
-      aria-label="Toggle navigation"
-      class="navbar-toggler"
-      (click)="collapse()"
-      [attr.aria-expanded]="!isCollapsed"
-      aria-controls="collapseExample"
-      id="navigation"
-      type="button"
-    >
+    <button aria-label="Toggle navigation" class="navbar-toggler" (click)="collapse()"
+      [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample" id="navigation" type="button">
       <span class="navbar-toggler-bar navbar-kebab"> </span>
       <span class="navbar-toggler-bar navbar-kebab"> </span>
       <span class="navbar-toggler-bar navbar-kebab"> </span>
@@ -39,43 +32,31 @@
           </button>
         </li>-->
         <li class="nav-item" ngbDropdown>
-          <button
-            (click)="notificacao()"
-            type="button"
-            class="btn btn-sm btn-secondary"
-            ngbDropdownToggle
-          >
+          <button (click)="notificacao()" type="button" class="btn btn-sm btn-secondary" ngbDropdownToggle>
             <div class="photo">
-              <i
-                style="padding-top: 10%; font-size: 1.5rem"
-                class="far fa-bell"
-              ></i>
+              <i style="padding-top: 10%; font-size: 1.5rem" class="far fa-bell"></i>
             </div>
           </button>
 
-          <ul
-            style="left: -180px"
-            *ngIf="verificaLogin()"
-            class="dropdown-navbar"
-            ngbDropdownMenu
-          >
+          <ul style="left: -180px" *ngIf="verificaLogin()" class="dropdown-navbar" ngbDropdownMenu>
             <li *ngIf="novoPendente" class="nav-link">
-              <a
-                href="javascript:void(0)"
-                ngbDropdownItem
-                (click)="novoPendente = false"
-              >
+              <a href="javascript:void(0)" ngbDropdownItem (click)="novoPendente = false">
                 Novo Agendamento Pendente
               </a>
             </li>
-            <li *ngIf="this.agendados > 0" class="nav-link">
+            <li *ngIf="exibirAgendado" class="nav-link">
               <a href="javascript:void(0)" ngbDropdownItem>
                 Agendamentos Confirmados {{ this.agendados }}
               </a>
             </li>
             <li *ngIf="this.pendentes > 0" class="nav-link">
-              <a class="nav-item" href="javascript:void(0)" ngbDropdownItem>
+              <a class="nav-item" href="agendamento/status" ngbDropdownItem>
                 Agendamentos Pendentes {{ this.pendentes }}
+              </a>
+            </li>
+            <li *ngIf="exibirNaoAtendido " class="nav-link">
+              <a class="nav-item" href="agendamento/status?status=naoatendido" ngbDropdownItem>
+                Agendamentos Não Atendidos {{ this.naoAtendido }}
               </a>
             </li>
           </ul>
@@ -105,11 +86,7 @@
             </div>
             <b class="caret d-none d-lg-block d-xl-block"> </b>
           </a>-->
-          <button
-            type="button"
-            class="btn btn-sm btn-secondary"
-            ngbDropdownToggle
-          >
+          <button type="button" class="btn btn-sm btn-secondary" ngbDropdownToggle>
             PERFIl
             <div class="photo">
               <img alt="Profile Photo" src="assets/img/anime3.png" />
@@ -132,24 +109,14 @@
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-link">
-              <a
-                class="nav-item"
-                (click)="logout()"
-                href="javascript:void(0)"
-                ngbDropdownItem
-              >
+              <a class="nav-item" (click)="logout()" href="javascript:void(0)" ngbDropdownItem>
                 Log out
               </a>
             </li>
           </ul>
           <ul *ngIf="!verificaLogin()" class="dropdown-navbar" ngbDropdownMenu>
             <li class="nav-link">
-              <a
-                class="nav-item"
-                (click)="login()"
-                href="javascript:void(0)"
-                ngbDropdownItem
-              >
+              <a class="nav-item" (click)="login()" href="javascript:void(0)" ngbDropdownItem>
                 LogIn
               </a>
             </li>
@@ -163,20 +130,9 @@
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <input
-      class="form-control"
-      id="inlineFormInputGroup"
-      placeholder="abc"
-      type="text"
-    />
+    <input class="form-control" id="inlineFormInputGroup" placeholder="abc" type="text" />
 
-    <button
-      aria-label="Close"
-      class="close"
-      data-dismiss="modal"
-      type="button"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button aria-label="Close" class="close" data-dismiss="modal" type="button" (click)="modal.dismiss('Cross click')">
       <i class="tim-icons icon-simple-remove"> </i>
     </button>
   </div>

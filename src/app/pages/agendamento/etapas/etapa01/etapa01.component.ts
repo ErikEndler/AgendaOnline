@@ -27,7 +27,7 @@ export class Etapa01Component implements OnInit {
   servicos: Servico[];
   servicosFuncionario: ServicoFuncionario[];
   listaServicos$: Observable<Servico[]>;
-  colunas: string[] = ['nome', 'Descrição', 'tempo', 'select'];
+  colunas: string[] = ['nome','tempo', 'Descrição',  'select'];
   teste: string;
   teste2: string;
   loginReturn: LoginReturn;

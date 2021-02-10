@@ -5,24 +5,20 @@
         <!--<a class="navbar-brand">Meus Agendamentos</a>-->
 
         <div class="collapse navbar-collapse" id="navbarNav">
-          <button
-            class="btn btn-sm"
-            style="margin-left: 0ch"
-            (click)="voltar()"
-          >
+          <button class="btn btn-sm" style="margin-left: 0ch" (click)="voltar()">
             <i class="fas fa-arrow-left"></i>
           </button>
           <i class="far fa-calendar-alt"></i>
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link">Meus Agendamentos</a>
+              <a style="font-size: 1.2rem;" class="nav-link title">Meus Agendamentos</a>
             </li>
           </ul>
         </div>
       </nav>
     </div>
     <div class="card-body">
-      <div class="card card-blue">
+      <div class="card">
         <div class="card-body">
           <table class="table tablesorter" id="">
             <thead class="text-primary">
@@ -46,11 +42,8 @@
                 <td>{{ agendamento.servicoFuncionario.servico.nome }}</td>
                 <td>{{ agendamento.servicoFuncionario.funcionario.nome }}</td>
                 <td>
-                  <button
-                    [ngClass]="aplicaCss(agendamento.status)"
-                    class="btn btn-sm"
-                    (click)="OnAgendamento(agendamento.id)"
-                  >
+                  <button [ngClass]="aplicaCss(agendamento.status)" class="btn btn-sm"
+                    (click)="OnAgendamento(agendamento.id)">
                     {{ agendamento.status }}
                   </button>
                 </td>
@@ -58,20 +51,11 @@
             </tbody>
           </table>
           <div class="d-flex justify-content-between p-2">
-            <ngb-pagination
-              [collectionSize]="collectionSize"
-              [(page)]="page"
-              [pageSize]="pageSize"
-              (pageChange)="refresh()"
-            >
+            <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize"
+              (pageChange)="refresh()">
             </ngb-pagination>
 
-            <select
-              class="custom-select"
-              style="width: auto"
-              [(ngModel)]="pageSize"
-              (ngModelChange)="refresh()"
-            >
+            <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (ngModelChange)="refresh()">
               <option [ngValue]="5">5 itens por página</option>
               <option [ngValue]="10">10 itens por página</option>
               <option [ngValue]="20">20 itens por página</option>
