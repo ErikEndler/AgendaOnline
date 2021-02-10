@@ -23,7 +23,7 @@ import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-
   styleUrls: ['./agendamento-form.component.css'],
 })
 export class AgendamentoFormComponent implements OnInit {
-  agendamentosConflito: Agendamento[];
+  agendamentosConflito: Agendamento[] = [];
   countConflitos: number;
   agendamento: Agendamento;
   funcionarioID: number;
@@ -56,7 +56,7 @@ export class AgendamentoFormComponent implements OnInit {
     private tokenService: TokenService,
     private modalCOnfirm: ModalConfirmacaoService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
@@ -212,5 +212,13 @@ export class AgendamentoFormComponent implements OnInit {
       });
     return this.agendamentosConflito;
   }
-
+  trim(palavra: string): string {
+    return palavra.slice(-5);
+  }
+  trimData(palavra: string): string {
+    return palavra.slice(0, 10);
+  }
+  editar(id): void {
+    this.router.navigate(['agendamento/form/' + id]);
+  }
 }

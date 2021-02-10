@@ -16,3 +16,6 @@
   border-right-style: solid;
   border-right-color: darkorange;
 }
+.alert {
+  padding: 0.5rem 1.25rem;
+}

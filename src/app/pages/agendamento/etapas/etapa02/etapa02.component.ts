@@ -16,6 +16,7 @@ export class Etapa02Component implements OnInit {
   servicosFuncionario: ServicoFuncionario[];
   listaServicosFuncionario: ServicoFuncionario[];
   listempy = true;
+  escalaEmpy: boolean[];
   page = 1;
   pageSize = 4;
   collectionSize: any;
@@ -39,8 +40,8 @@ export class Etapa02Component implements OnInit {
     });
   }
   list(): void {
+    this.escalaEmpy = [];
     this.listaServicosFuncionario = null;
-
     this.loading1 = true;
     this.servicoFuncionarioService
       .listarFuncionariosDoServico(this.idServico)
@@ -51,8 +52,10 @@ export class Etapa02Component implements OnInit {
           this.loading1 = false;
           if (sucess.length > 0) {
             this.listempy = false;
+            sucess.forEach((e) => this.buscaEscala(e.id));
           }
           this.refresh();
+          console.log('this.escalaEmpy = ', this.escalaEmpy);
         },
         (error) => {
           console.error(error);
@@ -72,29 +75,29 @@ export class Etapa02Component implements OnInit {
   avancar(servicoFuncionario): void {
     this.etapasService.emiteServicoFuncionario(servicoFuncionario);
   }
-  buscaEscala(servicoFuncionario: ServicoFuncionario) {
-    if (servicoFuncionario) {
-      this.escalaService
-        .listarPorServicoFuncionario(servicoFuncionario.id)
-        .subscribe(
-          (result) => {
-            if (result[0].itensEscala.length > 0) {
-            }
-            result[0];
-            result.forEach((e) => {
-              if (e.itensEscala.length > 0) {
-                return true;
-              }
-              return false;
-            });
-          },
-          (error) => {
-            console.error(error);
-            this.erroService.tratarErro(error);
-            return false;
+  buscaEscala(id): boolean {
+    let resposta = true;
+    console.log('entrou if');
+    this.escalaService.listarPorServicoFuncionario(id).subscribe(
+      (result) => {
+        console.log('dentro result');
+        // this.escalaEmpy = true;
+        result.forEach((e) => {
+          console.log('length =', e.itensEscala.length);
+          if (e.itensEscala.length > 0) {
+            console.log('tem escala');
+            resposta = false;
           }
-        );
-    }
-    return false;
+        });
+        console.log('valor a ser dado push = ', resposta);
+        this.escalaEmpy.push(resposta);
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+        resposta = true;
+      }
+    );
+    return resposta;
   }
 }

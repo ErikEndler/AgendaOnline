@@ -1,16 +1,62 @@
 <div class="content">
+  <div *ngIf="agendamentosConflito.length > 1" id="conflito" class="card">
+    <div class="card-header">
+      Agendamentos Conflito
+      <i
+        style="color: darkorange; font-size: 1.3rem"
+        class="fas fa-exclamation-triangle"
+      ></i>
+    </div>
+    <div class="card-body">
+      <table *ngIf="agendamentosConflito.length > 1" class="table tablesorter">
+        <thead class="text-primary">
+          <tr>
+            <th>Cliente</th>
+            <th>Serviço</th>
+            <th>Horario</th>
+
+            <th>Faltas Cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let agd of agendamentosConflito">
+            <td>{{ agd.cliente.nome }}</td>
+            <td>{{ agd.servicoFuncionario.servico.nome }}</td>
+            <td>{{ trim(agd.horarioInicio) }} - {{ trim(agd.horarioFim) }}</td>
+
+            <td>{{ agd.cliente.score }}</td>
+            <td>
+              <button class="btn btn-sm" (click)="editar(agendamento.id)">
+                <i class="fas fa-info-circle"></i> Ver
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Agendamento</h5>
+          <a style="font-size: 1.1rem" class="title">Agendamento</a>
         </div>
         <div class="card-body">
-          <div *ngIf="statusPendente" class="alert" style="background-color: coral;" role="alert">
+          <div
+            *ngIf="statusPendente"
+            class="alert"
+            style="background-color: coral"
+            role="alert"
+          >
             <i class="fas fa-exclamation-triangle"></i>
             Este atendimento esta pendente !
           </div>
-          <div *ngIf="countConflitos>1" class="alert" style="background-color: coral;" role="alert">
+          <div
+            *ngIf="countConflitos > 1"
+            class="alert"
+            style="background-color: coral"
+            role="alert"
+          >
             <i class="fas fa-exclamation-triangle"></i>
             Agendamento conflitante !
           </div>
@@ -18,58 +64,115 @@
           <form>
             <div class="row">
               <div class="col">
+                <label> Cliente </label>
+                <select
+                  [disabled]="disableSelect"
+                  class="form-control"
+                  data-selectpicker
+                  [(ngModel)]="agendamento.cliente"
+                  name="agendamento.clienteId"
+                  [compareWith]="comparar"
+                >
+                  <option *ngFor="let usuario of usuarios" [ngValue]="usuario">
+                    {{ usuario.nome }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-3">
+                <label> Histórico Faltas </label>
+                <input
+                  readonly
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="agendamento.cliente.score"
+                  name="agendamento.cliente.score"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label> Servico </label>
+                <select
+                  [disabled]="disableSelect"
+                  class="form-control"
+                  data-selectpicker
+                  [(ngModel)]="agendamento.servicoFuncionario"
+                  name="agendamento.servicoFuncionarioId"
+                  (change)="selecionarServico()"
+                  [compareWith]="comparar"
+                >
+                  <option
+                    *ngFor="let servicoFuncionario of listaServicoFuncionario"
+                    [ngValue]="servicoFuncionario"
+                  >
+                    {{ servicoFuncionario.servico.nome }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
                 <label> Funcionário </label>
-                <input readonly class="form-control" type="text"
+                <input
+                  readonly
+                  class="form-control"
+                  type="text"
                   [(ngModel)]="agendamento.servicoFuncionario.funcionario.nome"
-                  name="agendamento.servicoFuncionarioFuncionario" />
+                  name="agendamento.servicoFuncionarioFuncionario"
+                />
               </div>
               <div class="col-md-3">
                 <label> Status </label>
-                <select [disabled]="disableSelect" class="form-control" data-selectpicker
-                  [(ngModel)]="agendamento.status" name="agendamento.status" [compareWith]="compararStatus">
+                <select
+                  [disabled]="disableSelect"
+                  class="form-control"
+                  data-selectpicker
+                  [(ngModel)]="agendamento.status"
+                  name="agendamento.status"
+                  [compareWith]="compararStatus"
+                >
                   <option *ngFor="let status of listaStatus" [ngValue]="status">
                     {{ status }}
                   </option>
                 </select>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <label> Servico </label>
-                <select [disabled]="disableSelect" class="form-control" data-selectpicker
-                  [(ngModel)]="agendamento.servicoFuncionario" name="agendamento.servicoFuncionarioId"
-                  (change)="selecionarServico()" [compareWith]="comparar">
-                  <option *ngFor="let servicoFuncionario of listaServicoFuncionario" [ngValue]="servicoFuncionario">
-                    {{ servicoFuncionario.servico.nome }}
-                  </option>
-                </select>
-              </div>
-              <div class="col-md-6">
-                <label> Cliente </label>
-                <select [disabled]="disableSelect" class="form-control" data-selectpicker
-                  [(ngModel)]="agendamento.cliente" name="agendamento.clienteId" [compareWith]="comparar">
-                  <option *ngFor="let usuario of usuarios" [ngValue]="usuario">
-                    {{ usuario.nome }}
-                  </option>
-                </select>
-              </div>
-            </div>
+
             <div class="row">
               <div class="col-md-5">
                 <label> Data </label>
-                <input [readonly]="disableSelect" class="form-control" type="date" [(ngModel)]="data" name="data" />
+                <input
+                  [readonly]="disableSelect"
+                  class="form-control"
+                  type="date"
+                  [(ngModel)]="data"
+                  name="data"
+                />
               </div>
               <div class="col">
                 <div class="form-group">
                   <label> Horario Inicio </label>
-                  <input [readonly]="disableSelect" (change)="atribuirHr()" class="form-control" type="time"
-                    [(ngModel)]="hrInicial" name="hrInicial" />
+                  <input
+                    [readonly]="disableSelect"
+                    (change)="atribuirHr()"
+                    class="form-control"
+                    type="time"
+                    [(ngModel)]="hrInicial"
+                    name="hrInicial"
+                  />
                 </div>
               </div>
               <div class="col">
                 <div class="form-group">
                   <label> Horario Fim </label>
-                  <input readonly class="form-control" type="time" [(ngModel)]="hrFinal" name="hrFinal" />
+                  <input
+                    readonly
+                    class="form-control"
+                    type="time"
+                    [(ngModel)]="hrFinal"
+                    name="hrFinal"
+                  />
                 </div>
               </div>
             </div>
@@ -77,8 +180,13 @@
             <div class="row">
               <div class="col">
                 <label> Observação </label>
-                <textarea [readonly]="disableSelect" class="form-control" type="text" [(ngModel)]="agendamento.obs"
-                  name="agendamento.obs"></textarea>
+                <textarea
+                  [readonly]="disableSelect"
+                  class="form-control"
+                  type="text"
+                  [(ngModel)]="agendamento.obs"
+                  name="agendamento.obs"
+                ></textarea>
               </div>
             </div>
           </form>
@@ -86,13 +194,23 @@
         <div class="card-footer">
           <div class="row">
             <div *ngIf="!disableSelect" class="col-auto mr-auto">
-              <button type="submit" class="btn btn-fill btn-success" (click)="onSave()">
+              <button
+                type="submit"
+                class="btn btn-fill btn-success"
+                (click)="onSave()"
+              >
                 Salvar
               </button>
             </div>
             <div *ngIf="disableSelect" class="col-auto mr-auto">
-              <button type="submit" class="btn btn-fill btn-success" (click)="onEdit()" data-toggle="tooltip"
-                data-placement="left" title="Clique para habilitar Edição">
+              <button
+                type="submit"
+                class="btn btn-fill btn-success"
+                (click)="onEdit()"
+                data-toggle="tooltip"
+                data-placement="left"
+                title="Clique para habilitar Edição"
+              >
                 Editar
               </button>
             </div>
@@ -102,21 +220,41 @@
               </button>
             </div>
             <div *ngIf="btnAtender" class="col-auto">
-              <button class="btn btn-fill btn-info" style="text-align: right" (click)="atender()" data-toggle="tooltip"
-                data-placement="left" title="Atender o agendamento">
+              <button
+                class="btn btn-fill btn-info"
+                style="text-align: right"
+                (click)="atender()"
+                data-toggle="tooltip"
+                data-placement="left"
+                title="Atender o agendamento"
+              >
                 Atender
               </button>
             </div>
             <div *ngIf="statusPendente" class="col-auto">
-              <button [disabled]="!disableSelect" class="btn btn-fill btn-info" style="text-align: right"
-                (click)="confirmar()" data-toggle="tooltip" data-placement="left" title="{{textoconfirmacao}}">
+              <button
+                [disabled]="!disableSelect"
+                class="btn btn-fill btn-info"
+                style="text-align: right"
+                (click)="confirmar()"
+                data-toggle="tooltip"
+                data-placement="left"
+                title="{{ textoconfirmacao }}"
+              >
                 Confirmar Agendamento
               </button>
             </div>
             <div *ngIf="statusPendente" class="col-auto">
-              <button [disabled]="!disableSelect" class="btn btn-sm btn-success" style="text-align: right"
-                (click)="sendWhatsapp()" data-toggle="tooltip" data-placement="left" title="Whatsapp">
-                <i class="fab fa-whatsapp" style="font-size: 1.9rem;"></i>
+              <button
+                [disabled]="!disableSelect"
+                class="btn btn-sm btn-success"
+                style="text-align: right"
+                (click)="sendWhatsapp()"
+                data-toggle="tooltip"
+                data-placement="left"
+                title="Whatsapp"
+              >
+                <i class="fab fa-whatsapp" style="font-size: 1.9rem"></i>
               </button>
             </div>
           </div>
@@ -124,29 +262,6 @@
       </div>
     </div>
     <div class="col-md-4">
-      <div *ngIf="agendamentosConflito.length>1" id="conflito" class="card ">
-        <div class="card-header">
-          Agendamentos Conflito <i style="color: darkorange;" class="fas fa-exclamation-triangle"></i>
-        </div>
-        <div class="card-body">
-          <table *ngIf="agendamentosConflito.length>1" class="table tablesorter">
-            <thead class="text-primary">
-              <tr>
-                <th> Cliente </th>
-                <th> Serviço </th>
-                <th> Faltas </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let agd of agendamentosConflito">
-                <td>{{ agd.cliente.nome }}</td>
-                <td>{{ agd.servicoFuncionario.servico.nome }}</td>
-                <td>{{ agd.cliente.score }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
       <div class="card card-user">
         <div class="card-header">
           ESCALAS - {{ agendamento?.servicoFuncionario.servico.nome }}
@@ -157,7 +272,9 @@
               <tr *ngFor="let escala of escalas">
                 <td>{{ escala.diaSemana }}</td>
                 <td>
-                  <ng-container *ngIf="escala.itensEscala.length; else elseTemplate">
+                  <ng-container
+                    *ngIf="escala.itensEscala.length; else elseTemplate"
+                  >
                     <div *ngFor="let itemEscala of escala.itensEscala">
                       {{ itemEscala.hrInicial }} - {{ itemEscala.hrFinal }}
                     </div>
@@ -169,10 +286,8 @@
               </tr>
             </tbody>
           </table>
-
         </div>
       </div>
-
     </div>
   </div>
 </div>

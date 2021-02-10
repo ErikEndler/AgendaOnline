@@ -25,11 +25,17 @@
                   <tr *ngIf="listempy">
                     <td id="tdvazio" colspan="4">VAZIO</td>
                   </tr>
-                  <tr *ngFor="let servicoFunc of servicosFuncionario">
+                  <tr
+                    *ngFor="
+                      let servicoFunc of servicosFuncionario;
+                      let i = index
+                    "
+                  >
                     <td>{{ servicoFunc.servico.nome }}</td>
                     <td>{{ servicoFunc.funcionario.nome }}</td>
                     <td>
                       <button
+                        [disabled]="escalaEmpy[i]"
                         type="button"
                         class="btn-sm btn-info"
                         (click)="avancar(servicoFunc)"
