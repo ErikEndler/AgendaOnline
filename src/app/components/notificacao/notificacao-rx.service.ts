@@ -1,6 +1,6 @@
 import { LoginReturn } from './../../models/loginReturn';
 import { TokenService } from 'src/app/auth/token.service';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { RxStomp } from '@stomp/rx-stomp';
 
 import * as SockJS from 'sockjs-client';
@@ -10,7 +10,9 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class NotificacaoRxService {
-  constructor(private tokenService: TokenService) {}
+  constructor(private tokenService: TokenService) { }
+  novaNotificacao = new EventEmitter();
+
 
   loginReturn: LoginReturn = this.tokenService.decodePayloadJWT();
   private client: RxStomp;
@@ -43,8 +45,12 @@ export class NotificacaoRxService {
           return text;
         })
       )
-      .subscribe((notification: string) =>
-        this.notifications.push(notification)
+      .subscribe((notification: string) => {
+        this.notifications.push(notification);
+        if (notification.match(/.*SINO*/)) {
+          this.novaNotificacao.emit(notification);
+        }
+      }
       );
   }
 

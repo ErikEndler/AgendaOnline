@@ -31,8 +31,10 @@
             <span class="d-lg-none d-md-block"> Search </span>
           </button>
         </li>-->
-        <li class="nav-item" ngbDropdown>
-          <button (click)="notificacao()" type="button" class="btn btn-sm btn-secondary" ngbDropdownToggle>
+        <li class="nav-item " ngbDropdown>
+          <button (click)="notificacao()" type="button"
+            class="{{ newNotification ? 'btn btn-sm btn-secondary blinking' : 'btn btn-sm btn-secondary ' }}"
+            ngbDropdownToggle>
             <div class="photo">
               <i style="padding-top: 10%; font-size: 1.5rem" class="far fa-bell"></i>
             </div>

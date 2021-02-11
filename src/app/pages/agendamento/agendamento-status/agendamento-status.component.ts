@@ -24,7 +24,7 @@ export class AgendamentoStatusComponent implements OnInit {
   agendamentos: Agendamento[];
   listaStatus: string[];
   statusSelect = 'PENDENTE';
-  hide = false;
+  hide = true;
   loading = true;
   page = 1;
   pageSize = 10;
@@ -60,7 +60,10 @@ export class AgendamentoStatusComponent implements OnInit {
           this.collectionSize = this.agendamentos.length;
           console.log(result);
           this.loading = false;
-          this.hide = true;
+          if (result.length > 0) {
+            this.hide = false;
+
+          }
           this.refresh();
         },
         (error) => {

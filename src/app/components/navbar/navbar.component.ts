@@ -1,3 +1,4 @@
+import { NotificacaoRxService } from './../notificacao/notificacao-rx.service';
 import { UsuarioService } from 'src/app/pages/usuario/usuario.service';
 import { TokenService } from './../../auth/token.service';
 import { LoginReturn } from 'src/app/models/loginReturn';
@@ -18,7 +19,8 @@ import { EMPTY } from 'rxjs';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  hide = true;
+  hide = false;
+  newNotification = false;
   loginStatus = false;
   private listTitles: any[];
   location: Location;
@@ -34,6 +36,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   exibirNaoAtendido = false;
   exibirAgendado = false;
   novoPendente = true;
+  notificacoesNovas = [];
 
   constructor(
     private modalLoginService: ModalLoginService,
@@ -45,7 +48,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private tokenService: TokenService,
     private modalConfirm: ModalConfirmacaoService,
-    private auth: AuthService
+    private auth: AuthService,
+    private notificacaoRxService: NotificacaoRxService
   ) {
     this.location = location;
     this.sidebarVisible = false;
@@ -96,6 +100,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.auth.eventoLogar.subscribe(() => {
       this.ngOnInit();
     });
+    this.notificacaoRxService.novaNotificacao.subscribe((result) => this.novaNotificacao(result));
 
     this.loginReturn = this.tokenService.decodePayloadJWT();
     window.addEventListener('resize', this.updateColor);
@@ -112,8 +117,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
     // this.notificacao();
   }
+  novaNotificacao(msg: string): void {
+    if (msg.slice(0, 4) === 'SINO') {
+      //retira SINO da string
+      msg.slice(-3);
+    }
+  }
 
-  notificacao() {
+  notificacao(): void {
     if (this.loginReturn) {
       this.usuarioService
         .buscarNotificacaoBase(this.loginReturn.id)
