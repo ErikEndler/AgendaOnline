@@ -17,4 +17,9 @@ export class AvaliacaoService extends CrudService<Avaliacao> {
       AppSettings.url + '/api/avaliacao/atendimento/' + id
     );
   }
+  minhasAvaliacoes(id: number): Observable<Avaliacao[]> {
+    return this.http.get<Array<Avaliacao>>(
+      AppSettings.url + '/api/avaliacao/usuario/' + id
+    );
+  }
 }

@@ -33,7 +33,8 @@ export class UsuarioComponent implements OnInit {
   debugEnable = false;
   usuario: Usuario;
   disableAtribuicao = true;
-  confirmaSenha: string;
+  confirmaSenha: string = null;
+  perfil = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,11 +44,12 @@ export class UsuarioComponent implements OnInit {
     private router: Router,
     private erroService: ErroService,
     private notificacaoService: NotificacaoService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     if (this.router.url.match(/.*perfil*/)) {
       console.log('URL = ' + this.router.url);
+      this.perfil = true;
       this.verificaCredencial();
     }
 
@@ -67,7 +69,7 @@ export class UsuarioComponent implements OnInit {
       sexo: [this.usuario.sexo],
       telefone: [this.usuario.telefone, Validators.required],
       whatsapp: [this.usuario.whatsapp],
-      senha: [this.usuario.senha],
+      senha: [null],
       notificacao: [this.usuario.notificacao],
       notificacaoEmail: [this.usuario.notificacaoEmail],
       notificacaoWhatsapp: [this.usuario.notificacaoWhatsapp],
@@ -129,9 +131,17 @@ export class UsuarioComponent implements OnInit {
   }
   habilitaEnviar(): boolean {
     if (this.formulario.valid) {
-      if (this.confirmaSenha === this.formulario.controls.senha.value) {
-        return false;
+      if (this.perfil) {
+        if (this.confirmaSenha === this.formulario.controls.senha.value) {
+          return false;
+        }
+      } else {
+        if (this.confirmaSenha === this.formulario.controls.senha.value &&
+          (this.confirmaSenha !== null && this.formulario.controls.senha.value !== null)) {
+          return false;
+        }
       }
+
     }
     return true;
   }

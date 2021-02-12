@@ -39,6 +39,7 @@ import { AgendamentoViewComponent } from './pages/agendamento/agendamento-view/a
 import { ListarComponent } from './pages/atendimento/atender/atender-listar/listar.component';
 import { FormComponent } from './pages/atendimento/atender/atender-form/form.component';
 import { AtenderResolveGuard } from './guards/atender-resolve.guard';
+import { MinhasAvaliacoesComponent } from './pages/avaliacao/minhas-avaliacoes/minhas-avaliacoes.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -170,6 +171,11 @@ const routes: Routes = [
     component: ServicoFormComponent,
     resolve: { servico: ServicoResolveGuard },
     canActivate: [FuncionarioGuard],
+  },
+  {
+    path: 'minhasAvaliacoes',
+    component: MinhasAvaliacoesComponent,
+    canActivate: [UserGuard],
   },
 ];
 
