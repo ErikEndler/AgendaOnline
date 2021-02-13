@@ -23,7 +23,5 @@ export class AtendimentoComponent implements OnInit {
   }
   avaliacoes() {
     this.router.navigate(['minhasAvaliacoes']);
-
-
   }
 }

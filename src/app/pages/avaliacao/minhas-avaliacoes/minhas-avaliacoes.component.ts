@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Avaliacao } from 'src/app/models/avaliacao';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { RatingService } from 'src/app/shared/rating/rating.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-minhas-avaliacoes',
@@ -16,6 +17,7 @@ export class MinhasAvaliacoesComponent implements OnInit {
     private avaliacaoService: AvaliacaoService,
     private erroService: ErroService,
     private tokenService: TokenService,
+    private router: Router,
     private ratingService: RatingService
   ) {}
   loading = true;
@@ -25,9 +27,13 @@ export class MinhasAvaliacoesComponent implements OnInit {
   lista: Avaliacao[];
   avaliacoes: Avaliacao[];
   loginReturn: LoginReturn;
+  cliente: boolean;
 
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
+    if (this.loginReturn.role === 'ROLE_USER') {
+      this.cliente = true;
+    }
     this.list();
   }
   voltarPagina() {
@@ -62,6 +68,16 @@ export class MinhasAvaliacoesComponent implements OnInit {
   }
   trimData(palavra: string): string {
     return palavra.slice(0, 10);
+  }
+  atendimento(avaliacao: Avaliacao): void {
+    // agendamento/cliente/12
+    if (this.cliente) {
+      this.router.navigate([
+        'agendamento/cliente/' + avaliacao.atendimento.agendamento.id,
+      ]);
+    } else {
+      this.router.navigate(['atendimento/' + avaliacao.atendimento.id]);
+    }
   }
 
   onRatingStar(avaliacao: Avaliacao): void {

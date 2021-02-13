@@ -22,11 +22,13 @@
               <tbody>
                 <tr *ngIf="listempy">
                   <td id="tdvazio" colspan="7">
-                    <p style="color: darkorange; font-size: 1.5rem;">Não há horários disponíveis</p>
+                    <p style="color: darkorange; font-size: 1.5rem">
+                      Não há horários disponíveis
+                    </p>
                   </td>
                 </tr>
                 <tr>
-                  <td *ngFor="let escala of escalas$ | async; let i = index">
+                  <td *ngFor="let escala of escalas; let i = index">
                     <div *ngFor="let item of escala.itensEscala; let j = index">
                       {{ item.hrInicial }} as {{ item.hrFinal }}
                     </div>
@@ -43,23 +45,46 @@
             <div class="card-body">
               <div class="text-center">
                 <label style="font-size: 1.1rem">Selecione uma Data</label>
-                <input [disabled]="listempy" class="form-control" type="date" name="data"
-                  (change)="dayselect($event.target.value)" />
+                <input
+                  [disabled]="listempy"
+                  class="form-control"
+                  type="date"
+                  name="data"
+                  (change)="dayselect($event.target.value)"
+                />
               </div>
               <div *ngIf="!horariosHide" class="text-center">
-                <label style="font-size: 1.1rem">Selecione Horario de Inicio</label>
+                <label style="font-size: 1.1rem"
+                  >Selecione Horario de Inicio</label
+                >
 
                 <div class="form-row align-items-center">
-                  <input style="margin-right: 0" class="form-control" type="time" name="hrInicial"
-                    [(ngModel)]="hrInicial" (change)="selectHora()" />
-                  <input readonly style="margin-left: 0" class="form-control" type="time" name="hrFinal"
-                    [(ngModel)]="hrFinal" />
+                  <input
+                    style="margin-right: 0"
+                    class="form-control"
+                    type="time"
+                    name="hrInicial"
+                    [(ngModel)]="hrInicial"
+                    (change)="selectHora()"
+                  />
+                  <input
+                    readonly
+                    style="margin-left: 0"
+                    class="form-control"
+                    type="time"
+                    name="hrFinal"
+                    [(ngModel)]="hrFinal"
+                  />
                 </div>
               </div>
               <div class="text-center">
                 <label style="font-size: 1.1rem">Observação</label>
-                <textarea [disabled]="listempy" style="min-width: 60%" class="form-control"
-                  [(ngModel)]="agendamento.obs"></textarea>
+                <textarea
+                  [disabled]="listempy"
+                  style="min-width: 60%"
+                  class="form-control"
+                  [(ngModel)]="agendamento.obs"
+                ></textarea>
               </div>
               <div *ngIf="loading" class="text-center">
                 <div class="spinner-border text-success" role="status">
@@ -67,10 +92,16 @@
                 </div>
               </div>
               <div>
-                <label style="font-size: 1.1rem">Receber Notificações sobre este Agendamento
+                <label style="font-size: 1.1rem"
+                  >Receber Notificações sobre este Agendamento
                 </label>
                 <label class="switch">
-                  <input [(ngModel)]="agendamento.notificacao" type="checkbox" id="notificacao" checked />
+                  <input
+                    [(ngModel)]="agendamento.notificacao"
+                    type="checkbox"
+                    id="notificacao"
+                    checked
+                  />
                   <span class="slider round"></span>
                 </label>
               </div>
@@ -90,24 +121,32 @@
                   <td id="tdvazio" colspan="4">VAZIO</td>
                 </tr>
                 <tr *ngFor="let disp of disponibilidade; let j = index">
-                  <td *ngIf="disp.situacao" style="background-color: forestgreen;"> {{disp.horaI}}-{{disp.horaF}}</td>
+                  <td
+                    *ngIf="disp.situacao"
+                    style="background-color: forestgreen"
+                  >
+                    {{ disp.horaI }}-{{ disp.horaF }}
+                  </td>
                   <!--<td *ngIf="!disp.situacao" style="background-color: darkred;"> {{disp.horaI}}-{{disp.horaF}}</td>-->
                 </tr>
-
-
               </tbody>
             </table>
           </div>
         </div>
       </div>
-
     </div>
     <div class="card-footer">
       <div class="btn-group">
         <button awPreviousStep type="button" class="btn btn-warning">
           <i class="fas fa-arrow-left"></i>Voltar
         </button>
-        <button type="button" class="btn btn-success" awNextStep (click)="finalizar()" [disabled]="!button">
+        <button
+          type="button"
+          class="btn btn-success"
+          awNextStep
+          (click)="finalizar()"
+          [disabled]="!button"
+        >
           Finalizar <i class="fas fa-arrow-right"></i>
         </button>
       </div>

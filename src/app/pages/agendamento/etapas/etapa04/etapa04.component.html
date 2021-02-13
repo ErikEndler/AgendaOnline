@@ -7,34 +7,79 @@
       <div class="card card-blue">
         <form>
           <div>
-            <label>Nome</label>
-            <input class="form-control" type="text" name="nome" [(ngModel)]="agendamento?.cliente.nome" readonly>
+            <label>Funcionário</label>
+            <input
+              class="form-control"
+              type="text"
+              name="funcionario"
+              [(ngModel)]="agendamento?.servicoFuncionario.funcionario.nome"
+              readonly
+            />
+          </div>
+          <div>
+            <label>Cliente</label>
+            <input
+              class="form-control"
+              type="text"
+              name="nome"
+              [(ngModel)]="agendamento?.cliente.nome"
+              readonly
+            />
           </div>
           <div>
             <label>Serviço</label>
-            <input class="form-control" type="text" name="servico" [(ngModel)]="servicoFuncionario?.servico.nome"
-              readonly>
+            <input
+              class="form-control"
+              type="text"
+              name="servico"
+              [(ngModel)]="servicoFuncionario?.servico.nome"
+              readonly
+            />
           </div>
           <div>
             <label>Data</label>
-            <input readonly class="form-control" type="date" name="data" [(ngModel)]="data">
+            <input
+              readonly
+              class="form-control"
+              type="date"
+              name="data"
+              [(ngModel)]="data"
+            />
           </div>
           <div>
             <label>Horario</label>
-            <input readonly class="form-control" type="time" [(ngModel)]="hora" name="hora">
+            <input
+              readonly
+              class="form-control"
+              type="time"
+              [(ngModel)]="hora"
+              name="hora"
+            />
           </div>
           <div>
             <label>Receber Notificações</label>
             <label class="switch">
-              <input disabled *ngIf="agendamento" [(ngModel)]="agendamento.notificacao" type="checkbox" id="notificacao"
-                name="box" />
+              <input
+                disabled
+                *ngIf="agendamento"
+                [(ngModel)]="agendamento.notificacao"
+                type="checkbox"
+                id="notificacao"
+                name="box"
+              />
               <span class="slider round"></span>
             </label>
           </div>
           <div>
             <label>Observação</label>
-            <textarea readonly style="min-width: 50%;" class="form-control" *ngIf="agendamento"
-              [(ngModel)]="agendamento.obs" name="obs"></textarea>
+            <textarea
+              readonly
+              style="min-width: 50%"
+              class="form-control"
+              *ngIf="agendamento"
+              [(ngModel)]="agendamento.obs"
+              name="obs"
+            ></textarea>
           </div>
         </form>
       </div>

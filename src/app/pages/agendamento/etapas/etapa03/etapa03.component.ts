@@ -41,6 +41,7 @@ export class Etapa03Component implements OnInit {
   dias: string[] = [];
   servicoFuncionario: ServicoFuncionario;
   escalas$: Observable<Escala[]>;
+  escalas: Escala[] = [];
   agendamento: Agendamento = new Agendamento();
   data: string;
   hrInicial: string;
@@ -54,7 +55,7 @@ export class Etapa03Component implements OnInit {
     private escalaService: EscalaService,
     private notificacaoService: NotificacaoService,
     private usuarioService: UsuarioService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.agendamento.notificacao = true;
@@ -83,15 +84,18 @@ export class Etapa03Component implements OnInit {
       this.servicoFuncionario.id
     );
     this.dias = [];
-    this.escalas$.subscribe((result) => {
-      this.listempy = true;
-      result.forEach((e) => {
-        if (e.itensEscala.length > 0) {
-          this.dias.push(e.diaSemana);
-          this.listempy = false;
-        }
-      });
-    },
+    this.escalas = [];
+    this.escalas$.subscribe(
+      (result) => {
+        this.listempy = true;
+        result.forEach((e) => {
+          if (e.itensEscala.length > 0) {
+            this.escalas.push(e);
+            this.dias.push(e.diaSemana);
+            this.listempy = false;
+          }
+        });
+      },
       (error) => {
         console.error(error);
         this.erroService.tratarErro(error);

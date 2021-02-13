@@ -25,32 +25,51 @@
       <div *ngIf="!loading" class="table-responsive">
         <table class="table tablesorter" id="">
           <thead class="text-primary">
-            <tr>
+            <tr class="text-center">
               <th>Data</th>
               <th>Hora</th>
               <th>Serviço</th>
+              <th *ngIf="!cliente">cliente</th>
+              <th *ngIf="cliente">funcionário</th>
+              <th>nota</th>
               <th>detalhes</th>
+              <th>atendimento</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let avaliacao of avaliacoes">
+            <tr *ngFor="let avaliacao of avaliacoes" class="text-center">
               <td>
                 {{ trimData(avaliacao.atendimento.agendamento.horarioInicio) }}
               </td>
               <td>
                 {{ trim(avaliacao.atendimento.agendamento.horarioInicio) }}
               </td>
-
               <td>
                 {{
                   avaliacao.atendimento.agendamento.servicoFuncionario.servico
                     .nome
                 }}
               </td>
-
+              <td *ngIf="!cliente">
+                {{ avaliacao.atendimento.agendamento.cliente.nome }}
+              </td>
+              <td *ngIf="cliente">
+                {{ avaliacao.atendimento.funcionario.nome }}
+              </td>
+              <td *ngIf="!cliente">
+                {{ avaliacao.notaFuncionario }} <i class="fas fa-star"></i>
+              </td>
+              <td *ngIf="cliente">
+                {{ avaliacao.notaCliente }} <i class="fas fa-star"></i>
+              </td>
               <td>
                 <button class="btn btn-sm" (click)="onRatingStar(avaliacao)">
-                  <i class="fas fa-info-circle"></i> Info
+                  <i class="fas fa-info-circle"></i> Avaliação
+                </button>
+              </td>
+              <td>
+                <button class="btn btn-sm" (click)="atendimento(avaliacao)">
+                  <i class="fas fa-info-circle"></i> Atendimento
                 </button>
               </td>
             </tr>

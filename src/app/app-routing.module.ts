@@ -81,9 +81,21 @@ const routes: Routes = [
     resolve: { agendamento: AgendamentoFormResolveGuard },
   },
   { path: 'meusagendamentos', component: AgendamentoClienteComponent },
-  { path: 'atendimento', component: AtendimentoComponent },
-  { path: 'atendimento/funcionario', component: MeusAtendimentosComponent },
-  { path: 'atendimento/agendamentos', component: ListarComponent },
+  {
+    path: 'atendimento',
+    component: AtendimentoComponent,
+    canActivate: [FuncionarioGuard],
+  },
+  {
+    path: 'atendimento/funcionario',
+    component: MeusAtendimentosComponent,
+    canActivate: [FuncionarioGuard],
+  },
+  {
+    path: 'atendimento/agendamentos',
+    component: ListarComponent,
+    canActivate: [FuncionarioGuard],
+  },
   {
     path: 'atendimento/atender/:id',
     component: FormComponent,
@@ -183,4 +195,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes), BrowserModule, CommonModule],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
