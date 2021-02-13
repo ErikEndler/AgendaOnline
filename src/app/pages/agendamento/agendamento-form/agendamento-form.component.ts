@@ -194,8 +194,8 @@ export class AgendamentoFormComponent implements OnInit {
       'Ao confirmar este agendamento, os demais agendamentos em conflito serão cancelados!',
       'Confirmar'
     );
-    //this.agendamento.status = 'AGENDADO';
-    // this.onSave('Agendamento Confirmado');
+    this.agendamento.status = 'AGENDADO';
+    this.onSave('Agendamento Confirmado');
   }
   sendWhatsapp(): void {
     window.open(

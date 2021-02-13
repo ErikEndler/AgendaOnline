@@ -10,9 +10,8 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class NotificacaoRxService {
-  constructor(private tokenService: TokenService) { }
+  constructor(private tokenService: TokenService) {}
   novaNotificacao = new EventEmitter();
-
 
   loginReturn: LoginReturn = this.tokenService.decodePayloadJWT();
   private client: RxStomp;
@@ -31,8 +30,9 @@ export class NotificacaoRxService {
 
       this.watchForNotifications(cpf);
 
-      console.info('connected!');
+      console.info('Conectado!');
     }
+    console.info('Ja Conectado!');
   }
 
   private watchForNotifications(cpf?: string) {
@@ -50,8 +50,7 @@ export class NotificacaoRxService {
         if (notification.match(/.*SINO*/)) {
           this.novaNotificacao.emit(notification);
         }
-      }
-      );
+      });
   }
 
   disconnectClicked() {

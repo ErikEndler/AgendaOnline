@@ -1,3 +1,4 @@
+import { NotificacaoRxService } from './../components/notificacao/notificacao-rx.service';
 import { LoginReturn } from './../models/loginReturn';
 import { Injectable } from '@angular/core';
 import {
@@ -22,8 +23,9 @@ export class AdminGuard implements CanActivate {
     private router: Router,
     private modalLoginService: ModalLoginService,
     private tokenService: TokenService,
+    private notificacaoRxService: NotificacaoRxService,
     private erroService: ErroService
-  ) { }
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -37,6 +39,7 @@ export class AdminGuard implements CanActivate {
     if (this.tokenService.getToken()) {
       this.user = this.tokenService.decodePayloadJWT();
       if (this.user) {
+        this.notificacaoRxService.connectClicked(this.user.cpf);
         if (this.user.role === 'ROLE_ADMIN') {
           return true;
         } else {
@@ -46,21 +49,21 @@ export class AdminGuard implements CanActivate {
     } else {
       console.log('DESTINO : ' + next.url.toString());
       const result$ = this.modalLoginService.open(state.url.toString());
-      result$
-        .asObservable()
-        .subscribe(
-          (result) => {
-            if (result === true) {
-              console.log('logou e redirecionou');
-              return this.router.navigate([state.url.toString()]);
-            } else { return false; }
-          },
-          (error) => {
-            console.error(error);
-            console.log('ERRO AO redirecionar');
-            this.erroService.tratarErro(error);
+      result$.asObservable().subscribe(
+        (result) => {
+          if (result === true) {
+            console.log('logou e redirecionou');
+            return this.router.navigate([state.url.toString()]);
+          } else {
+            return false;
           }
-        );
+        },
+        (error) => {
+          console.error(error);
+          console.log('ERRO AO redirecionar');
+          this.erroService.tratarErro(error);
+        }
+      );
       return this.router.navigate(['home']);
     }
   }

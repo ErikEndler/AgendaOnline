@@ -36,7 +36,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   exibirNaoAtendido = false;
   exibirAgendado = false;
   novoPendente = true;
-  notificacoesNovas = [];
+  listaNotificacao = [];
+  // notificação recebida
+  notificacaoNova = [];
 
   constructor(
     private modalLoginService: ModalLoginService,
@@ -81,12 +83,13 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   logout(): void {
     // this.authService.deslogar();
-    this.modalConfirm.showConfirm(
-      'Deslogar',
-      'Deseja Deslogar??',
-      'Confirmar'
-    ).subscribe(result => { if (result) { this.authService.deslogar(); } });
-
+    this.modalConfirm
+      .showConfirm('Deslogar', 'Deseja Deslogar??', 'Confirmar')
+      .subscribe((result) => {
+        if (result) {
+          this.authService.deslogar();
+        }
+      });
   }
   verificaLogin(): boolean {
     if (sessionStorage.getItem('logado')) {
@@ -100,7 +103,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.auth.eventoLogar.subscribe(() => {
       this.ngOnInit();
     });
-    this.notificacaoRxService.novaNotificacao.subscribe((result) => this.novaNotificacao(result));
+    this.notificacaoRxService.novaNotificacao.subscribe((result) =>
+      this.novaNotificacao(result)
+    );
 
     this.loginReturn = this.tokenService.decodePayloadJWT();
     window.addEventListener('resize', this.updateColor);
@@ -118,10 +123,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // this.notificacao();
   }
   novaNotificacao(msg: string): void {
-    if (msg.slice(0, 4) === 'SINO') {
-      //retira SINO da string
-      msg.slice(-3);
-    }
+    this.notificacaoNova = msg.split('#');
+    console.log(this.notificacaoNova);
+    this.listaNotificacao.push(this.notificacaoNova);
+    console.log(this.listaNotificacao);
   }
 
   notificacao(): void {
@@ -262,7 +267,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return 'Dashboard';
   }
 
-  newopen() { }
+  newopen() {}
   open(content) {
     this.modalService
       .open(content, { windowClass: 'modal-search' })
@@ -288,6 +293,4 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     window.removeEventListener('resize', this.updateColor);
   }
-
-
 }

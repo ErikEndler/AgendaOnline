@@ -4,19 +4,20 @@ import { AvaliacaoService } from 'src/app/pages/avaliacao/avaliacao.service';
 import { Component, OnInit } from '@angular/core';
 import { Avaliacao } from 'src/app/models/avaliacao';
 import { ErroService } from 'src/app/shared/erro/erro.service';
+import { RatingService } from 'src/app/shared/rating/rating.service';
 
 @Component({
   selector: 'app-minhas-avaliacoes',
   templateUrl: './minhas-avaliacoes.component.html',
-  styleUrls: ['./minhas-avaliacoes.component.css']
+  styleUrls: ['./minhas-avaliacoes.component.css'],
 })
 export class MinhasAvaliacoesComponent implements OnInit {
-
   constructor(
     private avaliacaoService: AvaliacaoService,
     private erroService: ErroService,
-    private tokenService: TokenService
-  ) { }
+    private tokenService: TokenService,
+    private ratingService: RatingService
+  ) {}
   loading = true;
   page = 1;
   pageSize = 5;
@@ -28,7 +29,6 @@ export class MinhasAvaliacoesComponent implements OnInit {
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
     this.list();
-
   }
   voltarPagina() {
     window.history.back();
@@ -64,4 +64,22 @@ export class MinhasAvaliacoesComponent implements OnInit {
     return palavra.slice(0, 10);
   }
 
+  onRatingStar(avaliacao: Avaliacao): void {
+    if (
+      this.loginReturn.role === 'ROLE_FUNCIONARIO' ||
+      this.loginReturn.role === 'ROLE_ADMIN'
+    ) {
+      this.ratingService
+        .showratingStar(avaliacao.atendimento, true, true, avaliacao)
+        .subscribe((result) => {
+          console.log(result);
+        });
+    } else if (this.loginReturn.role === 'ROLE_USER') {
+      this.ratingService
+        .showratingStar(avaliacao.atendimento, false, true, avaliacao)
+        .subscribe((result) => {
+          console.log(result);
+        });
+    }
+  }
 }

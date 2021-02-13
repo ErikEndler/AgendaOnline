@@ -1,3 +1,4 @@
+import { NotificacaoRxService } from './../components/notificacao/notificacao-rx.service';
 import { Injectable } from '@angular/core';
 import {
   CanActivate,
@@ -22,6 +23,7 @@ export class UserGuard implements CanActivate {
     private router: Router,
     private tokenService: TokenService,
     private modalLoginService: ModalLoginService,
+    private notificacaoRxService: NotificacaoRxService,
     private erroService: ErroService
   ) {
     this.user = JSON.parse(sessionStorage.getItem('Authorization'));
@@ -38,6 +40,7 @@ export class UserGuard implements CanActivate {
     if (this.tokenService.getToken()) {
       this.user = this.tokenService.decodePayloadJWT();
       if (this.user) {
+        this.notificacaoRxService.connectClicked(this.user.cpf);
         return true;
       }
     } else {
