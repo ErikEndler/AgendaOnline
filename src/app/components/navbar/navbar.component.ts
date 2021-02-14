@@ -122,6 +122,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
     // this.notificacao();
   }
+  agendamentosStatus(tipo: string) {
+    if (this.loginReturn.role === ('ROLE_ADMIN' || 'ROLE_FUNCIONARIO')) {
+      if (tipo === 'pendente') {
+        this.router.navigate(['agendamento/status']);
+      } else if (tipo === 'naoatendido') {
+        this.router.navigate(['agendamento/status?status=naoatendido']);
+      } else if (tipo === 'naoatendido') {
+        this.router.navigate(['agendamento/status?status=agendado']);
+      }
+    } else if (this.loginReturn.role === 'ROLE_USER') {
+      this.router.navigate(['meusagendamentos']);
+    }
+  }
   novaNotificacao(msg: string): void {
     this.notificacaoNova = msg.split('#');
     console.log(this.notificacaoNova);

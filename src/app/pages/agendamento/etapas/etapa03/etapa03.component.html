@@ -41,6 +41,14 @@
       </div>
       <div class="row">
         <div class="col">
+          <div
+            *ngIf="erro"
+            class="alert alert-danger"
+            role="alert"
+            (click)="erro = false"
+          >
+            {{ msgErro }}
+          </div>
           <div class="card card-blue">
             <div class="card-body">
               <div class="text-center">

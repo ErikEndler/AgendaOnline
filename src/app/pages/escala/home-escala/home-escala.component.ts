@@ -6,14 +6,14 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./home-escala.component.css'],
 })
 export class HomeEscalaComponent implements OnInit {
-  @Input() hide = false;
+  @Input() visible = true;
   @Output() eventoHide = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
   iniciar(): void {
-    this.hide = !this.hide;
-    this.eventoHide.emit(this.hide);
+    this.visible = !this.visible;
+    this.eventoHide.emit(this.visible);
   }
 }

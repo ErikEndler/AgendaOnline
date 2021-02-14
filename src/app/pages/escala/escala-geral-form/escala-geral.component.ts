@@ -15,7 +15,7 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 })
 export class EscalageralComponent implements OnInit {
   iniciar = true;
-  visible = false;
+  visible = true;
   loading = false;
   page = 1;
   pageSize = 4;
@@ -35,16 +35,16 @@ export class EscalageralComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe((params) => {
-      console.log(params); // { order: "popular" }
-      this.usuarioService
-        .loadByID(params.id)
-        .subscribe((result) => (this.funcionario = result));
-      // this.funcionarioId = params.id as number;
-      // this.funcionarioNome = params.nome;
-    });
+    this.funcionario = this.activatedRoute.snapshot.data.usuario;
 
-    this.list();
+    // this.activatedRoute.queryParams.subscribe((params) => {
+    //  console.log(params); // { order: "popular" }
+    //  this.usuarioService
+    //    .loadByID(params.id)
+    //    .subscribe((result) => (this.funcionario = result));
+    // });
+
+    // this.list();
     // const escala = this.route.snapshot.data['escala'];
     // this.formulario = this.formBuilder.group({id: [escala.id],servico: [escala.servico],diaSemana: [escala.diaSemana],});
   }
@@ -79,4 +79,7 @@ export class EscalageralComponent implements OnInit {
   }
 
   finishFunction(): void {}
+  voltarPagina() {
+    window.history.back();
+  }
 }

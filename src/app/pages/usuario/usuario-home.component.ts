@@ -40,9 +40,7 @@ export class UsuarioHomeComponent implements OnInit {
     });
   }
   escalas(): void {
-    this.router.navigate(['escala'], {
-      queryParams: { id: this.loginReturn.id },
-    });
+    this.router.navigate(['escala/' + this.loginReturn.id]);
   }
   avaliacoes() {
     this.router.navigate(['minhasAvaliacoes']);

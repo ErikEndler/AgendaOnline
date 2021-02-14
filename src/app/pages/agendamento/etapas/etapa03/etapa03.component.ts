@@ -47,6 +47,8 @@ export class Etapa03Component implements OnInit {
   hrInicial: string;
   hrFinal: string;
   escalaVazia = false;
+  erro = false;
+  msgErro: string;
 
   constructor(
     private agendamentoService: AgendamentoService,
@@ -102,6 +104,7 @@ export class Etapa03Component implements OnInit {
       }
     );
   }
+
   dayselect(valor): void {
     moment.locale('pt-br');
     this.loading = true;
@@ -114,6 +117,8 @@ export class Etapa03Component implements OnInit {
         this.data = valor;
         this.horariosHide = false;
       } else {
+        this.erro = true;
+        this.msgErro = moment(valor).format('dddd') + ' Fora da escala !';
         this.horariosHide = true;
         this.notificacaoService.criar(
           NotificationType.Warn,
@@ -122,7 +127,9 @@ export class Etapa03Component implements OnInit {
         );
       }
     } else {
+      this.erro = true;
       this.horariosHide = true;
+      this.msgErro = 'Erro : Selecione data apartir da data atual !';
       this.notificacaoService.criar(
         NotificationType.Warn,
         'Erro',

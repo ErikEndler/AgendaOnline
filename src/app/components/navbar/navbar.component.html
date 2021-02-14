@@ -74,19 +74,29 @@
               </a>
             </li>
             <li *ngIf="exibirAgendado" class="nav-link">
-              <a href="javascript:void(0)" ngbDropdownItem>
+              <a
+                href="javascript:void(0)"
+                ngbDropdownItem
+                (click)="agendamentosStatus('confirmado')"
+              >
                 Agendamentos Confirmados {{ this.agendados }}
               </a>
             </li>
             <li *ngIf="this.pendentes > 0" class="nav-link">
-              <a class="nav-item" href="agendamento/status" ngbDropdownItem>
+              <a
+                class="nav-item"
+                href="javascript:void(0)"
+                (click)="agendamentosStatus('pendente')"
+                ngbDropdownItem
+              >
                 Agendamentos Pendentes {{ this.pendentes }}
               </a>
             </li>
             <li *ngIf="exibirNaoAtendido" class="nav-link">
               <a
+                (click)="agendamentosStatus('naoatendido')"
                 class="nav-item"
-                href="agendamento/status?status=naoatendido"
+                href="javascript:void(0)"
                 ngbDropdownItem
               >
                 Agendamentos Não Atendidos {{ this.naoAtendido }}

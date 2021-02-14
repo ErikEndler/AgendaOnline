@@ -1,8 +1,14 @@
 <div class="content">
   <div>
-    <app-home-escala (eventoHide)="changeVisible($event)"></app-home-escala>
+    <app-home-escala
+      (eventoHide)="changeVisible($event)"
+      [(visible)]="visible"
+    ></app-home-escala>
   </div>
-  <aw-wizard *ngIf="visible" #wizard [navBarLayout]="'large-empty-symbols'">
+  <div>
+    <i class="far fa-question-circle" (click)="visible = false"></i>
+  </div>
+  <aw-wizard #wizard [navBarLayout]="'large-empty-symbols'">
     <aw-wizard-step [stepTitle]="'SERVIÇOS'">
       <app-servico-escala-form [funcionario]="funcionario">
       </app-servico-escala-form>

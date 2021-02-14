@@ -14,7 +14,10 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class UsuarioResolverGuard implements Resolve<Usuario> {
-  constructor(private service: UsuarioService, private tokenService: TokenService) { }
+  constructor(
+    private service: UsuarioService,
+    private tokenService: TokenService
+  ) {}
   usuario: Usuario = new Usuario();
   loginReturn: LoginReturn;
   resolve(

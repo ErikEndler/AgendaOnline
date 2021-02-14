@@ -116,9 +116,9 @@ const routes: Routes = [
     canActivate: [UserGuard],
   },
   {
-    path: 'escala',
+    path: 'escala/:id',
     component: EscalageralComponent,
-    resolve: { escala: EscalaResolveGuard },
+    resolve: { usuario: EscalaResolveGuard },
     canActivate: [FuncionarioGuard],
   },
   {

@@ -1,0 +1,11 @@
+.far,
+.fa {
+  font-size: 3em;
+  color: antiquewhite;
+  margin-top: 20px;
+  position: absolute;
+  cursor: pointer;
+}
+.far:hover {
+  color: aliceblue;
+}

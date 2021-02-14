@@ -28,7 +28,7 @@ export class ServicoEscalaFormComponent implements OnInit {
   servicoOut: Servico[] = [];
   listaServicoFuncionario: ServicoFuncionario[];
   lista: ServicoFuncionario[];
-  listaServicoFuncionario$: Observable<ServicoFuncionario[]>;
+  //listaServicoFuncionario$: Observable<ServicoFuncionario[]>;
   page = 1;
   pageSize = 5;
   collectionSize: any;
@@ -41,21 +41,20 @@ export class ServicoEscalaFormComponent implements OnInit {
   }
   list(): void {
     this.loading = true;
-    this.listaServicoFuncionario$ = this.servicoFuncionarioService.listarServicosFuncionario(
-      this.funcionario.id
-    );
-    this.listaServicoFuncionario$.subscribe(
-      (dados) => {
-        this.collectionSize = dados.length;
-        this.loading = false;
-        this.listaServicoFuncionario = dados;
-        this.refreshListServico();
-      },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
-      }
-    );
+    this.servicoFuncionarioService
+      .listarServicosFuncionario(this.funcionario.id)
+      .subscribe(
+        (dados) => {
+          this.collectionSize = dados.length;
+          this.loading = false;
+          this.listaServicoFuncionario = dados;
+          this.refreshListServico();
+        },
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+        }
+      );
   }
 
   refreshListServico(): void {
@@ -96,5 +95,8 @@ export class ServicoEscalaFormComponent implements OnInit {
     this.router.navigate(['sf'], {
       queryParams: { id: this.funcionario.id },
     });
+  }
+  voltarPagina() {
+    window.history.back();
   }
 }

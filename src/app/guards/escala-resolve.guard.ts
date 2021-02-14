@@ -1,3 +1,5 @@
+import { Usuario } from 'src/app/models/usuario';
+import { UsuarioService } from 'src/app/pages/usuario/usuario.service';
 import { Escala } from './../models/escala';
 import { Injectable } from '@angular/core';
 import {
@@ -11,15 +13,18 @@ import { EscalaService } from '../pages/escala/escala.service';
 @Injectable({
   providedIn: 'root',
 })
-export class EscalaResolveGuard implements Resolve<Escala> {
-  constructor(private serviceEscala: EscalaService) { }
+export class EscalaResolveGuard implements Resolve<Usuario> {
+  constructor(
+    private serviceEscala: EscalaService,
+    private usuarioService: UsuarioService
+  ) {}
   resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<Escala> {
+  ): Observable<Usuario> {
     if (route.params && route.params.id) {
-      return this.serviceEscala.loadByID(route.params.id);
+      return this.usuarioService.loadByID(route.params.id);
     }
-    return of(new Escala());
+    return of(new Usuario());
   }
 }
