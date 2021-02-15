@@ -31,10 +31,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public isCollapsed = true;
   closeResult: string;
   agendados: number;
+  agendadosHoje: number;
   pendentes: number;
   naoAtendido: number;
   exibirNaoAtendido = false;
   exibirAgendado = false;
+  exibirAgendadoHoje = false;
   novoPendente = true;
   listaNotificacao = [];
   // notificação recebida
@@ -122,20 +124,34 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
     // this.notificacao();
   }
+  clickNovaNotificacao(index: number, piscar: boolean, id: number) {
+    this.listaNotificacao.splice(0, index);
+    this.newNotification = piscar;
+    if (this.loginReturn.role === 'ROLE_USER') {
+      this.router.navigate(['agendamento/cliente/' + id]);
+    } else if (this.loginReturn.role === ('ROLE_ADMIN' || 'ROLE_FUNCIONARIO')) {
+      this.router.navigate(['agendamento/form/' + id]);
+    }
+  }
   agendamentosStatus(tipo: string) {
     if (this.loginReturn.role === ('ROLE_ADMIN' || 'ROLE_FUNCIONARIO')) {
       if (tipo === 'pendente') {
         this.router.navigate(['agendamento/status']);
       } else if (tipo === 'naoatendido') {
-        this.router.navigate(['agendamento/status?status=naoatendido']);
-      } else if (tipo === 'naoatendido') {
-        this.router.navigate(['agendamento/status?status=agendado']);
+        this.router.navigate(['agendamento/status'], {
+          queryParams: { status: 'naoatendido' },
+        });
+      } else if (tipo === 'agendado') {
+        this.router.navigate(['agendamento/status'], {
+          queryParams: { status: 'agendado' },
+        });
       }
     } else if (this.loginReturn.role === 'ROLE_USER') {
       this.router.navigate(['meusagendamentos']);
     }
   }
   novaNotificacao(msg: string): void {
+    this.newNotification = true;
     this.notificacaoNova = msg.split('#');
     console.log(this.notificacaoNova);
     this.listaNotificacao.push(this.notificacaoNova);
@@ -151,11 +167,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.agendados = result[0];
           this.pendentes = result[1];
           this.naoAtendido = result[2];
+          this.agendadosHoje = result[3];
           if (this.loginReturn.role !== 'ROLE_USER' && this.naoAtendido > 0) {
             this.exibirNaoAtendido = true;
           }
           if (this.loginReturn.role === 'ROLE_USER' && this.agendados > 0) {
             this.exibirAgendado = true;
+          }
+          if (this.loginReturn.role !== 'ROLE_USER' && this.agendadosHoje > 0) {
+            this.exibirAgendadoHoje = true;
           }
         });
     }

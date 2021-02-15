@@ -68,7 +68,7 @@
                 *ngFor="let notificacao of listaNotificacao; let i = index"
                 href="javascript:void(0)"
                 ngbDropdownItem
-                (click)="listaNotificacao.splice(0, i)"
+                (click)="clickNovaNotificacao(i, false, notificacao[1])"
               >
                 {{ notificacao[2] }}
               </a>
@@ -80,6 +80,15 @@
                 (click)="agendamentosStatus('confirmado')"
               >
                 Agendamentos Confirmados {{ this.agendados }}
+              </a>
+            </li>
+            <li *ngIf="exibirAgendadoHoje" class="nav-link">
+              <a
+                href="javascript:void(0)"
+                ngbDropdownItem
+                (click)="agendamentosStatus('agendado')"
+              >
+                Agendamentos Confirmados Hoje {{ this.agendadosHoje }}
               </a>
             </li>
             <li *ngIf="this.pendentes > 0" class="nav-link">
@@ -141,19 +150,15 @@
           </button>
           <ul *ngIf="verificaLogin()" class="dropdown-navbar" ngbDropdownMenu>
             <li class="nav-item">
-              <p ngbDropdownItem>USUARIO</p>
+              <a ngbDropdownItem>{{ loginReturn.nome }}</a>
             </li>
             <li class="dropdown-divider"></li>
             <li class="nav-link">
               <a href="perfil/{{ loginReturn?.id }}" ngbDropdownItem>
-                Profile
+                Perfil
               </a>
             </li>
-            <li class="nav-link">
-              <a class="nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Settings
-              </a>
-            </li>
+
             <li class="dropdown-divider"></li>
             <li class="nav-link">
               <a
@@ -162,7 +167,7 @@
                 href="javascript:void(0)"
                 ngbDropdownItem
               >
-                Log out
+                Sair
               </a>
             </li>
           </ul>
