@@ -65,7 +65,7 @@ export class AgendamentoClienteComponent implements OnInit {
   trimHora(agendamento: Agendamento): string {
     return agendamento.horarioInicio.slice(-5);
   }
-  aplicaCss(status) {
+  aplicaCss(status): any {
     if (status === 'PENDENTE') {
       return 'btn-warning';
     }
@@ -82,12 +82,12 @@ export class AgendamentoClienteComponent implements OnInit {
       return 'btn-danger';
     }
   }
-  OnAgendamento(id: number) {
+  OnAgendamento(id: number): void {
     this.router.navigate(['agendamento/cliente/' + id]);
 
     // agendamento/cliente/
   }
-  voltar() {
+  voltar(): void {
     window.history.back();
   }
 }

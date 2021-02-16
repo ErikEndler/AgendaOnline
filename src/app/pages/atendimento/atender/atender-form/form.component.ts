@@ -75,7 +75,7 @@ export class FormComponent implements OnInit {
   }
 
   startInfinito(): void {
-    //this.horarios = true;
+    // this.horarios = true;
     this.inicioAtendimento = moment().format('HH:mm');
     this.btn1 = 'Atendendo...';
     this.btn1Disabled = true;

@@ -194,8 +194,18 @@ export class AgendamentoFormComponent implements OnInit {
       'Ao confirmar este agendamento, os demais agendamentos em conflito serão cancelados!',
       'Confirmar'
     );
-    this.agendamento.status = 'AGENDADO';
-    this.onSave('Agendamento Confirmado');
+    result$.subscribe(
+      (result) => {
+        if (result) {
+          this.agendamento.status = 'AGENDADO';
+          this.onSave('Agendamento Confirmado');
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.erroService.tratarErro(error);
+      }
+    );
   }
   sendWhatsapp(): void {
     window.open(
@@ -220,5 +230,8 @@ export class AgendamentoFormComponent implements OnInit {
   }
   editar(id): void {
     this.router.navigate(['agendamento/form/' + id]);
+  }
+  voltarPagina(): void {
+    window.history.back();
   }
 }

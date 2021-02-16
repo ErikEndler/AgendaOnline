@@ -86,7 +86,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   logout(): void {
     // this.authService.deslogar();
     this.modalConfirm
-      .showConfirm('Deslogar', 'Deseja Deslogar??', 'Confirmar')
+      .showConfirm('Deslogar', 'Deseja Deslogar??', 'Deslogar')
       .subscribe((result) => {
         if (result) {
           this.authService.deslogar();

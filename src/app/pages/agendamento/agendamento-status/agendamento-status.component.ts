@@ -18,7 +18,7 @@ export class AgendamentoStatusComponent implements OnInit {
     private erroService: ErroService,
     private activatedRoute: ActivatedRoute,
     private router: Router
-  ) { }
+  ) {}
   loginReturn: LoginReturn;
   listaAgendamentos: Agendamento[];
   agendamentos: Agendamento[];
@@ -42,11 +42,9 @@ export class AgendamentoStatusComponent implements OnInit {
     );
     this.activatedRoute.queryParams.subscribe((params) => {
       if (params.status) {
-        this.statusSelect = (params.status).toUpperCase();
+        this.statusSelect = params.status.toUpperCase();
         console.log(this.statusSelect);
       }
-
-
     });
     this.loginReturn = this.tokenService.decodePayloadJWT();
     this.listarPorStatus();
@@ -62,7 +60,6 @@ export class AgendamentoStatusComponent implements OnInit {
           this.loading = false;
           if (result.length > 0) {
             this.hide = false;
-
           }
           this.refresh();
         },
@@ -94,7 +91,7 @@ export class AgendamentoStatusComponent implements OnInit {
   editar(id): void {
     this.router.navigate(['agendamento/form/' + id]);
   }
-  voltarPagina() {
+  voltarPagina(): void {
     window.history.back();
   }
 }

@@ -36,7 +36,7 @@ export class MinhasAvaliacoesComponent implements OnInit {
     }
     this.list();
   }
-  voltarPagina() {
+  voltarPagina(): void {
     window.history.back();
   }
   list(): void {

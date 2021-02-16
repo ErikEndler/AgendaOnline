@@ -27,7 +27,7 @@ export class Etapa01Component implements OnInit {
   servicos: Servico[];
   servicosFuncionario: ServicoFuncionario[];
   listaServicos$: Observable<Servico[]>;
-  colunas: string[] = ['nome','tempo', 'Descrição',  'select'];
+  colunas: string[] = ['serviço', 'tempo', 'Descrição', 'select'];
   teste: string;
   teste2: string;
   loginReturn: LoginReturn;
@@ -40,8 +40,8 @@ export class Etapa01Component implements OnInit {
     private etapasService: EtapasService,
     private router: Router,
     private servicoFuncionarioService: ServicoFuncionarioService,
-    private tokenService: TokenService,
-  ) { }
+    private tokenService: TokenService
+  ) {}
 
   ngOnInit(): void {
     this.loginReturn = this.tokenService.decodePayloadJWT();
@@ -54,23 +54,26 @@ export class Etapa01Component implements OnInit {
   }
   meusServicos(): void {
     this.loading1 = true;
-    this.servicoFuncionarioService.listarServicosFuncionario(this.loginReturn.id).subscribe(
-      (sucess) => {
-        this.listempy = true;
-        this.collectionSize = sucess.length;
-        this.loading1 = false;
-        this.exibirTodos = false;
-        this.listaServicosFuncionario = sucess;
-        if (sucess.length > 0) {
-          this.listempy = false;
+    this.servicoFuncionarioService
+      .listarServicosFuncionario(this.loginReturn.id)
+      .subscribe(
+        (sucess) => {
+          this.listempy = true;
+          this.collectionSize = sucess.length;
+          this.loading1 = false;
+          this.exibirTodos = false;
+          this.listaServicosFuncionario = sucess;
+          if (sucess.length > 0) {
+            this.listempy = false;
+          }
+          this.refreshServicoFuncionario();
+        },
+        (error) => {
+          console.error(error);
+          this.erroService.tratarErro(error);
+          this.loading1 = false;
         }
-        this.refreshServicoFuncionario();
-      },
-      (error) => {
-        console.error(error);
-        this.erroService.tratarErro(error);
-        this.loading1 = false;
-      });
+      );
   }
   listServicos(): void {
     this.loading1 = true;

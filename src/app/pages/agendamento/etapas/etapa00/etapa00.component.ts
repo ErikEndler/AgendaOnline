@@ -9,17 +9,15 @@ import { EtapasService } from '../etapas.service';
 @Component({
   selector: 'app-etapa00',
   templateUrl: './etapa00.component.html',
-  styleUrls: ['./etapa00.component.css']
+  styleUrls: ['./etapa00.component.css'],
 })
 export class Etapa00Component implements OnInit {
-
   constructor(
     private router: Router,
     private erroService: ErroService,
     private usuarioService: UsuarioService,
-    private etapasService: EtapasService,
-
-  ) { }
+    private etapasService: EtapasService
+  ) {}
   loading = false;
   listempy = true;
   page = 1;
@@ -35,20 +33,22 @@ export class Etapa00Component implements OnInit {
   }
   listar(): void {
     this.listaUsuarios$ = this.usuarioService.list();
-    this.listaUsuarios$.subscribe((result) => {
-      this.listaUsuarios = result;
-      this.collectionSize = result.length;
-      this.loading = false;
-      if (result.length > 0) {
-        this.listempy = false;
-      }
-      this.refresh();
-    },
+    this.listaUsuarios$.subscribe(
+      (result) => {
+        this.listaUsuarios = result;
+        this.collectionSize = result.length;
+        this.loading = false;
+        if (result.length > 0) {
+          this.listempy = false;
+        }
+        this.refresh();
+      },
       (error) => {
         console.error(error);
         this.erroService.tratarErro(error);
         this.loading = false;
-      });
+      }
+    );
   }
   refresh(): void {
     this.usuarios = this.listaUsuarios
@@ -57,7 +57,6 @@ export class Etapa00Component implements OnInit {
         (this.page - 1) * this.pageSize,
         (this.page - 1) * this.pageSize + this.pageSize
       );
-
   }
   cancelar(): void {
     this.router.navigate(['agendamento']);

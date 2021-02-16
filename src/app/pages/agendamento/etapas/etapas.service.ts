@@ -7,7 +7,7 @@ import { Usuario } from 'src/app/models/usuario';
   providedIn: 'root',
 })
 export class EtapasService {
-  constructor() { }
+  constructor() {}
   eventoServico = new EventEmitter<number>();
   eventoServicoFuncionario = new EventEmitter<ServicoFuncionario>();
   eventoAgendamento = new EventEmitter<Agendamento>();

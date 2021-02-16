@@ -66,7 +66,7 @@ export class ListarComponent implements OnInit {
   agendamentosPendentes(): void {
     this.router.navigate(['agendamento/status']);
   }
-  voltarPagina() {
+  voltarPagina(): void {
     window.history.back();
   }
 }

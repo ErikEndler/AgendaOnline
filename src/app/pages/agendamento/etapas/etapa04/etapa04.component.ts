@@ -10,10 +10,9 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 @Component({
   selector: 'app-etapa04',
   templateUrl: './etapa04.component.html',
-  styleUrls: ['./etapa04.component.css']
+  styleUrls: ['./etapa04.component.css'],
 })
 export class Etapa04Component implements OnInit {
-
   @Input() clienteNome;
   agendamento: Agendamento;
   servicoFuncionario: ServicoFuncionario;
@@ -23,12 +22,14 @@ export class Etapa04Component implements OnInit {
     private etapasService: EtapasService,
     private agendamentoService: AgendamentoService,
     private notificacaoService: NotificacaoService,
-    private erroService: ErroService,
-  ) { }
+    private erroService: ErroService
+  ) {}
 
   ngOnInit(): void {
     // this.agendamento = new Agendamento();
-    this.etapasService.eventoServicoFuncionario.subscribe((result) => this.servicoFuncionario = result);
+    this.etapasService.eventoServicoFuncionario.subscribe(
+      (result) => (this.servicoFuncionario = result)
+    );
     this.etapasService.eventoAgendamento.subscribe((result) => {
       this.agendamento = result;
       this.data = this.agendamento.horarioInicio.slice(0, 10);

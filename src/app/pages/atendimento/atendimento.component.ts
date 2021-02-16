@@ -9,7 +9,7 @@ import { LoginReturn } from 'src/app/models/loginReturn';
   styleUrls: ['./atendimento.component.css'],
 })
 export class AtendimentoComponent implements OnInit {
-  constructor(private tokenService: TokenService, private router: Router) { }
+  constructor(private tokenService: TokenService, private router: Router) {}
   loginReturn: LoginReturn;
 
   ngOnInit(): void {
@@ -21,7 +21,7 @@ export class AtendimentoComponent implements OnInit {
   atender(): void {
     this.router.navigate(['atendimento/agendamentos']);
   }
-  avaliacoes() {
+  avaliacoes(): void {
     this.router.navigate(['minhasAvaliacoes']);
   }
 }

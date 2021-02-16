@@ -61,10 +61,10 @@ export class MeusAtendimentosComponent implements OnInit {
     return palavra.slice(0, 10);
   }
 
-  onInfo(id) {
+  onInfo(id): void {
     this.router.navigate(['atendimento/' + id]);
   }
-  voltarPagina() {
+  voltarPagina(): void {
     window.history.back();
   }
 }

@@ -79,7 +79,7 @@ export class EscalageralComponent implements OnInit {
   }
 
   finishFunction(): void {}
-  voltarPagina() {
+  voltarPagina(): void {
     window.history.back();
   }
 }

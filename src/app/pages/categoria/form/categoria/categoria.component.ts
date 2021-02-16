@@ -27,7 +27,7 @@ export class CategoriaComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const categoria = this.route.snapshot.data['categoria'];
+    const categoria = this.route.snapshot.data.categoria;
     this.formulario = this.formBuilder.group({
       id: [categoria.id],
       nome: [categoria.nome, Validators.required],
