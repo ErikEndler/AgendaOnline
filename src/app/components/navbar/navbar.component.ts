@@ -110,6 +110,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
     );
 
     this.loginReturn = this.tokenService.decodePayloadJWT();
+    if (this.loginReturn) {
+      this.notificacaoRxService.connectClicked(this.loginReturn.cpf);
+    }
     window.addEventListener('resize', this.updateColor);
     this.listTitles = ROUTES.filter((listTitle) => listTitle);
     const navbar: HTMLElement = this.element.nativeElement;
@@ -125,7 +128,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     // this.notificacao();
   }
   clickNovaNotificacao(index: number, piscar: boolean, id: number) {
-    this.listaNotificacao.splice(0, index);
+    console.log('index=', index);
+    this.listaNotificacao.splice(index, 1);
     this.newNotification = piscar;
     if (this.loginReturn.role === 'ROLE_USER') {
       this.router.navigate(['agendamento/cliente/' + id]);
