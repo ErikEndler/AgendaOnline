@@ -3,24 +3,12 @@
     <div class="card-header">
       <nav class="navbar navbar-expand navbar">
         <a class="navbar-brand">
-          <button
-            class="btn btn-sm"
-            style="margin-left: 0ch"
-            (click)="voltarPagina()"
-          >
+          <button class="btn btn-sm" style="margin-left: 0ch" (click)="voltarPagina()">
             <i class="fas fa-arrow-left"></i>
           </button>
-          Agendamentos</a
-        >
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
+          Agendamentos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -30,13 +18,8 @@
             <button class="btn btn-sm btn-secondary" (click)="agendaHoje()">
               Agenda do Dia
             </button>
-            <input
-              (change)="agendaDia($event.target.value)"
-              class="form-control mr-sm-2"
-              type="date"
-              name="data"
-              aria-label="Search"
-            />
+            <input (change)="agendaDia($event.target.value)" class="form-control mr-sm-2" type="date" name="data"
+              aria-label="Search" />
             <i class="tim-icons icon-zoom-split"> </i>
             <span class="d-lg-none d-md-block"> Search </span>
           </form>
@@ -45,11 +28,7 @@
     </div>
     <div class="card-body">
       <div *ngIf="loading" class="d-flex justify-content-center">
-        <div
-          class="spinner-border text-primary"
-          style="width: 3rem; height: 3rem"
-          role="status"
-        >
+        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem" role="status">
           <span class="sr-only">Loading...</span>
         </div>
       </div>
@@ -57,19 +36,12 @@
         <div class="row justify-content-center">
           <div class="col-auto">
             <div>
-              <button
-                type="button"
-                class="btn btn-secundary btn-sm"
-                (click)="voltar()"
-              >
+              <button type="button" class="btn btn-secundary btn-sm" (click)="voltar()">
                 <i class="fas fa-arrow-left"></i>
               </button>
             </div>
           </div>
-          <div
-            *ngFor="let agds of agendamentos$ | async; let i = index"
-            class="col-auto"
-          >
+          <div *ngFor="let agds of agendamentos$ | async; let i = index" class="col-auto">
             <div class="card card-blue">
               <div class="card-header text-center">{{ colunas[i] }}</div>
               <div class="card-body">
@@ -86,7 +58,7 @@
                   </thead>
                   <tbody>
                     <tr *ngIf="empy">
-                      <td id="tdvazio" colspan="4">VAZIO</td>
+                      <td id="tdvazio" colspan="5">VAZIO</td>
                     </tr>
                     <tr *ngFor="let agd of agds; let j = index">
                       <td>{{ agd.id }}</td>
@@ -97,11 +69,7 @@
                       <td>{{ agd.servicoFuncionario.servico.nome }}</td>
                       <!--<td><span class="badge badge-warning" (click)="editar(agd.id)">{{agd.status}}</span>-->
                       <td>
-                        <button
-                          [ngClass]="aplicaCss(agd.status)"
-                          class="btn btn-sm"
-                          (click)="editar(agd.id)"
-                        >
+                        <button [ngClass]="aplicaCss(agd.status)" class="btn btn-sm" (click)="editar(agd.id)">
                           {{ agd.status }}
                         </button>
                       </td>
@@ -113,11 +81,7 @@
           </div>
           <div class="col-auto">
             <div>
-              <button
-                type="button"
-                class="btn btn-secundary btn-sm"
-                (click)="avancar()"
-              >
+              <button type="button" class="btn btn-secundary btn-sm" (click)="avancar()">
                 <i class="fas fa-arrow-right"></i>
               </button>
             </div>
