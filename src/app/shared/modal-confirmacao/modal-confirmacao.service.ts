@@ -6,7 +6,7 @@ import { ModalConfirmacaoComponent } from './modal-confirmacao.component';
   providedIn: 'root',
 })
 export class ModalConfirmacaoService {
-  constructor(private modalservice: BsModalService) {}
+  constructor(private modalservice: BsModalService) { }
 
   showConfirm(title: string, msg: string, okTxt?: string, cancelText?: string) {
     const config: ModalOptions = {
@@ -22,7 +22,7 @@ export class ModalConfirmacaoService {
       bsModalRef.content.okTxt = okTxt;
     }
     if (cancelText) {
-      bsModalRef.content.cancelText = cancelText;
+      bsModalRef.content.cancelTxt = cancelText;
     }
     return (bsModalRef.content as ModalConfirmacaoComponent).confirmResult;
   }

@@ -97,7 +97,11 @@
     </div>
     <div class="card-footer">
       <button style="margin-left: 10px" class="btn-sm btn-fill btn-danger" (click)="onCancel()">
-        Cancelar
+        Voltar
+      </button>
+      <button *ngIf="statusPendente" style="margin-left: 10px" class="btn-sm btn-fill btn-danger"
+        (click)="cancelarAgendamento()">
+        Cancelar Agendamento
       </button>
     </div>
   </div>

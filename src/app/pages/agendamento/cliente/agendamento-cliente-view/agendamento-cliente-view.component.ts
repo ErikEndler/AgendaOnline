@@ -1,3 +1,4 @@
+import { AgendamentoService } from './../../agendamento.service';
 import { RatingService } from 'src/app/shared/rating/rating.service';
 import { Atendimento } from 'src/app/models/atendimento';
 import { Agendamento } from 'src/app/models/agendamento';
@@ -9,6 +10,8 @@ import { ErroService } from 'src/app/shared/erro/erro.service';
 import { NotificacaoService } from 'src/app/shared/notificacao/notificacao.service';
 import { AvaliacaoService } from 'src/app/pages/avaliacao/avaliacao.service';
 import { Avaliacao } from 'src/app/models/avaliacao';
+import { ModalConfirmacaoService } from 'src/app/shared/modal-confirmacao/modal-confirmacao.service';
+import { NotificationType } from 'angular2-notifications';
 
 @Component({
   selector: 'app-agendamento-cliente-view',
@@ -28,12 +31,14 @@ export class AgendamentoClienteViewComponent implements OnInit {
     private tokenService: TokenService,
     private router: Router,
     private notificacaoService: NotificacaoService,
+    private modalConfirm: ModalConfirmacaoService,
     private erroService: ErroService,
     private atendimentoService: AtendimentoService,
     private activatedRoute: ActivatedRoute,
     private ratingService: RatingService,
-    private avaliacaoService: AvaliacaoService
-  ) {}
+    private avaliacaoService: AvaliacaoService,
+    private agendamentoService: AgendamentoService
+  ) { }
 
   ngOnInit(): void {
     this.agendamento = this.activatedRoute.snapshot.data.agendamento;
@@ -100,5 +105,28 @@ export class AgendamentoClienteViewComponent implements OnInit {
   }
   onCancel() {
     window.history.back();
+  }
+  cancelarAgendamento() {
+    this.modalConfirm.showConfirm(
+      'Confirmação',
+      'Deseja cancelar seu Agendamento??',
+      'Confirmar',
+      'voltar'
+    ).subscribe((result) => {
+      if (result) {
+        this.agendamento.status = 'CANCELADO';
+        this.agendamentoService.save(this.agendamento).subscribe((success) => {
+          this.notificacaoService.criar(
+            NotificationType.Success,
+            'Agendamento Cancelado'
+          );
+          this.router.navigate(['meusagendamentos']);
+        },
+          (error) => {
+            console.error(error);
+            this.erroService.tratarErro(error);
+          });
+      }
+    });
   }
 }
