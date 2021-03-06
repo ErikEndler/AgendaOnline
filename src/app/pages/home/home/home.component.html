@@ -25,45 +25,91 @@
         </div>
       </nav>
     </div>
-    <div class="card-body">
-      <!-- Rectangular switch -->
-      <!--<label class="switch">
-        <input type="checkbox" />
-        <span class="slider"></span>
-      </label>-->
-      <!-- Rounded switch -->
-      <!--<label class="switch">
-        <input type="checkbox" />
-        <span class="slider round"></span>
-      </label>-->
 
-      <p>Bem vindo ao Agenda Online!</p>
+    <div class="card-body">
+      <div class="card text-center">
+        <div class="card-body">
+          <h4 class="card-title">AGENDA ONLINE</h4>
+          <p class="card-text">
+            Facilitando a integração e comunicação entre Cliente e Empresa no
+            agendamento de atendimentos.<br />
+            <button
+              *ngIf="!vermais1"
+              class="btn btn-sm btn-info"
+              (click)="vermais1 = true"
+            >
+              Ver mais <i class="fas fa-chevron-down"></i>
+            </button>
+          </p>
+          <p *ngIf="vermais1">
+            <span id="principal" class="badge badge-pill badge-primary"
+              >Faça agendamentos</span
+            ><br />
+            <span id="principal" class="badge badge-pill badge-primary"
+              >Registre os atendimentos</span
+            ><br />
+            <span id="principal" class="badge badge-pill badge-primary"
+              >Tudo em uma única ferramenta</span
+            >
+          </p>
+          <button
+            *ngIf="vermais1"
+            class="btn btn-sm btn-info"
+            (click)="vermais1 = false"
+          >
+            Ver mais <i class="fas fa-chevron-up"></i>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">
+                <span
+                  class="badge badge-pill badge-success"
+                  style="font-size: 80%"
+                  >CLIENTE</span
+                >
+              </h4>
+              <p class="card-text">
+                Agende seu atendimento, e acompanhe passo a passo
+              </p>
+              <button class="btn btn-sm btn-info">Ver mais...</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">
+                <span class="badge badge-pill badge-info" style="font-size: 80%"
+                  >FUNCIONÁRIO</span
+                >
+              </h4>
+              <p class="card-text">
+                Monte e gerencie sua escala de atendimento,<br />
+                Agende e gerencie seus agendamentos e atendimentos,
+              </p>
+              <button class="btn btn-sm btn-info">Ver mais...</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <simple-notifications></simple-notifications>
+      <!--
+      <p>Bem vindo ao Agenda Online!</p>
 
       <p>Usuario ADMIN para teste <br />cpf: 999.999.999-99 <br />senha: 123</p>
       <br />
       <p>Usuario Comum para teste <br />cpf: 111.111.111-11 <br />senha: 132</p>
       <br />
-
+        -->
       <div>
         <button class="btn px-3" (click)="agendar()">
           <i class="far fa-calendar-alt pr-2"></i> Agendar Horário
         </button>
       </div>
-      <!--<div>
-        <div>
-          <button class="btn px-3" (click)="conectar()">conectar</button>
-        </div>
-        <div>
-          <button class="btn px-3" (click)="desconectar()">Desconectar</button>
-        </div>
-        <div>
-          <button class="btn px-3" (click)="start()">Start(ouvir)</button>
-        </div>
-        <div>
-          <button class="btn px-3" (click)="stop()">Stop(ouvir)</button>
-        </div>
-      </div>-->
     </div>
   </div>
 </div>

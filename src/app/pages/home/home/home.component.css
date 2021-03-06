@@ -64,3 +64,11 @@ input:checked + .slider:before {
 .fas {
   color: antiquewhite;
 }
+.badge {
+  padding: 0.5rem 0.5rem;
+  font-size: 100%;
+}
+#principal {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
