@@ -6,6 +6,7 @@ import { ServicoFuncionario } from 'src/app/models/servico-funcionario';
 import { EtapasService } from '../etapas.service';
 import { Agendamento } from 'src/app/models/agendamento';
 import { ErroService } from 'src/app/shared/erro/erro.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-etapa04',
@@ -22,8 +23,9 @@ export class Etapa04Component implements OnInit {
     private etapasService: EtapasService,
     private agendamentoService: AgendamentoService,
     private notificacaoService: NotificacaoService,
+    private router: Router,
     private erroService: ErroService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // this.agendamento = new Agendamento();
@@ -48,6 +50,8 @@ export class Etapa04Component implements OnInit {
           'Salvo com Sucesso'
         );
         console.log('Agendamento salvo com sucesso!');
+        this.router.navigate(['meusagendamentos']);
+
       },
       (error) => {
         console.error(error);
