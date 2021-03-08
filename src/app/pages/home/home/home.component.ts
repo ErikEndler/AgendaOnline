@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
   logado = false;
   time: any;
   isRunning: any;
+  vermais1: boolean;
   constructor(
     private notificacaoRxService: NotificacaoRxService,
     private notificacao: NotificacaoService,
@@ -30,10 +31,7 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private ratingService: RatingService
   ) {}
-  segundos: number = 0;
-  minutos: number = 0;
-  interval;
-  hrFinal;
+
   // https://medium.com/@josevieiraneto/push-notifications-com-server-sent-events-spring-boot-c2b7ee6febe9
   ngOnInit(): void {
     this.authService.eventoLogar.subscribe(() => (this.logado = true));
@@ -62,34 +60,5 @@ export class HomeComponent implements OnInit {
   }
   agendar(): void {
     this.router.navigate(['agendamento/novo']);
-  }
-  pauseTimer(): void {
-    clearInterval(this.interval);
-  }
-  startInfinito(): void {
-    this.interval = setInterval(() => {
-      this.segundos++;
-      this.hrFinal = moment(0, 'HH:mm:ss')
-        .add(this.segundos, 's')
-        .format('HH:mm:ss');
-    }, 1000);
-  }
-  clearTime(): void {
-    this.segundos = 0;
-  }
-  receberNota(resposta): void {
-    console.log('pai nota recebida : ', resposta);
-  }
-  conectar() {
-    this.notificacaoRxService.connectClicked(this.loginReturn.cpf);
-  }
-  desconectar() {
-    this.notificacaoRxService.disconnectClicked();
-  }
-  start() {
-    this.notificacaoRxService.startClicked();
-  }
-  stop() {
-    this.notificacaoRxService.stopClicked();
   }
 }

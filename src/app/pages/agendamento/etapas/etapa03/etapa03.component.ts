@@ -110,7 +110,7 @@ export class Etapa03Component implements OnInit {
     this.loading = true;
     console.log(moment(valor).format('yyyy-MM-DD'));
     console.log(moment().format('yyyy-MM-DD'));
-
+    this.erro = false;
     if (moment(valor).format('yyyy-MM-DD') >= moment().format('yyyy-MM-DD')) {
       if (this.dias.indexOf(moment(valor).format('dddd')) !== -1) {
         this.obterDisponibilidade(moment(valor).format('yyyy-MM-DD'));
