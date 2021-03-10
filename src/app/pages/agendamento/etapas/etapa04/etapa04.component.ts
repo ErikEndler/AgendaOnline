@@ -7,6 +7,8 @@ import { EtapasService } from '../etapas.service';
 import { Agendamento } from 'src/app/models/agendamento';
 import { ErroService } from 'src/app/shared/erro/erro.service';
 import { Router } from '@angular/router';
+import { TokenService } from 'src/app/auth/token.service';
+import { LoginReturn } from 'src/app/models/loginReturn';
 
 @Component({
   selector: 'app-etapa04',
@@ -19,15 +21,20 @@ export class Etapa04Component implements OnInit {
   servicoFuncionario: ServicoFuncionario;
   data: string;
   hora: string;
+  loginReturn: LoginReturn;
+
   constructor(
     private etapasService: EtapasService,
     private agendamentoService: AgendamentoService,
     private notificacaoService: NotificacaoService,
     private router: Router,
+    private tokenService: TokenService,
     private erroService: ErroService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.loginReturn = this.tokenService.decodePayloadJWT();
+
     // this.agendamento = new Agendamento();
     this.etapasService.eventoServicoFuncionario.subscribe(
       (result) => (this.servicoFuncionario = result)
@@ -50,8 +57,11 @@ export class Etapa04Component implements OnInit {
           'Salvo com Sucesso'
         );
         console.log('Agendamento salvo com sucesso!');
-        this.router.navigate(['meusagendamentos']);
-
+        if (this.loginReturn.role === 'ROLE_USER') {
+          this.router.navigate(['meusagendamentos']);
+        } else {
+          this.router.navigate(['agendamento']);
+        }
       },
       (error) => {
         console.error(error);

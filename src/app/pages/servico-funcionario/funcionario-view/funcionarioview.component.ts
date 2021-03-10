@@ -159,9 +159,7 @@ export class FuncionarioviewComponent implements OnInit {
       );
   }
   redirecionaEscala(): void {
-    this.router.navigate(['escala'], {
-      queryParams: { id: this.funcionario.id },
-    });
+    this.router.navigate(['escala/' + this.funcionario.id]);
   }
   teste(): void {
     this.servicoFuncionarioService
